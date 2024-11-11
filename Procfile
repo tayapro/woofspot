@@ -1,1 +1,1 @@
-web: gunicorn codestar.wsgi
+web: gunicorn woofspot_project.wsgi
