@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from event_app.views import my_woofspot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('event/', my_woofspot, name='my_event'),
 ]
