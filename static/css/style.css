@@ -10,7 +10,3 @@
   box-sizing: border-box;
   font-family: var(--font-family);
 }
-
-.event-card {
-  margin-bottom: 20px;
-}
