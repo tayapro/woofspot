@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django_summernote',
     'event_app',
     'user_app',
@@ -62,6 +63,16 @@ INSTALLED_APPS = [
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+  'google': {
+    "SCOPE": [
+        "profile",
+        "email"
+    ],
+    "AUTH_PARAMS": {"account_type": "online"}
+  },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
