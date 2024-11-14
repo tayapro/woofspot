@@ -31,7 +31,7 @@ STATIC_VERSION = int(time.time())
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-tayapro-woofspot-dr7arhh9daf.ws.codeinstitute-ide.net',
                  '.herokuapp.com']
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_summernote',
     'event_app',
+    'user_app',
 ]
 
 SITE_ID = 2
@@ -120,6 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
