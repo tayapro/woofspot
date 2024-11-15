@@ -1,1 +1,1 @@
-web: gunicorn woofspot_project.wsgi
+web: gunicorn woofspot_project.wsgi:application
