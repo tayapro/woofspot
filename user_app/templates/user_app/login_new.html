@@ -1,17 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block content %}
+{% load static %}
 
-<body>
-    <h2>Welcome to Woofspot!</h2>
+<h2>Welcome to Woofspot!</h2>
 
-    <p>Please choose how you want to sign in or sign up:</p>
+<p>Please choose how you want to sign in or sign up:</p>
 
-</body>
+<h3>Sign in with Social Accounts</h3>
 
-</html>
+<h3>Website Account</h3>
+<ul>
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
+            href="{% url 'account_logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+            href="{% url 'account_signup' %}">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page"
+            href="{% url 'account_login' %}">Login</a>
+    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}
