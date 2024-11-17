@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from datetime import datetime, date
+from django.contrib.auth.models import User
 
 # Create your models here.
 class WoofspotEvent(models.Model):
@@ -12,6 +13,7 @@ class WoofspotEvent(models.Model):
     event_date = models.DateField()
     event_start_time = models.TimeField()
     event_end_time = models.TimeField()
+    attendees = models.ManyToManyField(User, related_name='events_attending', blank = True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True) 
 
