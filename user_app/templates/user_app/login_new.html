@@ -7,18 +7,8 @@
 {% load static %}
 
 <h2>Welcome to Woofspot!</h2>
-
 <p>Please choose how you want to sign in or sign up:</p>
 
-<h3>Sign in with Social Accounts</h3>
-
-{% load socialaccount %}
-<form action="{% provider_login_url 'google' method='POST' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary btn-sm ms-2">Login with Google</button>
-</form>
-
-<h3>Website Account</h3>
 <ul>
     {% if user.is_authenticated %}
     <li class="nav-item">
@@ -26,6 +16,12 @@
             href="{% url 'account_logout' %}">Logout</a>
     </li>
     {% else %}
+    {% load socialaccount %}
+    <form action="{% provider_login_url 'google' method='POST' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm ms-2">Login with Google</button>
+    </form>
+
     <li class="nav-item">
         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
             href="{% url 'account_signup' %}">Register</a>

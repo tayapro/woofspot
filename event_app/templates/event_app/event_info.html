@@ -6,4 +6,17 @@
     {{ event.content | safe }}
 </article>
 
+{% if user_registered %}
+<p>You are attending this event.</p>
+
+{% elif user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="reserve_spot" class="btn btn-primary">RSVP</button>
+</form>
+
+{% else %}
+<a href="{% url 'login_new' %}?next={{ request.path }}" class="btn btn-primary">RSVP (Login Required)</a>
+{% endif %}
+
 {% endblock %}
