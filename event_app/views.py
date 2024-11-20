@@ -28,4 +28,7 @@ def event_detail(request, slug):
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()
     )
-    return render(request, "event_app/event_info.html", {"event": event, "user_registered": user_registered})
+    return render(request, "event_app/event_info.html", 
+                 {"event": event, 
+                 "user_registered": user_registered}
+                 )
