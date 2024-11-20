@@ -86,6 +86,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Lifetime of CSRF token is 1 hour
+CSRF_COOKIE_AGE = 3600
+
 ROOT_URLCONF = 'woofspot_project.urls'
 
 TEMPLATES = [
