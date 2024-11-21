@@ -2,21 +2,47 @@
 
 {% block content %}
 
-<article class="card-text">
-    {{ event.content | safe }}
-</article>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <h2 class="text-center">{{ event.title }}</h2>
 
-{% if user_registered %}
-<p>You are attending this event.</p>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p class="event-details">
+                        <strong>Location:</strong> {{ event.location }}<br>
+                        <strong>Date:</strong> {{ event.event_date|date:"F j, Y" }}<br>
+                        <strong>Time:</strong> {{ event.event_start_time|time:"g:i A" }} -
+                        {{ event.event_end_time|time:"g:i A" }}
+                    </p>
+                </div>
+            </div>
+            {% if event.event_image %}
+            <div class="event-image">
+                <!-- <img src="{{ event.event_image.url }}" alt="{{ event.title }} image" class="img-fluid"> -->
+            </div>
+            {% endif %}
 
-{% elif user.is_authenticated %}
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" name="reserve_spot" class="btn btn-primary">RSVP</button>
-</form>
+            <div class="event-content">
+                {{ event.content | safe }}
+            </div>
 
-{% else %}
-<a href="{% url 'login_new' %}?next={{ request.path }}" class="btn btn-primary">RSVP (Login Required)</a>
-{% endif %}
+            <div class="rsvp-section mt-4 text-left">
+                {% if user_registered %}
+                <p>You are attending this event.</p>
+
+                {% elif user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="reserve_spot" class="btn btn-primary">RSVP</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login_new' %}?next={{ request.path }}" class="btn btn-primary">
+                    RSVP (Login Required)</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
