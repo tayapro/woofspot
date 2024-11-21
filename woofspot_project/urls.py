@@ -22,5 +22,6 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path("accounts/", include("allauth.urls")),
     path("login-new/", include("user_app.urls")),
+    path("logout-new/", include("user_app.urls")),
     path("", include("event_app.urls"), name="event-app-urls"),
 ]

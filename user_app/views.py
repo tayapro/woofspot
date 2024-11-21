@@ -3,3 +3,6 @@ from django.http import HttpResponse
 
 def login_new_page(request):
     return render(request, "user_app/login_new.html")
+
+def logout_new_page(request):
+    return render(request, "user_app/logout_new.html")
