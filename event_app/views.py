@@ -23,7 +23,7 @@ def event_detail(request, slug):
                 event.attendees.add(request.user)
                 messages.success(request, "Slot is reserved!")
         else:
-            return redirect(f"{reverse('login_new')}?next={request.path}")
+            return redirect(f"{reverse('get_started')}?next={request.path}")
 
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()

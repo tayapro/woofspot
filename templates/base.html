@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load static %}
-{% url 'login_new' as login_new_url %}
+{% url 'get_started' as get_started_url %}
 {% url 'logout_new' as logout_new_url %}
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
                     </button>
                 </div>
 
-                {% if request.path != login_new_url or 'accounts/' not in request.path %}
+                {% if request.path != get_started_url or 'accounts/' not in request.path %}
                 <!-- Modal window -->
                 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel"
                     aria-hidden="true">
@@ -64,7 +64,7 @@
                                 <a href="#" class="btn btn-primary me-4">Profile</a>
                                 <a href="{% url 'logout_new' %}" class="btn btn-outline-primary">Logout</a>
                                 {% else %}
-                                <a href="{% url 'login_new' %}" class="btn btn-primary m-3">Get started</a>
+                                <a href="{% url 'get_started' %}" class="btn btn-primary m-3">Get started</a>
                                 {% endif %}
                             </div>
                         </div>
