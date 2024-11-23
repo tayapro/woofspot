@@ -12,17 +12,14 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ STATIC_VERSION }}">
 </head>
 
-<body class="d-flex justify-content-center align-items-center min-vh-100">
+<body>
+    <div class="row">
+        <div class="placeholder-image col-md-6 d-none d-md-block">
+            <img src="{% static 'images/get_started.jpg' %}" alt="Running puppy" class="img-fluid">
+        </div>
+        <div class="login-form col-md-6 d-flex flex-column justify-content-center">
 
-    <div class="container">
-        <div class="login-container justify-content-center">
-
-            <div class="placeholder-image d-none d-lg-block">
-                <img src="{% static 'images/get_started.jpg' %}" alt="Running puppy" class="img-fluid">
-            </div>
-
-            <div class="login-form">
-
+            <div class="me-3">
                 <div class="text-center">
                     <h1>woofspot</h1>
                     <h2>Welcome back!</h2>
@@ -41,15 +38,18 @@
                 </form>
 
                 <div class="text-center">
-                    <p>Don't have an account <a href="{% url 'account_signup' %}" class="link-primary">Sign up</a></p>
+                    <p>Don't have an account? <a href="{% url 'account_signup' %}" class="text-decoration-none">Sign
+                            up</a></p>
                     <p class="text-center"> Or</p>
-                    <a href="#" class="btn btn-outline-primary w-100">
-                        {% load socialaccount %}
-                        <form action="{% provider_login_url 'google' method='POST' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary btn-sm ms-2">Login with Google</button>
-                        </form>
-                    </a>
+                    {% load socialaccount %}
+                    <form action="{% provider_login_url 'google' method='POST' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-primary w-100">
+                            <img src="{% static 'images/icons8-google.svg' %}" alt="Google icon"
+                                class="google-icon me-2">
+                            Login with Google
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
