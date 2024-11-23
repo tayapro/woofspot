@@ -44,3 +44,23 @@ input::placeholder {
   width: 24px;
   height: 24px;
 }
+
+.or-line {
+  display: flex;
+  flex-direction: row;
+}
+
+.or-line:before,
+.or-line:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 2px solid rgba(149, 149, 149, 0.6);
+}
+
+.or-line:before {
+  margin: auto 1rem auto auto;
+}
+
+.or-line:after {
+  margin: auto auto auto 1rem;
+}

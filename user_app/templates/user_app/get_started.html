@@ -19,32 +19,37 @@
         </div>
         <div class="login-form col-md-6 d-flex flex-column justify-content-center">
 
-            <div class="me-3">
+            <div class="m-5">
                 <div class="text-center">
-                    <h1>woofspot</h1>
-                    <h2>Welcome back!</h2>
+                    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
+                    <h4 class="text-black fw-light text-opacity-50 mb-4">Welcome back!</h4>
                 </div>
 
                 <form class="login" method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="login" id="login" placeholder="Username" required>
+                        <input type="text" class="form-control text-body-secondary text-opacity-75" name="login"
+                            id="login" placeholder="Username" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"
-                            required>
+                        <input type="password" class="form-control text-body-secondary text-opacity-75" name="password"
+                            id="password" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 mb-3">Sign in</button>
+                    <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 w-100 mb-3">Sign
+                        In</button>
                 </form>
 
                 <div class="text-center">
-                    <p>Don't have an account? <a href="{% url 'account_signup' %}" class="text-decoration-none">Sign
-                            up</a></p>
-                    <p class="text-center"> Or</p>
+                    <p class="text-body-secondary text-opacity-50">Don't have an account? <a
+                            href="{% url 'account_signup' %}"
+                            class="text-decoration-none fw-semibold text-opacity-75">Sign
+                            Up</a></p>
+                    <p class="text-center or-line text-body-secondary text-opacity-50"> or </p>
                     {% load socialaccount %}
                     <form action="{% provider_login_url 'google' method='POST' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-primary w-100">
+                        <button type="submit"
+                            class="btn btn-outline-default active fw-semibold text-opacity-75 text-body-secondary text-opacity-75 w-100">
                             <img src="{% static 'images/icons8-google.svg' %}" alt="Google icon"
                                 class="google-icon me-2">
                             Login with Google
