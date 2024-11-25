@@ -14,16 +14,18 @@
 
 <body>
     <div class="main-container">
-        <div class="row g-0">
+        <div class="row g-0 justify-content-center">
             <div class="placeholder-image col-md-6 d-none d-md-block">
                 <img src="{% static 'images/running_puppy.jpg' %}" alt="Running puppy" class="img-fluid">
             </div>
-            <div class="login-form col-md-6 d-flex flex-column justify-content-center">
 
-                {% block content %}
-                <!-- Content goes here -->
-                {% endblock content %}
+            <div class="d-flex flex-column justify-content-center col-12 col-md-6">
+                <div class="m-2 m-md-3 m-lg-5">
+                    {% block content %}
+                    <!-- Content goes here -->
+                    {% endblock content %}
 
+                </div>
             </div>
         </div>
     </div>

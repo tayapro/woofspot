@@ -7,49 +7,44 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 mt-3">
-            <div class="m-5">
-                <div class="text-center">
-                    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
-                    <h4 class="text-black fw-light text-opacity-50 mb-4">Create an Account</h4>
-                </div>
+<div class="text-center">
+    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
+    <h4 class="text-black fw-light text-opacity-50 mb-4">Create an Account</h4>
 
-                <p>
-                    Already have an account? Then please
-                    <a href="{% url 'get_started' %}">sign in</a>
-                </p>
+    <p class="text-body-secondary text-opacity-50">Already have an account? Then please
+        <a class="text-decoration-none fw-semibold text-opacity-75 {% if request.path == get_started_url %}active{% endif %}"
+            aria-current="page" href="{% url 'get_started' %}">
+            Sign In
+        </a>
+    </p>
+</div>
 
-                {% if form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {{ form.non_field_errors }}
-                </div>
-                {% endif %}
+{% if form.non_field_errors %}
+<div class="alert alert-danger">
+    {{ form.non_field_errors }}
+</div>
+{% endif %}
 
-                <form class="signup" method="POST" action="{% url 'account_signup' %}">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <input type="text" class="form-control text-body-secondary text-opacity-75" name="username"
-                            id="username" placeholder="Username" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control text-body-secondary text-opacity-75" name="email"
-                            id="email" placeholder="Email" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control text-body-secondary text-opacity-75" name="password1"
-                            id="password1" placeholder="Password" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control text-body-secondary text-opacity-75" name="password2"
-                            id="password2" placeholder="Confirm Password" required>
-                    </div>
-                    <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 w-100 mb-3">Sign
-                        Up</button>
-                </form>
-            </div>
-        </div>
+<form class="signup" method="POST" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="text" class="form-control text-body-secondary text-opacity-75" name="username" id="username"
+            placeholder="Username" required>
     </div>
+    <div class="mb-3">
+        <input type="email" class="form-control text-body-secondary text-opacity-75" name="email" id="email"
+            placeholder="Email" required>
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control text-body-secondary text-opacity-75" name="password1" id="password1"
+            placeholder="Password" required>
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control text-body-secondary text-opacity-75" name="password2" id="password2"
+            placeholder="Confirm Password" required>
+    </div>
+    <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 w-100 mb-3">Sign
+        Up</button>
+</form>
 
-    {% endblock %}
+{% endblock %}
