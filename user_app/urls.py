@@ -3,7 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path("get-started/", views.get_started_page, name='get_started'),
-    path("logout-new/", views.logout_new_page, name='logout_new'),
+    path("signin/", views.my_signin_page, name='my_signin'),
+    path("signup/", views.my_signup_page, name='my_signup'),
+    path("signout/", views.my_signout_page, name='my_signout'),
     # TODO: add url for profile 
 ]
