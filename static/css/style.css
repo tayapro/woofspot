@@ -26,6 +26,11 @@
   cursor: pointer;
 }
 
+#rive-dog {
+  height: 128px;
+  width: 128px;
+}
+
 /* Get started page */
 .xmark-icon .fa-solid {
   display: inline-block;
