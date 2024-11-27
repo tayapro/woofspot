@@ -30,46 +30,26 @@
                     <input class="form-control me-2" type="search" placeholder="Search on woofspot" aria-label="Search">
                 </form>
                 <div class="user-icon">
-                    <button type="button" class="btn btn-primary rounded-circle" data-bs-toggle="modal"
-                        data-bs-target="#userModal">
+                    <button type="button" class="btn btn-primary rounded-circle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         {% if user.is_authenticated %}
                         {{ user.username|slice:":3" }}
                         {% else %}
                         <i class="fas fa-user"></i>
                         {% endif %}
                     </button>
+                    <ul class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                        <li><a href="#" class="dropdown-item">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a href="{% url 'my_signout' %}" class="dropdown-item">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'my_signin' %}" class="dropdown-item">Get started</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
-
-                {% if request.path != my_signin_url or 'accounts/' not in request.path %}
-                <!-- Modal window -->
-                <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="userModalLabel">
-                                    {% if user.is_authenticated %}
-                                    {{ user.username }}
-                                    {% else %}
-                                    Options
-                                    {% endif%}
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center">
-
-                                {% if user.is_authenticated %}
-                                <a href="#" class="btn btn-primary me-4">Profile</a>
-                                <a href="{% url 'my_signout' %}" class="btn btn-outline-primary">Logout</a>
-                                {% else %}
-                                <a href="{% url 'my_signin' %}" class="btn btn-primary m-3">Get started</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
             </div>
 
             {% block content %}
