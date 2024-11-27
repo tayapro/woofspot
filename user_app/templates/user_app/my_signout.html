@@ -1,10 +1,27 @@
-{% extends "base.html" %}
+{% extends "user_app_base.html" %}
+{% load allauth i18n %}
 
+{% block head_title %}
+{% trans "Sign Out" %}
+{% endblock head_title %}
 
 {% block content %}
-<form method="post" action="{% url 'account_logout' %}">
-    {% csrf_token %}
-    <p>Are you sure you want to log out?</p>
-    <button type="submit" class="btn btn-primary me-2 mb-2">Log Out</button>
-</form>
+
+<div class="text-center">
+    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
+    <h5 class="text-black fw-light text-opacity-50 mb-1">We’ll miss you and your furry friend(s)!</h5>
+    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to log out?</h5>
+
+    <div class="d-flex justify-content-evenly">
+        <a href="{% url 'home' %}">
+            <button type="submit"
+                class="btn btn-outline-default active fw-semibold text-opacity-75 text-body-secondary text-opacity-75 px-5">No</button>
+        </a>
+
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 px-5">Yes</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}
