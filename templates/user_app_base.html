@@ -1,4 +1,5 @@
 {% load static %}
+{% url 'my_signout' as my_signout_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,11 @@
 <body>
     <div class="row g-0 min-vh-100">
         <div class="auth_img col-md-6 d-none d-md-block mh-100">
+            {% if request.path == my_signout_url %}
+            <img src="{% static 'images/puppy_on_bed.webp' %}" alt="Puppy on bed" class="img-fluid">
+            {% else %}
             <img src="{% static 'images/running_puppy.webp' %}" alt="Running puppy" class="img-fluid">
+            {% endif %}
         </div>
 
         <div class="col-md-6 d-flex flex-column justify-content-center">
