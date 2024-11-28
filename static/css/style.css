@@ -31,15 +31,17 @@
   width: 128px;
 }
 
+/* base.html styles */
+.dropdown-menu {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  border: none;
+}
+
 /* Get started page */
 .xmark-icon .fa-solid {
   display: inline-block;
   vertical-align: middle;
-}
-
-.main-container {
-  min-height: 100vh;
-  width: 100vw;
 }
 
 .auth_img {

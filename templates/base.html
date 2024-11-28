@@ -1,6 +1,7 @@
 {% load static %}
 {% url 'my_signin' as my_signin_url %}
 {% url 'my_signout' as my_signout_url %}
+{% url 'profile' as profile_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,33 +21,40 @@
 
 <body>
     <div class="container">
-        <div class="row mt-4">
+        <div class="row mt-4 d-flex align-items-center">
             <div class="col">
                 <img src="{% static 'images/good_brown_dog.svg' %}" alt="Woofspot logo">
                 <a href="{% url 'home' %}" class="navbar-brand h1 text-uppercase">Woofspot</a>
             </div>
-            <div class="col-auto d-flex align-items-center">
+            <div class="col">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search on woofspot" aria-label="Search">
                 </form>
+            </div>
+            <div class="col-auto d-flex align-items-center">
                 <div class="user-icon">
-                    <button type="button" class="btn btn-primary rounded-circle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button type="button" class="btn btn-primary rounded-circle text-uppercase"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         {% if user.is_authenticated %}
-                        {{ user.username|slice:":3" }}
+                        {{ user.username|slice:":1" }}
                         {% else %}
                         <i class="fas fa-user"></i>
                         {% endif %}
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu mt-2 text-black">
                         {% if user.is_authenticated %}
-                        <li><a href="#" class="dropdown-item">Profile</a></li>
+                        <li><a href="{% url 'profile' %}?next={{ next }}"
+                                class="dropdown-item text-black text-opacity-50">
+                                <i class="fa-regular fa-user me-1"></i>
+                                Profile</a></li>
                         <li>
-                            <hr class="dropdown-divider" />
+                            <hr class="dropdown-divider text-black text-opacity-50" />
                         </li>
-                        <li><a href="{% url 'my_signout' %}" class="dropdown-item">Logout</a></li>
+                        <li><a href="{% url 'my_signout' %}" class="dropdown-item text-black text-opacity-50">Logout</a>
+                        </li>
                         {% else %}
-                        <li><a href="{% url 'my_signin' %}" class="dropdown-item">Get started</a></li>
+                        <li><a href="{% url 'my_signin' %}" class="dropdown-item text-black text-opacity-50">Get
+                                started</a></li>
                         {% endif %}
                     </ul>
                 </div>
