@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required 
+from event_app.models import WoofspotEvent
 
 def my_signin_page(request):
     next = request.GET.get('next', '/')
@@ -45,6 +47,19 @@ def profile_page(request):
         "next": next,
         "user": user,
         "latest_message": latest_message,
+    })
+
+
+def events_page(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('my_signin'))
+    events = WoofspotEvent.objects.filter(attendees=request.user) 
+
+    return render(request, "user_app/events.html",
+    {
+        "user": user,
+        "events": events
     })
 
 

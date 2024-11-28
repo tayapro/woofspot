@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Events</h2>
+
+{% if events %}
+<ul>
+    {% for event in events %}
+    <li>
+        <a href="{% url 'event-detail' event.slug %}">{{ event.title }}</a> ({{ event.event_date }})
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>You haven't RSVPed for any events yet.</p>
+{% endif %}
+
+{% endblock %}
