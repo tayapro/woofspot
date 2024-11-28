@@ -65,6 +65,7 @@ def events_page(request):
         except (WoofspotEvent.DoesNotExist, EventAttendance.DoesNotExist):
             messages.error(request, "There was a problem cancelling your reservation.")
 
+    # TODO: move to try/catch
     latest_message = get_latest_message(request)
 
     return render(request, "user_app/events.html",
