@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -28,9 +28,6 @@ def profile_page(request):
         return redirect(reverse('my_signin'))
     next = request.GET.get('next', '/')
 
-    all_messages = list(messages.get_messages(request))
-    latest_message = all_messages[-1] if all_messages else None
-
     if request.method == "POST":
         new_email = request.POST.get("email", "").strip()
 
@@ -41,6 +38,8 @@ def profile_page(request):
             return redirect(reverse('profile'))
         else:
             messages.error(request, "Please provide a valid email address.")
+
+    latest_message = get_latest_message(request)
 
     return render(request, "user_app/profile.html", 
     {
@@ -56,12 +55,32 @@ def events_page(request):
         return redirect(reverse('my_signin'))
     events = WoofspotEvent.objects.filter(attendees=request.user) 
 
+    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
+        event_id = request.POST.get('event_id')
+        try:
+            event = get_object_or_404(WoofspotEvent, pk=event_id)
+            event.attendees.remove(request.user)
+            messages.success(request, f"Your reservation for {event.title} has been cancelled.")
+
+        except (WoofspotEvent.DoesNotExist, EventAttendance.DoesNotExist):
+            messages.error(request, "There was a problem cancelling your reservation.")
+
+    latest_message = get_latest_message(request)
+
     return render(request, "user_app/events.html",
     {
         "user": user,
-        "events": events
+        "events": events,
+        "latest_message": latest_message,
     })
 
 
 def my_signout_page(request):
     return render(request, "user_app/my_signout.html")
+
+
+def get_latest_message(request):
+    all_messages = list(messages.get_messages(request))
+    latest_message = all_messages[-1] if all_messages else None
+
+    return latest_message
