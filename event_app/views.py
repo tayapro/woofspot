@@ -4,10 +4,10 @@ from django.views import generic
 from django.contrib import messages
 from .models import WoofspotEvent
 
-# Create your views here.
+
 class FetchEvents(generic.ListView):
     queryset = WoofspotEvent.objects.all()
-    template_name = "event_app/index.html"
+    template_name = "index.html"
     context_object_name = "events"
     paginate_by = 6
 
@@ -28,7 +28,44 @@ def event_detail(request, slug):
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()
     )
-    return render(request, "event_app/event_info.html", 
+    return render(request, "event_info.html", 
                  {"event": event, 
                  "user_registered": user_registered}
                  )
+
+
+def events_page(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('my_signin'))
+    events = WoofspotEvent.objects.filter(attendees=request.user) 
+
+    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
+        event_id = request.POST.get('event_id')
+        try:
+            event = get_object_or_404(WoofspotEvent, pk=event_id)
+            event.attendees.remove(request.user)
+            messages.success(request, f"Your reservation for {event.title} has been cancelled.")
+
+        except (WoofspotEvent.DoesNotExist, EventAttendance.DoesNotExist):
+            messages.error(request, "There was a problem cancelling your reservation.")
+
+    all_messages = list(messages.get_messages(request))
+    latest_message = all_messages[-1] if all_messages else None
+
+    return render(request, "events.html",
+    {
+        "user": user,
+        "events": events,
+        "latest_message": latest_message,
+    })
+
+def cancel_event_page(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('my_signin'))
+    
+    return render(request, "cancel_event.html",
+    {
+        "user": user,
+    })

@@ -31,7 +31,7 @@ STATIC_VERSION = int(time.time())
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-tayapro-woofspot-dr7arhh9daf.ws.codeinstitute-ide.net',
                  '.herokuapp.com']
@@ -95,7 +95,11 @@ ROOT_URLCONF = 'woofspot_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [
+            BASE_DIR / "event_app/templates/event_app", 
+            BASE_DIR / "user_app/templates/user_app", 
+            TEMPLATES_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

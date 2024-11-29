@@ -32,7 +32,7 @@
                 <p>You are attending this event.</p>
 
                 {% elif user.is_authenticated %}
-                <form method="post">
+                <form method="POST">
                     {% csrf_token %}
                     <button type="submit" name="reserve_spot" class="btn btn-primary">Reserve spot</button>
                 </form>

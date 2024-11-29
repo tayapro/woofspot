@@ -8,7 +8,7 @@ from event_app.models import WoofspotEvent
 
 def my_signin_page(request):
     next = request.GET.get('next', '/')
-    return render(request, "user_app/my_signin.html", 
+    return render(request, "my_signin.html", 
     {
         "next": next,
     })
@@ -16,7 +16,7 @@ def my_signin_page(request):
 
 def my_signup_page(request):
     next = request.GET.get('next', '/')
-    return render(request, "user_app/my_signup.html", 
+    return render(request, "my_signup.html", 
     {
         "next": next,
     })
@@ -41,7 +41,7 @@ def profile_page(request):
 
     latest_message = get_latest_message(request)
 
-    return render(request, "user_app/profile.html", 
+    return render(request, "profile.html", 
     {
         "next": next,
         "user": user,
@@ -49,35 +49,8 @@ def profile_page(request):
     })
 
 
-def events_page(request):
-    user = request.user
-    if not user.is_authenticated:
-        return redirect(reverse('my_signin'))
-    events = WoofspotEvent.objects.filter(attendees=request.user) 
-
-    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
-        event_id = request.POST.get('event_id')
-        try:
-            event = get_object_or_404(WoofspotEvent, pk=event_id)
-            event.attendees.remove(request.user)
-            messages.success(request, f"Your reservation for {event.title} has been cancelled.")
-
-        except (WoofspotEvent.DoesNotExist, EventAttendance.DoesNotExist):
-            messages.error(request, "There was a problem cancelling your reservation.")
-
-    # TODO: move to try/catch
-    latest_message = get_latest_message(request)
-
-    return render(request, "user_app/events.html",
-    {
-        "user": user,
-        "events": events,
-        "latest_message": latest_message,
-    })
-
-
 def my_signout_page(request):
-    return render(request, "user_app/my_signout.html")
+    return render(request, "my_signout.html")
 
 
 def get_latest_message(request):
