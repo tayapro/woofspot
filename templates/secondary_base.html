@@ -1,5 +1,6 @@
 {% load static %}
 {% url 'my_signout' as my_signout_url %}
+{% url 'cancel_event' as cancel_event_url%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,8 @@
         <div class="auth_img col-md-6 d-none d-md-block mh-100">
             {% if request.path == my_signout_url %}
             <img src="{% static 'images/puppy_on_bed.webp' %}" alt="Puppy on bed" class="img-fluid">
+            {% elif cancel_event_url in request.path %}
+            <img src="{% static 'images/dog_and_cat.webp' %}" alt="Dog and cat" class="img-fluid">
             {% else %}
             <img src="{% static 'images/running_puppy.webp' %}" alt="Running puppy" class="img-fluid">
             {% endif %}
