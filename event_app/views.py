@@ -40,31 +40,22 @@ def events_page(request):
         return redirect(reverse('my_signin'))
     events = WoofspotEvent.objects.filter(attendees=request.user) 
 
-    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
-        event_id = request.POST.get('event_id')
-        try:
-            event = get_object_or_404(WoofspotEvent, pk=event_id)
-            event.attendees.remove(request.user)
-            messages.success(request, f"Your reservation for {event.title} has been cancelled.")
-
-        except (WoofspotEvent.DoesNotExist, EventAttendance.DoesNotExist):
-            messages.error(request, "There was a problem cancelling your reservation.")
-
-    all_messages = list(messages.get_messages(request))
-    latest_message = all_messages[-1] if all_messages else None
-
     return render(request, "events.html",
     {
         "user": user,
         "events": events,
-        "latest_message": latest_message,
     })
 
-def cancel_event_page(request):
+def cancel_event_page(request, slug):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('my_signin'))
-    
+
+    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
+        event = get_object_or_404(WoofspotEvent, slug=slug)
+        event.attendees.remove(request.user)
+        return redirect(reverse('events'))
+        
     return render(request, "cancel_event.html",
     {
         "user": user,

@@ -13,15 +13,10 @@
     <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to cancel your spot?</h5>
 
     <div class="d-flex justify-content-evenly">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'events' %}">
             <button type="submit"
                 class="btn btn-outline-default active fw-semibold text-opacity-75 text-body-secondary text-opacity-75 px-5">No</button>
         </a>
-
-        <form method="post" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 px-5">Yes</button>
-        </form>
 
         <form method="POST">
             {% csrf_token %}
