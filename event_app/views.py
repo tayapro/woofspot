@@ -58,5 +58,6 @@ def cancel_event_page(request, slug):
         
     return render(request, "cancel_event.html",
     {
+        "slug": slug,
         "user": user,
     })
