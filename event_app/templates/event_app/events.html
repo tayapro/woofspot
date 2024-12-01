@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h5><a href="{% url 'event-detail' event.slug %}">{{ event.title }}</a></h5>
+                    <h5><a href="{% url 'event_detail' event.slug %}">{{ event.title }}</a></h5>
                     <p>{{ event.location }}
                         <span class="ms-2">
                             {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
@@ -35,7 +35,7 @@
                     </p>
                 </div>
                 <div class="col-md-auto d-flex justify-content-center">
-                    <a href="{% url 'cancel-event' event.slug %}">
+                    <a href="{% url 'cancel_event' event.slug %}">
                         <button class="btn btn-danger">Cancel spot</button>
                     </a>
                 </div>
