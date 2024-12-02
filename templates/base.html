@@ -32,17 +32,13 @@
                 </form>
             </div>
             <div class="col-auto d-flex align-items-center">
+                {% if user.is_authenticated %}
                 <div class="user-icon">
                     <button type="button" class="btn btn-primary rounded-circle text-uppercase"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if user.is_authenticated %}
                         {{ user.username|slice:":1" }}
-                        {% else %}
-                        <i class="fas fa-user"></i>
-                        {% endif %}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end mt-2 text-black">
-                        {% if user.is_authenticated %}
                         <li>
                             <p class="dropdown-item text-black text-opacity-50">
                                 <i class="fa-regular fa-user me-1"></i>
@@ -61,12 +57,16 @@
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 Logout</a>
                         </li>
-                        {% else %}
-                        <li><a href="{% url 'my_signin' %}" class="dropdown-item text-black text-opacity-50">Get
-                                started</a></li>
-                        {% endif %}
                     </ul>
                 </div>
+                {% else %}
+                <div>
+                    <a href="{% url 'my_signin' %}"
+                        class="btn btn-outline-default active fw-semibold text-body-secondary text-opacity-75 px-3">
+                        Get started
+                    </a>
+                </div>
+                {% endif %}
             </div>
 
             {% block content %}
