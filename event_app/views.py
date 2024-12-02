@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
+from django.db.models import Q
 from .models import WoofspotEvent
 
 
@@ -12,7 +13,7 @@ class FetchEvents(generic.ListView):
     paginate_by = 6
 
 
-def event_detail(request, slug):
+def event_detail_page(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
     if request.method == 'POST' and 'reserve_spot' in request.POST:
@@ -61,3 +62,14 @@ def cancel_event_page(request, slug):
         "slug": slug,
         "user": user,
     })
+
+
+def search_results_page(request):
+    query = request.GET.get('query')  
+    results = []
+    if query:
+        results = WoofspotEvent.objects.filter(
+            Q(title__icontains=query) |  
+            Q(content__icontains=query)  
+        )
+    return render(request, "search_results.html", {"query": query, "results": results})

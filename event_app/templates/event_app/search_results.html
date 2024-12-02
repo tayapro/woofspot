@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load allauth i18n %}
+
+{% block head_title %}
+{% trans "Search Results" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Search Results</h1>
+
+    {% if query %}
+    <p class="text-muted">Results for "<strong>{{ query }}</strong>":</p>
+    {% endif %}
+
+    {% if results %}
+    <ul class="list-group">
+        {% for event in results %}
+        <li class="list-group-item">
+            <h5>
+                <a href="{% url 'event_detail' event.slug %}">{{ event.title }}</a>
+            </h5>
+            <p class="mb-1">{{ event.content|striptags|truncatewords:20 }}</p>
+            <small class="text-muted">Date: {{ event.event_date }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-warning">No results</p>
+    {% endif %}
+</div>
+{% endblock content %}
