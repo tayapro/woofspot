@@ -31,7 +31,7 @@ STATIC_VERSION = int(time.time())
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-tayapro-woofspot-dr7arhh9daf.ws.codeinstitute-ide.net',
                  '.herokuapp.com']
@@ -63,6 +63,11 @@ INSTALLED_APPS = [
 SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# 2 hours in seconds
+SESSION_COOKIE_AGE = 7200
+# Update session expiry on every request
+SESSION_SAVE_EVERY_REQUEST = True
 
 SOCIALACCOUNT_PROVIDERS = {
   'google': {
