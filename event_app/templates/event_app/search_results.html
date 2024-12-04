@@ -6,27 +6,43 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mb-4">Search Results</h1>
+<div class="text-center m-4">
+    <h3 class="mb-4">SEARCH RESULTS</h3>
 
     {% if query %}
     <p class="text-muted">Results for "<strong>{{ query }}</strong>":</p>
     {% endif %}
-
-    {% if results %}
-    <ul class="list-group">
-        {% for event in results %}
-        <li class="list-group-item">
-            <h5>
-                <a href="{% url 'event_detail' event.slug %}">{{ event.title }}</a>
-            </h5>
-            <p class="mb-1">{{ event.content|striptags|truncatewords:20 }}</p>
-            <small class="text-muted">Date: {{ event.event_date }}</small>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p class="text-warning">No results</p>
-    {% endif %}
 </div>
+
+<section class="event-list">
+    {% if results %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            {% for event in results %}
+            <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+                <div class="col-md-auto">
+                    <div class="d-flex flex-column">
+                        <strong class="fs-4">{{ event.event_date|date:"d" }}</strong>
+                        <span class="text-muted">{{ event.event_date|date:"M" }}</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>{{ event.title }}</h5>
+                    <p>{{ event.location }}
+                        <span class="ms-2">
+                            {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-auto d-flex align-items-center">
+                    <a href="{% url 'event_detail' event.slug %}" class="btn btn-primary">More details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <p class="text-warning text-center">No results</p>
+    {% endif %}
+</section>
 {% endblock content %}
