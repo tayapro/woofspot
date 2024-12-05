@@ -7,7 +7,7 @@
 {% endblock head_title %}
 
 {% block content %}
-<div>
+<div class="results-container">
     <div class="text-center my-5">
         <h3 class="header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
 
@@ -16,7 +16,7 @@
         {% endif %}
     </div>
 
-    <section class="event-list">
+    <div class="event-list">
         {% if results %}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
@@ -44,11 +44,15 @@
             </div>
         </div>
         {% else %}
-        <div class="no-results">
-            <p class="header-font text-warning text-center">No Result found for: {{ query }}</p>
-            <img src="{% static 'images/googlebot.webp' %}" alt="A crocheted Googlebot">
+        <div class="no-results d-flex align-items-center flex-column">
+            <div class="header-font text-warning">
+                <p>No Result found for: {{ query }}</p>
+            </div>
+            <div class="mt-2">
+                <img src="{% static 'images/googlebot.webp' %}" alt="A crocheted Googlebot">
+            </div>
         </div>
         {% endif %}
-    </section>
+    </div>
 </div>
 {% endblock content %}

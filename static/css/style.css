@@ -5,6 +5,7 @@
 :root {
   --font-family: "Inter", sans-serif;
   --header-font-family: "Montserrat", sans-serif;
+  --white-color: rgb(251, 251, 251);
 }
 
 * {
@@ -54,6 +55,49 @@ body {
   border: none;
 }
 
+#search-form {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+#search-input {
+  border: 1px solid rgba(124, 124, 125, 255);
+  border-radius: 5px 0 0 5px;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+#bth-search-form {
+  border: 1px solid rgba(124, 124, 125, 255);
+  padding: 0.37rem;
+  background-color: var(--white-color);
+  border-radius: 0 5px 5px 0;
+  color: rgba(124, 124, 125, 255);
+  border-left-style: none;
+}
+
+#bth-search-form:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .search-form-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    z-index: 10;
+    padding: 1rem;
+  }
+}
+
 /* Get started page */
 .xmark-icon .fa-solid {
   display: inline-block;
@@ -100,6 +144,10 @@ input::placeholder {
 }
 
 /* Results page */
+.results-container {
+  height: calc(100vh - 130px);
+}
+
 .no-results img {
   height: 200px;
   width: auto;
