@@ -49,6 +49,13 @@ body {
 }
 
 /* base.html styles */
+#carouselExampleDark .carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  height: 70vh;
+}
+
 .logo-size {
   width: 128px;
   height: auto;
