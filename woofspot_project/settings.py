@@ -31,7 +31,7 @@ STATIC_VERSION = int(time.time())
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-tayapro-woofspot-dr7arhh9daf.ws.codeinstitute-ide.net',
                  '.herokuapp.com']

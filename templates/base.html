@@ -80,7 +80,7 @@
     </nav>
 
     {% if request.path == home_url %}
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide my-4" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -92,23 +92,20 @@
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
                 <img src="{% static 'images/girl_and_puppy.webp' %}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block bg-white bg-opacity-50">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                <div class="carousel-caption d-md-block bg-white bg-opacity-75">
+                    <h4 class="text-body-secondary">Huh? Where are we going?</h4>
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
                 <img src="{% static 'images/corgi_with_big_dog.webp' %}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
+                <div class="carousel-caption d-md-block bg-white bg-opacity-75">
+                    <h4 class="text-body-secondary">Wait, is that a new friend I see?</h4>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{% static 'images/two_happy_dogs.webp' %}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                <img src="{% static 'images/two_bzi_bza.webp' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-md-block bg-white bg-opacity-75">
+                    <h4 class="text-body-secondary">Let's be friends!</h4>
                 </div>
             </div>
         </div>

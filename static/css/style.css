@@ -1,6 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css?family=Lora:400,400i|Open+Sans:300,400,600,700,800"); */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"); */
 
 :root {
   --font-family: "Inter", sans-serif;
@@ -71,6 +69,19 @@ body {
   .logo-size {
     width: 256px;
   }
+}
+
+.carousel-caption {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.carousel-caption h4 {
+  font-family: var(--font-family);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: light;
 }
 
 .dropdown-menu {
