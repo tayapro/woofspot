@@ -19,6 +19,11 @@ body {
   min-height: 100vh;
 }
 
+.mx-lg-10 {
+  margin-left: 5rem !important;
+  margin-right: 5rem !important;
+}
+
 .header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;
@@ -47,6 +52,12 @@ body {
 }
 
 /* base.html styles */
+#carouselExampleDark {
+  top: 0;
+  left: 5%;
+  width: 90%;
+}
+
 #carouselExampleDark .carousel-item img {
   object-fit: cover;
   object-position: center;
