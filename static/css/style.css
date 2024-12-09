@@ -24,10 +24,24 @@ body {
   margin-right: 5rem !important;
 }
 
-.header-font {
+.bold-header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;
   font-weight: 900;
+  font-style: normal;
+}
+
+.tagline-header-font {
+  font-family: var(--header-font-family);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.tagline-p-font {
+  font-family: var(--header-font-family);
+  font-optical-sizing: auto;
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -52,47 +66,18 @@ body {
 }
 
 /* base.html styles */
-#carouselExampleDark {
-  top: 0;
-  left: 5%;
-  width: 90%;
-}
-
-#carouselExampleDark .carousel-item img {
-  object-fit: cover;
-  object-position: center;
-  overflow: hidden;
-  height: 70vh;
-}
 
 .logo-size {
-  width: 128px;
+  width: 64px;
   height: auto;
 }
 
-@media (min-width: 481px) {
-  .logo-size {
-    width: 192px;
-  }
-}
-
-@media (min-width: 768px) {
-  .logo-size {
-    width: 256px;
-  }
-}
-
-.carousel-caption {
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-
-.carousel-caption h4 {
-  font-family: var(--font-family);
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: light;
+#bg-image {
+  background-image: url("../images/two_happy_dogs2.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
 }
 
 .dropdown-menu {

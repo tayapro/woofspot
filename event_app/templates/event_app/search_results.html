@@ -9,7 +9,7 @@
 {% block content %}
 <div class="results-container">
     <div class="text-center my-5">
-        <h3 class="header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
+        <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
 
         {% if query and results %}
         <p class="text-black text-opacity-50">Results for "<strong>{{ query }}</strong>":</p>
@@ -45,7 +45,7 @@
         </div>
         {% else %}
         <div class="no-results d-flex align-items-center flex-column">
-            <div class="header-font text-warning">
+            <div class="bold-header-font text-warning">
                 <p>No Result found for: {{ query }}</p>
             </div>
             <div class="mt-2">
