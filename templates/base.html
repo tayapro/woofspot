@@ -22,73 +22,75 @@
 </head>
 
 <body class="bg-body-tertiary d-flex flex-column h-100">
+    {% if request.path == home_url %}
     <div id="bg-image" class="mask d-flex align-items-start">
-        <nav
-            class="navbar navbar-expand-lg w-100 d-flex justify-content-between align-items-center my-2 mx-4 mx-md-5 mx-lg-5">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="{% url 'home' %}" class="navbar-brand">
-                    <img src="{% static 'images/ws_logo.svg' %}" alt="Woofspot logo" class="img-fluid logo-size">
-                </a>
-            </div>
-
-            <div class="d-flex gap-3">
-                <div class="search-form-container">
-                    <form method="GET" action="{% url 'search_results' %}" id="search-form" class="d-flex">
-                        <label for="search-input">
-                            <input type="text" id="search-input" class="form-control me-2" name="query"
-                                placeholder="Search on woofspot" minlength="2" size="20" autocomplete="off"
-                                aria-label="Search" required></label>
-                        <button type="submit" id="bth-search-form">Search</button>
-                    </form>
-                </div>
-                <div>
-                    {% if user.is_authenticated %}
-                    <div class="user-icon">
-                        <button type="button" class="btn btn-primary rounded-circle text-uppercase"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.username|slice:":1" }}
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end mt-2 text-black">
-                            <li>
-                                <p class="dropdown-item text-black text-opacity-50">
-                                    <i class="fa-regular fa-user me-1"></i>
-                                    {{ user.username }}
-                                </p>
-                            </li>
-                            <hr class="dropdown-divider text-black text-opacity-50" />
-                            <li><a href="{% url 'events' %}?next={{ next }}"
-                                    class="dropdown-item text-black text-opacity-50">
-                                    <i class="fa-solid fa-ticket"></i>
-                                    My events</a></li>
-                            <li>
-                                <hr class="dropdown-divider text-black text-opacity-50" />
-                            </li>
-                            <li><a href="{% url 'my_signout' %}" class="dropdown-item text-black text-opacity-50">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                    {% else %}
-                    <div>
-                        <a href="{% url 'my_signin' %}"
-                            class="btn btn-outline-default active fw-semibold text-danger text-opacity-75 px-3">
-                            Get started
-                        </a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
-
         <div
-            class="d-flex w-100 position-absolute flex-column p-5 text-body-secondary bg-white bg-opacity-50 bottom-0 start-0">
+            class="d-flex w-100 position-absolute bottom-0 start-0 flex-column p-5 text-body-secondary bg-white bg-opacity-50">
             <h2 class="tagline-header-font text-black text-opacity-50">WOOFSPOT:</h2>
             <p class="tagline-p-font">Your guide to pet-friendly events.</p>
         </div>
     </div>
+    {% endif%}
 
-    <main role="main" class="container">
+    <nav
+        class="navbar position-fixed top-0 start-0 z-3 w-100 d-flex justify-content-between align-items-center my-2 px-sm-4 px-md-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <img src="{% static 'images/ws_logo.svg' %}" alt="Woofspot logo" class="img-fluid logo-size">
+            </a>
+        </div>
+
+        <div class="d-flex gap-3">
+            <div class="search-form-container">
+                <form method="GET" action="{% url 'search_results' %}" id="search-form" class="d-flex">
+                    <label for="search-input">
+                        <input type="text" id="search-input" class="form-control me-2" name="query"
+                            placeholder="Search on woofspot" minlength="2" size="20" autocomplete="off"
+                            aria-label="Search" required></label>
+                    <button type="submit" id="bth-search-form">Search</button>
+                </form>
+            </div>
+            <div>
+                {% if user.is_authenticated %}
+                <div class="user-icon">
+                    <button type="button" class="btn btn-primary rounded-circle text-uppercase"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.username|slice:":1" }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end mt-2 text-black">
+                        <li>
+                            <p class="dropdown-item text-black text-opacity-50">
+                                <i class="fa-regular fa-user me-1"></i>
+                                {{ user.username }}
+                            </p>
+                        </li>
+                        <hr class="dropdown-divider text-black text-opacity-50" />
+                        <li><a href="{% url 'events' %}?next={{ next }}"
+                                class="dropdown-item text-black text-opacity-50">
+                                <i class="fa-solid fa-ticket"></i>
+                                My events</a></li>
+                        <li>
+                            <hr class="dropdown-divider text-black text-opacity-50" />
+                        </li>
+                        <li><a href="{% url 'my_signout' %}" class="dropdown-item text-black text-opacity-50">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                <div>
+                    <a href="{% url 'my_signin' %}"
+                        class="btn btn-outline-default active fw-semibold text-danger text-opacity-75 px-3">
+                        Get started
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="container mt-5 pt-5">
         {% block content %}
         <!-- Content goes here -->
         {% endblock content %}
