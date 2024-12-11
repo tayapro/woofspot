@@ -6,12 +6,36 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from event_app.models import WoofspotEvent
 
-def my_signin_page(request):
-    next = request.GET.get('next', '/')
-    return render(request, "my_signin.html", 
-    {
-        "next": next,
-    })
+from allauth.account.views import LoginView
+from allauth.account import forms as auth_forms
+from .forms import MySigninForm
+
+class MySigninView(LoginView):
+    template_name = 'my_signin.html' 
+    form_class = MySigninForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next')
+        return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+
+# def my_signin_page(request):
+#     messages.get_messages(request).used = True
+#     next = request.GET.get('next', '/')
+#     if request.user.is_authenticated:
+#         return redirect(next)
+    
+#     if 'login' in request.POST:
+#         messages.error(request, "The username and/or password are not correct.")
+    
+#     return render(request, "my_signin.html", {
+#         "next": next,
+#     })
 
 
 def my_signup_page(request):

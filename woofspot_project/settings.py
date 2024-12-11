@@ -68,6 +68,11 @@ LOGOUT_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 7200
 # Update session expiry on every request
 SESSION_SAVE_EVERY_REQUEST = True
+# Lifetime of CSRF token is 1 hour
+CSRF_COOKIE_AGE = 3600
+
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 SOCIALACCOUNT_PROVIDERS = {
   'google': {
@@ -88,12 +93,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'user_app.middleware.SessionExpiredMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# Lifetime of CSRF token is 1 hour
-CSRF_COOKIE_AGE = 3600
 
 ROOT_URLCONF = 'woofspot_project.urls'
 
