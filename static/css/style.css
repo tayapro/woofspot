@@ -19,6 +19,36 @@ body {
   min-height: 100vh;
 }
 
+/* Custom allauth styles for login, signup pages */
+ul.errorlist.nonfield {
+  list-style-type: none;
+  color: rgb(232, 86, 98);
+  text-align: center;
+  padding-left: 0;
+}
+
+#id_password_helptext {
+  display: flex;
+  justify-content: end;
+}
+
+#id_password_helptext > a {
+  text-decoration: none;
+  color: #6d7d9c;
+  font-size: smaller;
+}
+
+.login p:last-of-type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#id_remember {
+  padding: 0.5rem;
+  width: 1rem;
+}
+
 .mx-lg-10 {
   margin-left: 5rem !important;
   margin-right: 5rem !important;
@@ -106,7 +136,7 @@ body {
   padding: 0.37rem;
   background-color: var(--white-color);
   border-radius: 0 5px 5px 0;
-  color: rgba(124, 124, 125, 255);
+  color: rgba(124, 124, 125, 1);
   border-left-style: none;
 }
 

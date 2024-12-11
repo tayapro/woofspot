@@ -71,8 +71,10 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Lifetime of CSRF token is 1 hour
 CSRF_COOKIE_AGE = 3600
 
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+ACCOUNT_FORMS = {'signup': 'woofspot_project.forms.MySignupForm',
+                 'login': 'woofspot_project.forms.MySigninForm'}
 
 SOCIALACCOUNT_PROVIDERS = {
   'google': {

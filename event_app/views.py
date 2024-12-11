@@ -38,7 +38,7 @@ def event_detail_page(request, slug):
 def events_page(request):
     user = request.user
     if not user.is_authenticated:
-        return redirect(reverse('my_signin'))
+        return redirect(reverse('account_login'))
     events = WoofspotEvent.objects.filter(attendees=request.user) 
 
     return render(request, "events.html",
@@ -50,7 +50,7 @@ def events_page(request):
 def cancel_event_page(request, slug):
     user = request.user
     if not user.is_authenticated:
-        return redirect(reverse('my_signin'))
+        return redirect(reverse('account_login'))
 
     if request.method == 'POST' and 'cancel_reservation' in request.POST:  
         event = get_object_or_404(WoofspotEvent, slug=slug)

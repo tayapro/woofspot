@@ -1,9 +1,8 @@
 {% load static %}
 {% url 'search_results' as search_results_url %}
-<!-- {% url 'my_signin' as my_signin_url %} -->
-{% url 'account_login' as account_login_url%}
-{% url 'my_signout' as my_signout_url %}
-{% url 'profile' as profile_url %}
+{% url 'account_login' as account_login_url %}
+{% url 'account_signup' as account_signup_url %}
+{% url 'account_logout' as account_logout_url %}
 {% url 'home' as home_url %}
 
 <!DOCTYPE html>
@@ -73,7 +72,7 @@
                         <li>
                             <hr class="dropdown-divider text-black text-opacity-50" />
                         </li>
-                        <li><a href="{% url 'my_signout' %}" class="dropdown-item text-black text-opacity-50">
+                        <li><a href="{% url 'account_logout' %}" class="dropdown-item text-black text-opacity-50">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 Logout</a>
                         </li>

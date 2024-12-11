@@ -37,7 +37,7 @@
                     <button type="submit" name="reserve_spot" class="btn btn-primary">Reserve spot</button>
                 </form>
                 {% else %}
-                <a href="{% url 'my_signin' %}?next={{ request.path }}" class="btn btn-primary">
+                <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-primary">
                     Reserve spot (Login Required)</a>
                 {% endif %}
             </div>
