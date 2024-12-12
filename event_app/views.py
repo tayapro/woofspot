@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
 from django.db.models import Q
+from django.http import HttpResponse
 from .models import WoofspotEvent
 
 
@@ -81,4 +82,6 @@ def toggle_like(request, slug):
     
     event = get_object_or_404(WoofspotEvent, slug=slug)
     event.toggle_like(request.user)
-    return redirect("home")
+    return render(request, "like_button.html", {
+        "event": event
+    })
