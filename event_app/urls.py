@@ -7,4 +7,5 @@ urlpatterns = [
     path('search/', views.search_results_page, name="search_results"),
     path('myevents/cancel/<slug:slug>/', views.cancel_event_page, name="cancel_event"),
     path('<slug:slug>/', views.event_detail_page, name="event_detail"),
+    path('toggle-like/<slug:slug>/', views.toggle_like, name="toggle_like"),
 ]

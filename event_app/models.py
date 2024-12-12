@@ -15,7 +15,8 @@ class WoofspotEvent(models.Model):
     event_end_time = models.TimeField()
     attendees = models.ManyToManyField(User, related_name='events_attending', blank = True)
     created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True) 
+    updated_on = models.DateTimeField(auto_now=True)
+    liked_by = models.ManyToManyField(User, related_name="liked_events", blank=True)
 
     def __str__(self):
         return f"Event: {self.title} at {self.location} on {self.event_date}"
@@ -37,6 +38,17 @@ class WoofspotEvent(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save()
+
+    def toggle_like(self, user):
+        # Toggle the like status of a user
+        if user in self.liked_by.all():
+            self.liked_by.remove(user)
+        else:
+            self.liked_by.add(user)
+
+    def like_count(self):
+        # Return the number of likes
+        return self.liked_by.count()
 
     class Meta:
         ordering = ["-event_date", "event_start_time"]

@@ -73,3 +73,12 @@ def search_results_page(request):
             Q(content__icontains=query)  
         )
     return render(request, "search_results.html", {"query": query, "results": results})
+
+
+def toggle_like(request, slug):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You must be logged in to like an event.")
+    
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+    event.toggle_like(request.user)
+    return redirect("home")

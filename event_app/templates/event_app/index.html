@@ -45,12 +45,33 @@
                 </span>
             </div>
 
-            <div class="col-12 order-4 d-flex justify-content-end align-items-center gap-2">
-                <div>
-                    <i class="fa-regular fa-heart fa-2x text-black text-opacity-25"></i>
+            <div class="col-12 order-4 d-flex justify-content-end align-items-center gap-3">
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'toggle_like' event.slug %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn p-0">
+                                {% if user in event.liked_by.all %}
+                                <i class="fa-solid fa-heart fa-2x text-danger text-opacity-50"></i>
+                                {% else %}
+                                <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                                {% endif %}
+                            </button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Login to like">
+                            <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="fw-semibold text-danger text-opacity-50 mb-0">{{ event.like_count }}</p>
+                    </div>
                 </div>
                 <div>
-                    <a href=" {% url 'event_detail' event.slug %}" class="btn btn-primary">More details</a>
+                    <a href="{% url 'event_detail' event.slug %}" class="btn btn-primary">More details</a>
                 </div>
             </div>
         </div>
