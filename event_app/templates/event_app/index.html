@@ -6,33 +6,56 @@
     <h2 class="bold-header-font text-black text-opacity-50">EVENT CALENDAR</h2>
 </div>
 
+<!-- <div class="container mb-4">
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-2">13</div>
+                <div class="col-6">EVENT TITILE</div>
+            </div>
+            <div class="row">
+                <div class="col-2">DEC</div>
+                <div class="col-4">Location</div>
+                <div class="col-2">time</div>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center">Mode details & like</div>
+    </div>
+</div> -->
+
 <section class="event-list">
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
+        {% for event in events %}
+        <div class="row shadow-sm p-3 mb-5 bg-white rounded row-gap-2">
+            <div class="col-12 order-1 text-center">
+                <h5>{{ event.title }}</h5>
+            </div>
 
-            {% for event in events %}
-            <div class="row shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="col-md-auto">
-                    <div class="d-flex flex-column">
-                        <strong class="fs-4">{{ event.event_date|date:"d" }}</strong>
-                        <span class="text-muted">{{ event.event_date|date:"M" }}</span>
-                    </div>
+            <div class="col-2 order-2 text-center">
+                <strong class="fs-4">{{ event.event_date|date:"d" }}</strong>
+            </div>
+            <div class="col-10 order-2">{{ event.location }}</div>
+
+            <div class="col-2 order-3 text-center">
+                <span class="text-muted">{{ event.event_date|date:"M" }}</span>
+            </div>
+            <div class="col-10 order-3">
+                <span>
+                    {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
+                </span>
+            </div>
+
+            <div class="col-12 order-4 d-flex justify-content-end align-items-center gap-2">
+                <div>
+                    <i class="fa-regular fa-heart fa-2x text-black text-opacity-25"></i>
                 </div>
-                <div class="col">
-                    <h5>{{ event.title }}</h5>
-                    <p>{{ event.location }}
-                        <span class="ms-2">
-                            {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
-                        </span>
-                    </p>
-                </div>
-                <div class="col-md-auto d-flex align-items-center">
-                    <a href="{% url 'event_detail' event.slug %}" class="btn btn-primary">More details</a>
+                <div>
+                    <a href=" {% url 'event_detail' event.slug %}" class="btn btn-primary">More details</a>
                 </div>
             </div>
-            {% endfor %}
-
         </div>
+        {% endfor %}
+    </div>
     </div>
 </section>
 
