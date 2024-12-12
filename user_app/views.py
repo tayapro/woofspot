@@ -41,10 +41,6 @@ def profile_page(request):
     })
 
 
-def my_signout_page(request):
-    return render(request, "my_signout.html")
-
-
 def get_latest_message(request):
     all_messages = list(messages.get_messages(request))
     latest_message = all_messages[-1] if all_messages else None
