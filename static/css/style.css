@@ -20,7 +20,7 @@ body {
 }
 
 /* Custom allauth styles for login, signup pages */
-ul.errorlist.nonfield {
+ul.errorlist {
   list-style-type: none;
   color: rgb(232, 86, 98);
   text-align: center;
@@ -47,6 +47,13 @@ ul.errorlist.nonfield {
 #id_remember {
   padding: 0.5rem;
   width: 1rem;
+}
+
+form.signup ul:last-of-type {
+  list-style-type: none;
+  color: #6d7d9c;
+  font-size: smaller;
+  padding-left: 0;
 }
 
 .mx-lg-10 {

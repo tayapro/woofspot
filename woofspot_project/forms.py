@@ -18,14 +18,10 @@ class MySigninForm(LoginForm):
 class MySignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Field('username'),
-            Field('email'),
-            Field('password1'),
-            Field('password2'),
-        )
+        
         self.fields['username'].widget.attrs.update({'class': 'form-control text-body-secondary text-opacity-75'})
         self.fields['email'].widget.attrs.update({'class': 'form-control text-body-secondary text-opacity-75'})
+        self.fields['email'].required = True
+        self.fields['email'].label = "Email:"
         self.fields['password1'].widget.attrs.update({'class': 'form-control text-body-secondary text-opacity-75'})
         self.fields['password2'].widget.attrs.update({'class': 'form-control text-body-secondary text-opacity-75'})

@@ -6,14 +6,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from event_app.models import WoofspotEvent
 
-def my_signup_page(request):
-    next = request.GET.get('next', '/')
-    return render(request, "my_signup.html", 
-    {
-        "next": next,
-    })
-
-
 def profile_page(request):
     user = request.user
     if not user.is_authenticated:
