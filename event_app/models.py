@@ -13,10 +13,11 @@ class WoofspotEvent(models.Model):
     event_date = models.DateField()
     event_start_time = models.TimeField()
     event_end_time = models.TimeField()
-    attendees = models.ManyToManyField(User, related_name='events_attending', blank = True)
+    attendees = models.ManyToManyField(User, related_name="events_attending", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     liked_by = models.ManyToManyField(User, related_name="liked_events", blank=True)
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organized_events", default=1)
 
     def __str__(self):
         return f"Event: {self.title} at {self.location} on {self.event_date}"
@@ -32,12 +33,12 @@ class WoofspotEvent(models.Model):
 
         super().clean()
 
-    def save(self):
+    def save(self, *args, **kwargs):
         # Generate slug, perform validation and save the object
-        self.full_clean()
         if not self.slug:
             self.slug = slugify(self.title)
-        super().save()
+        self.full_clean()  
+        super().save(*args, **kwargs)
 
     def toggle_like(self, user):
         # Toggle the like status of a user

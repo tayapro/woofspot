@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.views import generic
 from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
 from .models import WoofspotEvent
+from .forms import EventOrganizerForm
 
 
 class FetchEvents(generic.ListView):
@@ -40,13 +43,17 @@ def events_page(request):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('account_login'))
-    events = WoofspotEvent.objects.filter(attendees=request.user) 
+    
+    attending_events = WoofspotEvent.objects.filter(attendees=request.user)
+    organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
 
     return render(request, "events.html",
     {
         "user": user,
-        "events": events,
+        "attending_events": attending_events,
+        "organizing_events": organizing_events
     })
+
 
 def cancel_event_page(request, slug):
     user = request.user
@@ -85,3 +92,17 @@ def toggle_like(request, slug):
     return render(request, "like_button.html", {
         "event": event
     })
+
+
+@login_required
+def create_event_organizer(request):
+    if request.method == 'POST':
+        form = EventOrganizerForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.organizer = request.user
+            event.save()
+            return redirect("events")
+    else:
+        form = EventOrganizerForm()
+    return render(request, "create_event_organizer.html", {"form": form})
