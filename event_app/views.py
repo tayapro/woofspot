@@ -106,3 +106,28 @@ def create_event_organizer(request):
     else:
         form = EventOrganizerForm()
     return render(request, "create_event_organizer.html", {"form": form})
+
+
+@login_required
+def edit_event_organizer(request, slug):
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+    if event.organizer != request.user:
+        return HttpResponseForbidden("Unauthorized access")
+    if request.method == 'POST':
+        form = EventOrganizerForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect("events")
+    else:
+        form = EventOrganizerForm(instance=event)
+    return render(request, "edit_event_organizer.html", {"form": form, "event": event})
+
+
+@login_required
+def delete_event_organizer(request, slug):
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+    if event.organizer != request.user:
+        return HttpResponseForbidden("Unauthorized access")
+    event.delete()
+    return redirect("events")
+

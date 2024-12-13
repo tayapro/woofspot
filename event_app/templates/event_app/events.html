@@ -8,22 +8,36 @@
 
 <div class="container mt-5">
     {% if organizing_events %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="row row-cols-1 row-cols-md-1 row-col-lg-2 g-4">
         {% for event in organizing_events %}
         <div class="col">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'event_detail' event.slug %}"
-                            class="text-decoration-none text-black text-opacity-50 text-capitalize">
-                            {{ event.title }}</a>
-                    </h5>
-                    <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
-                    <p class="card-text text-muted my-0"><strong>Time:</strong>
-                        {{ event.event_start_time }} - {{event.event_end_time }}</p>
-                    <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                    <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
+                        <h5 class="card-title m-0">
+                            <a href="{% url 'event_detail' event.slug %}"
+                                class="text-decoration-none text-black text-opacity-50 text-capitalize">
+                                {{ event.title }}</a>
+                        </h5>
+                    </div>
+                    <div>
+                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                        <p class="card-text text-muted my-0"><strong>Time:</strong>
+                            {{ event.event_start_time }} - {{event.event_end_time }}</p>
+                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                    </div>
                 </div>
-                <!-- TODO: Add edit and cancel features -->
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'events_organizer_edit_event' event.slug %}" class="btn">
+                        <i class="fa-regular fa-pen-to-square text-primary text-opacity-75"></i>
+                    </a>
+                    <form method="POST" action="{% url 'events_organizer_cancel_event' event.slug %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="fa-regular fa-trash-can text-danger text-opacity-75"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         {% endfor %}

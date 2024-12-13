@@ -9,4 +9,6 @@ urlpatterns = [
     path('<slug:slug>/', views.event_detail_page, name="event_detail"),
     path('toggle-like/<slug:slug>/', views.toggle_like, name="toggle_like"),
     path('eventsorganizer/create/', views.create_event_organizer, name="events_organizer_create_event"),
+    path('eventsorganizer/edit/<slug:slug>/', views.edit_event_organizer, name="events_organizer_edit_event"),
+    path('eventsorganizer/delete/<slug:slug>/', views.delete_event_organizer, name="events_organizer_cancel_event"),
 ]
