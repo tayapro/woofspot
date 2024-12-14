@@ -60,14 +60,15 @@ def cancel_event_page(request, slug):
     if not user.is_authenticated:
         return redirect(reverse('account_login'))
 
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+
     if request.method == 'POST' and 'cancel_reservation' in request.POST:  
-        event = get_object_or_404(WoofspotEvent, slug=slug)
         event.attendees.remove(request.user)
         return redirect(reverse('events'))
         
     return render(request, "cancel_event.html",
     {
-        "slug": slug,
+        "event": event,
         "user": user,
     })
 
