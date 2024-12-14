@@ -1,10 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Create Event</h1>
+<h1 class="text-center">Create Event</h1>
+
+{% if errors %}
+<div>
+    {{ errors }}
+</div>
+{% endif %}
+
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <!-- Title Field -->
+    <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+    </div>
+
+    <!-- Content Field -->
+    <div class="mb-3">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+    </div>
+
+    <!-- Location Field -->
+    <div class="mb-3">
+        {{ form.location.label_tag }}
+        {{ form.location }}
+    </div>
+
+    <!-- Event Date, Start Time, End Time on One Line -->
+    <div class="row mb-3 justify-content-center">
+        <div class="col-md-4">
+            {{ form.event_date.label_tag }}
+            {{ form.event_date }}
+        </div>
+        <div class="col-md-4">
+            {{ form.event_start_time.label_tag }}
+            {{ form.event_start_time }}
+        </div>
+        <div class="col-md-4">
+            {{ form.event_end_time.label_tag }}
+            {{ form.event_end_time }}
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
+    <a href="{% url 'events' %}" class="btn btn-secondary">Cancel</a>
 </form>
 {% endblock %}

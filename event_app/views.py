@@ -96,16 +96,22 @@ def toggle_like(request, slug):
 
 @login_required
 def create_event_organizer(request):
+    # Handle submit (POST)
     if request.method == 'POST':
         form = EventOrganizerForm(request.POST)
+
         if form.is_valid():
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
             return redirect("events")
-    else:
-        form = EventOrganizerForm()
-    return render(request, "create_event_organizer.html", {"form": form})
+        else:
+            errors = form.errors
+            return render(request, "create_event_organizer.html", {"form": form, "errors": errors })
+
+    # Handle page (GET)
+    form = EventOrganizerForm()
+    return render(request, "create_event_organizer.html", {"form": form, "errors": None })
 
 
 @login_required

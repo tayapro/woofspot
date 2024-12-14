@@ -19,6 +19,11 @@ body {
   min-height: 100vh;
 }
 
+::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 /* Custom allauth styles for login, signup pages */
 ul.errorlist {
   list-style-type: none;
