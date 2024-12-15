@@ -1,10 +1,10 @@
 from django import forms
 from .models import WoofspotEvent
 
-# Reusable styles defined outside the class
+# Reusable styles
 COMMON_TEXT_STYLES = {
     'class': 'form-control',
-    'style': 'min-width: 200px; width: 100%; max-width: 600px;',
+    'style': 'min-width: 200px; width: 100%;',
 }
 
 DATE_TIME_STYLES = {
@@ -23,6 +23,14 @@ class EventOrganizerForm(forms.ModelForm):
             'event_start_time',
             'event_end_time',
         ]
+        labels = {
+            'title': 'Title',
+            'content': 'Description',
+            'location': 'Location',
+            'event_date': 'Date',
+            'event_start_time': 'From',
+            'event_end_time': 'To',
+        }
         widgets = {
             'title': forms.TextInput(attrs={
                 **COMMON_TEXT_STYLES,  

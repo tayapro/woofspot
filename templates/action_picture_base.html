@@ -2,6 +2,7 @@
 {% url 'cancel_event' slug=event.slug as cancel_event_url %}
 {% url 'account_logout' as account_logout_url %}
 {% url 'events_organizer_edit_event' slug=event.slug as events_organizer_edit_event_url %}
+{% url 'events_organizer_create_event' as events_organizer_create_event_url %}
 
 
 <!DOCTYPE html>
@@ -28,6 +29,8 @@
             {% elif request.path == cancel_event_url %}
             <img src="{% static 'images/dog_and_cat.webp' %}" alt="Dog and cat" class="img-fluid">
             {% elif request.path == events_organizer_edit_event_url %}
+            <img src="{% static 'images/dachshund.webp' %}" alt="Dachshund resting on fabric" class="img-fluid">
+            {% elif request.path == events_organizer_create_event_url %}
             <img src="{% static 'images/dachshund.webp' %}" alt="Dachshund resting on fabric" class="img-fluid">
             {% else %}
             <img src="{% static 'images/running_puppy.webp' %}" alt="Running puppy" class="img-fluid">

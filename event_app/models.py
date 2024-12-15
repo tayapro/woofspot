@@ -29,7 +29,7 @@ class WoofspotEvent(models.Model):
 
         if self.event_date < date.today() or (self.event_date == date.today() and 
          self.event_start_time < datetime.now().time()):
-            raise ValidationError("Event cannot be in the past.")    
+            raise ValidationError("Event cannot be in the past.")
 
         super().clean()
 

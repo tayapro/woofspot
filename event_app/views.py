@@ -120,14 +120,20 @@ def edit_event_organizer(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
+    # Handle submit (POST)
     if request.method == 'POST':
         form = EventOrganizerForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
             return redirect("events")
-    else:
-        form = EventOrganizerForm(instance=event)
-    return render(request, "edit_event_organizer.html", {"form": form, "event": event})
+        else:
+            errors = form.errors
+            return render(request, "edit_event_organizer.html", {"form": form, "event": event, "errors": errors })
+
+    # Handle page (GET)
+    form = EventOrganizerForm(instance=event)
+    return render(request, "edit_event_organizer.html", {"form": form, "event": event, "errors": None})
+
 
 
 @login_required
