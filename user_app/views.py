@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from event_app.models import WoofspotEvent
 
-def profile_page(request):
+def profile(request):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('account_login'))

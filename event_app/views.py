@@ -17,7 +17,7 @@ class FetchEvents(generic.ListView):
     paginate_by = 6
 
 
-def event_detail_page(request, slug):
+def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
     if request.method == 'POST' and 'reserve_spot' in request.POST:
@@ -33,13 +33,13 @@ def event_detail_page(request, slug):
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()
     )
-    return render(request, "event_info.html", 
+    return render(request, "event_view.html", 
                  {"event": event, 
                  "user_registered": user_registered}
                  )
 
 
-def events_page(request):
+def my_event_list(request):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('account_login'))
@@ -47,7 +47,7 @@ def events_page(request):
     attending_events = WoofspotEvent.objects.filter(attendees=request.user)
     organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
 
-    return render(request, "events.html",
+    return render(request, "my_event_list.html",
     {
         "user": user,
         "attending_events": attending_events,
@@ -55,7 +55,7 @@ def events_page(request):
     })
 
 
-def cancel_event_page(request, slug):
+def reservation_cancel(request, slug):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse('account_login'))
@@ -64,16 +64,16 @@ def cancel_event_page(request, slug):
 
     if request.method == 'POST' and 'cancel_reservation' in request.POST:  
         event.attendees.remove(request.user)
-        return redirect(reverse('events'))
+        return redirect(reverse('my_event_list'))
         
-    return render(request, "cancel_event.html",
+    return render(request, "reservation_cancel.html",
     {
         "event": event,
         "user": user,
     })
 
 
-def search_results_page(request):
+def search_results(request):
     query = request.GET.get('query')  
     results = []
     if query:
@@ -96,45 +96,45 @@ def toggle_like(request, slug):
 
 
 @login_required
-def create_event_organizer(request):
+def event_create(request):
     # Handle submit (POST)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EventOrganizerForm(request.POST)
 
         if form.is_valid():
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
-            return redirect("events")
+            return redirect("my_event_list")
         else:
-            return render(request, "create_event_organizer.html", {"form": form })
+            return render(request, "event_create.html", {"form": form })
 
     # Handle page (GET)
     form = EventOrganizerForm()
-    return render(request, "create_event_organizer.html", {"form": form })
+    return render(request, "event_create.html", {"form": form })
 
 
 @login_required
-def edit_event_organizer(request, slug):
+def event_edit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
     # Handle submit (POST)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EventOrganizerForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
-            return redirect("events")
+            return redirect("my_event_list")
         else:
-            return render(request, "edit_event_organizer.html", {"form": form, "event": event })
+            return render(request, "event_edit.html", {"form": form, "event": event })
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)
-    return render(request, "edit_event_organizer.html", {"form": form, "event": event })
+    return render(request, "event_edit.html", {"form": form, "event": event })
 
 
 @login_required
-def delete_event_organizer(request, slug):
+def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")

@@ -3,12 +3,13 @@ from . import views
 
 urlpatterns = [
     path('', views.FetchEvents.as_view(), name="home"),
-    path('myevents/', views.events_page, name="events"),
-    path('search/', views.search_results_page, name="search_results"),
-    path('myevents/cancel/<slug:slug>/', views.cancel_event_page, name="cancel_event"),
-    path('<slug:slug>/', views.event_detail_page, name="event_detail"),
+    path("my/event/list/", views.my_event_list, name="my_event_list"),
+    path("search/", views.search_results, name="search_results"), # search in all events
+    # TODO: search in my/event/list
+    path("reservation/cancel/<slug:slug>/", views.reservation_cancel, name="reservation_cancel"),
     path('toggle-like/<slug:slug>/', views.toggle_like, name="toggle_like"),
-    path('eventsorganizer/create/', views.create_event_organizer, name="events_organizer_create_event"),
-    path('eventsorganizer/edit/<slug:slug>/', views.edit_event_organizer, name="events_organizer_edit_event"),
-    path('eventsorganizer/delete/<slug:slug>/', views.delete_event_organizer, name="events_organizer_cancel_event"),
+    path("event/create/", views.event_create, name="event_create"),
+    path("event/<slug:slug>/", views.event_view, name="event_view"),
+    path("event/edit/<slug:slug>/", views.event_edit, name="event_edit"),
+    path("event/delete/<slug:slug>/", views.event_delete, name="event_delete"),
 ]

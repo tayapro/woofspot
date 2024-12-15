@@ -1,8 +1,8 @@
 {% load static %}
-{% url 'cancel_event' slug=event.slug as cancel_event_url %}
+{% url 'reservation_cancel' slug=event.slug as reservation_cancel_url %}
 {% url 'account_logout' as account_logout_url %}
-{% url 'events_organizer_edit_event' slug=event.slug as events_organizer_edit_event_url %}
-{% url 'events_organizer_create_event' as events_organizer_create_event_url %}
+{% url 'event_edit' slug=event.slug as event_edit_url %}
+{% url 'event_create' as event_create_url %}
 
 
 <!DOCTYPE html>
@@ -26,11 +26,11 @@
         <div class="action_picture col-md-6 d-none d-md-block mh-100">
             {% if request.path == account_logout_url %}
             <img src="{% static 'images/puppy_on_bed.webp' %}" alt="Puppy on bed" class="img-fluid">
-            {% elif request.path == cancel_event_url %}
+            {% elif request.path == reservation_cancel_url %}
             <img src="{% static 'images/dog_and_cat.webp' %}" alt="Dog and cat" class="img-fluid">
-            {% elif request.path == events_organizer_edit_event_url %}
+            {% elif request.path == event_edit_url %}
             <img src="{% static 'images/dachshund.webp' %}" alt="Dachshund resting on fabric" class="img-fluid">
-            {% elif request.path == events_organizer_create_event_url %}
+            {% elif request.path == event_create_url %}
             <img src="{% static 'images/dachshund.webp' %}" alt="Dachshund resting on fabric" class="img-fluid">
             {% else %}
             <img src="{% static 'images/running_puppy.webp' %}" alt="Running puppy" class="img-fluid">

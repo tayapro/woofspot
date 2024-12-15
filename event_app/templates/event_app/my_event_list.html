@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
                         <h5 class="card-title m-0">
-                            <a href="{% url 'event_detail' event.slug %}"
+                            <a href="{% url 'event_view' event.slug %}"
                                 class="text-decoration-none text-black text-opacity-50 text-capitalize">
                                 {{ event.title }}</a>
                         </h5>
@@ -28,10 +28,10 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <a href="{% url 'events_organizer_edit_event' event.slug %}" class="btn">
+                    <a href="{% url 'event_edit' event.slug %}" class="btn">
                         <i class="fa-regular fa-pen-to-square text-primary text-opacity-75"></i>
                     </a>
-                    <form method="POST" action="{% url 'events_organizer_cancel_event' event.slug %}" class="d-inline">
+                    <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn">
                             <i class="fa-regular fa-trash-can text-danger text-opacity-75"></i>
@@ -46,7 +46,7 @@
     <p>You are not organizing any events yet.</p>
     {% endif %}
     <div class="mt-4 text-center">
-        <a href="{% url 'events_organizer_create_event' %}" class="btn btn-success">Create New Event</a>
+        <a href="{% url 'event_create' %}" class="btn btn-success">Create New Event</a>
     </div>
 </div>
 
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h5><a href="{% url 'event_detail' event.slug %}"
+                    <h5><a href="{% url 'event_view' event.slug %}"
                             class="text-decoration-none text-black text-opacity-50 text-capitalize">
                             {{ event.title }}</a></h5>
                     <p>{{ event.location }}
@@ -79,7 +79,7 @@
                     </p>
                 </div>
                 <div class="col-md-auto d-flex justify-content-center">
-                    <a href="{% url 'cancel_event' event.slug %}">
+                    <a href="{% url 'reservation_cancel' event.slug %}">
                         <button class="btn btn-danger">Cancel spot</button>
                     </a>
                 </div>
