@@ -4,11 +4,11 @@
 <div class="px-4">
     <h2 class="text-center">Edit Event</h2>
 
-    {% if errors %}
-    <div>
-        {{ errors }}
-    </div>
-    {% endif %}
+    <ul class="errorlist">
+        {% for key, value in form.errors.items %}
+        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+        {% endfor %}
+    </ul>
 
     <form method="POST">
         {% csrf_token %}

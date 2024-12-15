@@ -107,12 +107,11 @@ def create_event_organizer(request):
             event.save()
             return redirect("events")
         else:
-            errors = form.errors
-            return render(request, "create_event_organizer.html", {"form": form, "errors": errors })
+            return render(request, "create_event_organizer.html", {"form": form })
 
     # Handle page (GET)
     form = EventOrganizerForm()
-    return render(request, "create_event_organizer.html", {"form": form, "errors": None })
+    return render(request, "create_event_organizer.html", {"form": form })
 
 
 @login_required
@@ -127,13 +126,11 @@ def edit_event_organizer(request, slug):
             form.save()
             return redirect("events")
         else:
-            errors = form.errors
-            return render(request, "edit_event_organizer.html", {"form": form, "event": event, "errors": errors })
+            return render(request, "edit_event_organizer.html", {"form": form, "event": event })
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)
-    return render(request, "edit_event_organizer.html", {"form": form, "event": event, "errors": None})
-
+    return render(request, "edit_event_organizer.html", {"form": form, "event": event })
 
 
 @login_required
