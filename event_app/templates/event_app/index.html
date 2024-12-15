@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-12 order-4 d-flex justify-content-end align-items-center gap-3">
-                <div class="d-flex align-items-center" id="like-container" hx-post="{% url 'toggle_like' event.slug %}"
+                <div class="d-flex align-items-center" id="like-container" hx-post="{% url 'like_toggle' event.slug %}"
                     hx-swap="outerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
                     <div>
                         {% if user.is_authenticated %}

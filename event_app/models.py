@@ -39,7 +39,7 @@ class WoofspotEvent(models.Model):
         self.full_clean()  
         super().save(*args, **kwargs)
 
-    def toggle_like(self, user):
+    def like_toggle(self, user):
         # Toggle the like status of a user
         if user in self.liked_by.all():
             self.liked_by.remove(user)

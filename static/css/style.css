@@ -146,7 +146,7 @@ form.signup ul:last-of-type {
 }
 
 #search-input:focus {
-  outline: none;
+  box-shadow: none;
 }
 
 #bth-search-form {

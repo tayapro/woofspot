@@ -12,7 +12,13 @@
         <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
 
         {% if query and results %}
-        <p class="text-black text-opacity-50">Results for "<strong>{{ query }}</strong>":</p>
+        {% if request.path == my_event_search_results_url %}
+        <p class="text-black text-opacity-50">Here are the results for your events matching "<strong>
+                {{ query }}</strong>":</p>
+        {% else%}
+        <p class="text-black text-opacity-50">
+            Here are the results matching "<strong>{{ query }}</strong>":</p>
+        {% endif %}
         {% endif %}
     </div>
 
@@ -46,7 +52,7 @@
         {% else %}
         <div class="no-results d-flex align-items-center flex-column">
             <div class="bold-header-font text-warning">
-                <p>No Result found for: {{ query }}</p>
+                <p>Oops! No results found for "{{ query }}"</p>
             </div>
             <div class="mt-2">
                 <img src="{% static 'images/googlebot.webp' %}" alt="A crocheted Googlebot">

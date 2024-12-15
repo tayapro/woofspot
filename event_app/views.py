@@ -73,7 +73,7 @@ def reservation_cancel(request, slug):
     })
 
 
-def search_results(request):
+def event_search_results(request):
     query = request.GET.get('query')  
     results = []
     if query:
@@ -81,15 +81,39 @@ def search_results(request):
             Q(title__icontains=query) |  
             Q(content__icontains=query)  
         )
-    return render(request, "search_results.html", {"query": query, "results": results})
+    return render(request, "event_search_results.html", {"query": query, "results": results})
 
 
-def toggle_like(request, slug):
+def my_event_search_results(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect(reverse('account_login'))
+    
+    events = WoofspotEvent.objects.filter(
+        Q(attendees=user) | Q(organizer=user)
+    )
+    
+    query = request.GET.get('query')  
+    results = events
+    if query:
+        results = results.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    
+    return render(request, 
+                  "event_search_results.html",
+                  {
+                    "query": query,
+                    "results": results
+                  })
+
+
+def like_toggle(request, slug):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You must be logged in to like an event.")
     
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    event.toggle_like(request.user)
+    event.like_toggle(request.user)
     return render(request, "like_button.html", {
         "event": event
     })
