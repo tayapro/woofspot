@@ -7,8 +7,9 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="results-container">
-    <div class="text-center my-5">
+
+<div class="results-container d-flex align-items-center flex-column gap-4">
+    <div class="text-center mt-5">
         <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
 
         {% if query and results %}
@@ -51,7 +52,7 @@
         </div>
         {% else %}
         <div class="no-results d-flex align-items-center flex-column">
-            <div class="bold-header-font text-warning">
+            <div class="text-warning">
                 <p>Oops! No results found for "{{ query }}"</p>
             </div>
             <div class="mt-2">
@@ -60,5 +61,12 @@
         </div>
         {% endif %}
     </div>
+
+    {% if next %}
+    <div>
+        <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
+            <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

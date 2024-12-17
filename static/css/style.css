@@ -65,13 +65,6 @@ form.signup ul:last-of-type {
   margin-right: 5rem !important;
 }
 
-.bold-header-font {
-  font-family: var(--header-font-family);
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-}
-
 .tagline-header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;

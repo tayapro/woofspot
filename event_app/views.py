@@ -81,7 +81,16 @@ def event_search_results(request):
             Q(title__icontains=query) |  
             Q(content__icontains=query)  
         )
-    return render(request, "event_search_results.html", {"query": query, "results": results})
+    next = request.GET.get('next', "/")
+    print("next: ", next)
+
+    return render(request,
+                  "event_search_results.html", 
+                  {
+                    "next": next,
+                    "query": query, 
+                    "results": results
+                  })
 
 
 def my_event_search_results(request):
@@ -100,9 +109,12 @@ def my_event_search_results(request):
             Q(title__icontains=query) | Q(content__icontains=query)
         )
     
+    next = request.GET.get('next', "/my/event/list/")
+    
     return render(request, 
                   "event_search_results.html",
                   {
+                    "next": next,
                     "query": query,
                     "results": results
                   })
