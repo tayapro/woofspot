@@ -22,7 +22,7 @@
                         {{ event.event_start_time }} - {{ event.event_end_time }}</p>
                     <p class="card-text text-muted mb-2"><strong>Location:</strong> {{ event.location }}</p>
                 </div>
-                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                <div class="card-footer d-flex justify-content-between p-3">
                     <div class="d-flex align-items-center mb-2 mb-md-0" id="like-container"
                         hx-post="{% url 'like_toggle' event.slug %}" hx-swap="outerHTML"
                         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>

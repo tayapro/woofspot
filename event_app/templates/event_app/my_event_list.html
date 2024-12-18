@@ -28,7 +28,7 @@
                         <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
                     </div>
                 </div>
-                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                <div class="card-footer d-flex justify-content-between p-3">
                     <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
                         <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75"></i>
                     </a>
@@ -80,7 +80,7 @@
                         <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
                     </div>
                 </div>
-                <div class="card-footer d-flex justify-content-between">
+                <div class="card-footer d-flex justify-content-between p-3">
                     <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
                         <i class="fa-regular fa-star fa-xl text-primary text-opacity-75"></i>
                     </a>
