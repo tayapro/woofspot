@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from datetime import datetime, date
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 class WoofspotEvent(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)

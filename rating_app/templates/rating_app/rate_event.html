@@ -1,0 +1,19 @@
+{% extends "action_picture_base.html" %}
+{% load allauth i18n %}
+
+{% block head_title %}
+{% trans "Rate Event" %}
+{% endblock head_title %}
+
+{% block content %}
+<h1 class="text-center">Rate the event: {{ event.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Rating</button>
+</form>
+
+<p><a href="{% url 'event_view' event.slug %}">Back to event details</a></p>
+
+{% endblock %}

@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
+from rating_app.models import Rating
 
 
 class FetchEvents(generic.ListView):
@@ -19,6 +20,7 @@ class FetchEvents(generic.ListView):
 
 def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    average_rating = Rating.get_average_rating(event)
 
     if request.method == 'POST' and 'reserve_spot' in request.POST:
         if request.user.is_authenticated:
@@ -33,10 +35,12 @@ def event_view(request, slug):
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()
     )
+
     return render(request, "event_view.html", 
                  {"event": event, 
-                 "user_registered": user_registered}
-                 )
+                 "user_registered": user_registered,
+                 "average_rating": average_rating
+                 })
 
 
 def my_event_list(request):
@@ -48,11 +52,10 @@ def my_event_list(request):
     organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
 
     return render(request, "my_event_list.html",
-    {
-        "user": user,
-        "attending_events": attending_events,
-        "organizing_events": organizing_events
-    })
+                 {"user": user,
+                  "attending_events": attending_events,
+                  "organizing_events": organizing_events
+                 })
 
 
 def reservation_cancel(request, slug):
