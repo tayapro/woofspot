@@ -7,66 +7,80 @@
 {% endblock head_title %}
 
 {% block content %}
+<div class="text-center mt-5">
+    <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
 
-<div class="results-container d-flex align-items-center flex-column gap-4">
-    <div class="text-center mt-5">
-        <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
-
-        {% if query and results %}
-        {% if request.path == my_event_search_results_url %}
-        <p class="text-black text-opacity-50">Here are the results for your events matching "<strong>
-                {{ query }}</strong>":</p>
-        {% else%}
-        <p class="text-black text-opacity-50">
-            Here are the results matching "<strong>{{ query }}</strong>":</p>
-        {% endif %}
-        {% endif %}
-    </div>
-
-    <div class="event-list">
-        {% if results %}
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                {% for event in results %}
-                <div class="row shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="col-md-auto">
-                        <div class="d-flex flex-column">
-                            <strong class="fs-4">{{ event.event_date|date:"d" }}</strong>
-                            <span class="text-muted">{{ event.event_date|date:"M" }}</span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h5>{{ event.title }}</h5>
-                        <p>{{ event.location }}
-                            <span class="ms-2">
-                                {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-md-auto d-flex align-items-center">
-                        <a href="{% url 'event_view' event.slug %}" class="btn btn-primary">More details</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% else %}
-        <div class="no-results d-flex align-items-center flex-column">
-            <div class="text-warning">
-                <p>Oops! No results found for "{{ query }}"</p>
-            </div>
-            <div class="mt-2">
-                <img src="{% static 'images/googlebot.webp' %}" alt="A crocheted Googlebot">
-            </div>
-        </div>
-        {% endif %}
-    </div>
-
-    {% if next %}
-    <div>
-        <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
-            <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
-    </div>
+    {% if query and results %}
+    {% if request.path == my_event_search_results_url %}
+    <p class="text-black text-opacity-50">Here are the results for your events matching "<strong>
+            {{ query }}</strong>":</p>
+    {% else%}
+    <p class="text-black text-opacity-50">
+        Here are the results matching "<strong>{{ query }}</strong>":</p>
     {% endif %}
+    {% endif %}
+</div>
+
+{% if results %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for event in results %}
+    <div class="col mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-center mb-3">
+                    <a href="{% url 'event_view' event.slug %}" class="text-decoration-none text-black text-opacity-75">
+                        {{ event.title }}
+                    </a>
+                </h5>
+                <p class="card-text text-muted mb-2"><strong>Date:</strong> {{ event.event_date }}</p>
+                <p class="card-text text-muted mb-2"><strong>Time:</strong>
+                    {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                <p class="card-text text-muted mb-2"><strong>Location:</strong> {{ event.location }}</p>
+            </div>
+            <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                <div class="d-flex align-items-center mb-2 mb-md-0" id="like-container"
+                    hx-post="{% url 'like_toggle' event.slug %}" hx-swap="outerHTML"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                    {% if user.is_authenticated %}
+                    <button type="submit" class="btn p-0" aria-label="Like event">
+                        {% if user in event.liked_by.all %}
+                        <i class="fa-solid fa-heart fa-2x text-danger text-opacity-50"></i>
+                        {% else %}
+                        <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                        {% endif %}
+                    </button>
+                    {% else %}
+                    <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Login to like" aria-label="Login to like event">
+                        <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                    </a>
+                    {% endif %}
+                    <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">{{ event.like_count }}</p>
+                </div>
+                <a href="{% url 'event_view' event.slug %}" class="btn btn-primary mt-2 mt-md-0" role="button"
+                    aria-label="View event details">More details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<div class="no-results d-flex align-items-center flex-column">
+    <div class="text-warning">
+        <p>Oops! No results found for "{{ query }}"</p>
+    </div>
+    <div class="mt-2">
+        <img src="{% static 'images/googlebot.webp' %}" alt="A crocheted Googlebot">
+    </div>
+</div>
+{% endif %}
+
+{% if next %}
+<div class="text-center">
+    <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
+        <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
+</div>
+{% endif %}
 </div>
 {% endblock content %}

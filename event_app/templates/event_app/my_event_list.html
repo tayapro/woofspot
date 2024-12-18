@@ -1,39 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container my-5 pb-5">
+    <!-- Organizing Events Section -->
+    <div class="text-center my-4">
+        <h2 class="bold-header-font text-black text-opacity-50">Events I'm Organizing</h2>
+    </div>
 
-<div class="text-center my-4">
-    <h2>Events I'm Organizing</h2>
-</div>
-
-<div class="container mt-5">
     {% if organizing_events %}
-    <div class="row row-cols-1 row-cols-md-1 row-col-lg-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for event in organizing_events %}
-        <div class="col">
+        <div class="col mb-4">
             <div class="card h-100 shadow-sm">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
                         <h5 class="card-title m-0">
                             <a href="{% url 'event_view' event.slug %}"
-                                class="text-decoration-none text-black text-opacity-50 text-capitalize">
-                                {{ event.title }}</a>
+                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                                {{ event.title }}
+                            </a>
                         </h5>
                     </div>
                     <div>
                         <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
                         <p class="card-text text-muted my-0"><strong>Time:</strong>
-                            {{ event.event_start_time }} - {{event.event_end_time }}</p>
+                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
                         <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
                     </div>
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{% url 'event_edit' event.slug %}" class="btn">
+                <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                    <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
                         <i class="fa-regular fa-pen-to-square text-primary text-opacity-75"></i>
                     </a>
                     <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn">
+                        <button type="submit" class="btn btn-link">
                             <i class="fa-regular fa-trash-can text-danger text-opacity-75"></i>
                         </button>
                     </form>
@@ -43,55 +44,61 @@
         {% endfor %}
     </div>
     {% else %}
-    <p>You are not organizing any events yet.</p>
+    <div>
+        <p class="text-center">You are not organizing any events yet.</p>
+    </div>
     {% endif %}
+
+    <!-- Create New Event Button -->
     <div class="mt-4 text-center">
         <a href="{% url 'event_create' %}" class="btn btn-success">Create New Event</a>
     </div>
-</div>
 
+    <!-- Attending Events Section -->
+    <div class="text-center my-4">
+        <h2 class="bold-header-font text-black text-opacity-50">Events I'm Attending</h2>
+    </div>
 
-<div class="text-center my-4">
-    <h2>Events I'm Attending</h2>
-</div>
-
-{% if attending_events %}
-<section class="event-list">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
-
-            {% for event in attending_events %}
-            <div class="row shadow-sm p-3 mb-5 bg-white rounded">
-                <div class="col-auto text-md-center text-sm-start">
-                    <div class="d-flex flex-row flex-sm-column flex-md-column align-items-center">
-                        <strong class="fs-4">{{ event.event_date|date:"d" }}</strong>
-                        <span class="text-muted fs-5 ms-sm-2">{{ event.event_date|date:"M" }}</span>
+    {% if attending_events %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for event in attending_events %}
+        <div class="col mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
+                        <h5 class="card-title m-0">
+                            <a href="{% url 'event_view' event.slug %}"
+                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                                {{ event.title }}
+                            </a>
+                        </h5>
+                    </div>
+                    <div>
+                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                        <p class="card-text text-muted my-0"><strong>Time:</strong>
+                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
                     </div>
                 </div>
-                <div class="col">
-                    <h5><a href="{% url 'event_view' event.slug %}"
-                            class="text-decoration-none text-black text-opacity-50 text-capitalize">
-                            {{ event.title }}</a></h5>
-                    <p>{{ event.location }}
-                        <span class="ms-2">
-                            {{ event.event_start_time|time:"H:i" }} - {{ event.event_end_time|time:"H:i" }}
-                        </span>
-                    </p>
-                </div>
-                <div class="col-md-auto d-flex justify-content-center">
-                    <a href="{% url 'reservation_cancel' event.slug %}">
-                        <button class="btn btn-danger">Cancel spot</button>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
+                        <i class="fa-regular fa-star text-primary text-opacity-75"></i>
                     </a>
+                    <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">
+                            <i class="fa-regular fa-rectangle-xmark text-danger text-opacity-75"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-            {% endfor %}
-
-            {% else %}
-            <p>You haven't reserved a spot for any events yet.</p>
-            {% endif %}
-
         </div>
+        {% endfor %}
     </div>
-</section>
-
+    {% else %}
+    <div>
+        <p class="text-center">You haven't reserved a spot for any events yet.</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

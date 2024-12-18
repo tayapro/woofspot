@@ -82,7 +82,6 @@ def event_search_results(request):
             Q(content__icontains=query)  
         )
     next = request.GET.get('next', "/")
-    print("next: ", next)
 
     return render(request,
                   "event_search_results.html", 
