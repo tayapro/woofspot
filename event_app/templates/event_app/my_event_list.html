@@ -30,12 +30,12 @@
                 </div>
                 <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
-                        <i class="fa-regular fa-pen-to-square text-primary text-opacity-75"></i>
+                        <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75"></i>
                     </a>
                     <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link">
-                            <i class="fa-regular fa-trash-can text-danger text-opacity-75"></i>
+                            <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75"></i>
                         </button>
                     </form>
                 </div>
@@ -82,12 +82,12 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
-                        <i class="fa-regular fa-star text-primary text-opacity-75"></i>
+                        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75"></i>
                     </a>
                     <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link">
-                            <i class="fa-regular fa-rectangle-xmark text-danger text-opacity-75"></i>
+                            <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75"></i>
                         </button>
                     </form>
                 </div>

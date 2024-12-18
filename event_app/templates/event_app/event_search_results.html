@@ -44,15 +44,15 @@
                     {% if user.is_authenticated %}
                     <button type="submit" class="btn p-0" aria-label="Like event">
                         {% if user in event.liked_by.all %}
-                        <i class="fa-solid fa-heart fa-2x text-danger text-opacity-50"></i>
+                        <i class="fa-solid fa-heart fa-xl text-danger text-opacity-50"></i>
                         {% else %}
-                        <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                        <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
                         {% endif %}
                     </button>
                     {% else %}
                     <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Login to like" aria-label="Login to like event">
-                        <i class="fa-regular fa-heart fa-2x text-danger text-opacity-50"></i>
+                        <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
                     </a>
                     {% endif %}
                     <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">{{ event.like_count }}</p>
