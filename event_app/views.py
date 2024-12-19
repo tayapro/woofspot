@@ -189,9 +189,13 @@ def rating_submit(request, slug):
     if request.method == 'POST':
         form = ReviewForm(request.POST, event=event)
         if form.is_valid():
-            form.save(user=request.user)
-            return redirect("event_view", slug=event.slug)
+            try:
+                Rating.objects.filter(user=request.user, event=event).delete()
+                form.save(user=request.user)
+                return redirect("event_view", slug=event.slug)
+            except IntegrityError:
+                form.add_error(None, "There was an issue saving your review.")
         else:
             return render(request, "rating_submit.html", {"form": form, "event": event})
-        
+
     return render(request, "rating_submit.html", {"form": form, "event": event})
