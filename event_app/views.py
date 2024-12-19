@@ -8,7 +8,8 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
-from rating_app.models import Rating
+from .models import Rating
+from .forms import ReviewForm
 
 
 class FetchEvents(generic.ListView):
@@ -179,3 +180,18 @@ def event_delete(request, slug):
     event.delete()
     return redirect("events")
 
+
+def rating_submit(request, slug):
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+    form = ReviewForm(event=event)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, event=event)
+        if form.is_valid():
+            try:
+                form.save(user=request.user)
+                return redirect("event_view", slug=event.slug)
+            except IntegrityError:
+                form.add_error(None, "You have already rated this event.")
+        
+    return render(request, "rating_submit.html", {"form": form, "event": event})

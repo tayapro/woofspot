@@ -45,10 +45,10 @@
         <div class="d-flex gap-3">
             <div class="search-form-container">
                 <form method="GET" action="{% if request.path == my_event_list_url %}
-                {% url 'my_event_search_results' %}
-            {% else %}
-                {% url 'event_search_results' %}
-            {% endif %}" id="search-form" class="d-flex">
+                                {% url 'my_event_search_results' %}
+                              {% else %}
+                                {% url 'event_search_results' %}
+                              {% endif %}" id="search-form" class="d-flex">
                     <label for="search-input">
                         <input type="text" id="search-input" class="form-control me-2" name="query"
                             placeholder="Search on woofspot" minlength="2" size="20" autocomplete="off"

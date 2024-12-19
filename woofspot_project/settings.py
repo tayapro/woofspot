@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'django_summernote',
     'event_app',
     'user_app',
-    'rating_app',
 ]
 
 SITE_ID = 3
@@ -107,7 +106,6 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / "event_app/templates/event_app", 
             BASE_DIR / "user_app/templates/user_app", 
-            BASE_DIR / "rating_app/templates/rating_app",
             TEMPLATES_DIR,
         ],
         'APP_DIRS': True,

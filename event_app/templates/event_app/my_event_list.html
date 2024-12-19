@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between p-3">
-                    <a href="{% url 'rate_create' event.slug %}" class="btn btn-link">
+                    <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
                         <i class="fa-regular fa-star fa-xl text-primary text-opacity-75"></i>
                     </a>
                     <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
