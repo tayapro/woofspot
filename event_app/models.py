@@ -63,7 +63,9 @@ class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_ratings')
     event = models.ForeignKey(WoofspotEvent, on_delete=models.CASCADE, related_name='event_ratings')
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
+    review_text = models.TextField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def get_average_rating(event):
         return event.event_ratings.aggregate(Avg('rating'))['rating__avg']

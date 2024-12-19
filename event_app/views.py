@@ -6,6 +6,7 @@ from django.views import generic
 from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
+from django.db import IntegrityError
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
@@ -188,10 +189,9 @@ def rating_submit(request, slug):
     if request.method == 'POST':
         form = ReviewForm(request.POST, event=event)
         if form.is_valid():
-            try:
-                form.save(user=request.user)
-                return redirect("event_view", slug=event.slug)
-            except IntegrityError:
-                form.add_error(None, "You have already rated this event.")
+            form.save(user=request.user)
+            return redirect("event_view", slug=event.slug)
+        else:
+            return render(request, "rating_submit.html", {"form": form, "event": event})
         
     return render(request, "rating_submit.html", {"form": form, "event": event})

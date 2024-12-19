@@ -64,7 +64,10 @@ class EventOrganizerForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Rating
-        fields = ['rating']
+        fields = [
+            'rating', 
+            'review_text'
+        ]
 
     def __init__(self, *args, **kwargs):
         # Pass event to the form
