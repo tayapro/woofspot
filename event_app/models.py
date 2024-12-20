@@ -57,13 +57,13 @@ class WoofspotEvent(models.Model):
 
 
 # 1 to 5 stars
-RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
+RATING_CHOICES = [(i, f"{i} Star{'s' if i > 1 else ''}") for i in range(1, 6)]
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_ratings')
     event = models.ForeignKey(WoofspotEvent, on_delete=models.CASCADE, related_name='event_ratings')
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
-    review_text = models.TextField(default="")
+    review_text = models.TextField(default="", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -71,7 +71,7 @@ class Rating(models.Model):
         return event.event_ratings.aggregate(Avg('rating'))['rating__avg']
 
     def __str__(self):
-        return f"{self.user} rated {self.event} - {self.rating} stars"
+        return f"Rating: {self.rating} stars by {self.user} for {self.event.title}"
 
     class Meta:
         ordering = ['-created_at']

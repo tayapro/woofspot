@@ -182,20 +182,20 @@ def event_delete(request, slug):
     return redirect("events")
 
 
+@login_required
 def rating_submit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    form = ReviewForm(event=event)
 
-    if request.method == 'POST':
+    # Handle submit (POST)
+    if request.method == "POST":
         form = ReviewForm(request.POST, event=event)
         if form.is_valid():
-            try:
-                Rating.objects.filter(user=request.user, event=event).delete()
-                form.save(user=request.user)
-                return redirect("event_view", slug=event.slug)
-            except IntegrityError:
-                form.add_error(None, "There was an issue saving your review.")
-        else:
-            return render(request, "rating_submit.html", {"form": form, "event": event})
+            Rating.objects.filter(user=request.user, event=event).delete()
+            form.save(user=request.user)
+            return redirect("event_view", slug=event.slug)
 
+        return render(request, "rating_submit.html", {"form": form, "event": event})
+
+    # Handle page (GET)
+    form = ReviewForm(event=event)
     return render(request, "rating_submit.html", {"form": form, "event": event})

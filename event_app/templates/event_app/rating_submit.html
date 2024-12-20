@@ -6,14 +6,46 @@
 {% endblock head_title %}
 
 {% block content %}
-<h1 class="text-center">Rate the event: {{ event.name }}</h1>
+<h2 class="text-center">Create Review</h2>
+<h5 class="text-center text-body-secondary opacity-50">for</h5>
+<h3 class="text-center text-body-secondary opacity-75 mb-5">{{ event.title }}</h3>
+
+{% if form.errors %}
+<ul class="errorlist">
+    {% for field, errors in form.errors.items %}
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+    {% endfor %}
+</ul>
+{% endif %}
 
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Rating</button>
-</form>
+    <div class="mb-3">
+        {{ form.review_text.label_tag }}
+        {{ form.review_text }}
+    </div>
 
-<p><a href="{% url 'event_view' event.slug %}">Back to event details</a></p>
+    <hr class="my-4 border-secondary-subtle">
+
+    <div class="text-center">
+        {{ form.rating.label_tag }}
+        <div id="star-rating" class="d-flex justify-content-center mb-3">
+            {% for i in "12345" %}
+            <button type="button" class="star-btn btn p-0" data-value="{{ i }}">
+                <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-value="{{ i }}"></i>
+            </button>
+            {% endfor %}
+            <input type="hidden" name="rating" id="rating-value" required>
+        </div>
+    </div>
+
+    <div class="mb-5 pb-5 d-flex justify-content-around">
+        <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 px-4">Submit</button>
+        <a href="{% url 'my_event_list' %}"
+            class="btn btn-outline-default active fw-semibold text-opacity-75 text-body-secondary text-opacity-75 px-4">Cancel</a>
+    </div>
+</form>
 
 {% endblock %}

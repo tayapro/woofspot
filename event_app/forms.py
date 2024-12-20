@@ -62,23 +62,56 @@ class EventOrganizerForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    review_text = forms.CharField(
+        required=False,
+        label="Add a review",
+        widget=forms.Textarea(attrs={
+            **COMMON_TEXT_STYLES,
+            'rows': 5,
+            'placeholder': 'Write your review here...',
+        })
+    )
+    
     class Meta:
         model = Rating
         fields = [
             'rating', 
             'review_text'
         ]
+        labels = {
+            'rating': 'Overall rating',
+        }
+        error_messages = {
+            'rating': {
+                'required': "Please select a rating.",
+            },
+        }
 
     def __init__(self, *args, **kwargs):
-        # Pass event to the form
-        self.event = kwargs.pop('event', None)  # Get the event from the kwargs
+        self.event = kwargs.pop('event', None)  
         super().__init__(*args, **kwargs)
 
-    def save(self, user, commit=True):
-        # Override the save method to include the user
-        rating = super().save(commit=False)
-        rating.user = user  # Set the user
-        rating.event = self.event  # Set the event
-        if commit:
-            rating.save()
+    def clean(self):
+        rating = self.cleaned_data.get('rating')
+        if not rating:
+            raise ValidationError("Please select a rating.")
         return rating
+
+    def save(self, user, commit=True):
+        try:
+            rating = super().save(commit=False)
+            rating.user = user
+            rating.event = self.event
+            if commit:
+                print("Saving rating:", rating)
+                rating.save()
+            return rating
+        except Exception as e:
+            print("Error in save method:", e)
+            raise
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        print("Cleaned data:", cleaned_data)
+        return cleaned_data
