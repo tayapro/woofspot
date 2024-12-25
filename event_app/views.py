@@ -147,7 +147,7 @@ def like_toggle(request, slug):
 def event_create(request):
     # Handle submit (POST)
     if request.method == "POST":
-        form = EventOrganizerForm(request.POST)
+        form = EventOrganizerForm(request.POST, request.FILES)
 
         if form.is_valid():
             event = form.save(commit=False)
@@ -169,7 +169,7 @@ def event_edit(request, slug):
         return HttpResponseForbidden("Unauthorized access")
     # Handle submit (POST)
     if request.method == "POST":
-        form = EventOrganizerForm(request.POST, instance=event)
+        form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
             return redirect("my_event_list")

@@ -59,6 +59,10 @@ class EventOrganizerForm(forms.ModelForm):
                 **DATE_TIME_STYLES,  
                 'type': 'time',
             }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+            }),
         }
 
 

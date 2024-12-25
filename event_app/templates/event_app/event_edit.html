@@ -24,7 +24,7 @@
             {{ form.location.label_tag }}
             {{ form.location }}
         </div>
-        <div class="d-flex flex-wrap justify-content-around gap-4 mb-5">
+        <div class="d-flex flex-wrap justify-content-around gap-4 mb-3">
             <div>
                 {{ form.event_date.label_tag }}
                 {{ form.event_date }}
@@ -39,15 +39,17 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="id_image">Event Image</label>
+        <div class="img_edit mb-5">
             {% if event.image %}
             <div class="current-image">
-                <p>Current image:</p>
+                <label for="id_image">Event Image</label>
                 <img src="{{ event.image.url }}" alt="Current Event Image" style="max-width: 300px;">
             </div>
+            {% else %}
+            <p>The event does not have image.</p>
             {% endif %}
-            <input type="file" name="image" accept="image/*" class="form-control" />
+            {{ form.image.label_tag }}
+            {{ form.image }}
             <small class="form-text text-muted">Upload a new image for this event (optional).</small>
         </div>
 

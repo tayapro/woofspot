@@ -62,11 +62,6 @@ form.signup ul:last-of-type {
   padding-left: 0;
 }
 
-/* .mx-lg-10 {
-  margin-left: 5rem !important;
-  margin-right: 5rem !important;
-} */
-
 .tagline-header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;
@@ -221,4 +216,10 @@ form.signup ul:last-of-type {
 .no-results img {
   height: 200px;
   width: auto;
+}
+
+/* Event view page */
+.event-image > img {
+  width: 500px;
+  height: auto;
 }

@@ -17,9 +17,9 @@
                     </p>
                 </div>
             </div>
-            {% if event.event_image %}
+            {% if event.image %}
             <div class="event-image">
-                <img src="{{ event.image.url }}?w=500&h=500&fit=crop" alt="{{ event.title }}">
+                <img src="{{ event.image.url }}" alt="{{ event.title }}">
             </div>
             {% else %}
             <p class="text-danger">No image</p>
