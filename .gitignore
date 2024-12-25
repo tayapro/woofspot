@@ -11,3 +11,4 @@ env.py
 blog/fixtures/
 staticfiles/
 client_secret.json
+cloudinary_python.txt

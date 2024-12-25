@@ -10,7 +10,7 @@
         {% endfor %}
     </ul>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             {{ form.title.label_tag }}
@@ -37,6 +37,18 @@
                 {{ form.event_end_time.label_tag }}
                 {{ form.event_end_time }}
             </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Event Image</label>
+            {% if event.image %}
+            <div class="current-image">
+                <p>Current image:</p>
+                <img src="{{ event.image.url }}" alt="Current Event Image" style="max-width: 300px;">
+            </div>
+            {% endif %}
+            <input type="file" name="image" accept="image/*" class="form-control" />
+            <small class="form-text text-muted">Upload a new image for this event (optional).</small>
         </div>
 
         <div class="mb-5 pb-5 d-flex justify-content-around">

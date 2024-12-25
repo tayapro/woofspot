@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from datetime import datetime, date
 from django.db.models import Avg
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 
@@ -19,6 +20,7 @@ class WoofspotEvent(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     liked_by = models.ManyToManyField(User, related_name="liked_events", blank=True)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organized_events", default=1)
+    image = CloudinaryField('image', resource_type='auto', blank=True)
 
     def __str__(self):
         return f"Event: {self.title} at {self.location} on {self.event_date}"

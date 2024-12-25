@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
 from django.db import IntegrityError
+from django.utils.timezone import now
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
@@ -50,12 +51,19 @@ def my_event_list(request):
     if not user.is_authenticated:
         return redirect(reverse('account_login'))
     
-    attending_events = WoofspotEvent.objects.filter(attendees=request.user)
+    today = now().date()
+    future_attending_events = WoofspotEvent.objects.filter(
+                                attendees=request.user,
+                                event_date__gt=today)
+    past_attending_events = WoofspotEvent.objects.filter(
+                                attendees=request.user,
+                                event_date__lte=today)
     organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
 
     return render(request, "my_event_list.html",
                  {"user": user,
-                  "attending_events": attending_events,
+                  "future_attending_events": future_attending_events,
+                  "past_attending_events": past_attending_events,
                   "organizing_events": organizing_events
                  })
 

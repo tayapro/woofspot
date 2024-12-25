@@ -23,6 +23,7 @@ class EventOrganizerForm(forms.ModelForm):
             'event_date',
             'event_start_time',
             'event_end_time',
+            'image',
         ]
         labels = {
             'title': 'Title',

@@ -4,7 +4,12 @@
 <div class="container my-5 pb-5">
     <!-- Organizing Events Section -->
     <div class="text-center my-4">
-        <h2 class="bold-header-font text-black text-opacity-50">Events I'm Organizing</h2>
+        <h2 class="bold-header-font text-black text-opacity-50">Hosted By Me</h2>
+    </div>
+
+    <!-- Create New Event Button -->
+    <div class="mb-4 text-center">
+        <a href="{% url 'event_create' %}" class="btn btn-outline-success">Create New Event</a>
     </div>
 
     {% if organizing_events %}
@@ -49,19 +54,58 @@
     </div>
     {% endif %}
 
-    <!-- Create New Event Button -->
-    <div class="mt-4 text-center">
-        <a href="{% url 'event_create' %}" class="btn btn-success">Create New Event</a>
-    </div>
-
     <!-- Attending Events Section -->
+    {% if future_attending_events %}
     <div class="text-center my-4">
-        <h2 class="bold-header-font text-black text-opacity-50">Events I'm Attending</h2>
+        <h2 class="bold-header-font text-black text-opacity-50">Planning To Attend</h2>
     </div>
 
-    {% if attending_events %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for event in attending_events %}
+        {% for event in future_attending_events %}
+        <div class="col mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <h5 class="card-title m-0">
+                            <a href="{% url 'event_view' event.slug %}"
+                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                                {{ event.title }}
+                            </a>
+                        </h5>
+
+                        <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">
+                                <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between p-3">
+                    <div>
+                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                        <p class="card-text text-muted my-0"><strong>Time:</strong>
+                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div>
+        <p class="text-center">You haven't reserved a spot for any future events yet.</p>
+    </div>
+    {% endif %}
+
+    {% if past_attending_events %}
+    <div class="text-center my-4">
+        <h2 class="bold-header-font text-black text-opacity-50">Was At And Enjoyed</h2>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for event in past_attending_events %}
         <div class="col mb-4">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
@@ -84,12 +128,6 @@
                     <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
                         <i class="fa-regular fa-star fa-xl text-primary text-opacity-75"></i>
                     </a>
-                    <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link">
-                            <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75"></i>
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
