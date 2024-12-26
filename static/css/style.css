@@ -62,6 +62,7 @@ form.signup ul:last-of-type {
   padding-left: 0;
 }
 
+/* */
 .tagline-header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;

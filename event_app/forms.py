@@ -1,6 +1,7 @@
 from django import forms
 from .models import WoofspotEvent
 from .models import Rating
+from django.forms.widgets import ClearableFileInput
 
 # Reusable styles
 COMMON_TEXT_STYLES = {
@@ -12,6 +13,11 @@ DATE_TIME_STYLES = {
     'class': 'form-control',
     'style': 'width: auto; max-width: 200px;',
 }
+
+# Custom template
+class CustomClearableFileInput(ClearableFileInput):
+    template_name = "event_app/custom_clearable_file_input.html"
+
 
 class EventOrganizerForm(forms.ModelForm):
     class Meta:
@@ -59,8 +65,8 @@ class EventOrganizerForm(forms.ModelForm):
                 **DATE_TIME_STYLES,  
                 'type': 'time',
             }),
-            'image': forms.ClearableFileInput(attrs={
-                'class': 'form-control',
+            'image': CustomClearableFileInput(attrs={
+                'class': 'form-control custom-clearable-file-input',
                 'accept': 'image/*',
             }),
         }

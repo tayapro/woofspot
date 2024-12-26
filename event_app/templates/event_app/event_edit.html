@@ -41,16 +41,23 @@
 
         <div class="img_edit mb-5">
             {% if event.image %}
-            <div class="current-image">
-                <label for="id_image">Event Image</label>
-                <img src="{{ event.image.url }}" alt="Current Event Image" style="max-width: 300px;">
+            <div class="current-image mb-3">
+                <label for="id_image">Event Image:</label>
+                <div class="image-container">
+                    <img src="{{ event.image.url }}" alt="Current Event Image" class="img-fluid"
+                        style="max-width: 300px; border-radius: 8px;">
+                </div>
+                <small class="text-muted">Current image for this event.</small>
             </div>
             {% else %}
-            <p>The event does not have image.</p>
+            <p class="text-warning">The event does not have an image.</p>
             {% endif %}
-            {{ form.image.label_tag }}
-            {{ form.image }}
-            <small class="form-text text-muted">Upload a new image for this event (optional).</small>
+
+            <div class="mt-4">
+                <label for="id_image">New Image:</label>
+                {{ form.image }}
+                <small class="form-text text-muted">Upload a new image for this event (optional).</small>
+            </div>
         </div>
 
         <div class="mb-5 pb-5 d-flex justify-content-around">

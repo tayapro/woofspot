@@ -16,7 +16,7 @@ from .forms import ReviewForm
 
 class FetchEvents(generic.ListView):
     queryset = WoofspotEvent.objects.all()
-    template_name = "index.html"
+    template_name = "event_app/index.html"
     context_object_name = "events"
     paginate_by = 6
 
@@ -39,7 +39,7 @@ def event_view(request, slug):
         request.user.is_authenticated and request.user in event.attendees.all()
     )
 
-    return render(request, "event_view.html", 
+    return render(request, "event_app/event_view.html", 
                  {"event": event, 
                  "user_registered": user_registered,
                  "average_rating": average_rating
@@ -60,7 +60,7 @@ def my_event_list(request):
                                 event_date__lte=today)
     organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
 
-    return render(request, "my_event_list.html",
+    return render(request, "event_app/my_event_list.html",
                  {"user": user,
                   "future_attending_events": future_attending_events,
                   "past_attending_events": past_attending_events,
@@ -97,7 +97,7 @@ def event_search_results(request):
     next = request.GET.get('next', "/")
 
     return render(request,
-                  "event_search_results.html", 
+                  "event_app/event_search_results.html", 
                   {
                     "next": next,
                     "query": query, 
@@ -124,7 +124,7 @@ def my_event_search_results(request):
     next = request.GET.get('next', "/my/event/list/")
     
     return render(request, 
-                  "event_search_results.html",
+                  "event_app/event_search_results.html",
                   {
                     "next": next,
                     "query": query,
@@ -155,11 +155,11 @@ def event_create(request):
             event.save()
             return redirect("my_event_list")
         else:
-            return render(request, "event_create.html", {"form": form })
+            return render(request, "event_app/event_create.html", {"form": form })
 
     # Handle page (GET)
     form = EventOrganizerForm()
-    return render(request, "event_create.html", {"form": form })
+    return render(request, "event_app/event_create.html", {"form": form })
 
 
 @login_required
@@ -174,11 +174,11 @@ def event_edit(request, slug):
             form.save()
             return redirect("my_event_list")
         else:
-            return render(request, "event_edit.html", {"form": form, "event": event })
+            return render(request, "event_app/event_edit.html", {"form": form, "event": event })
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)
-    return render(request, "event_edit.html", {"form": form, "event": event })
+    return render(request, "event_app/event_edit.html", {"form": form, "event": event })
 
 
 @login_required
@@ -202,7 +202,7 @@ def rating_submit(request, slug):
             form.save(user=request.user)
             return redirect("event_view", slug=event.slug)
 
-        return render(request, "rating_submit.html", {"form": form, "event": event})
+        return render(request, "event_app/rating_submit.html", {"form": form, "event": event})
 
     # Handle page (GET)
     form = ReviewForm(event=event)
