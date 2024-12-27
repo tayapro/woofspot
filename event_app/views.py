@@ -52,19 +52,27 @@ def my_event_list(request):
         return redirect(reverse('account_login'))
     
     today = now().date()
+    future_organizing_events = WoofspotEvent.objects.filter(
+                                organizer=request.user,
+                                event_date__gt=today)
     future_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
                                 event_date__gt=today)
     past_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
                                 event_date__lte=today)
-    organizing_events = WoofspotEvent.objects.filter(organizer=request.user)
+    past_organizing_events = WoofspotEvent.objects.filter(
+                                organizer=request.user,
+                                event_date__lte=today)
+    past_events = WoofspotEvent.objects.filter(
+            Q(organizer=request.user, event_date__lte=today) |  
+            Q(attendees=request.user, event_date__lte=today))
 
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
+                  "future_organizing_events": future_organizing_events,
                   "future_attending_events": future_attending_events,
-                  "past_attending_events": past_attending_events,
-                  "organizing_events": organizing_events
+                  "past_events": past_events,
                  })
 
 
@@ -79,7 +87,7 @@ def reservation_cancel(request, slug):
         event.attendees.remove(request.user)
         return redirect(reverse('my_event_list'))
         
-    return render(request, "reservation_cancel.html",
+    return render(request, "event_app/reservation_cancel.html",
     {
         "event": event,
         "user": user,
@@ -186,8 +194,12 @@ def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
+    
+    # Delete related ratings
+    Rating.objects.filter(event=event).delete()
+
     event.delete()
-    return redirect("events")
+    return redirect("my_event_list")
 
 
 @login_required
@@ -206,4 +218,4 @@ def rating_submit(request, slug):
 
     # Handle page (GET)
     form = ReviewForm(event=event)
-    return render(request, "rating_submit.html", {"form": form, "event": event})
+    return render(request, "event_app/rating_submit.html", {"form": form, "event": event})

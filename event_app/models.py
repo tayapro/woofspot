@@ -64,7 +64,7 @@ RATING_CHOICES = [(i, f"{i} Star{'s' if i > 1 else ''}") for i in range(1, 6)]
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_ratings')
-    event = models.ForeignKey(WoofspotEvent, on_delete=models.CASCADE, related_name='event_ratings')
+    event = models.ForeignKey(WoofspotEvent, on_delete=models.CASCADE, null=True, related_name='event_ratings')
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
     review_text = models.TextField(default="", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

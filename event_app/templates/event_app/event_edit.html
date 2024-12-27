@@ -29,31 +29,34 @@
                 {{ form.event_date.label_tag }}
                 {{ form.event_date }}
             </div>
-            <div>
-                {{ form.event_start_time.label_tag }}
-                {{ form.event_start_time }}
-            </div>
-            <div>
-                {{ form.event_end_time.label_tag }}
-                {{ form.event_end_time }}
+            <div class="d-flex flex-row gap-2">
+                <div>
+                    {{ form.event_start_time.label_tag }}
+                    {{ form.event_start_time }}
+                </div>
+                <div>
+                    {{ form.event_end_time.label_tag }}
+                    {{ form.event_end_time }}
+                </div>
             </div>
         </div>
 
-        <div class="img_edit mb-5">
+        <div class="img_edit mb-3">
             {% if event.image %}
-            <div class="current-image mb-3">
-                <label for="id_image">Event Image:</label>
+            <div class="current-image mb-3 d-flex flex-column align-items-center">
+                <label for="id_image">
+                    <small class="text-muted">Current image for this event:</small>
+                </label>
                 <div class="image-container">
                     <img src="{{ event.image.url }}" alt="Current Event Image" class="img-fluid"
                         style="max-width: 300px; border-radius: 8px;">
                 </div>
-                <small class="text-muted">Current image for this event.</small>
             </div>
             {% else %}
             <p class="text-warning">The event does not have an image.</p>
             {% endif %}
 
-            <div class="mt-4">
+            <div class="mt-4 px-4">
                 <label for="id_image">New Image:</label>
                 {{ form.image }}
                 <small class="form-text text-muted">Upload a new image for this event (optional).</small>
