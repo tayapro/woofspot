@@ -25,7 +25,7 @@ def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     average_rating = Rating.get_average_rating(event)
 
-    if request.method == 'POST' and 'reserve_spot' in request.POST:
+    if request.method == "POST" and "reserve_spot" in request.POST:
         if request.user.is_authenticated:
             if request.user in event.attendees.all():
                 messages.error(request, "You have already reserved a spot for this event.")
@@ -39,8 +39,12 @@ def event_view(request, slug):
         request.user.is_authenticated and request.user in event.attendees.all()
     )
 
+    next = request.GET.get("next", "/")
+    print("NEXT: ", next)
+
     return render(request, "event_app/event_view.html", 
-                 {"event": event, 
+                 {"event": event,
+                 "next": next,
                  "user_registered": user_registered,
                  "average_rating": average_rating
                  })
@@ -83,9 +87,9 @@ def reservation_cancel(request, slug):
 
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
-    if request.method == 'POST' and 'cancel_reservation' in request.POST:  
+    if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(request.user)
-        return redirect(reverse('my_event_list'))
+        return redirect(reverse("event_app/my_event_list"))
         
     return render(request, "event_app/reservation_cancel.html",
     {
@@ -161,7 +165,7 @@ def event_create(request):
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
-            return redirect("my_event_list")
+            return redirect("event_app/my_event_list")
         else:
             return render(request, "event_app/event_create.html", {"form": form })
 
@@ -180,7 +184,7 @@ def event_edit(request, slug):
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
-            return redirect("my_event_list")
+            return redirect("event_app/my_event_list")
         else:
             return render(request, "event_app/event_edit.html", {"form": form, "event": event })
 
@@ -199,7 +203,7 @@ def event_delete(request, slug):
     Rating.objects.filter(event=event).delete()
 
     event.delete()
-    return redirect("my_event_list")
+    return redirect("event_app/my_event_list")
 
 
 @login_required
