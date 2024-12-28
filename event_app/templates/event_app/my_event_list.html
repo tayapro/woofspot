@@ -104,12 +104,10 @@
     {% endif %}
 
     <!-- Past Events Section -->
-
-    {% if past_events %}
     <div class="text-center my-4">
         <h2 class="bold-header-font text-black text-opacity-50">Past Events</h2>
     </div>
-
+    {% if past_events %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for event in past_events %}
         <div class="col mb-4">

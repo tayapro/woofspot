@@ -13,12 +13,15 @@ from .forms import EventOrganizerForm
 from .models import Rating
 from .forms import ReviewForm
 
+TODAY = now().date()
 
-class FetchEvents(generic.ListView):
-    queryset = WoofspotEvent.objects.all()
-    template_name = "event_app/index.html"
-    context_object_name = "events"
-    paginate_by = 6
+
+def event_list(request):
+    events = WoofspotEvent.objects.filter(event_date__gt=TODAY)
+
+    return render(request, "event_app/index.html", {
+        "events": events,
+    })
 
 
 def event_view(request, slug):
@@ -54,22 +57,21 @@ def my_event_list(request):
     if not user.is_authenticated:
         return redirect(reverse("account_login"))
     
-    today = now().date()
     future_organizing_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__gt=today)
+                                event_date__gt=TODAY)
     future_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__gt=today)
+                                event_date__gt=TODAY)
     past_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__lte=today)
+                                event_date__lte=TODAY)
     past_organizing_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__lte=today)
+                                event_date__lte=TODAY)
     past_events = WoofspotEvent.objects.filter(
-            Q(organizer=request.user, event_date__lte=today) |  
-            Q(attendees=request.user, event_date__lte=today))
+            Q(organizer=request.user, event_date__lte=TODAY) |  
+            Q(attendees=request.user, event_date__lte=TODAY))
 
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
