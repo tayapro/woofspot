@@ -6,6 +6,8 @@
   --font-family: "Inter", sans-serif;
   --header-font-family: "Montserrat", sans-serif;
   --white-color: rgb(251, 251, 251);
+  --bootstrap-danger-75: rgb(220, 53, 69, 0.75);
+  --bootstrap-danger-90: rgb(220, 53, 69, 0.9);
 }
 
 * {
@@ -19,6 +21,18 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.tooltip-inner {
+  background-color: var(--bootstrap-danger-75);
+  color: var(--white-color);
+  border: 1px solid var(--bootstrap-danger-90);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
+}
+
+.tooltip-arrow {
+  display: none !important;
 }
 
 ::placeholder {

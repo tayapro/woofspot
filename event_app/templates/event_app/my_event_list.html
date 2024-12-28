@@ -34,12 +34,16 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between p-3">
                     <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
-                        <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75"></i>
+                        <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit event"
+                            aria-label="Edit event"></i>
                     </a>
                     <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link">
-                            <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75"></i>
+                            <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel event"
+                                aria-label="Cancel event"></i>
                         </button>
                     </form>
                 </div>
@@ -75,7 +79,9 @@
                         <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-link">
-                                <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75"></i>
+                                <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Changing your plans?"
+                                    aria-label="Changing your plans?"></i>
                             </button>
                         </form>
                     </div>
@@ -119,9 +125,12 @@
                         </h5>
                         <div>
                             {% if user == event.organizer %}
-                            <i class="fa-solid fa-clipboard-list fa-xl text-primary text-opacity-75"></i>
+                            <i class="fa-solid fa-clipboard-list fa-xl text-primary text-opacity-75"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="You're hosting this event"
+                                aria-label="You're hosting this event"></i>
                             {% else %}
-                            <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75"></i>
+                            <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Attended" aria-label="Attended"></i>
                             {% endif %}
                         </div>
                     </div>
@@ -136,7 +145,8 @@
                 <div class="card-footer d-flex justify-content-between p-3">
                     {% if user != event.organizer %}
                     <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
-                        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75"></i>
+                        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
                     </a>
                     {% endif %}
                 </div>
