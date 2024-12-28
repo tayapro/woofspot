@@ -40,7 +40,6 @@ def event_view(request, slug):
     )
 
     next = request.GET.get("next", "/")
-    print("NEXT: ", next)
 
     return render(request, "event_app/event_view.html", 
                  {"event": event,
@@ -53,7 +52,7 @@ def event_view(request, slug):
 def my_event_list(request):
     user = request.user
     if not user.is_authenticated:
-        return redirect(reverse('account_login'))
+        return redirect(reverse("account_login"))
     
     today = now().date()
     future_organizing_events = WoofspotEvent.objects.filter(
@@ -83,7 +82,7 @@ def my_event_list(request):
 def reservation_cancel(request, slug):
     user = request.user
     if not user.is_authenticated:
-        return redirect(reverse('account_login'))
+        return redirect(reverse("account_login"))
 
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
@@ -99,14 +98,14 @@ def reservation_cancel(request, slug):
 
 
 def event_search_results(request):
-    query = request.GET.get('query')  
+    query = request.GET.get("query")  
     results = []
     if query:
         results = WoofspotEvent.objects.filter(
             Q(title__icontains=query) |  
             Q(content__icontains=query)  
         )
-    next = request.GET.get('next', "/")
+    next = request.GET.get("next", "/")
 
     return render(request,
                   "event_app/event_search_results.html", 
@@ -120,20 +119,20 @@ def event_search_results(request):
 def my_event_search_results(request):
     user = request.user
     if not user.is_authenticated:
-        return redirect(reverse('account_login'))
+        return redirect(reverse("account_login"))
     
     events = WoofspotEvent.objects.filter(
         Q(attendees=user) | Q(organizer=user)
     )
     
-    query = request.GET.get('query')  
+    query = request.GET.get("query")  
     results = events
     if query:
         results = results.filter(
             Q(title__icontains=query) | Q(content__icontains=query)
         )
     
-    next = request.GET.get('next', "/my/event/list/")
+    next = request.GET.get("next", "/my/event/list/")
     
     return render(request, 
                   "event_app/event_search_results.html",
@@ -165,7 +164,7 @@ def event_create(request):
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
-            return redirect("event_app/my_event_list")
+            return redirect("my_event_list")
         else:
             return render(request, "event_app/event_create.html", {"form": form })
 
@@ -184,7 +183,7 @@ def event_edit(request, slug):
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
-            return redirect("event_app/my_event_list")
+            return redirect("my_event_list")
         else:
             return render(request, "event_app/event_edit.html", {"form": form, "event": event })
 
@@ -199,11 +198,16 @@ def event_delete(request, slug):
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
     
-    # Delete related ratings
-    Rating.objects.filter(event=event).delete()
-
-    event.delete()
-    return redirect("event_app/my_event_list")
+    if request.method == "POST" and "event_delete" in request.POST:
+        # Delete related ratings
+        Rating.objects.filter(event=event).delete()
+        event.delete()
+        return redirect("my_event_list")
+    
+    return render(request, "event_app/event_delete.html",
+    {
+        "event": event,
+    })
 
 
 @login_required

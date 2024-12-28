@@ -58,11 +58,10 @@
     {% endif %}
 
     <!-- Future Attending Events Section -->
-    {% if future_attending_events %}
     <div class="text-center my-4">
         <h2 class="bold-header-font text-black text-opacity-50">Planning To Attend</h2>
     </div>
-
+    {% if future_attending_events %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for event in future_attending_events %}
         <div class="col mb-4">

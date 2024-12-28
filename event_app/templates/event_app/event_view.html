@@ -43,6 +43,8 @@
                 {% if user_registered %}
                 <p>You are attending this event.</p>
 
+                <!-- TODO: Add option for past event -->
+
                 {% elif user.is_authenticated %}
                 <form method="POST">
                     {% csrf_token %}
