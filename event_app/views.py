@@ -216,6 +216,7 @@ def event_delete(request, slug):
 @login_required
 def rating_submit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    next = request.GET.get("next", "my_event_list")
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -230,8 +231,11 @@ def rating_submit(request, slug):
 
             return redirect("event_view", slug=event.slug)
 
-        return render(request, "event_app/rating_submit.html", {"form": form, "event": event})
+        return render(request, "event_app/rating_submit.html", 
+                      {"next": next, 
+                      "form": form, 
+                      "event": event})
 
     # Handle page (GET)
     form = ReviewForm(event=event)
-    return render(request, "event_app/rating_submit.html", {"form": form, "event": event})
+    return render(request, "event_app/rating_submit.html", {"form": form, "event": event, "next": next})

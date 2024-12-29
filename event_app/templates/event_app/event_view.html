@@ -5,24 +5,39 @@
     <div class="col-md-8">
       <h2 class="text-center">{{ event.title }}</h2>
       {% if event.event_date > today %}
-      <!-- For future event -->
-      {% if user == event.organizer %} {% include
-      "edit_delete_event_container.html" %} {% else %} {% include
-      "like_container.html" %} {% endif %} {% else %}
-      <!-- For past event -->
+      <!-- For future event start -->
       {% if user == event.organizer %}
       <!-- host -->
+      {% include "edit_delete_event_container.html" %}
+      {% else %}
+      <!-- user -->
+      {% include "like_container.html" %}
+      {% endif %}
+      <!-- For future event end -->
+      {% else %}
+      <!-- For past event start -->
       {% if average_rating %}
+      {% if user == event.organizer %}
+      <!-- host -->
       <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
+      <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">
+        {{ average_rating }}
+      </p>
+      {% elif user_registered %}
+      <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
+        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+          data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
+      </a>
       <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">
         {{ average_rating }}
       </p>
       {% else %}
       <i class="fa-regular fa-star fa-xl text-warning text-opacity-75"></i>
-      {% endif %} {% else %}
-      <!-- user -->
-      <!-- for attended and not -->
-      {% endif %} {% endif %}
+      {% endif %}
+      {% else %}
+      <i class="fa-regular fa-star fa-xl text-warning text-opacity-75"></i>
+      {% endif %}
+      {% endif %}
 
       <div class="row">
         <div class="col-12 col-md-6">
@@ -45,7 +60,8 @@
       <div class="event-content">{{ event.content | safe }}</div>
 
       <div class="rsvp-section mt-4 text-left">
-        {{ average_rating }} {% if user_registered %}
+        {{ average_rating }}
+        {% if user_registered %}
         <p>You are attending this event.</p>
 
         <!-- TODO: Add option for past event -->
@@ -58,20 +74,15 @@
           </button>
         </form>
         {% else %}
-        <a
-          href="{% url 'account_login' %}?next={{ request.path }}"
-          class="btn btn-primary"
-        >
-          Reserve spot (Login Required)</a
-        >
+        <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-primary">
+          Reserve spot (Login Required)</a>
         {% endif %}
       </div>
     </div>
     {% if next %}
     <div class="mt-5 text-center">
       <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
-        <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a
-      >
+        <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
     </div>
     {% endif %}
   </div>

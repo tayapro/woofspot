@@ -129,7 +129,7 @@
 
                 <div class="card-footer d-flex justify-content-between p-3">
                     {% if user != event.organizer %}
-                    <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
+                    <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
                         <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
                     </a>
