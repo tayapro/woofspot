@@ -47,6 +47,7 @@ def event_view(request, slug):
     return render(request, "event_app/event_view.html", 
                  {"event": event,
                  "next": next,
+                 "today": TODAY,
                  "user_registered": user_registered,
                  "average_rating": average_rating
                  })
@@ -221,7 +222,12 @@ def rating_submit(request, slug):
         form = ReviewForm(request.POST, event=event)
         if form.is_valid():
             Rating.objects.filter(user=request.user, event=event).delete()
-            form.save(user=request.user)
+
+            rating = form.save(commit=False)
+            rating.user = request.user
+            rating.event = event
+            rating.save()
+
             return redirect("event_view", slug=event.slug)
 
         return render(request, "event_app/rating_submit.html", {"form": form, "event": event})

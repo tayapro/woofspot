@@ -33,19 +33,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between p-3">
-                    <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
-                        <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit event"
-                            aria-label="Edit event"></i>
-                    </a>
-                    <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link">
-                            <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel event"
-                                aria-label="Cancel event"></i>
-                        </button>
-                    </form>
+                    {% include "edit_delete_event_container.html" %}
                 </div>
             </div>
         </div>

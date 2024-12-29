@@ -23,25 +23,7 @@
                     <p class="card-text text-muted mb-2"><strong>Location:</strong> {{ event.location }}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between p-3">
-                    <div class="d-flex align-items-center mb-2 mb-md-0" id="like-container"
-                        hx-post="{% url 'like_toggle' event.slug %}" hx-swap="outerHTML"
-                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                        {% if user.is_authenticated %}
-                        <button type="submit" class="btn p-0" aria-label="Like event">
-                            {% if user in event.liked_by.all %}
-                            <i class="fa-solid fa-heart fa-xl text-danger text-opacity-50"></i>
-                            {% else %}
-                            <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
-                            {% endif %}
-                        </button>
-                        {% else %}
-                        <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Login to like" aria-label="Login to like event">
-                            <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
-                        </a>
-                        {% endif %}
-                        <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">{{ event.like_count }}</p>
-                    </div>
+                    {% include "like_container.html" %}
                     <a href="{% url 'event_view' event.slug %}" class="btn btn-primary mt-2 mt-md-0" role="button"
                         aria-label="View event details">More details</a>
                 </div>
