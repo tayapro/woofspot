@@ -8,7 +8,8 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.db import IntegrityError
 from django.utils.timezone import now
-from django.core.mail import EmailMessage, get_connection
+from django.core.mail import EmailMessage, get_connection, EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.conf import settings
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
@@ -83,21 +84,59 @@ def my_event_list(request):
                   "past_events": past_events,
                  })
 
-def send_email(user_email):
-    try:
-        with get_connection(host=settings.EMAIL_HOST, 
-                port=settings.EMAIL_PORT,  
-                username=settings.EMAIL_HOST_USER, 
-                password=settings.EMAIL_HOST_PASSWORD, 
-                use_tls=settings.EMAIL_USE_TLS
-            ) as connection:  
-            subject = "test subject"
-            email_from = settings.EMAIL_HOST_USER 
-            recipient_list = [user_email, ]  
-            message = "test"
-            EmailMessage(subject, message, email_from, recipient_list, connection=connection).send()
-    except Exception as e:
-        raise
+def send_email(user, event, action):
+    with get_connection(host=settings.EMAIL_HOST, 
+            port=settings.EMAIL_PORT,  
+            username=settings.EMAIL_HOST_USER, 
+            password=settings.EMAIL_HOST_PASSWORD, 
+            use_tls=settings.EMAIL_USE_TLS
+        ) as connection:  
+        email_from = settings.EMAIL_HOST_USER 
+        recipient_list = [user.email, ]
+
+        context = {'user': user, 'event': event}
+
+        subject = f"{action}: {event.title}"
+        if action == "Event cancelled":
+            attendees = event.attendees.all()
+            recipient_list = [attendee.email for attendee in attendees]
+            text_content = render_to_string('event_app/emails/event_cancelled.txt', context)
+            html_content = render_to_string('event_app/emails/event_cancelled.html', context)
+            
+            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        elif action == "Reservation cancelled":
+            text_content = render_to_string('event_app/emails/reservation_cancelled.txt', context)
+            html_content = render_to_string('event_app/emails/reservation_cancelled.html', context)
+
+            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        elif action == "Event Created":
+            text_content = render_to_string('event_app/emails/event_created.txt', context)
+            html_content = render_to_string('event_app/emails/event_created.html', context)
+
+            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        elif action == "Some Changes about your Event":
+            attendees = event.attendees.all()
+            recipient_list = [attendee for attendee in attendees] + [event.organizer]
+
+            for recipient in recipient_list:
+                context = {
+                    'user': recipient,
+                    'event': event,
+                }
+        
+                text_content = render_to_string('event_app/emails/event_changed.txt', context)
+                html_content = render_to_string('event_app/emails/event_changed.html', context)
+
+                email = EmailMultiAlternatives(subject, text_content, email_from, [recipient.email],)
+                email.attach_alternative(html_content, "text/html")
+                email.send()
+
 
 def reservation_cancel(request, slug):
     user = request.user
@@ -108,8 +147,8 @@ def reservation_cancel(request, slug):
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(user)
-        print(f"user's email: ", user.email)
-        send_email(user.email)
+        action = "Reservation cancelled"
+        send_email(user, event, action)
         return redirect(reverse("my_event_list"))
         
     return render(request, "event_app/reservation_cancel.html",
@@ -178,6 +217,8 @@ def like_toggle(request, slug):
 
 @login_required
 def event_create(request):
+    user = request.user
+
     # Handle submit (POST)
     if request.method == "POST":
         form = EventOrganizerForm(request.POST, request.FILES)
@@ -186,6 +227,8 @@ def event_create(request):
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
+            action = "Event Created"
+            send_email(user, event, action)
             return redirect("my_event_list")
         else:
             return render(request, "event_app/event_create.html", {"form": form })
@@ -197,14 +240,27 @@ def event_create(request):
 
 @login_required
 def event_edit(request, slug):
+    user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
+
+    original_date = event.event_date
+    original_event_start_time = event.event_start_time
+    original_event_end_time = event.event_end_time
+    
     # Handle submit (POST)
     if request.method == "POST":
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
-            form.save()
+            updated_event = form.save(commit=False)
+            updated_event.save()
+
+            if original_date != updated_event.event_date or original_event_start_time != updated_event.event_start_time or original_event_end_time != updated_event.event_start_time:
+                
+                action = "Some Changes about your Event"
+                send_email(user, event, action)
+
             return redirect("my_event_list")
         else:
             return render(request, "event_app/event_edit.html", {"form": form, "event": event })
@@ -217,12 +273,16 @@ def event_edit(request, slug):
 @login_required
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    user = request.user
+
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
     
     if request.method == "POST" and "event_delete" in request.POST:
         # Delete related ratings
         Rating.objects.filter(event=event).delete()
+        action = "Event cancelled"
+        send_email(user, event, action)
         event.delete()
         return redirect("my_event_list")
     

@@ -1,0 +1,8 @@
+Dear {{ user.username }},
+
+We regret to inform you that the event "{{ event.title }}" scheduled on {{ event.event_date }} has been cancelled.
+
+We apologize for the inconvenience caused.
+
+Thank you,
+Your Woofspot Team

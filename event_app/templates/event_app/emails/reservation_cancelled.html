@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reservation Cancelled</title>
+</head>
+
+<body>
+    <p>Dear {{ user.username }},</p>
+    <p>Your reservation for "<strong>{{ event.title }}</strong>" on {{ event.event_date }} has been successfully
+        cancelled.</p>
+    <p>We hope to see you at another woofspot event soon!</p>
+
+    <p>If you have any questions, please don't hesitate to contact us.</p>
+    <p><a href="mailto:woofspot.app@gmail.com"> woofspot.app@gmail.com</a></p>
+    <p>Thank you,<br>Your Woofspot Team</p>
+</body>
+
+</html>
