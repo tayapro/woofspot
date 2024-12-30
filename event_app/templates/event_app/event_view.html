@@ -1,11 +1,12 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
 
+{% block content %}
 <div class="container my-5 pb-5">
   <div class="row justify-content-center mt-5">
     <div class="col-md-8">
       <h2 class="text-center">{{ event.title }}</h2>
       {% if event.event_date > today %}
-      <!-- For future event start -->
+      <!-- Start of future events section -->
       {% if user == event.organizer %}
       <!-- host -->
       {% include "edit_delete_event_container.html" %}
@@ -13,30 +14,28 @@
       <!-- user -->
       {% include "like_container.html" %}
       {% endif %}
-      <!-- For future event end -->
+      <!-- End of future events section -->
       {% else %}
-      <!-- For past event start -->
+      <!-- Start of past events section -->
       {% if average_rating %}
-      {% if user == event.organizer %}
-      <!-- host -->
-      <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
-      <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">
-        {{ average_rating }}
-      </p>
-      {% elif user_registered %}
-      <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
-        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+      {% if user_registered %}
+      <!-- for attended user -->
+      <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
+        <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip"
           data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
       </a>
-      <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">
-        {{ average_rating }}
-      </p>
       {% else %}
-      <i class="fa-regular fa-star fa-xl text-warning text-opacity-75"></i>
+      <!-- for not attended users / host -->
+      <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
       {% endif %}
+      <p class="fw-semibold text-warning text-opacity-75 mb-0 ms-2">
+        {{ average_rating }} </p>
       {% else %}
+      <!-- no rating -->
       <i class="fa-regular fa-star fa-xl text-warning text-opacity-75"></i>
+      <p class="fw-semibold text-warning text-opacity-50 mb-0 ms-2">0</p>
       {% endif %}
+      <!-- End of past events section -->
       {% endif %}
 
       <div class="row">
@@ -59,26 +58,34 @@
 
       <div class="event-content">{{ event.content | safe }}</div>
 
-      <div class="rsvp-section mt-4 text-left">
-        {{ average_rating }}
+      <div class="reservation-section mt-4 text-left">
+        {% if user != event.organizer %}
+        {% if event.event_date > today %}
+        <!-- Start of future events section -->
         {% if user_registered %}
-        <p>You are attending this event.</p>
-
-        <!-- TODO: Add option for past event -->
-
-        {% elif user.is_authenticated %}
+        <p>You're planning to be there.</p>
+        {% else %}
         <form method="POST">
           {% csrf_token %}
           <button type="submit" name="reserve_spot" class="btn btn-primary">
-            Reserve spot
-          </button>
+            Count me in</button>
         </form>
+        {% endif %}
+        <!-- End of future events section -->
         {% else %}
-        <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-primary">
-          Reserve spot (Login Required)</a>
+        <!-- Start of past events section -->
+        {% if user_registered %}
+        <p>Hope you enjoyed the event.</p>
+        {% else %}
+        <p>Keep an eye out! We'll have new events posted soon.</p>
+        {% endif %}
+        <!-- End of past events section -->
+        {% endif %}
         {% endif %}
       </div>
     </div>
+
+
     {% if next %}
     <div class="mt-5 text-center">
       <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
