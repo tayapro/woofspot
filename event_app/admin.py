@@ -18,5 +18,3 @@ class WoofspotEventAdmin(SummernoteModelAdmin):
         return "No Image"
 
     image_preview.short_description = "Image Preview"
-
-
