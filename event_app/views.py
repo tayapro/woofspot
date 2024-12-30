@@ -91,7 +91,7 @@ def reservation_cancel(request, slug):
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(request.user)
-        return redirect(reverse("event_app/my_event_list"))
+        return redirect(reverse("my_event_list"))
         
     return render(request, "event_app/reservation_cancel.html",
     {

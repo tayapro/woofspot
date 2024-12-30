@@ -17,24 +17,22 @@
       <!-- End of future events section -->
       {% else %}
       <!-- Start of past events section -->
-      {% if average_rating %}
       {% if user_registered %}
       <!-- for attended user -->
-      <a href="{% url 'rating_submit' event.slug %}" class="btn btn-link">
+      <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 p-0">
         <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip"
-          data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
-      </a>
+          data-bs-placement="top" title="How was it?" aria-label="How was it?"></i></a>
       {% else %}
       <!-- for not attended users / host -->
       <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
       {% endif %}
-      <p class="fw-semibold text-warning text-opacity-75 mb-0 ms-2">
-        {{ average_rating }} </p>
-      {% else %}
-      <!-- no rating -->
-      <i class="fa-regular fa-star fa-xl text-warning text-opacity-75"></i>
-      <p class="fw-semibold text-warning text-opacity-50 mb-0 ms-2">0</p>
-      {% endif %}
+      <p class="fw-semibold text-warning text-opacity-50 m-0">
+        {% if average_rating %}
+        {{ average_rating }}
+        {% else %}
+        0
+        {% endif %}
+      </p>
       <!-- End of past events section -->
       {% endif %}
 
