@@ -17,15 +17,36 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.shortcuts import render
 from django.conf.urls.static import static
+from . import views
 
+
+# Custom error handlers
+def custom_404(request, exception):
+    return render(request, "404.html", status=404)
+
+def custom_500(request):
+    return render(request, "500.html", status=500)
+
+handler404 = custom_404
+handler500 = custom_500
+
+
+# URL patterns
 urlpatterns = [
+    # Admin interface
     path("admin/", admin.site.urls),
+    # Summernote WYSIWYG editor
     path("summernote/", include("django_summernote.urls")),
+    # User authentication via Django Allauth
     path("accounts/", include("allauth.urls")),
-    # path("users/", include("user_app.urls")),
+    # Event app (root URL)
     path("", include("event_app.urls"), name="event-app-urls"),
+    # Other URL patterns
+    path("trigger-500/", views.trigger_500, name="trigger-500"),
 ]
 
+# Serve static and media files during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
