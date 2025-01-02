@@ -1,0 +1,17 @@
+</head>
+
+<body>
+    <p>Hello {{ user.username }},</p>
+    <p>This email confirms your reservation for the event "<strong>{{ event.title }}</strong>":</p>
+    <p>Event details:</p>
+    <ul>
+        <li><strong>Date:</strong> {{ event.event_date }}</li>
+        <li><strong>Time:</strong> {{ event.event_start_time }} - {{ event.event_end_time }}</li>
+        <li><strong>Location:</strong> {{ event.location }}</li>
+    </ul>
+
+    <p>We look forward to seeing you there!</p>
+    <p>If you have any questions, please don't hesitate to contact us, woofspot.app@gmail.com</p>
+
+    <p>Thank you,<br>The Woofspot Team</p>
+</body>

@@ -30,30 +30,23 @@ def event_list(request):
 def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     average_rating = Rating.get_average_rating(event)
-
-    if request.method == "POST" and "reserve_spot" in request.POST:
-        if request.user.is_authenticated:
-            if request.user in event.attendees.all():
-                messages.error(request, "You have already reserved a spot for this event.")
-            else:
-                event.attendees.add(request.user)
-                messages.success(request, "Slot is reserved!")
-        else:
-            return redirect(f"{reverse('signin')}?next={request.path}")
-
     user_registered = (
         request.user.is_authenticated and request.user in event.attendees.all()
     )
 
     next = request.GET.get("next", "/")
 
-    return render(request, "event_app/event_view.html", 
-                 {"event": event,
-                 "next": next,
-                 "today": TODAY,
-                 "user_registered": user_registered,
-                 "average_rating": average_rating
-                 })
+    return render(
+        request,
+        "event_app/event_view.html",
+        {
+            "event": event,
+            "next": next,
+            "today": TODAY,
+            "user_registered": user_registered,
+            "average_rating": average_rating,
+        },
+    )
 
 
 def my_event_list(request):
@@ -84,6 +77,7 @@ def my_event_list(request):
                   "past_events": past_events,
                  })
 
+
 def send_email(user, event, action):
     with get_connection(host=settings.EMAIL_HOST, 
             port=settings.EMAIL_PORT,  
@@ -97,7 +91,14 @@ def send_email(user, event, action):
         context = {'user': user, 'event': event}
 
         subject = f"{action}: {event.title}"
-        if action == "Event cancelled":
+        if action == "Event Created":
+            text_content = render_to_string('event_app/emails/event_created.txt', context)
+            html_content = render_to_string('event_app/emails/event_created.html', context)
+
+            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        elif action == "Event Cancelled":
             attendees = event.attendees.all()
             recipient_list = [attendee.email for attendee in attendees]
             text_content = render_to_string('event_app/emails/event_cancelled.txt', context)
@@ -106,16 +107,16 @@ def send_email(user, event, action):
             email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
             email.attach_alternative(html_content, "text/html")
             email.send()
-        elif action == "Reservation cancelled":
-            text_content = render_to_string('event_app/emails/reservation_cancelled.txt', context)
-            html_content = render_to_string('event_app/emails/reservation_cancelled.html', context)
+        elif action == "Reservation Confirmed":
+            text_content = render_to_string('event_app/emails/reservation_confirmed.txt', context)
+            html_content = render_to_string('event_app/emails/reservation_confirmed.html', context)
 
             email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
             email.attach_alternative(html_content, "text/html")
             email.send()
-        elif action == "Event Created":
-            text_content = render_to_string('event_app/emails/event_created.txt', context)
-            html_content = render_to_string('event_app/emails/event_created.html', context)
+        elif action == "Reservation Cancelled":
+            text_content = render_to_string('event_app/emails/reservation_cancelled.txt', context)
+            html_content = render_to_string('event_app/emails/reservation_cancelled.html', context)
 
             email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
             email.attach_alternative(html_content, "text/html")
@@ -138,6 +139,23 @@ def send_email(user, event, action):
                 email.send()
 
 
+@login_required
+def reservation_submit(request, slug):
+    user = request.user
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+
+    if request.method == "POST" and "reserve_spot" in request.POST:
+        if request.user in event.attendees.all():
+            messages.error(request, "You have already reserved a spot for this event.")
+        else:
+            event.attendees.add(request.user)
+            messages.success(request, "Slot is reserved!")
+            action = "Reservation Confirmed"
+            send_email(user, event, action)
+
+    return redirect(reverse("event_view", args=[slug]))
+
+
 def reservation_cancel(request, slug):
     user = request.user
     if not user.is_authenticated:
@@ -147,7 +165,7 @@ def reservation_cancel(request, slug):
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(user)
-        action = "Reservation cancelled"
+        action = "Reservation Cancelled"
         send_email(user, event, action)
         return redirect(reverse("my_event_list"))
         
@@ -281,7 +299,7 @@ def event_delete(request, slug):
     if request.method == "POST" and "event_delete" in request.POST:
         # Delete related ratings
         Rating.objects.filter(event=event).delete()
-        action = "Event cancelled"
+        action = "Event Cancelled"
         send_email(user, event, action)
         event.delete()
         return redirect("my_event_list")

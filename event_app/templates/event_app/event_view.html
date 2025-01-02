@@ -63,7 +63,7 @@
         {% if user_registered %}
         <p>You're planning to be there.</p>
         {% else %}
-        <form method="POST">
+        <form method="POST" action="{% url 'reservation_submit' event.slug %}">
           {% csrf_token %}
           <button type="submit" name="reserve_spot" class="btn btn-primary">
             Count me in</button>
