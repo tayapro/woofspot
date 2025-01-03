@@ -2,13 +2,14 @@
 {% load allauth i18n %}
 
 {% block head_title %}
-{% trans "Cancel Spot" %}
+{% trans "Cancel Event" %}
 {% endblock head_title %}
 
 {% block content %}
 <div class="text-center">
     <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
-    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to delete the event?</h5>
+    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to delete the event {{event.title}}?
+    </h5>
 
     <div class="d-flex justify-content-evenly">
         <a href="{% url 'my_event_list' %}">

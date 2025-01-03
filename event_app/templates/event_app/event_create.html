@@ -29,13 +29,15 @@
                 {{ form.event_date.label_tag }}
                 {{ form.event_date }}
             </div>
-            <div>
-                {{ form.event_start_time.label_tag }}
-                {{ form.event_start_time }}
-            </div>
-            <div>
-                {{ form.event_end_time.label_tag }}
-                {{ form.event_end_time }}
+            <div class="d-flex flex-row gap-2">
+                <div>
+                    {{ form.event_start_time.label_tag }}
+                    {{ form.event_start_time }}
+                </div>
+                <div>
+                    {{ form.event_end_time.label_tag }}
+                    {{ form.event_end_time }}
+                </div>
             </div>
         </div>
         <div class=" mb-5">

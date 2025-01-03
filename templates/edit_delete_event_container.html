@@ -1,5 +1,5 @@
 <div class="edit-container">
-    <a href="{% url 'event_edit' event.slug %}" class="btn btn-link">
+    <a href="{% url 'event_edit' event.slug %}?next={{ request.path }}" class="btn btn-link">
         <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
             data-bs-placement="top" title="Edit event" aria-label="Edit event"></i>
     </a>

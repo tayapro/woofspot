@@ -8,8 +8,9 @@
 {% block content %}
 <div class="text-center">
     <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
-    <h5 class="text-black fw-light text-opacity-50 mb-1">We'll miss you and your furry friend(s)!</h5>
-    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to cancel your spot?</h5>
+    <h5 class="text-black fw-light text-opacity-50 mb-5">We'll Miss You And Your Furry Friend(s)!</h5>
+    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-1">Are You Sure You Want To Cancel Your Spot</h5>
+    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">For the {{event.title}}?</h5>
 
     <div class="d-flex justify-content-evenly">
         <a href="{% url 'my_event_list' %}">
