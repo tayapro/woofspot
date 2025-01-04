@@ -1,4 +1,4 @@
-Dear {{ user.username }},
+Hello {{ user.username }},
 
 Your reservation for "{{ event.title }} on {{ event.event_date }} has been successfully cancelled.
 We hope to see you at another woofspot event soon!

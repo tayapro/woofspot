@@ -1,0 +1,8 @@
+Hello {{ user.username }},
+
+Welcome to WoofSpot! We're excited to have you here.
+
+Explore events and join the fun!
+
+Best regards,
+The WoofSpot Team

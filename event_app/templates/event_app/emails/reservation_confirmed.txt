@@ -1,4 +1,4 @@
-Dear {{ user.username }},
+Hello {{ user.username }},
 
 This email confirms your reservation for the event "{{ event.title }}"
 
