@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load allauth i18n %}
+
+{% block head_title %}
+{% trans "My Event List" %}
+{% endblock head_title %}
 
 {% block content %}
 <div class="container my-5 pb-5">
@@ -8,7 +13,7 @@
     </div>
 
     <div class="mb-4 text-center">
-        <a href="{% url 'event_create' %}" class="btn btn-outline-success">Host New Event</a>
+        <a href="{% url 'event_create' %}?next={{ request.path }}" class="btn btn-outline-success">Host New Event</a>
     </div>
 
     {% if future_organizing_events %}

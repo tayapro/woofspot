@@ -1,5 +1,5 @@
 <div>
-    <form method="POST" action="{% url 'reservation_cancel' event.slug %}" class="d-inline">
+    <form method="POST" action="{% url 'reservation_cancel' event.slug %}?next={{ request.path }}" class="d-inline">
         {% csrf_token %}
         <button type="submit" class="btn btn-link">
             <i class="fa-regular fa-rectangle-xmark fa-xl text-danger text-opacity-75" data-bs-toggle="tooltip"

@@ -1,9 +1,9 @@
 {% load static %}
-{% url 'reservation_cancel' slug=event.slug as reservation_cancel_url %}
 {% url 'account_logout' as account_logout_url %}
+{% url 'event_create' as event_create_url %}
 {% url 'event_edit' slug=event.slug as event_edit_url %}
 {% url 'event_delete' slug=event.slug as event_delete_url %}
-{% url 'event_create' as event_create_url %}
+{% url 'reservation_cancel' slug=event.slug as reservation_cancel_url %}
 
 
 <!DOCTYPE html>
@@ -49,9 +49,8 @@
         <div class="col-md-6 d-flex flex-column justify-content-center">
             <div class="auth_form mx-3 p-4">
                 <div class="xmark-icon position-fixed top-0 end-0 m-3 z-3">
-                    <a href="{% url 'home' %}" class="btn rounded-circle">
-                        <i class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i>
-                    </a>
+                    <a href="{{ next|default:'/' }}" class="btn rounded-circle">
+                        <i class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></a>
                 </div>
 
                 <div class="text-center opacity-75">

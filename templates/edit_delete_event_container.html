@@ -5,7 +5,7 @@
     </a>
 </div>
 <div class="cancel-container">
-    <form method="POST" action="{% url 'event_delete' event.slug %}" class="d-inline">
+    <form method="POST" action="{% url 'event_delete' event.slug %}?next={{ request.path }}" class="d-inline">
         {% csrf_token %}
         <button type="submit" class="btn btn-link">
             <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75" data-bs-toggle="tooltip"

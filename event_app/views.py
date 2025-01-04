@@ -156,12 +156,11 @@ def reservation_submit(request, slug):
     return redirect(reverse("event_view", args=[slug]))
 
 
+@login_required
 def reservation_cancel(request, slug):
     user = request.user
-    if not user.is_authenticated:
-        return redirect(reverse("account_login"))
-
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    next = request.GET.get("next", "my_event_list")
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(user)
@@ -173,6 +172,7 @@ def reservation_cancel(request, slug):
     {
         "event": event,
         "user": user,
+        "next": next
     })
 
 
@@ -236,6 +236,7 @@ def like_toggle(request, slug):
 @login_required
 def event_create(request):
     user = request.user
+    next = request.GET.get("next", "my_event_list")
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -253,13 +254,15 @@ def event_create(request):
 
     # Handle page (GET)
     form = EventOrganizerForm()
-    return render(request, "event_app/event_create.html", {"form": form })
+    return render(request, "event_app/event_create.html", {"form": form, "next": next })
 
 
 @login_required
 def event_edit(request, slug):
     user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    next = request.GET.get("next", "my_event_list")
+
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
 
@@ -285,13 +288,18 @@ def event_edit(request, slug):
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)
-    return render(request, "event_app/event_edit.html", {"form": form, "event": event })
+    return render(request, "event_app/event_edit.html", 
+                  {
+                    "form": form, 
+                    "event": event,
+                    "next": next })
 
 
 @login_required
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     user = request.user
+    next = request.GET.get("next", "my_event_list")
 
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
@@ -307,6 +315,7 @@ def event_delete(request, slug):
     return render(request, "event_app/event_delete.html",
     {
         "event": event,
+        "next": next
     })
 
 
