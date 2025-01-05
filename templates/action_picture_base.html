@@ -46,13 +46,12 @@
             {% endif %}
         </div>
 
-        <div class="col-md-6 d-flex flex-column justify-content-center">
-            <div class="auth_form mx-3 p-4">
+        <div class="col-md-6 d-flex vh-100">
+            <div class="auth_form flex-grow-1 d-flex flex-column justify-content-center align-items-center p-4">
                 <div class="xmark-icon position-fixed top-0 end-0 m-3 z-3">
                     <a href="{{ next|default:'/' }}" class="btn rounded-circle">
                         <i class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></a>
                 </div>
-
                 <div class="text-center opacity-75">
                     <canvas id="rive-dog"></canvas>
                 </div>

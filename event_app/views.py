@@ -31,8 +31,9 @@ def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     average_rating = Rating.get_average_rating(event)
     user_registered = (
-        request.user.is_authenticated and request.user in event.attendees.all()
+        request.user in event.attendees.all()
     )
+    is_past_event = event.event_date <= TODAY
 
     next = request.GET.get("next", "/")
 
@@ -43,6 +44,7 @@ def event_view(request, slug):
             "event": event,
             "next": next,
             "today": TODAY,
+            "is_past_event": is_past_event,
             "user_registered": user_registered,
             "average_rating": average_rating,
         },
@@ -221,14 +223,11 @@ def my_event_search_results(request):
                     "results": results
                   })
 
-
+@login_required
 def like_toggle(request, slug):
-    if not request.user.is_authenticated:
-        return HttpResponseForbidden("You must be logged in to like an event.")
-    
     event = get_object_or_404(WoofspotEvent, slug=slug)
     event.like_toggle(request.user)
-    return render(request, "like_button.html", {
+    return render(request, "like_container.html", {
         "event": event
     })
 

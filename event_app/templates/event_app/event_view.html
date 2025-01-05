@@ -10,28 +10,32 @@
   <div class="row justify-content-center mt-5">
     <div class="col-md-8">
       <h2 class="text-center">{{ event.title }}</h2>
-      {% if event.event_date > today %}
       <!-- Start of future events section -->
-      {% if user == event.organizer %}
-      <!-- host -->
+      {% if not is_past_event and user == event.organizer %}
       {% include "edit_delete_event_container.html" %}
-      {% else %}
-      <!-- user -->
+      {% endif %}
+
+      {% if not is_past_event and user != event.organizer and user_registered %}
       {% include "like_container.html" %}
+      <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
+        title="Planning To Attend" aria-label="Attend"></i>
       {% include "cancel_reservation_container.html"%}
       {% endif %}
-      <!-- End of future events section -->
-      {% else %}
-      <!-- Start of past events section -->
-      {% if user_registered %}
-      <!-- for attended user -->
-      <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 p-0">
-        <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip"
-          data-bs-placement="top" title="How was it?" aria-label="How was it?"></i></a>
-      {% else %}
-      <!-- for not attended users / host -->
-      <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
+
+      {% if not is_past_event and user != event.organizer and not user_registered %}
+      {% include "like_container.html" %}
+      <form method="POST" action="{% url 'reservation_submit' event.slug %}">
+        {% csrf_token %}
+        <button type="submit" name="reserve_spot" class="btn btn-link">
+          <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+            data-bs-placement="top" title="Do you want to join?" aria-label="Join to event"></i></button>
+      </form>
       {% endif %}
+      <!-- End of future events section -->
+
+      <!-- Start of past events section -->
+      {% if is_past_event and user == event.organizer %}
+      <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" title="Star Rating"></i>
       <p class="fw-semibold text-warning text-opacity-50 m-0">
         {% if average_rating %}
         {{ average_rating }}
@@ -39,8 +43,32 @@
         0
         {% endif %}
       </p>
-      <!-- End of past events section -->
       {% endif %}
+
+      {% if is_past_event and user != event.organizer and user_registered %}
+      <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 p-0">
+        <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip"
+          data-bs-placement="top" title="How was it?" aria-label="How was it?"></i></a>
+      <p class="fw-semibold text-warning text-opacity-50 m-0">
+        {% if average_rating %}
+        {{ average_rating }}
+        {% else %}
+        0
+        {% endif %}
+      </p>
+      {% endif %}
+
+      {% if is_past_event and user != event.organizer and not user_registered %}
+      <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
+      <p class="fw-semibold text-warning text-opacity-50 m-0">
+        {% if average_rating %}
+        {{ average_rating }}
+        {% else %}
+        0
+        {% endif %}
+      </p>
+      {% endif %}
+      <!-- End of past events section -->
 
       <div class="row">
         <div class="col-12 col-md-6">
@@ -63,32 +91,17 @@
       <div class="event-content">{{ event.content | safe }}</div>
 
       <div class="reservation-section mt-4 text-left">
-        {% if user != event.organizer %}
-        {% if event.event_date > today %}
-        <!-- Start of future events section -->
-        {% if user_registered %}
+
+        {% if not is_past_event and user != event.organizer and user_registered %}
         <p>You're planning to be there.</p>
-        {% else %}
-        <form method="POST" action="{% url 'reservation_submit' event.slug %}">
-          {% csrf_token %}
-          <button type="submit" name="reserve_spot" class="btn btn-primary">
-            Count me in</button>
-        </form>
         {% endif %}
-        <!-- End of future events section -->
-        {% else %}
-        <!-- Start of past events section -->
-        {% if user_registered %}
-        <p>Hope you enjoyed the event.</p>
-        {% else %}
-        <p>Keep an eye out! We'll have new events posted soon.</p>
-        {% endif %}
-        <!-- End of past events section -->
-        {% endif %}
+
+        {% if is_past_event and user != event.organizer and user_registered %}
+        <p class="mb-0">We hope you enjoyed the event!</p>
+        <p>Feel free to rate it and share your feedback.</p>
         {% endif %}
       </div>
     </div>
-
 
     {% if next %}
     <div class="mt-5 text-center">
