@@ -39,23 +39,12 @@ body {
   color: rgba(124, 124, 125, 0.6) !important;
 }
 
-/* Custom allauth styles for login, signup pages */
+/* Custom allauth styles for login, signup, reset password pages */
 ul.errorlist {
   list-style-type: none;
   color: rgb(232, 86, 98);
   text-align: center;
   padding-left: 0;
-}
-
-#id_password_helptext {
-  display: flex;
-  justify-content: end;
-}
-
-#id_password_helptext > a {
-  text-decoration: none;
-  color: #6d7d9c;
-  font-size: smaller;
 }
 
 .login p:last-of-type {
@@ -69,7 +58,8 @@ ul.errorlist {
   width: 1rem;
 }
 
-form.signup ul:last-of-type {
+form.signup ul:last-of-type,
+form.password-change ul:last-of-type {
   list-style-type: none;
   color: #6d7d9c;
   font-size: smaller;
