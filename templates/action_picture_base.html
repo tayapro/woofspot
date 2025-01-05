@@ -70,9 +70,42 @@
     <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@rive-app/canvas@2.20.0"></script>
     <script>
-        const doggoAnimationURL = "{% static 'animations/doggo.riv' %}";
+        const r = new rive.Rive({
+            src: "{% static 'animations/doggo.riv' %}",
+            canvas: document.getElementById('rive-dog'),
+            autoplay: true,
+            stateMachines: 'State Machine 1',
+            onLoad: () => {
+                r.resizeDrawingSurfaceToCanvas()
+            },
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const stars = document.querySelectorAll(".star-btn");
+            const ratingInput = document.getElementById("rating-value");
+
+            stars.forEach(star => {
+                star.addEventListener("click", function () {
+                    const rating = this.getAttribute("data-value");
+                    ratingInput.value = rating;
+
+                    stars.forEach(s => {
+                        const starValue = s.getAttribute("data-value");
+                        const starIcon = s.querySelector("i");
+
+                        if (starValue <= rating) {
+                            starIcon.classList.add("fa-solid");
+                            starIcon.classList.remove("fa-regular");
+                        } else {
+                            starIcon.classList.add("fa-regular");
+                            starIcon.classList.remove("fa-solid");
+                        }
+                    });
+                });
+            });
+        });
     </script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
