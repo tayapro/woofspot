@@ -11,7 +11,7 @@
     {% else %}
     <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Login to like"
         aria-label="Login to like event">
-        <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
+        <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50 hover-scale"></i>
     </a>
     {% endif %}
     <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">{{ event.like_count }}</p>

@@ -28,7 +28,9 @@
                     <p class="card-text text-muted mb-2"><strong>Location:</strong> {{ event.location }}</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between p-3">
+                    {% if user != event.organizer %}
                     {% include "like_container.html" %}
+                    {% endif %}
                     <a href="{% url 'event_view' event.slug %}" class="btn btn-primary mt-2 mt-md-0" role="button"
                         aria-label="View event details">More details</a>
                 </div>
