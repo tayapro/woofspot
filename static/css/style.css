@@ -238,3 +238,11 @@ form.signup ul:last-of-type {
   width: 500px;
   height: auto;
 }
+
+.btn-scale {
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-scale:hover {
+  transform: scale(1.05);
+}

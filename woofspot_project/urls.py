@@ -39,6 +39,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Summernote WYSIWYG editor
     path("summernote/", include("django_summernote.urls")),
+    # Custom overrides for specific features in user_app
+    path("", include("user_app.urls")),
     # User authentication via Django Allauth
     path("accounts/", include("allauth.urls")),
     # Event app (root URL)
