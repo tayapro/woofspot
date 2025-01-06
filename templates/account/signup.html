@@ -9,7 +9,6 @@
 {% block content %}
 
 <div class="text-center mb-3">
-    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
     <h4 class="text-black fw-light text-opacity-50 mb-4">Create an Account</h4>
 
     <small class="text-muted">
@@ -44,7 +43,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="btn btn-secondary fw-semibold text-opacity-75 w-100 my-3" type="submit">
+        <button class="btn btn-secondary text-opacity-75 w-100 my-3" type="submit">
             {% trans "Sign Up"%}</button>
     </form>
 </div>

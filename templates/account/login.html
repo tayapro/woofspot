@@ -10,7 +10,6 @@
 {% block content %}
 
 <div class="text-center">
-    <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
     <h4 class="text-black fw-light text-opacity-50 mb-4">Welcome back!</h4>
 </div>
 
@@ -51,7 +50,7 @@
     <form action="{% provider_login_url 'google' method='POST' %}" method="post">
         {% csrf_token %}
         <button type="submit"
-            class="btn-scale btn btn-outline-default active fw-semibold border-secondary-subtle text-body-secondary text-opacity-75 w-100">
+            class="btn-scale btn btn-outline-default active border-secondary-subtle text-body-secondary text-opacity-75 w-100">
             <img src="{% static 'images/icons8-google.svg' %}" alt="Google icon" class="google-icon me-2">
             Login with Google
         </button>
