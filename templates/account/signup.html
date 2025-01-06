@@ -19,6 +19,17 @@
     </small>
 </div>
 
+<ul class="errorlist">
+    {% for key, values in form.errors.items %}
+    <li>
+        {% if key != '__all__' %}
+        {{ key|capfirst }}:
+        {% endif %}
+        {{ values|join:", " }}
+    </li>
+    {% endfor %}
+</ul>
+
 <div class="w-75" id="signup-form">
     <form class="signup" method="POST" action="{% url 'account_signup' %}">
         {% csrf_token %}

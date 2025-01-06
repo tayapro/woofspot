@@ -10,8 +10,13 @@
 <h2 class="text-center">Create Event</h2>
 
 <ul class="errorlist">
-    {% for key, value in form.errors.items %}
-    <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+    {% for key, values in form.errors.items %}
+    <li>
+        {% if key != '__all__' %}
+        {{ key|capfirst }}:
+        {% endif %}
+        {{ values|join:", " }}
+    </li>
     {% endfor %}
 </ul>
 
