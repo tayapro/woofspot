@@ -59,50 +59,65 @@
                     <label for="search-input">
                         <input type="text" id="search-input" class="form-control me-2" name="query"
                             placeholder="Search on woofspot" minlength="2" size="20" autocomplete="off"
-                            aria-label="Search" required></label>
+                            aria-label="Search" required>
+                    </label>
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button type="submit" id="bth-search-form">Search</button>
                 </form>
             </div>
             <div>
                 {% if user.is_authenticated %}
+                <button class="menu-btn btn btn-primary rounded-circle text-uppercase" popovertarget="menu">
+                    {{ user.username|slice:":1" }}
+                    <span class="sr-only">Open menu</span>
+                </button>
                 <div class="user-icon">
-                    <button type="button" class="btn btn-primary rounded-circle text-uppercase"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.username|slice:":1" }}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end text-black">
-                        <li>
-                            <a href="{% url 'home' %}?next={{ next }}" class="dropdown-item text-black text-opacity-50">
-                                <i class="fa-solid fa-house me-2"></i>Home</a>
-                        </li>
-                        <hr class="dropdown-divider text-black text-opacity-50" />
-                        <li>
-                            <p class="dropdown-item text-black text-opacity-50">
-                                <i class="fa-solid fa-user me-2"></i>{{ user.username }}
-                            </p>
-                        </li>
-                        <hr class="dropdown-divider text-black text-opacity-50" />
-                        <li><a href="{% url 'my_event_list' %}?next={{ next }}"
-                                class="dropdown-item text-black text-opacity-50">
-                                <i class="fa-solid fa-ticket me-2"></i>My events</a></li>
-                        <li>
-                            <hr class="dropdown-divider text-black text-opacity-50" />
-                        </li>
-                        <li><a href="{% url 'account_logout' %}" class="dropdown-item text-black text-opacity-50">
-                                <i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
-                        </li>
-                    </ul>
+                    <nav popover id="menu"
+                        class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                        <button class="btn rounded-circle close-btn position-fixed top-0 end-0 m-3 z-3"
+                            popovertarget="menu" popovertargetaction="hide">
+                            <span aria-hidden="true"><i
+                                    class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></span>
+                            <span class="sr-only">Close menu</span>
+                        </button>
+
+                        <ul
+                            class="d-flex flex-column justify-content-between align-items-center p-4 rounded fs-3 gap-4">
+                            <li>
+                                <a href=" {% url 'home' %}?next={{ next }}"
+                                    class="dropdown-item text-black text-opacity-50">
+                                    Home</a>
+                            </li>
+                            <li>
+                                <span class="dropdown-item text-black text-opacity-50">
+                                    {{ user.username }}
+                                </span>
+                            </li>
+                            <li>
+                                <a href="{% url 'my_event_list' %}?next={{ next }}"
+                                    class="dropdown-item text-black text-opacity-50">
+                                    My events</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item text-black text-opacity-50">
+                                    Logout</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                {% else %}
-                <div class="get-started">
-                    <a href="{% url 'account_login' %}"
-                        class="btn btn-outline-default active fw-semibold text-danger text-opacity-75 px-3">
-                        Get started
-                    </a>
-                </div>
-                {% endif %}
             </div>
+        </div>
+
+        </div>
+        {% else %}
+        <div class="get-started">
+            <a href="{% url 'account_login' %}"
+                class="btn btn-outline-default active fw-semibold text-danger text-opacity-75 px-3">
+                Get started
+            </a>
+        </div>
+        {% endif %}
+        </div>
         </div>
     </nav>
 

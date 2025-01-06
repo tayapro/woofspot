@@ -181,6 +181,48 @@ form.login p:last-of-type {
   }
 }
 
+/* popover menu */
+
+#menu {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 2px 40px darkgrey;
+
+  /*  undo popover styles  */
+  border: none;
+  padding: 0;
+  margin: 0;
+  left: auto;
+
+  /*  animate  */
+  transition: translate 0.5s ease-out, display 0.5s ease-out allow-discrete,
+    overlay 0.5s ease-out allow-discrete;
+  translate: 100% 0;
+
+  &:popover-open {
+    translate: 0 0;
+
+    @starting-style {
+      translate: 100% 0;
+    }
+  }
+}
+
+#menu ul {
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+#menu li {
+  transition: transform 0.2s ease-in-out;
+}
+
+#menu li:hover {
+  transform: scale(1.1);
+}
+
+/* */
+
 #bg-image {
   background-image: url("../images/two_happy_dogs2.webp");
   background-size: cover;
@@ -189,6 +231,7 @@ form.login p:last-of-type {
   height: 100vh;
 }
 
+/* do not use ? */
 .dropdown-menu {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
