@@ -8,6 +8,30 @@
   --white-color: rgb(251, 251, 251);
   --bootstrap-danger-75: rgb(220, 53, 69, 0.75);
   --bootstrap-danger-90: rgb(220, 53, 69, 0.9);
+  --bootstrap-base: rgb(50, 58, 73);
+  --bootstrap-gray-100: rgb(243, 244, 247);
+  --bootstrap-gray-200: rgb(231, 234, 238);
+  --bootstrap-gray-300: rgb(219, 223, 230);
+  --bootstrap-gray-400: rgb(207, 212, 222);
+  --bootstrap-gray-500: rgb(170, 179, 197);
+  --bootstrap-gray-600: rgb(109, 125, 156);
+  --bootstrap-gray-700: rgb(74, 86, 109);
+  --bootstrap-gray-800: rgb(50, 58, 73);
+  --bootstrap-gray-900: rgb(33, 38, 49);
+  --bootstrap-black: rgb(8, 10, 12);
+  --bootstrap-bs-blue: #0d6efd;
+  --bootstrap-bs-indigo: #6610f2;
+  --bootstrap-bs-purple: #6f42c1;
+  --bootstrap-bs-pink: #d63384;
+  --bootstrap-bs-red: #dc3545;
+  --bootstrap-bs-orange: #fd7e14;
+  --bootstrap-bs-yellow: #ffc107;
+  --bootstrap-bs-green: #198754;
+  --bootstrap-bs-teal: #20c997;
+  --bootstrap-bs-cyan: #0dcaf0;
+  --bootstrap-bs-black: #000;
+  --bootstrap-bs-white: #fff;
+  --bootstrap-bs-gray: #6c757d;
 }
 
 * {
@@ -40,6 +64,13 @@ body {
 }
 
 /* Custom allauth styles for login, signup, reset password pages */
+
+#login-form label,
+#signup-form label {
+  font-size: 0.9rem;
+  color: var(--bootstrap-bs-gray);
+}
+
 ul.errorlist {
   list-style-type: none;
   color: rgb(232, 86, 98);
@@ -47,23 +78,33 @@ ul.errorlist {
   padding-left: 0;
 }
 
-.login p:last-of-type {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 #id_remember {
   padding: 0.5rem;
   width: 1rem;
 }
 
-form.signup ul:last-of-type,
-form.password-change ul:last-of-type {
-  list-style-type: none;
-  color: #6d7d9c;
+#id_password_helptext,
+#id_remember {
   font-size: smaller;
-  padding-left: 0;
+}
+
+form.login ul:last-of-type,
+form.password-change ul:last-of-type,
+form.signup ul:last-of-type {
+  display: none !important;
+  /* list-style-type: none;
+  color: rgb(109, 125, 156);
+  font-size: 0.75rem;
+  padding-left: 0; */
+}
+
+form.login p,
+form.signup p {
+  margin-bottom: 0.5rem;
+}
+
+form.login p:last-of-type {
+  display: none !important;
 }
 
 /* */
@@ -201,8 +242,9 @@ form.password-change ul:last-of-type {
 .or-line:before,
 .or-line:after {
   content: "";
-  flex: 1 1;
-  border-bottom: 2px solid rgba(149, 149, 149, 0.6);
+  /* flex: 1 1; */
+  flex-grow: 100;
+  border-bottom: 1px solid rgba(149, 149, 149, 0.6);
 }
 
 .or-line:before {

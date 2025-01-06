@@ -8,27 +8,34 @@
 
 {% block content %}
 
-<div class="text-center">
+<div class="text-center mb-3">
     <h2 class="fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h2>
     <h4 class="text-black fw-light text-opacity-50 mb-4">Create an Account</h4>
 
-    <p class="text-body-secondary text-opacity-50">
-        Already have an account? Then please
-        <a class="text-decoration-none fw-semibold text-opacity-75" aria-current="page"
-            href="{% url 'account_login' %}">Sign In
+    <small class="text-muted">
+        Already have an account?
+        <a class="text-decoration-none text-opacity-75" aria-current="page" href="{% url 'account_login' %}">Sign In
         </a>
-    </p>
+    </small>
 </div>
 
-<form class="signup" method="POST" action="{% url 'account_signup' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <button class="btn btn-secondary fw-semibold text-opacity-75 w-100 mb-3" type="submit">
-        {% trans "Sign Up"%}</button>
-</form>
+<div class="w-75" id="signup-form">
+    <form class="signup" method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
 
+        {% for error in form.get_errors_as_single_list %}
+        <ul class="errorlist">
+            <li>{{ error }}</li>
+        </ul>
+        {% endfor %}
+
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="btn btn-secondary fw-semibold text-opacity-75 w-100 my-3" type="submit">
+            {% trans "Sign Up"%}</button>
+    </form>
+</div>
 
 {% endblock %}

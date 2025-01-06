@@ -4,7 +4,7 @@ from .models import Rating
 from django.forms.widgets import ClearableFileInput
 
 # Reusable styles
-COMMON_TEXT_STYLES = {
+TEXT_STYLES = {
     'class': 'form-control',
     'style': 'min-width: 200px; width: 100%;',
 }
@@ -41,16 +41,16 @@ class EventOrganizerForm(forms.ModelForm):
         }
         widgets = {
             'title': forms.TextInput(attrs={
-                **COMMON_TEXT_STYLES,  
+                **TEXT_STYLES,  
                 'placeholder': 'Enter event title',
             }),
             'content': forms.Textarea(attrs={
-                **COMMON_TEXT_STYLES, 
+                **TEXT_STYLES, 
                 'rows': 5,
                 'placeholder': 'Enter description for your event',
             }),
             'location': forms.TextInput(attrs={
-                **COMMON_TEXT_STYLES,  
+                **TEXT_STYLES,  
                 'placeholder': 'Enter event location',
             }),
             'event_date': forms.DateInput(attrs={
@@ -77,7 +77,7 @@ class ReviewForm(forms.ModelForm):
         required=False,
         label="Add a review",
         widget=forms.Textarea(attrs={
-            **COMMON_TEXT_STYLES,
+            **TEXT_STYLES,
             'rows': 5,
             'placeholder': 'Write your review here...',
         })

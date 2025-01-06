@@ -75,8 +75,8 @@ CSRF_COOKIE_AGE = 3600
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-ACCOUNT_FORMS = {'signup': 'woofspot_project.forms.MySignupForm',
-                 'login': 'woofspot_project.forms.MySigninForm'}
+ACCOUNT_FORMS = {'signup': 'user_app.forms.MySignupForm',
+                 'login': 'user_app.forms.MySigninForm'}
 
 SOCIALACCOUNT_PROVIDERS = {
   'google': {

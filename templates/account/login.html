@@ -14,28 +14,33 @@
     <h4 class="text-black fw-light text-opacity-50 mb-4">Welcome back!</h4>
 </div>
 
-<form class="login" method="POST" action="{% url 'account_login' %}?next={{ next }}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 w-100 mb-3">Sign In</button>
-</form>
+<div class="w-75" id="login-form">
+    <form class="login" method="POST" action="{% url 'account_login' %}?next={{ next }}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit" class="btn btn-secondary fw-semibold text-opacity-75 w-100 my-3">Sign In</button>
+    </form>
+</div>
 
-<div class="text-center">
-    <p class="text-body-secondary text-opacity-50">Don't have an account?
-        <a class="text-decoration-none fw-semibold text-opacity-75" aria-current="page"
-            href="{{ signup_url }}?next={{ next }}">
-            Sign Up
+<div class="text-center w-75">
+    <small class="text-muted">
+        Don't have an account?
+        <a class="text-decoration-none text-opacity-75" aria-current="page" href="{{ signup_url }}?next={{ next }}">Sign
+            Up
         </a>
-    </p>
-    <p class="text-center or-line text-body-secondary text-opacity-50"> or </p>
+    </small>
+    <p class="text-center or-line text-black fw-light text-opacity-50 mt-3"> or </p>
+</div>
+
+<div class="w-75">
     {% load account socialaccount %}
     <form action="{% provider_login_url 'google' method='POST' %}" method="post">
         {% csrf_token %}
         <button type="submit"
-            class="btn btn-outline-default active fw-semibold text-body-secondary text-opacity-75 w-100">
+            class="btn-scale btn btn-outline-default active fw-semibold border-secondary-subtle text-body-secondary text-opacity-75 w-100">
             <img src="{% static 'images/icons8-google.svg' %}" alt="Google icon" class="google-icon me-2">
             Login with Google
         </button>

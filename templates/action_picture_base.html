@@ -30,7 +30,7 @@
 
 <body>
     <div class="row g-0 min-vh-100">
-        <div class="action_picture col-md-6 d-none d-md-block mh-100">
+        <div class="action_picture col-md-6 d-none d-md-block">
             {% if request.path == account_logout_url %}
             <img src="{% static 'images/puppy_on_bed.webp' %}" alt="Puppy on bed" class="img-fluid">
             {% elif request.path == reservation_cancel_url %}
