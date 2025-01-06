@@ -159,6 +159,7 @@ form.login p:last-of-type {
 #rive-dog {
   height: 128px;
   width: 128px;
+  opacity: 0.8;
 }
 
 #logo-text {

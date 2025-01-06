@@ -53,7 +53,7 @@
                     <a href="{{ next|default:'/' }}" class="btn rounded-circle">
                         <i class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></a>
                 </div>
-                <div class="text-center opacity-75 d-flex align-items-center mb-3">
+                <div class="text-center d-flex align-items-center mb-3">
                     <img src="{% static 'images/branding_text.webp' %}" alt="Woofspot branding text image"
                         id="logo-text">
                     <canvas id="rive-dog"></canvas>
@@ -74,7 +74,7 @@
     <script src="https://unpkg.com/@rive-app/canvas@2.20.0"></script>
     <script>
         const r = new rive.Rive({
-            src: "{% static 'animations/doggo.riv' %}",
+            src: "{% static 'animations/doggo2.riv' %}",
             canvas: document.getElementById('rive-dog'),
             autoplay: true,
             stateMachines: 'State Machine 1',
