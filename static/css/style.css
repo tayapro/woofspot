@@ -1,12 +1,13 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 :root {
   --font-family: "Rubik", sans-serif;
-  --header-font-family: "Rubik", sans-serif;
+  --header-font-family: "Fredoka", sans-serif;
   --white-color: rgb(251, 251, 251);
   --bootstrap-black: rgb(8, 10, 12);
+  --bootstrap-black-20: rgba(8, 10, 12, 0.2);
   --bootstrap-danger-75: rgb(220, 53, 69, 0.75);
   --bootstrap-danger-90: rgb(220, 53, 69, 0.9);
   --bootstrap-danger-100: rgb(220, 53, 69);
@@ -29,11 +30,11 @@
   --bootstrap-bs-teal: rgb(32, 201, 151);
   --bootstrap-bs-cyan: rgb(13, 202, 240);
   --bootstrap-bs-gray: rgb(108, 117, 125);
-  --bootstrap-bs-gray-75: rgb(108, 117, 125, 0.75);
-  --bootstrap-bs-gray-50: rgb(108, 117, 125, 0.5);
-  --bootstrap-bs-gray-25: rgb(108, 117, 125, 0.25);
+  --bootstrap-bs-gray-75: rgba(108, 117, 125, 0.75);
+  --bootstrap-bs-gray-50: rgba(108, 117, 125, 0.5);
+  --bootstrap-bs-gray-25: rgba(108, 117, 125, 0.25);
   --bs-gray-700: rgb(73, 80, 87);
-  --bs-gray-700-85: rgb(73, 80, 87, 0.85);
+  --bs-gray-700-85: rgba(73, 80, 87, 0.85);
 }
 
 * {
@@ -53,7 +54,7 @@ body {
   background-color: var(--bootstrap-danger-75);
   color: var(--white-color);
   border: 1px solid var(--bootstrap-danger-90);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px var(--bootstrap-black-20);
   margin-bottom: 0.5rem;
 }
 
@@ -134,7 +135,7 @@ form.login p:last-of-type {
 .tagline-header-font {
   font-family: var(--header-font-family);
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -161,8 +162,8 @@ form.login p:last-of-type {
 }
 
 #rive-dog {
-  height: 128px;
-  width: 128px;
+  height: 110px;
+  width: 110px;
   opacity: 0.8;
 }
 
@@ -185,12 +186,11 @@ form.login p:last-of-type {
   }
 }
 
-/* popover menu */
-
+/* Popover menu */
 #menu {
   width: 100%;
   height: 100%;
-  box-shadow: 0 2px 40px darkgrey;
+  box-shadow: 0 2px 40px var(--bootstrap-black-20);
 
   /*  undo popover styles  */
   border: none;
@@ -273,13 +273,6 @@ form.login p:last-of-type {
   height: 100vh;
 }
 
-/* do not use ? */
-.dropdown-menu {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  border: none;
-}
-
 #search-form {
   display: flex;
   justify-content: left;
@@ -322,6 +315,7 @@ form.login p:last-of-type {
     border-top: 1px solid #ddd;
     z-index: 10;
     padding: 1rem;
+    box-shadow: 0px 4px 16px var(--bootstrap-black-20);
   }
 }
 
