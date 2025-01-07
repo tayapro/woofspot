@@ -45,7 +45,7 @@
         bg-white px-3 px-md-4 px-lg-5 shadow-sm">
         <div class="d-flex justify-content-between align-items-center">
             <a href="{% url 'home' %}" class="navbar-brand">
-                <img src="{% static 'images/ws_logo.svg' %}" alt="Woofspot logo" class="img-fluid logo-size">
+                <img src="{% static 'images/ws_logo_text.webp' %}" alt="Woofspot logo" class="img-fluid logo-size">
             </a>
         </div>
 
@@ -62,12 +62,13 @@
                             aria-label="Search" required>
                     </label>
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button type="submit" id="bth-search-form">Search</button>
+                    <button type="submit" class="btn" id="bth-search-form">Search</button>
                 </form>
             </div>
+
             <div>
                 {% if user.is_authenticated %}
-                <button class="menu-btn btn btn-primary rounded-circle text-uppercase" popovertarget="menu">
+                <button class="btn-scale menu-btn btn btn-secondary rounded-2 text-uppercase" popovertarget="menu">
                     {{ user.username|slice:":1" }}
                     <span class="sr-only">Open menu</span>
                 </button>
@@ -82,24 +83,22 @@
                         </button>
 
                         <ul
-                            class="d-flex flex-column justify-content-between align-items-center p-4 rounded fs-3 gap-4">
+                            class="d-flex flex-column justify-content-between align-items-center p-4 rounded fs-3 gap-4 text-black text-opacity-50">
                             <li>
-                                <a href=" {% url 'home' %}?next={{ next }}"
-                                    class="dropdown-item text-black text-opacity-50">
+                                <a href=" {% url 'home' %}?next={{ next }}" class="dropdown-item">
                                     Home</a>
                             </li>
                             <li>
-                                <span class="dropdown-item text-black text-opacity-50">
+                                <span class="dropdown-item">
                                     {{ user.username }}
                                 </span>
                             </li>
                             <li>
-                                <a href="{% url 'my_event_list' %}?next={{ next }}"
-                                    class="dropdown-item text-black text-opacity-50">
+                                <a href="{% url 'my_event_list' %}?next={{ next }}" class="dropdown-item">
                                     My events</a>
                             </li>
                             <li>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item text-black text-opacity-50">
+                                <a href="{% url 'account_logout' %}" class="dropdown-item">
                                     Logout</a>
                             </li>
                         </ul>

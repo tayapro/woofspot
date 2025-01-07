@@ -29,7 +29,11 @@
   --bootstrap-bs-teal: rgb(32, 201, 151);
   --bootstrap-bs-cyan: rgb(13, 202, 240);
   --bootstrap-bs-gray: rgb(108, 117, 125);
+  --bootstrap-bs-gray-75: rgb(108, 117, 125, 0.75);
+  --bootstrap-bs-gray-50: rgb(108, 117, 125, 0.5);
+  --bootstrap-bs-gray-25: rgb(108, 117, 125, 0.25);
   --bs-gray-700: rgb(73, 80, 87);
+  --bs-gray-700-85: rgb(73, 80, 87, 0.85);
 }
 
 * {
@@ -223,6 +227,44 @@ form.login p:last-of-type {
 
 /* */
 
+/* Good to know section */
+
+.accordion-button {
+  background-color: var(--bs-gray-700-85) !important;
+  color: var(--bootstrap-gray-100) !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--bs-gray-700) !important;
+}
+
+.accordion-button:focus {
+  border-color: var(--bootstrap-bs-gray-75) !important;
+  box-shadow: none;
+}
+
+/* Remove the default arrow */
+.accordion-button::after {
+  display: none;
+}
+
+/* Font Awesome icons for collapsed and expanded states */
+.accordion-button.collapsed::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f067";
+  font-weight: 900;
+  margin-right: 10px;
+}
+
+.accordion-button::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f068";
+  font-weight: 900;
+  margin-right: 10px;
+}
+
+/* */
+
 #bg-image {
   background-image: url("../images/two_happy_dogs2.webp");
   background-size: cover;
@@ -254,16 +296,18 @@ form.login p:last-of-type {
 }
 
 #bth-search-form {
-  border: 1px solid rgba(124, 124, 125, 255);
+  border: 1px solid var(--bootstrap-bs-gray);
   padding: 0.37rem;
-  background-color: var(--white-color);
   border-radius: 0 5px 5px 0;
-  color: rgba(124, 124, 125, 1);
   border-left-style: none;
+  color: var(--bootstrap-bs-gray);
+  background-color: var(--white-color);
 }
 
 #bth-search-form:hover {
   cursor: pointer;
+  background-color: var(--bootstrap-bs-gray);
+  color: var(--white-color);
 }
 
 @media (max-width: 768px) {
