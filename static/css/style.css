@@ -1,5 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 :root {
@@ -161,6 +159,8 @@ form.login p:last-of-type {
   cursor: pointer;
 }
 
+/* Action picture base pages */
+
 #rive-dog {
   height: 110px;
   width: 110px;
@@ -175,13 +175,13 @@ form.login p:last-of-type {
 /* base.html styles */
 
 .logo-size {
-  width: 64px;
+  width: 200px;
   height: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   .logo-size {
-    width: 45px;
+    width: 160px;
     height: auto;
   }
 }
@@ -205,10 +205,6 @@ form.login p:last-of-type {
 
   &:popover-open {
     translate: 0 0;
-
-    @starting-style {
-      translate: 100% 0;
-    }
   }
 }
 
@@ -280,7 +276,6 @@ form.login p:last-of-type {
 }
 
 #search-input {
-  border: 1px solid rgba(124, 124, 125, 255);
   border-radius: 5px 0 0 5px;
 }
 
@@ -289,7 +284,7 @@ form.login p:last-of-type {
 }
 
 #bth-search-form {
-  border: 1px solid var(--bootstrap-bs-gray);
+  border: 1px solid #dee2e6;
   padding: 0.37rem;
   border-radius: 0 5px 5px 0;
   border-left-style: none;
@@ -300,6 +295,8 @@ form.login p:last-of-type {
 #bth-search-form:hover {
   cursor: pointer;
   background-color: var(--bootstrap-bs-gray);
+  border: 1px solid var(--bootstrap-bs-gray);
+  border-left: none;
   color: var(--white-color);
 }
 
@@ -311,8 +308,6 @@ form.login p:last-of-type {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #f8f9fa;
-    border-top: 1px solid #ddd;
     z-index: 10;
     padding: 1rem;
     box-shadow: 0px 4px 16px var(--bootstrap-black-20);

@@ -76,6 +76,9 @@
 </div>
 {% endif %}
 
+
+<!-- TODO: multiple searches can lead to incorrect navigation, 
+ should redirect to home page, if next is one of search result URLs -->
 {% if next %}
 <div class="m-5 text-center">
     <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
