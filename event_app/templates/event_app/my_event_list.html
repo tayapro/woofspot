@@ -6,141 +6,140 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="container my-5 pb-5">
-    <!-- Future Organizing Events Section -->
-    <div class="text-center my-4">
-        <h2 class="bold-header-font text-black text-opacity-50">Hosted By Me</h2>
-    </div>
-
-    <div class="mb-4 text-center">
-        <a href="{% url 'event_create' %}?next={{ request.path }}" class="btn btn-outline-success">Host New Event</a>
-    </div>
-
-    {% if future_organizing_events %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for event in future_organizing_events %}
-        <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body d-flex flex-column">
-                    <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
-                        <h5 class="card-title m-0">
-                            <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
-                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
-                                {{ event.title }}
-                            </a>
-                        </h5>
-                    </div>
-                    <div>
-                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
-                        <p class="card-text text-muted my-0"><strong>Time:</strong>
-                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
-                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between p-3">
-                    {% include "edit_delete_event_container.html" %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div>
-        <p class="text-center">You are not organizing any events yet.</p>
-    </div>
-    {% endif %}
-
-    <!-- Future Attending Events Section -->
-    <div class="text-center my-4">
-        <h2 class="bold-header-font text-black text-opacity-50">Planning To Attend</h2>
-    </div>
-    {% if future_attending_events %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for event in future_attending_events %}
-        <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between align-items-center">
-                        <h5 class="card-title m-0">
-                            <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
-                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
-                                {{ event.title }}
-                            </a>
-                        </h5>
-
-                        {% include "cancel_reservation_container.html"%}
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between p-3">
-                    <div>
-                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
-                        <p class="card-text text-muted my-0"><strong>Time:</strong>
-                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
-                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div>
-        <p class="text-center">You haven't reserved a spot for any future events yet.</p>
-    </div>
-    {% endif %}
-
-    <!-- Past Events Section -->
-    <div class="text-center my-4">
-        <h2 class="bold-header-font text-black text-opacity-50">Past Events</h2>
-    </div>
-    {% if past_events %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for event in past_events %}
-        <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h5 class="card-title m-0">
-                            <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
-                                class="text-decoration-none text-black text-opacity-75 text-capitalize">
-                                {{ event.title }}
-                            </a>
-                        </h5>
-                        <div>
-                            {% if user == event.organizer %}
-                            <i class="fa-solid fa-clipboard-list fa-xl text-primary text-opacity-75"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="You're hosting this event"
-                                aria-label="You're hosting this event"></i>
-                            {% else %}
-                            <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Attended" aria-label="Attended"></i>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div>
-                        <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
-                        <p class="card-text text-muted my-0"><strong>Time:</strong>
-                            {{ event.event_start_time }} - {{ event.event_end_time }}</p>
-                        <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
-                    </div>
-                </div>
-
-                <div class="card-footer d-flex justify-content-between p-3">
-                    {% if user != event.organizer %}
-                    <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
-                        <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-                            data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div>
-        <p class="text-center">You haven't hosted any events or reserved a spot for any events yet.</p>
-    </div>
-    {% endif %}
+<!-- Future Organizing Events Section -->
+<div class="text-center my-4">
+    <h2 class="bold-header-font text-black text-opacity-50">Hosted By Me</h2>
 </div>
+
+<div class="mb-4 text-center">
+    <a href="{% url 'event_create' %}?next={{ request.path }}" class="btn btn-outline-success">Host New Event</a>
+</div>
+
+{% if future_organizing_events %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for event in future_organizing_events %}
+    <div class="col mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex flex-row justify-content-center align-items-end gap-2 mb-3">
+                    <h5 class="card-title m-0">
+                        <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
+                            class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                            {{ event.title }}
+                        </a>
+                    </h5>
+                </div>
+                <div>
+                    <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                    <p class="card-text text-muted my-0"><strong>Time:</strong>
+                        {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                    <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between p-3">
+                {% include "edit_delete_event_container.html" %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div>
+    <p class="text-center">You are not organizing any events yet.</p>
+</div>
+{% endif %}
+
+<!-- Future Attending Events Section -->
+<div class="text-center my-4">
+    <h2 class="bold-header-font text-black text-opacity-50">Planning To Attend</h2>
+</div>
+{% if future_attending_events %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for event in future_attending_events %}
+    <div class="col mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <h5 class="card-title m-0">
+                        <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
+                            class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                            {{ event.title }}
+                        </a>
+                    </h5>
+
+                    {% include "cancel_reservation_container.html"%}
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between p-3">
+                <div>
+                    <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                    <p class="card-text text-muted my-0"><strong>Time:</strong>
+                        {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                    <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div>
+    <p class="text-center">You haven't reserved a spot for any future events yet.</p>
+</div>
+{% endif %}
+
+<!-- Past Events Section -->
+<div class="text-center my-4">
+    <h2 class="bold-header-font text-black text-opacity-50">Past Events</h2>
+</div>
+{% if past_events %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for event in past_events %}
+    <div class="col mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <h5 class="card-title m-0">
+                        <a href="{% url 'event_view' event.slug %}?next={{ request.path }}"
+                            class="text-decoration-none text-black text-opacity-75 text-capitalize">
+                            {{ event.title }}
+                        </a>
+                    </h5>
+                    <div>
+                        {% if user == event.organizer %}
+                        <i class="fa-solid fa-clipboard-list fa-xl text-primary text-opacity-75"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="You're hosting this event"
+                            aria-label="You're hosting this event"></i>
+                        {% else %}
+                        <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Attended" aria-label="Attended"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <p class="card-text text-muted my-0"><strong>Date:</strong> {{ event.event_date }}</p>
+                    <p class="card-text text-muted my-0"><strong>Time:</strong>
+                        {{ event.event_start_time }} - {{ event.event_end_time }}</p>
+                    <p class="card-text text-muted my-0"><strong>Location:</strong> {{ event.location }}</p>
+                </div>
+            </div>
+
+            <div class="card-footer d-flex justify-content-between p-3">
+                {% if user != event.organizer %}
+                <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
+                    <i class="fa-regular fa-star fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="How was it?" aria-label="How was it?"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div>
+    <p class="text-center">You haven't hosted any events or reserved a spot for any events yet.</p>
+</div>
+{% endif %}
+
 {% endblock %}

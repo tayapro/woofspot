@@ -223,7 +223,7 @@ form.login p:last-of-type {
 
 /* */
 
-/* Good to know section */
+/* Good to know section on landing page (base.html) */
 
 .accordion-button {
   background-color: var(--bs-gray-700-85) !important;
@@ -257,6 +257,12 @@ form.login p:last-of-type {
   content: "\f068";
   font-weight: 900;
   margin-right: 10px;
+}
+
+/* Contact us section on landing page (base.html) */
+
+#contact-us-form textarea:last-of-type {
+  resize: none;
 }
 
 /* */
@@ -300,7 +306,7 @@ form.login p:last-of-type {
   color: var(--white-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   .search-form-container {
     display: flex;
     justify-content: center;
@@ -310,7 +316,6 @@ form.login p:last-of-type {
     width: 100%;
     z-index: 10;
     padding: 1rem;
-    box-shadow: 0px 4px 16px var(--bootstrap-black-20);
   }
 }
 
@@ -343,7 +348,6 @@ form.login p:last-of-type {
 .or-line:before,
 .or-line:after {
   content: "";
-  /* flex: 1 1; */
   flex-grow: 100;
   border-bottom: 1px solid rgba(149, 149, 149, 0.6);
 }
