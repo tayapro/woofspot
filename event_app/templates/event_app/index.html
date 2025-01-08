@@ -6,6 +6,23 @@
 {% endblock head_title %}
 
 {% block content %}
+
+<div class="d-flex flex-column justify-content-end align-items-start rounded-2" id="bg-image">
+    <div class="d-flex flex-column w-100 p-3 p-md-4 p-lg-5 text-body-secondary 
+    bg-body-secondary bg-opacity-50">
+        <h1 class="h1 fw-semibold text-body-secondary text-opacity-75">WOOFSPOT</h1>
+        <h2 class="h2 text-body-secondary text-opacity-75">Unleash the Fun</h2>
+    </div>
+</div>
+
+<div class="text-center my-5">
+    <p class="fst-italic text-body-secondary text-opacity-75 px-3 text-justify">
+        Woofspot helps you find the best pet-friendly events in your area.
+        Discover new parks, trails, and pup-approved hangouts.
+        Connect with other dog owners and share the joy of pet parenthood.
+        Because every dog deserves a tail-wagging good time!</p>
+</div>
+
 <div class="text-center my-4">
     <h2 class="bold-header-font text-black text-opacity-50">EVENT CALENDAR</h2>
 </div>
@@ -37,7 +54,7 @@
     {% endfor %}
 </div>
 
-<div class="faq-section container my-5">
+<div class="faq-section container my-5 px-4">
     <h2 class="text-center bold-header-font text-black text-opacity-50 mb-4">Everything You Need to Know</h2>
     <div class="accordion" id="faqAccordion">
 
@@ -124,8 +141,58 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+<footer class="text-body-secondary text-opacity-75 pb-5 pb-sm-0 pb-md-0 mb-5 mb-sm-0 mb-md-0">
+    <div class="container border-secondary-subtle border-top">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-10 col-md-5 mt-4 mt-md-0">
+                <h2 class="">Contact Us:</h2>
+                <small>We'd love to hear from you! Whether you have a question, need assistance, or just want to
+                    share
+                    your thoughts, feel free to reach out to us.</small>
+                <p class="mt-4">
+                    <a href="mailto:woofspot.app@gmail.com?subject=Woofspot user's request"
+                        class="text-decoration-none text-danger text-opacity-75">
+                        <i class="fa-regular fa-envelope"></i>
+                        woofspot.app@gmail.com
+                    </a>
+
+                </p>
+            </div>
+            <div class="col-md-7">
+                <form action="{% url 'contact_form_submit' %}" method="POST" class="bg-light p-4" id="contact-us-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name <sup>*</sup></label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail <sup>*</sup></label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comment <sup>*</sup></label>
+                        <textarea id="comment" name="comment" class="form-control" rows="4"
+                            placeholder="Enter your message" required></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn-scale btn-scale btn btn-secondary px-5">Contact
+                            us</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center m-3 m-md-5 pb-md-2">
+        <small>
+            &copy; {{ current_year }} WOOFSPOT. Powered and secured by Django.
+        </small>
+    </div>
+</footer>
 
 {% endblock %}

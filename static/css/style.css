@@ -90,6 +90,12 @@ one before and one within the form.
   display: none !important;
 }
 
+form.login ul:last-of-type,
+form.password-change ul:last-of-type,
+form.signup ul:last-of-type {
+  display: none !important;
+}
+
 ul.errorlist {
   list-style-type: none;
   color: var(--bootstrap-danger-90);
@@ -110,16 +116,6 @@ ul.errorlist {
   font-size: smaller;
 }
 
-form.login ul:last-of-type,
-form.password-change ul:last-of-type,
-form.signup ul:last-of-type {
-  display: none !important;
-  /* list-style-type: none;
-  color: rgb(109, 125, 156);
-  font-size: 0.75rem;
-  padding-left: 0; */
-}
-
 form.login p,
 form.signup p {
   margin-bottom: 0.5rem;
@@ -130,19 +126,6 @@ form.login p:last-of-type {
 }
 
 /* landing page */
-.tagline-header-font {
-  font-family: var(--header-font-family);
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.tagline-p-font {
-  font-family: var(--header-font-family);
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
 
 .user-icon .btn,
 .xmark-icon .btn {
@@ -265,14 +248,24 @@ form.login p:last-of-type {
   resize: none;
 }
 
-/* */
+/* Landing page */
 
 #bg-image {
-  background-image: url("../images/two_happy_dogs2.webp");
+  height: calc(100vh - 10rem);
+  margin: 5rem 0rem;
+  background-image: url("../images/unleash_fun.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 576px) {
+  #bg-image {
+    height: calc(100vh - 6rem);
+    margin-top: 5.3rem;
+    margin-bottom: 0rem;
+  }
 }
 
 #search-form {
@@ -308,13 +301,11 @@ form.login p:last-of-type {
 
 @media (max-width: 576px) {
   .search-form-container {
-    display: flex;
     justify-content: center;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
     padding: 1rem;
   }
 }
