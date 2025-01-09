@@ -20,12 +20,13 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for event in future_organizing_events %}
     <div class="col d-flex justify-content-center align-items-center mb-4">
-        <div class="card event-card shadow-sm position-relative">
-            <div class="event-card-image card-body p-0 rounded-2"
+        <div class="card event-card shadow-sm rounded-4">
+            <div class="event-card-image card-body p-0 rounded-4"
                 style="background-image: url('{{ event.image_url }}');">
             </div>
 
-            <div class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3">
+            <div
+                class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3 rounded-4 rounded-top-0">
                 <div class="d-flex h-100 justify-content-between">
                     <div class="d-flex flex-column justify-content-between">
                         <h5 class="card-title mt-0">
@@ -74,12 +75,13 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for event in future_attending_events %}
     <div class="col d-flex justify-content-center align-items-center mb-4">
-        <div class="card event-card shadow-sm position-relative">
-            <div class="event-card-image card-body p-0 rounded-2"
+        <div class="card event-card shadow-sm rounded-4">
+            <div class="event-card-image card-body p-0 rounded-4"
                 style="background-image: url('{{ event.image_url }}');">
             </div>
 
-            <div class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3">
+            <div
+                class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3 rounded-4 rounded-top-0">
                 <div class="d-flex h-100 justify-content-between">
                     <div class="d-flex flex-column justify-content-between">
                         <h5 class="card-title mt-0">
@@ -105,8 +107,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-start">
-                        {% include "cancel_reservation_container.html"%}
+                    <div class="d-flex flex-column justify-content-start text-center">
+                        {% include "cancel_reservation_container.html" %}
+                        {% include "like_container.html" %}
                     </div>
                 </div>
             </div>
@@ -129,12 +132,13 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for event in past_events %}
     <div class="col d-flex justify-content-center align-items-center mb-4">
-        <div class="card event-card shadow-sm position-relative">
-            <div class="event-card-image card-body p-0 rounded-2"
+        <div class="card event-card shadow-sm rounded-4">
+            <div class="event-card-image card-body p-0 rounded-4"
                 style="background-image: url('{{ event.image_url }}');">
             </div>
 
-            <div class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3">
+            <div
+                class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3 rounded-4 rounded-top-0">
                 <div class="d-flex h-100 justify-content-between">
                     <div class="d-flex flex-column justify-content-between">
                         <h5 class="card-title mt-0">
@@ -164,13 +168,13 @@
                         {% if user == event.organizer %}
                         <div class="text-center">
                             <i class="fa-solid fa-clipboard-list fa-xl text-success text-opacity-75"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="You're hosting this event"
-                                aria-label="You're hosting this event"></i>
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Hosted by You"
+                                aria-label="Hosted by You"></i>
                         </div>
                         {% else %}
                         <div class="text-center">
                             <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Attended" aria-label="Attended"></i>
+                                data-bs-placement="top" title="Attended by You" aria-label="Attended by You"></i>
                         </div>
                         <div class="text-center">
                             <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link">
