@@ -142,19 +142,6 @@ form.login p:last-of-type {
   cursor: pointer;
 }
 
-/* Action picture base pages */
-
-#rive-dog {
-  height: 110px;
-  width: 110px;
-  opacity: 0.8;
-}
-
-#logo-text {
-  height: 60px;
-  width: auto;
-}
-
 /* base.html styles */
 
 .logo-size {
@@ -215,6 +202,7 @@ form.login p:last-of-type {
 
 .accordion-button:not(.collapsed) {
   background-color: var(--bs-gray-700) !important;
+  z-index: 1;
 }
 
 .accordion-button:focus {
@@ -316,16 +304,6 @@ form.login p:last-of-type {
   vertical-align: middle;
 }
 
-.action_picture {
-  overflow: hidden;
-}
-
-.action_picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .google-icon {
   width: 24px;
   height: 24px;
@@ -375,8 +353,55 @@ form.login p:last-of-type {
   transform: scale(1.05);
 }
 
-/* Action picture pages */
+/* Action picture base pages */
+
+.action_picture {
+  overflow: hidden;
+}
+
+.action_picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .action-picture-form h4 {
   font-family: var(--header-font-family);
+}
+
+#rive-dog {
+  height: 110px;
+  width: 110px;
+  opacity: 0.8;
+}
+
+#logo-text {
+  height: 60px;
+  width: auto;
+}
+
+/* Event Card styles */
+
+/* Card's thumbnail area */
+.card {
+  width: 350px;
+  height: 500px;
+}
+
+.card-footer {
+  height: 150px;
+  width: 100%;
+}
+
+.event-card-image {
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.event-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.event-card:hover {
+  transform: scale(1.01);
 }

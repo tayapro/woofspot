@@ -15,6 +15,7 @@ from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
 from .forms import ReviewForm
+from .utils import validate_image_url
 
 TODAY = now().date()
 
@@ -72,6 +73,16 @@ def my_event_list(request):
             Q(organizer=request.user, event_date__lte=TODAY) |  
             Q(attendees=request.user, event_date__lte=TODAY))
 
+
+    # Check image URLs
+    # TODO: amend default image's URL to Cloudinary / static file 
+    for events in (future_organizing_events, future_attending_events, past_events):
+        for event in events:
+            if event.image and validate_image_url(event.image.url):
+                event.image_url = event.image.url
+            else:
+                event.image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1735236247/Woofspot/up30latgne57hlurifbn.png"
+
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
                   "future_organizing_events": future_organizing_events,
@@ -80,6 +91,7 @@ def my_event_list(request):
                  })
 
 
+# TODO: Move to utils.py file
 def send_email(user, event, action):
     with get_connection(host=settings.EMAIL_HOST, 
             port=settings.EMAIL_PORT,  
