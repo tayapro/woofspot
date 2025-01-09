@@ -11,7 +11,7 @@ TEXT_STYLES = {
 
 DATE_TIME_STYLES = {
     'class': 'form-control',
-    'style': 'width: auto; max-width: 200px;',
+    'style': 'width: auto; max-width: 150px;',
 }
 
 # Custom template

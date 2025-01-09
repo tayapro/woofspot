@@ -354,20 +354,26 @@ form.login p:last-of-type {
 }
 
 /* Action picture base pages */
-
-.action_picture {
-  overflow: hidden;
-}
-
-.action_picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.action-picture-image {
+  background-position: 50% 50%;
+  background-size: cover;
 }
 
 .action-picture-form h4 {
   font-family: var(--header-font-family);
 }
+
+/* @media (min-width: 576px) {
+  .action-picture-form {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1140px) {
+  .action-picture-form {
+    width: 50%;
+  }
+} */
 
 #rive-dog {
   height: 110px;
@@ -388,12 +394,18 @@ form.login p:last-of-type {
   height: 500px;
 }
 
+.card-body {
+  flex: none;
+}
+
 .card-footer {
   height: 170px;
   width: 100%;
 }
 
 .event-card-image {
+  height: 330px;
+  width: 100%;
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -404,4 +416,9 @@ form.login p:last-of-type {
 
 .event-card:hover {
   transform: scale(1.01);
+}
+
+.action-picture-base-container {
+  width: 100dvw !important;
+  height: 100dvh !important;
 }

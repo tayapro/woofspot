@@ -20,32 +20,33 @@
 </ul>
 {% endif %}
 
-<form method="POST">
-    {% csrf_token %}
-    <div class="mb-3">
-        {{ form.review_text.label_tag }}
-        {{ form.review_text }}
-    </div>
-
-    <hr class="my-4 border-secondary-subtle">
-
-    <div class="text-center">
-        {{ form.rating.label_tag }}
-        <div id="star-rating" class="d-flex justify-content-center mb-3">
-            {% for i in "12345" %}
-            <button type="button" class="star-btn btn p-0" data-value="{{ i }}">
-                <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-value="{{ i }}"></i>
-            </button>
-            {% endfor %}
-            <input type="hidden" name="rating" id="rating-value" required>
+<div class="w-75" id="event-rating-form">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.review_text.label_tag }}
+            {{ form.review_text }}
         </div>
-    </div>
 
-    <div class="mb-5 pb-5 d-flex justify-content-around">
-        <button type="submit" class="btn btn-secondary text-opacity-75 px-4">Submit</button>
-        <a href="{{ next }}"
-            class="btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 px-4">Cancel</a>
-    </div>
-</form>
+        <hr class="my-4 border-secondary-subtle">
 
+        <div class="text-center">
+            {{ form.rating.label_tag }}
+            <div id="star-rating" class="d-flex justify-content-center mb-3">
+                {% for i in "12345" %}
+                <button type="button" class="star-btn btn p-0" data-value="{{ i }}">
+                    <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-value="{{ i }}"></i>
+                </button>
+                {% endfor %}
+                <input type="hidden" name="rating" id="rating-value" required>
+            </div>
+        </div>
+
+        <div class="mb-5 pb-5 d-flex flex-column flex-md-row gap-2">
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill">Submit</button>
+            <a href="{{ next }}"
+                class="btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 flex-fill">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

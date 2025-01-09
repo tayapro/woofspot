@@ -1,7 +1,8 @@
 <div class="d-flex align-items-center justify-content-center mb-2 mb-md-0" id="like-container"
     hx-post="{% url 'like_toggle' event.slug %}" hx-swap="outerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% if user.is_authenticated %}
-    <button type="submit" class="btn p-0" aria-label="Like event">
+    <button type="submit" class="btn p-0" aria-label="Like event" data-bs-toggle="tooltip" data-bs-placement="bottom"
+        title="Like or undo like with a click" aria-label="Like or undo">
         {% if user in event.liked_by.all %}
         <i class="fa-solid fa-heart fa-xl text-danger text-opacity-75"></i>
         {% else %}

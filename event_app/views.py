@@ -19,9 +19,19 @@ from .utils import validate_image_url
 
 TODAY = now().date()
 
+def get_event_image(event):
+    if event.image and validate_image_url(event.image.url):
+            image_url = event.image.url
+    else:
+            image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1736449375/Woofspot/image_coming_soon_3.webp"
+
+    return image_url
 
 def event_list(request):
     events = WoofspotEvent.objects.filter(event_date__gt=TODAY)
+
+    for event in events:
+        event.image_url = get_event_image(event)
 
     return render(request, "event_app/index.html", {
         "events": events,
@@ -30,10 +40,13 @@ def event_list(request):
 
 def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    event.image_url = get_event_image(event)
+
     average_rating = Rating.get_average_rating(event)
     user_registered = (
         request.user in event.attendees.all()
     )
+
     is_past_event = event.event_date <= TODAY
 
     next = request.GET.get("next", "/")
@@ -74,14 +87,10 @@ def my_event_list(request):
             Q(attendees=request.user, event_date__lte=TODAY))
 
 
-    # Check image URLs
-    # TODO: amend default image's URL to Cloudinary / static file 
+    # Get URLs for all events
     for events in (future_organizing_events, future_attending_events, past_events):
         for event in events:
-            if event.image and validate_image_url(event.image.url):
-                event.image_url = event.image.url
-            else:
-                event.image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1735236247/Woofspot/up30latgne57hlurifbn.png"
+            event.image_url = get_event_image(event)
 
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
