@@ -35,6 +35,8 @@ handler500 = custom_500
 
 # URL patterns
 urlpatterns = [
+    # Django-Browser-Reload
+    path("__reload__/", include("django_browser_reload.urls")),
     # Admin interface
     path("admin/", admin.site.urls),
     # Summernote WYSIWYG editor

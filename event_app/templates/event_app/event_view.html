@@ -6,11 +6,11 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
+<!-- <div class="row justify-content-center mt-5">
   <div class="col-md-8">
-    <h2 class="text-center">{{ event.title }}</h2>
-    <!-- Start of future events section -->
-    {% if not is_past_event and user == event.organizer %}
+    <h2 class="text-center">{{ event.title }}</h2> -->
+<!-- Start of future events section -->
+<!-- {% if not is_past_event and user == event.organizer %}
     {% include "edit_delete_event_container.html" %}
     {% endif %}
 
@@ -29,11 +29,11 @@
         <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
           title="Do you want to join?" aria-label="Join to event"></i></button>
     </form>
-    {% endif %}
-    <!-- End of future events section -->
+    {% endif %} -->
+<!-- End of future events section -->
 
-    <!-- Start of past events section -->
-    {% if is_past_event and user == event.organizer %}
+<!-- Start of past events section -->
+<!-- {% if is_past_event and user == event.organizer %}
     <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" title="Star Rating"></i>
     <p class="fw-semibold text-warning text-opacity-50 m-0">
       {% if average_rating %}
@@ -66,10 +66,10 @@
       0
       {% endif %}
     </p>
-    {% endif %}
-    <!-- End of past events section -->
+    {% endif %} -->
+<!-- End of past events section -->
 
-    <div class="row">
+<!-- <div class="row">
       <div class="col-12 col-md-6">
         <p class="event-details">
           <strong>Location:</strong> {{ event.location }}<br />
@@ -100,14 +100,47 @@
       <p>Feel free to rate it and share your feedback.</p>
       {% endif %}
     </div>
-  </div>
+  </div> -->
 
-  {% if next %}
-  <div class="m-5 text-center">
-    <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
-      <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
+<div class="event-card-view rounded-4">
+  <div class="row flex-column flex-md-row align-items-stretch m-0 p-0">
+    <!-- Event Image -->
+    <div class="event-view-image col-12 col-md-4 rounded-4 shadow-sm "
+      style="background-image: url('{{ event.image_url }}');">
+    </div>
+    <!-- Event Details -->
+    <div class="card-body bg-success-subtle col-12 col-md-8 text-black p-5 rounded-4 shadow-sm">
+      <h5 class="card-title mb-3">{{ event.title }}</h5>
+      <p class="card-text text-muted mb-0">
+      <p class="card-text text-muted mb-0"><strong>Date:</strong> {{ event.event_date }}</p>
+      <p class="card-text text-muted mb-0"><strong>Time:</strong>
+        {{ event.event_start_time }} - {{ event.event_end_time }}
+      </p>
+      <p class="card-text text-muted"><strong class="mb-2">Location:</strong> {{ event.location }}</p>
+      <span id="content-truncated-{{ event.id }}" class="content-truncated">
+        {{ event.content|truncatewords:20 }}
+      </span>
+      <span id="content-full-{{ event.id }}" class="d-none">
+        {{ event.content }}
+      </span>
+      </p>
+      {% if event.content|length > 20 %}
+      <a href="#" class="toggle-content text-decoration-none" data-event-id="{{ event.id }}">
+        Show More
+      </a>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
+</div>
+
+
+
+{% if next %}
+<div class="m-5 pb-5 text-center">
+  <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
+    <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
+</div>
+{% endif %}
 </div>
 
 {% endblock %}

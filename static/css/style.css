@@ -363,18 +363,6 @@ form.login p:last-of-type {
   font-family: var(--header-font-family);
 }
 
-/* @media (min-width: 576px) {
-  .action-picture-form {
-    width: 75%;
-  }
-}
-
-@media (min-width: 1140px) {
-  .action-picture-form {
-    width: 50%;
-  }
-} */
-
 #rive-dog {
   height: 110px;
   width: 110px;
@@ -386,10 +374,10 @@ form.login p:last-of-type {
   width: auto;
 }
 
-/* Event Card styles */
+/* Event Card styles for My Events List page */
 
 /* Card's thumbnail area */
-.card {
+.event-card {
   width: 350px;
   height: 500px;
 }
@@ -421,4 +409,47 @@ form.login p:last-of-type {
 .action-picture-base-container {
   width: 100dvw !important;
   height: 100dvh !important;
+}
+
+/* Event View page */
+.content-truncated {
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.event-view-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: 4 / 3;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .custom-rounded-card-body-md {
+    /* border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 1rem !important; */
+  }
+  /* 
+  .custom-rounded-card-md {
+    border-radius: 1rem !important;
+  } */
+
+  .custom-rounded-card-image-md {
+    /* border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; */
+    height: 100%;
+  }
+
+  .event-view-image {
+    height: 100%;
+    /* border-bottom-left-radius: 1rem;
+    border-top-right-radius: 0; */
+  }
 }

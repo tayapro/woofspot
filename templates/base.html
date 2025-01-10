@@ -138,6 +138,27 @@
                 new bootstrap.Tooltip(tooltipTriggerEl);
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.toggle-content').forEach(function (toggleLink) {
+                toggleLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const eventId = this.getAttribute('data-event-id');
+                    const truncatedElement = document.getElementById(`content-truncated-${eventId}`);
+                    const fullElement = document.getElementById(`content-full-${eventId}`);
+
+                    if (truncatedElement.classList.contains('d-none')) {
+                        truncatedElement.classList.remove('d-none');
+                        fullElement.classList.add('d-none');
+                        this.textContent = 'Show More';
+                    } else {
+                        truncatedElement.classList.add('d-none');
+                        fullElement.classList.remove('d-none');
+                        this.textContent = 'Show Less';
+                    }
+                });
+            });
+        });
     </script>
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
 </body>
