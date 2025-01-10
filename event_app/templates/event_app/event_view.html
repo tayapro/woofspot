@@ -9,7 +9,7 @@
 <div class="event-card-view rounded-4">
   <div class="row flex-column flex-md-row align-items-stretch m-0 p-0">
     <!-- Event Image -->
-    <div class="event-view-image col-12 col-md-4 rounded-4 shadow-sm "
+    <div class="event-view-image col-12 col-md-4 rounded-4 shadow-sm"
       style="background-image: url('{{ event.image_url }}');">
     </div>
     <!-- Event Details -->
@@ -17,7 +17,6 @@
       <div class="d-flex flex-row justify-content-between">
         <div class="flex-grow-1 mb-3">
           <h5 class="card-title mb-3">{{ event.title }}</h5>
-          <p class="card-text text-muted mb-0">
           <p class="card-text text-muted mb-0"><strong>Date:</strong> {{ event.event_date }}</p>
           <p class="card-text text-muted mb-0"><strong>Time:</strong>
             {{ event.event_start_time }} - {{ event.event_end_time }}
@@ -66,7 +65,29 @@
   </div>
 </div>
 
-
+<!-- Reviews Section -->
+{% if event.is_past %}
+<div class="m-3 mt-5" id="reviews-section">
+  <h4 class="text-black text-opacity-75">Reviews</h4>
+  <div class="reviews-list">
+    {% for review in event.event_ratings.all %}
+    <div class="review border-bottom py-3">
+      <p><strong>{{ review.user.username }}</strong>
+        {% for i in "12345"|slice:":5" %}
+        <i class="fa-star fa-xl text-warning text-opacity-75 
+          {% if forloop.counter <= review.rating %}fa-solid{% else %}fa-regular{% endif %}"></i>
+        {% endfor %}
+        <small class="text-muted">Reviewed on
+          {{ review.created_at|date:"F j, Y" }}</small>
+      </p>
+      <p>{{ review.review_text }}</p>
+    </div>
+    {% empty %}
+    <p class="text-muted">No reviews yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 {% if next %}
 <div class="m-5 pb-5 text-center">
