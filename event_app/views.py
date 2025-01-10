@@ -7,17 +7,16 @@ from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
 from django.db import IntegrityError
-from django.utils.timezone import now
 from django.core.mail import EmailMessage, get_connection, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.utils.timezone import now
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
 from .forms import ReviewForm
-from .utils import validate_image_url
+from .utils import validate_image_url, is_in_the_past
 
-TODAY = now().date()
 
 def get_event_image(event):
     if event.image and validate_image_url(event.image.url):
@@ -28,7 +27,9 @@ def get_event_image(event):
     return image_url
 
 def event_list(request):
-    events = WoofspotEvent.objects.filter(event_date__gt=TODAY)
+    timestamp = now().date()
+
+    events = WoofspotEvent.objects.filter(event_date__gt=timestamp)
 
     for event in events:
         event.image_url = get_event_image(event)
@@ -43,11 +44,9 @@ def event_view(request, slug):
     event.image_url = get_event_image(event)
 
     average_rating = Rating.get_average_rating(event)
-    user_registered = (
-        request.user in event.attendees.all()
-    )
 
-    is_past_event = event.event_date <= TODAY
+    event.is_past = is_in_the_past(event.event_date)
+    event.is_user_attendee = (request.user in event.attendees.all())
 
     next = request.GET.get("next", "/")
 
@@ -57,9 +56,6 @@ def event_view(request, slug):
         {
             "event": event,
             "next": next,
-            "today": TODAY,
-            "is_past_event": is_past_event,
-            "user_registered": user_registered,
             "average_rating": average_rating,
         },
     )
@@ -69,33 +65,36 @@ def my_event_list(request):
     user = request.user
     if not user.is_authenticated:
         return redirect(reverse("account_login"))
+
+    timestamp = now().date()
     
-    future_organizing_events = WoofspotEvent.objects.filter(
+    hosted_by_me_future_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__gt=TODAY)
-    future_attending_events = WoofspotEvent.objects.filter(
+                                event_date__gt=timestamp)
+    planning_to_attend_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__gt=TODAY)
+                                event_date__gt=timestamp)
     past_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__lte=TODAY)
+                                event_date__lte=timestamp)
     past_organizing_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__lte=TODAY)
+                                event_date__lte=timestamp)
     past_events = WoofspotEvent.objects.filter(
-            Q(organizer=request.user, event_date__lte=TODAY) |  
-            Q(attendees=request.user, event_date__lte=TODAY))
+            Q(organizer=request.user, event_date__lte=timestamp) |  
+            Q(attendees=request.user, event_date__lte=timestamp))
 
-
-    # Get URLs for all events
-    for events in (future_organizing_events, future_attending_events, past_events):
+    # Get image URLs for all events
+    for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
             event.image_url = get_event_image(event)
+            event.is_past = is_in_the_past(event.event_date)
+            event.is_user_attendee = (request.user in event.attendees.all())
 
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
-                  "future_organizing_events": future_organizing_events,
-                  "future_attending_events": future_attending_events,
+                  "hosted_by_me_future_events": hosted_by_me_future_events,
+                  "planning_to_attend_events": planning_to_attend_events,
                   "past_events": past_events,
                  })
 
@@ -306,9 +305,9 @@ def event_edit(request, slug):
                 action = "Some Changes about your Event"
                 send_email(user, event, action)
 
-            return redirect("my_event_list")
+            return redirect(next)
         else:
-            return render(request, "event_app/event_edit.html", {"form": form, "event": event })
+            return render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)

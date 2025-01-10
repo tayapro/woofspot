@@ -13,7 +13,7 @@
       style="background-image: url('{{ event.image_url }}');">
     </div>
     <!-- Event Details -->
-    <div class="card-body col-12 col-md-8 text-black p-5 rounded-4 shadow-sm">
+    <div class="card-body col-12 col-md-8 text-black p-5 rounded-4 shadow-sm border-opacity-25 border border-secondary">
       <div class="d-flex flex-row justify-content-between">
         <div class="flex-grow-1 mb-3">
           <h5 class="card-title mb-3">{{ event.title }}</h5>
@@ -36,18 +36,20 @@
           {{ event.content }}
         </span>
         </p>
-        {% if event.content|length > 20 %}
+        {% with event.content|truncatewords:20 as truncated_content %}
+        {% if event.content != truncated_content %}
         <a href="#" class="toggle-content text-decoration-none" data-event-id="{{ event.id }}">
           Show More
         </a>
         {% endif %}
+        {% endwith %}
       </div>
       <div class="reservation-section bg-warning-subtle mt-4 text-left">
-        {% if not is_past_event and user != event.organizer and user_registered %}
+        {% if not event.is_past and user != event.organizer and event.is_user_attendee %}
         <p>You're planning to be there.</p>
         {% endif %}
 
-        {% if is_past_event and user != event.organizer and user_registered %}
+        {% if event.is_past and user != event.organizer and event.is_user_attendee %}
         <p class="mb-0">We hope you enjoyed the event!</p>
         <p>Feel free to rate it and share your feedback.</p>
         {% endif %}
