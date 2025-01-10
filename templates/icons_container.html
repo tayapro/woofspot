@@ -13,7 +13,6 @@
 {% endif %}
 
 {% if not event.is_past and user != event.organizer and not event.is_user_attendee %}
-<div class="text-black">FUTURE NOT ATTENDEE</div>
 {% include "like_container.html" %}
 <div>
     <form method="POST" action="{% url 'reservation_submit' event.slug %}">

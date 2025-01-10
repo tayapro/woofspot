@@ -44,14 +44,22 @@
         {% endif %}
         {% endwith %}
       </div>
-      <div class="reservation-section bg-warning-subtle mt-4 text-left">
+      <div class="reservation-section fst-italic fw-semi mt-4 text-left">
+        {% if not event.is_past and user == event.organizer %}
+        <p>You're the host.</p>
+        {% endif %}
+
+        {% if event.is_past and user == event.organizer %}
+        <p>Thanks for hosting this event.</p>
+        {% endif %}
+
         {% if not event.is_past and user != event.organizer and event.is_user_attendee %}
         <p>You're planning to be there.</p>
         {% endif %}
 
         {% if event.is_past and user != event.organizer and event.is_user_attendee %}
-        <p class="mb-0">We hope you enjoyed the event!</p>
-        <p>Feel free to rate it and share your feedback.</p>
+        <p class="mb-0">We'd love to hear your feedback!</p>
+        <p>Click the star to rate and review.</p>
         {% endif %}
       </div>
     </div>
