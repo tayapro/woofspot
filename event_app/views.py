@@ -247,8 +247,12 @@ def my_event_search_results(request):
 @login_required
 def like_toggle(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+
+    next = request.GET.get("next", "home")
+
     event.like_toggle(request.user)
     return render(request, "like_container.html", {
+        "next": next,
         "event": event
     })
 

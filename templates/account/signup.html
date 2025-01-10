@@ -30,7 +30,7 @@
 </ul>
 
 <div class="w-100" id="signup-form">
-    <form class="signup" method="POST" action="{% url 'account_signup' %}">
+    <form class="signup" method="POST" action="{% url 'account_signup' %}?next={{ next }}">
         {% csrf_token %}
 
         {% for error in form.get_errors_as_single_list %}

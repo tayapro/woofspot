@@ -1,0 +1,59 @@
+<!-- Start of future events section -->
+{% if not is_past_event and user == event.organizer %}
+{% include "edit_delete_event_container.html" %}
+{% endif %}
+
+{% if not is_past_event and user != event.organizer and user_registered %}
+{% include "like_container.html" %}
+<i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
+    title="Planning To Attend" aria-label="Attend"></i>
+{% include "cancel_reservation_container.html"%}
+{% endif %}
+
+{% if not is_past_event and user != event.organizer and not user_registered %}
+{% include "like_container.html" %}
+<form method="POST" action="{% url 'reservation_submit' event.slug %}">
+    {% csrf_token %}
+    <button type="submit" name="reserve_spot" class="btn btn-link">
+        <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Do you want to join?" aria-label="Join to event"></i></button>
+</form>
+{% endif %}
+<!-- End of future events section -->
+
+<!-- Start of past events section -->
+{% if is_past_event and user == event.organizer %}
+<i class="fa-solid fa-star fa-xl text-warning text-opacity-75" title="Star Rating"></i>
+<p class="fw-semibold text-warning text-opacity-50 m-0">
+    {% if average_rating %}
+    {{ average_rating }}
+    {% else %}
+    0
+    {% endif %}
+</p>
+{% endif %}
+
+{% if is_past_event and user != event.organizer and user_registered %}
+<a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 p-0">
+    <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
+        title="How was it?" aria-label="How was it?"></i></a>
+<p class="fw-semibold text-warning text-opacity-50 m-0">
+    {% if average_rating %}
+    {{ average_rating }}
+    {% else %}
+    0
+    {% endif %}
+</p>
+{% endif %}
+
+{% if is_past_event and user != event.organizer and not user_registered %}
+<i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
+<p class="fw-semibold text-warning text-opacity-50 m-0">
+    {% if average_rating %}
+    {{ average_rating }}
+    {% else %}
+    0
+    {% endif %}
+</p>
+{% endif %}
+<!-- End of past events section -->

@@ -429,27 +429,11 @@ form.login p:last-of-type {
 }
 
 @media (max-width: 768px) {
-  .custom-rounded-card-body-md {
-    /* border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 1rem !important; */
-  }
-  /* 
-  .custom-rounded-card-md {
-    border-radius: 1rem !important;
-  } */
-
   .custom-rounded-card-image-md {
-    /* border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0; */
     height: 100%;
   }
 
   .event-view-image {
     height: 100%;
-    /* border-bottom-left-radius: 1rem;
-    border-top-right-radius: 0; */
   }
 }

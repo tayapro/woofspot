@@ -50,15 +50,15 @@
                         {% endif %}
                     </button>
                     {% else %}
-                    <a href="{% url 'account_login' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                    <a href="{% url 'account_login' %}?next={{ next }}" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Login to like" aria-label="Login to like event">
                         <i class="fa-regular fa-heart fa-xl text-danger text-opacity-50"></i>
                     </a>
                     {% endif %}
                     <p class="fw-semibold text-danger text-opacity-50 mb-0 ms-2">{{ event.like_count }}</p>
                 </div>
-                <a href="{% url 'event_view' event.slug %}" class="btn btn-primary mt-2 mt-md-0" role="button"
-                    aria-label="View event details">More details</a>
+                <a href="{% url 'event_view' event.slug %}?next={{ next }}" class="btn btn-primary mt-2 mt-md-0"
+                    role="button" aria-label="View event details">More details</a>
             </div>
         </div>
     </div>
