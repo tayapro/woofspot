@@ -19,7 +19,7 @@
         {% csrf_token %}
         <button type="submit" name="reserve_spot" class="btn btn-link">
             <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Do you want to join?" aria-label="Join to event"></i></button>
+                data-bs-placement="top" title="Do You Want To Join?" aria-label="Join to event"></i></button>
     </form>
 </div>
 {% endif %}
@@ -35,11 +35,11 @@
     <a href="{% url 'event_view' event.slug %}#reviews-section" class="btn btn-link m-0 px-0" tabindex="-1"
         aria-disabled="true">
         <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="Your event's rating" aria-label="Event's Rating"></i>
+            title="Your Event's Rating" aria-label="Event's rating"></i>
     </a>
     <p class="fw-semibold text-warning text-opacity-75">
-        {% if average_rating %}
-        {{ average_rating }}
+        {% if event.average_rating %}
+        {{ event.average_rating }}
         {% else %}
         0
         {% endif %}
@@ -50,16 +50,16 @@
 {% if event.is_past and user != event.organizer and event.is_user_attendee %}
 <div class="text-center">
     <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-        title="Attended by You" aria-label="Attended by You"></i>
+        title="Attended by You" aria-label="Attended by you"></i>
 </div>
 <div class="text-center d-flex flex-row">
     <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 px-0">
-        <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip"
-            data-bs-placement="top" title="Share your feedback" aria-label="share feedback"></i>
+        <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Share Your Feedback" aria-label="Share feedback"></i>
     </a>
     <p class="fw-semibold text-warning text-opacity-75">
-        {% if average_rating %}
-        {{ average_rating }}
+        {% if event.average_rating %}
+        {{ event.average_rating }}
         {% else %}
         0
         {% endif %}
@@ -68,12 +68,15 @@
 {% endif %}
 
 {% if event.is_past and user != event.organizer and not event.is_user_attendee %}
-<div class="text-center d-flex flex-row">
-    <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-        title="Share your feedback" aria-label="share feedback"></i>
+<div class="tooltip-wrapper text-center d-flex flex-row m-0 p-0">
+    <div data-bs-toggle="tooltip" data-bs-placement="top" title="The Event's Rating" aria-label="The event's rating">
+        <a href="#" class="btn disabled opacity-100 text-warning text-opacity-75 border-0 m-0 px-0">
+            <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
+        </a>
+    </div>
     <p class="fw-semibold text-warning text-opacity-75 m-0">
-        {% if average_rating %}
-        {{ average_rating }}
+        {% if event.average_rating %}
+        {{ event.average_rating }}
         {% else %}
         0
         {% endif %}

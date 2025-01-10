@@ -43,7 +43,7 @@ def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     event.image_url = get_event_image(event)
 
-    average_rating = Rating.get_average_rating(event)
+    event.average_rating = Rating.get_average_rating(event)
 
     event.is_past = is_in_the_past(event.event_date)
     event.is_user_attendee = (request.user in event.attendees.all())
@@ -56,7 +56,6 @@ def event_view(request, slug):
         {
             "event": event,
             "next": next,
-            "average_rating": average_rating,
         },
     )
 
@@ -84,12 +83,13 @@ def my_event_list(request):
             Q(organizer=request.user, event_date__lte=timestamp) |  
             Q(attendees=request.user, event_date__lte=timestamp))
 
-    # Get image URLs for all events
+    # Get image URLs for all events and other parameters
     for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
             event.image_url = get_event_image(event)
             event.is_past = is_in_the_past(event.event_date)
             event.is_user_attendee = (request.user in event.attendees.all())
+            event.average_rating = Rating.get_average_rating(event)
 
     return render(request, "event_app/my_event_list.html",
                  {"user": user,
