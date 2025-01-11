@@ -17,15 +17,20 @@
 </div>
 
 <div class="text-center my-5">
-    <p class="fst-italic text-body-secondary text-opacity-75 px-3 text-justify">
+    <p class="fs-5 fst-italic text-body-secondary text-opacity-75 px-3 mb-3 text-justify">
         Woofspot helps you find the best pet-friendly events in your area.
         Discover new parks, trails, and pup-approved hangouts.
-        Connect with other dog owners and share the joy of pet parenthood.
-        Because every dog deserves a tail-wagging good time!</p>
+        Connect with other dog owners and share the joy of pet parenthood.</p>
 </div>
 
 <div class="text-center my-4">
-    <h2 class="bold-header-font text-black text-opacity-50">EVENT CALENDAR</h2>
+    <h2 class="bold-header-font text-black text-opacity-50">
+        <a href="{% url 'all_events_list'%}?next={{ request.path }}"
+            class="link-underline-light text-black text-opacity-50" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Explore More Events" aria-label="Explore more events">
+            EVENT CALENDAR
+        </a>
+    </h2>
 </div>
 
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">

@@ -26,6 +26,27 @@ def get_event_image(event):
 
     return image_url
 
+def all_events_list(request):
+    timestamp = now().date()
+    events = WoofspotEvent.objects.all()
+
+    future_events = WoofspotEvent.objects.filter(event_date__gt=timestamp)
+    past_events = WoofspotEvent.objects.filter(event_date__lte=timestamp)
+
+    for events in (future_events, past_events):
+        for event in events:
+            event.image_url = get_event_image(event)
+            event.is_user_attendee = (request.user in event.attendees.all())
+            event.average_rating = Rating.get_average_rating(event)
+
+    next = request.GET.get("next", reverse("home"))
+
+    return render(request, "event_app/all_events_list.html", {
+        "future_events": future_events,
+        "past_events": past_events,
+        "next": next,
+    })
+
 def event_list(request):
     timestamp = now().date()
 
@@ -33,6 +54,8 @@ def event_list(request):
 
     for event in events:
         event.image_url = get_event_image(event)
+        event.is_user_attendee = (request.user in event.attendees.all())
+        event.average_rating = Rating.get_average_rating(event)
 
     return render(request, "event_app/index.html", {
         "events": events,
