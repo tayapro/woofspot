@@ -10,8 +10,8 @@
 
 
 <!-- Future Organizing Events Section -->
-<div class="text-center my-4">
-    <h2 class="bold-header-font text-black text-opacity-50">Hosted By Me</h2>
+<div class="text-center mt-5 pt-5 my-4">
+    <h2 class="bold-header-font text-black text-opacity-50 mt-5">Hosted By Me</h2>
 </div>
 
 <div class="mb-4 text-center">
@@ -130,7 +130,7 @@
 </div>
 
 {% if past_events %}
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5 pb-5">
     {% for event in past_events %}
     <div class="col d-flex justify-content-center align-items-center mb-4">
         <div class="card event-card shadow-sm rounded-4">
@@ -175,7 +175,7 @@
     {% endfor %}
 </div>
 {% else %}
-<div>
+<div class="mb-5 pb-5">
     <p class="text-center">You haven't hosted any events or reserved a spot for any events yet.</p>
 </div>
 {% endif %}

@@ -7,8 +7,8 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="text-center mt-5">
-    <h3 class="bold-header-font text-black text-opacity-50 mb-1">SEARCH RESULTS</h3>
+<div class="text-center mt-5 pt-5">
+    <h3 class="bold-header-font text-black text-opacity-50 mt-5 mb-1">SEARCH RESULTS</h3>
 
     {% if query and results %}
     {% if request.path == my_event_search_results_url %}
@@ -66,7 +66,7 @@
 </div>
 
 {% else %}
-<div class="no-results d-flex align-items-center flex-column">
+<div class="no-results d-flex align-items-center flex-column mt-5 pt-5">
     <div class="text-warning">
         <p>Oops! No results found for "{{ query }}"</p>
     </div>
@@ -80,7 +80,7 @@
 <!-- TODO: multiple searches can lead to incorrect navigation, 
  should redirect to home page, if next is one of search result URLs -->
 {% if next %}
-<div class="m-5 text-center">
+<div class="m-5 pb-5 text-center">
     <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
         <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
 </div>
