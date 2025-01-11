@@ -48,7 +48,7 @@ def event_view(request, slug):
     event.is_past = is_in_the_past(event.event_date)
     event.is_user_attendee = (request.user in event.attendees.all())
 
-    next = request.GET.get("next", "/")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     return render(
         request,
@@ -182,7 +182,7 @@ def reservation_submit(request, slug):
 def reservation_cancel(request, slug):
     user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", "my_event_list")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(user)
@@ -233,7 +233,7 @@ def my_event_search_results(request):
             Q(title__icontains=query) | Q(content__icontains=query)
         )
     
-    next = request.GET.get("next", "/my/event/list/")
+    next = request.GET.get("next", reverse("my_event_list"))
     
     return render(request, 
                   "event_app/event_search_results.html",
@@ -259,7 +259,7 @@ def like_toggle(request, slug):
 @login_required
 def event_create(request):
     user = request.user
-    next = request.GET.get("next", "my_event_list")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -284,7 +284,7 @@ def event_create(request):
 def event_edit(request, slug):
     user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", "my_event_list")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
@@ -322,7 +322,7 @@ def event_edit(request, slug):
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
     user = request.user
-    next = request.GET.get("next", "my_event_list")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
@@ -345,7 +345,7 @@ def event_delete(request, slug):
 @login_required
 def rating_submit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", "my_event_list")
+    next = request.GET.get("next", reverse("my_event_list"))
 
     # Handle submit (POST)
     if request.method == "POST":
