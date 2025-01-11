@@ -65,7 +65,6 @@ body {
 }
 
 /* Custom allauth styles for login, signup, reset password pages */
-
 #login-form label,
 #signup-form label {
   font-size: 0.95rem;

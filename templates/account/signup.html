@@ -29,7 +29,7 @@
     {% endfor %}
 </ul>
 
-<div class="w-100" id="signup-form">
+<div class="w-75" id="signup-form">
     <form class="signup" method="POST" action="{% url 'account_signup' %}?next={{ next }}">
         {% csrf_token %}
 

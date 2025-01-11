@@ -24,7 +24,7 @@
     {% endfor %}
 </ul>
 
-<div class="w-100" id="login-form">
+<div class="w-75" id="login-form">
     <form class="login" method="POST" action="{% url 'account_login' %}?next={{ next }}">
         {% csrf_token %}
         {{ form.as_p }}
@@ -35,7 +35,7 @@
     </form>
 </div>
 
-<div class="text-center w-100">
+<div class="text-center w-75">
     <small class="text-muted">
         Don't have an account?
         <a class="text-decoration-none text-opacity-75" aria-current="page" href="{{ signup_url }}?next={{ next }}">Sign
@@ -45,7 +45,7 @@
     <p class="text-center or-line text-black fw-light text-opacity-50 mt-3"> or </p>
 </div>
 
-<div class="w-100">
+<div class="w-75">
     {% load account socialaccount %}
     <form action="{% provider_login_url 'google' method='POST' %}" method="post">
         {% csrf_token %}
