@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Avg
 from django.conf import settings
 from cloudinary.models import CloudinaryField
+from cloudinary.uploader import destroy
 from datetime import datetime, date
 from django.contrib.auth.models import User
 
@@ -53,6 +54,12 @@ class WoofspotEvent(models.Model):
     def like_count(self):
         # Return the number of likes
         return self.liked_by.count()
+
+    def remove_image(self):
+        public_id = self.image.public_id
+        destroy(public_id, invalidate=True)
+        self.image = None
+        self.save(update_fields=['image'])
 
     class Meta:
         ordering = ["-event_date", "event_start_time"]
