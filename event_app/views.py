@@ -1,21 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponse
 from django.urls import reverse
-from django.views import generic
 from django.contrib import messages
 from django.db.models import Q
-from django.http import HttpResponse
-from django.db import IntegrityError
-from django.core.mail import EmailMessage, get_connection, EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.conf import settings
 from django.utils.timezone import now
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
 from .forms import ReviewForm
-from .utils import validate_image_url, is_in_the_past
+from .utils import validate_image_url, is_in_the_past, send_email
 
 
 def get_event_image(event):
@@ -120,68 +114,6 @@ def my_event_list(request):
                   "planning_to_attend_events": planning_to_attend_events,
                   "past_events": past_events,
                  })
-
-
-# TODO: Move to utils.py file
-def send_email(user, event, action):
-    with get_connection(host=settings.EMAIL_HOST, 
-            port=settings.EMAIL_PORT,  
-            username=settings.EMAIL_HOST_USER, 
-            password=settings.EMAIL_HOST_PASSWORD, 
-            use_tls=settings.EMAIL_USE_TLS
-        ) as connection:  
-        email_from = settings.EMAIL_HOST_USER 
-        recipient_list = [user.email, ]
-
-        context = {'user': user, 'event': event}
-
-        subject = f"{action}: {event.title}"
-        if action == "Event Created":
-            text_content = render_to_string('event_app/emails/event_created.txt', context)
-            html_content = render_to_string('event_app/emails/event_created.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Event Cancelled":
-            attendees = event.attendees.all()
-            recipient_list = [attendee.email for attendee in attendees]
-            text_content = render_to_string('event_app/emails/event_cancelled.txt', context)
-            html_content = render_to_string('event_app/emails/event_cancelled.html', context)
-            
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Reservation Confirmed":
-            text_content = render_to_string('event_app/emails/reservation_confirmed.txt', context)
-            html_content = render_to_string('event_app/emails/reservation_confirmed.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Reservation Cancelled":
-            text_content = render_to_string('event_app/emails/reservation_cancelled.txt', context)
-            html_content = render_to_string('event_app/emails/reservation_cancelled.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Some Changes about your Event":
-            attendees = event.attendees.all()
-            recipient_list = [attendee for attendee in attendees] + [event.organizer]
-
-            for recipient in recipient_list:
-                context = {
-                    'user': recipient,
-                    'event': event,
-                }
-        
-                text_content = render_to_string('event_app/emails/event_changed.txt', context)
-                html_content = render_to_string('event_app/emails/event_changed.html', context)
-
-                email = EmailMultiAlternatives(subject, text_content, email_from, [recipient.email],)
-                email.attach_alternative(html_content, "text/html")
-                email.send()
 
 
 @login_required
@@ -325,7 +257,7 @@ def event_edit(request, slug):
 
             if original_date != updated_event.event_date or original_event_start_time != updated_event.event_start_time or original_event_end_time != updated_event.event_start_time:
                 
-                action = "Some Changes about your Event"
+                action = "Event Changed"
                 send_email(user, event, action)
 
             return redirect(next)
@@ -380,6 +312,9 @@ def rating_submit(request, slug):
             rating.user = request.user
             rating.event = event
             rating.save()
+
+            action = "Rating Created"
+            send_email(rating.user, rating.event, action)
 
             return redirect("event_view", slug=event.slug)
 

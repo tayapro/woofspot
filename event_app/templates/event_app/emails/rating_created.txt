@@ -1,0 +1,10 @@
+Hello {{ user.username }},
+
+Thank you for leaving a rating for the event "{{ event.title }}" held on {{ event.event_date }}.
+Your feedback is greatly appreciated and helps us improve our events for the entire Woofspot community!
+
+If you have any further thoughts or questions, feel free to reach out to us.
+Email: woofspot.app@gmail.com
+
+Thank you,
+Your Woofspot Team

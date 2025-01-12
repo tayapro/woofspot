@@ -11,15 +11,9 @@ from django.http import HttpResponseRedirect
 from .forms import ContactForm
 
 def contact_form_submit(request):
-
-    print("BLA")
-
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-
-            print("FORM IS VALID")
-
             name = form.cleaned_data["name"]
             email = form.cleaned_data["email"]
             comment = form.cleaned_data["comment"]
