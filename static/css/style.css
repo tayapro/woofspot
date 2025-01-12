@@ -436,3 +436,27 @@ form.login p:last-of-type {
     height: 100%;
   }
 }
+
+/* 400, 403, 404, 500 page */
+.bad-request-container,
+.forbitten-container,
+.not-found-container,
+.server-error-container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bad-request-container a,
+.forbitten-container a,
+.not-found-container a,
+.server-error-container a {
+  transition: transform 0.2s ease-in-out;
+}
+
+.bad-request-container a:hover,
+.forbitten-container a:hover,
+.not-found-container a:hover,
+.server-error-container a:hover {
+  transform: scale(1.01);
+}
