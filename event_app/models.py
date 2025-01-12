@@ -14,8 +14,6 @@ def file_validation(file):
     max_file_size = 1024 * 1024 * 2  # 2mb file
     allowed_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg']
 
-    print(f"FILE.TYPE: {file.content_type}")
-
     if not file:
         raise ValidationError("No file selected.")
 
@@ -24,8 +22,6 @@ def file_validation(file):
             raise ValidationError("File shouldn't be larger than 2MB.")
 
         if file.content_type not in allowed_types:
-            print("BLA")
-
             raise ValidationError(f"Invalid image type.")
 
 
