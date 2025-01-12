@@ -82,9 +82,8 @@
                                     Home</a>
                             </li>
                             <li>
-                                <span class="dropdown-item">
-                                    {{ user.username }}
-                                </span>
+                                <a href="{% url 'profile' %}?next={{ next }}" class="dropdown-item">
+                                    {{ user.username }}</a>
                             </li>
                             <li>
                                 <a href="{% url 'my_event_list' %}?next={{ next }}" class="dropdown-item">

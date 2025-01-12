@@ -28,7 +28,7 @@ class MySignupForm(SignupForm):
         self.fields['email'].label = "Email:"
 
 
-class ContactForm(forms.Form):
+class ContactUsForm(forms.Form):
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
