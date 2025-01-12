@@ -3,12 +3,10 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 
 
 def trigger_400(request):
-    print("TRIGGER_400")
     return HttpResponseBadRequest(render(request, "400.html"))
 
 
 def trigger_403(request):
-    print("TRIGGER_403")
     return HttpResponseForbidden(render(request, "403.html"))
 
 

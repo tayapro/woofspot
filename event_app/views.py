@@ -273,6 +273,31 @@ def event_edit(request, slug):
                     "next": next })
 
 
+
+@login_required
+def event_image_delete(request, slug):
+    user = request.user
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+   
+    if event.organizer != request.user:
+        return HttpResponseForbidden("Unauthorized access")
+
+    next = request.GET.get("next", reverse("my_event_list"))
+
+    if event.image:
+        try:
+            event.remove_image()
+            event.save()
+            messages.success(request, "Event image deleted!")
+            return redirect("my_event_list")
+
+        except Exception as e:
+            messages.error(request, f"Error deleting image: {e}")
+
+    form = EventOrganizerForm(instance=event)
+    return render(request, 'event_app/event_edit.html', {'form': form, 'event': event, 'next': next,})
+
+
 @login_required
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)

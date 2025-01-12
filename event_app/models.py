@@ -4,9 +4,29 @@ from django.core.exceptions import ValidationError
 from django.db.models import Avg
 from django.conf import settings
 from cloudinary.models import CloudinaryField
+from django.core.files.uploadedfile import UploadedFile
 from cloudinary.uploader import destroy
 from datetime import datetime, date
 from django.contrib.auth.models import User
+
+
+def file_validation(file):
+    max_file_size = 1024 * 1024 * 2  # 2mb file
+    allowed_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg']
+
+    print(f"FILE.TYPE: {file.content_type}")
+
+    if not file:
+        raise ValidationError("No file selected.")
+
+    if isinstance(file, UploadedFile):
+        if file.size > max_file_size:
+            raise ValidationError("File shouldn't be larger than 2MB.")
+
+        if file.content_type not in allowed_types:
+            print("BLA")
+
+            raise ValidationError(f"Invalid image type.")
 
 
 class WoofspotEvent(models.Model):
@@ -22,7 +42,7 @@ class WoofspotEvent(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     liked_by = models.ManyToManyField(User, related_name="liked_events", blank=True)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organized_events", default=1)
-    image = CloudinaryField('image', folder=settings.CLOUDINARY_UPLOAD_FOLDER, resource_type='auto', blank=True)
+    image = CloudinaryField('image', folder=settings.CLOUDINARY_UPLOAD_FOLDER, validators=[file_validation], resource_type='auto', blank=True)
 
     def __str__(self):
         return f"Event: {self.title} at {self.location} on {self.event_date}"

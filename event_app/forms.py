@@ -2,6 +2,7 @@ from django import forms
 from .models import WoofspotEvent
 from .models import Rating
 from django.forms.widgets import ClearableFileInput
+from cloudinary.forms import CloudinaryJsFileField
 
 # Reusable styles
 TEXT_STYLES = {
@@ -70,7 +71,14 @@ class EventOrganizerForm(forms.ModelForm):
                 'accept': 'image/*',
             }),
         }
-
+        image = CloudinaryJsFileField(
+        attrs={'style': "margin-top: 30px"},
+        options={
+            'tags': "directly_uploaded",
+            'crop': 'limit', 'width': 1000, 'height': 1000,
+            'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
+        })
+        
 
 class ReviewForm(forms.ModelForm):
     review_text = forms.CharField(
