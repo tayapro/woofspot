@@ -460,3 +460,7 @@ form.login p:last-of-type {
 .server-error-container a:hover {
   transform: scale(1.01);
 }
+
+.logo-img {
+  height: calc(1.475rem + 2.7vw);
+}
