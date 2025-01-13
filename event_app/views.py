@@ -155,20 +155,26 @@ def reservation_cancel(request, slug):
 
 def event_search_results(request):
     query = request.GET.get("query")  
-    results = []
+    search_results = []
     if query:
-        results = WoofspotEvent.objects.filter(
+        search_results = WoofspotEvent.objects.filter(
             Q(title__icontains=query) |  
             Q(content__icontains=query)  
         )
     next = request.GET.get("next", "/")
+
+    for event in search_results:
+        event.image_url = get_event_image(event)
+        event.is_past = is_in_the_past(event.event_date)
+        event.is_user_attendee = (request.user in event.attendees.all())
+        event.average_rating = Rating.get_average_rating(event)
 
     return render(request,
                   "event_app/event_search_results.html", 
                   {
                     "next": next,
                     "query": query, 
-                    "results": results
+                    "search_results": search_results
                   })
 
 
@@ -182,11 +188,17 @@ def my_event_search_results(request):
     )
     
     query = request.GET.get("query")  
-    results = events
+    search_results = events
     if query:
-        results = results.filter(
+        search_results = search_results.filter(
             Q(title__icontains=query) | Q(content__icontains=query)
         )
+
+    for event in search_results:
+        event.image_url = get_event_image(event)
+        event.is_past = is_in_the_past(event.event_date)
+        event.is_user_attendee = (request.user in event.attendees.all())
+        event.average_rating = Rating.get_average_rating(event)
     
     next = request.GET.get("next", reverse("my_event_list"))
     
@@ -195,7 +207,7 @@ def my_event_search_results(request):
                   {
                     "next": next,
                     "query": query,
-                    "results": results
+                    "search_results": search_results
                   })
 
 @login_required
