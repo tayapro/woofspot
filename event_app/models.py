@@ -11,13 +11,16 @@ from django.contrib.auth.models import User
 
 
 def file_validation(file):
-    max_file_size = 1024 * 1024 * 2  # 2mb file
+    min_file_size = 20480 # 20kB
+    max_file_size = 1024 * 1024 * 2 # 2mb file
     allowed_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg']
 
     if not file:
         raise ValidationError("No file selected.")
 
     if isinstance(file, UploadedFile):
+        if file.size < min_file_size:
+            raise ValidationError("File should be larger than 20kB.")
         if file.size > max_file_size:
             raise ValidationError("File shouldn't be larger than 2MB.")
 
