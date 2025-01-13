@@ -110,6 +110,30 @@
         </div>
     </nav>
 
+    <!-- Modal Window to Messages -->
+    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messagesModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show mb-0" role="alert">
+                        {{ message | safe }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <main role="main" class="container">
         {% block content %}
         <!-- Content goes here -->
@@ -120,6 +144,7 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
         </script>
     <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -148,8 +173,33 @@
                 });
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const messagesModal = document.getElementById("messagesModal");
+            const alerts = messagesModal.querySelectorAll(".alert");
+
+            if (alerts.length > 0) {
+                const modal = new bootstrap.Modal(messagesModal);
+
+                alerts.forEach(alert => {
+                    if (alert.classList.contains("success")) {
+                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` + alert.innerHTML;
+                    }
+                    if (alert.classList.contains("danger")) {
+                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` + alert.innerHTML;
+                    }
+                    if (alert.classList.contains("warning")) {
+                        alert.innerHTML = `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` + alert.innerHTML;
+                    }
+                    if (alert.classList.contains("info")) {
+                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` + alert.innerHTML;
+                    }
+                });
+
+                modal.show();
+            }
+        });
     </script>
-    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
 </body>
 
 </html>

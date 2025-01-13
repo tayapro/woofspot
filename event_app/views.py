@@ -143,6 +143,9 @@ def reservation_cancel(request, slug):
         event.attendees.remove(user)
         action = "Reservation Cancelled"
         send_email(user, event, action)
+
+        messages.success(request, "Slot is canceled!")
+
         return redirect(reverse("my_event_list"))
         
     return render(request, "event_app/reservation_cancel.html",
@@ -265,14 +268,23 @@ def event_edit(request, slug):
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             updated_event = form.save(commit=False)
-            updated_event.save()
+            
+            has_changes = (
+                updated_event.event_date != event.event_date or
+                updated_event.event_start_time != event.event_start_time or
+                updated_event.event_end_time != event.event_end_time or
+                updated_event.title != event.title or
+                updated_event.content != event.content or
+                updated_event.location != event.location)
 
-            if original_date != updated_event.event_date or original_event_start_time != updated_event.event_start_time or original_event_end_time != updated_event.event_start_time:
-                
+            if has_changes:
+                updated_event.save()
                 action = "Event Changed"
-                send_email(user, event, action)
-
-            return redirect(next)
+                send_email(user, updated_event, action)
+                return redirect(next)
+            else:
+                print("No changes")
+                render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
         else:
             return render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
 
