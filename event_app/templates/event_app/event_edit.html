@@ -8,11 +8,20 @@
 {% block content %}
 <h2 class="text-center">Edit Event</h2>
 
-<!-- <ul class="errorlist">
-    {% for key, value in form.errors.items %}
-    <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+<p class="text-center fst-italic text-body-secondary text-opacity-75 px-3 mb-3 text-justify">
+    Updating your event? Remember: English text, JPG or PNG images under 2MB.
+</p>
+
+<ul class="errorlist">
+    {% for key, values in form.errors.items %}
+    <li>
+        {% if key != '__all__' %}
+        {{ key|capfirst }}:
+        {% endif %}
+        {{ values|join:", " }}
+    </li>
     {% endfor %}
-</ul> -->
+</ul>
 
 <div class="w-75" id="event-edit-form">
     <form method="POST" enctype="multipart/form-data">
@@ -47,12 +56,17 @@
             </div>
         </div>
 
-        <div class="img-edit mb-3">
-            {% if not event.image %}
-            <p class="text-warning">The event does not have an image.</p>
-            {% endif %}
+        <div class="img-edit mt-5">
+            <p class="text-warning fst-italic text-center pb-0 mb-0">
+                {% if event.image %}
+                This event has an image, <br> and feel free to upload a new
+                one.
+                {% else %}
+                The event does not have an image.
+                {% endif %}
+            </p>
 
-            <div class="mt-4 px-4">
+            <div class="my-3 px-4">
                 <label for="id_image">New Image:</label>
                 {{ form.image }}
                 <small class="form-text text-muted">Upload a new image for this event (optional).</small>

@@ -9,9 +9,6 @@ from cloudinary.uploader import destroy
 from datetime import datetime, date, time
 from django.contrib.auth.models import User
 
-def title_validation(value):
-    if WoofspotEvent.objects.filter(title=value).exists():
-        raise ValidationError("An event with this title already exists.")
 
 # Validate that the event date is not in the past
 def date_validation(value):
@@ -23,7 +20,7 @@ def date_validation(value):
 def file_validation(file):
     min_file_size = 20480 # 20kB
     max_file_size = 1024 * 1024 * 2 # 2mb file
-    allowed_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg']
+    allowed_types = ['image/png', 'image/jpg', 'image/jpeg']
 
     if not file:
         raise ValidationError("No file selected.")
@@ -39,10 +36,10 @@ def file_validation(file):
 
 
 class WoofspotEvent(models.Model):
-    title = models.CharField(max_length=200, unique=True, validators=[title_validation])
+    title = models.CharField(max_length=55, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
-    location = models.CharField(max_length=200)
+    location = models.CharField(max_length=50)
     event_date = models.DateField(validators=[date_validation])
     event_start_time = models.TimeField()
     event_end_time = models.TimeField()
@@ -82,12 +79,14 @@ class WoofspotEvent(models.Model):
         if time_difference.total_seconds() < 3600:
             raise ValidationError("The minimum event duration is one hour")
 
+
     def save(self, *args, **kwargs):
         # Generate slug, perform validation and save the object
         if not self.slug:
             self.slug = slugify(self.title)
         self.full_clean()  
         super().save(*args, **kwargs)
+
 
     def like_toggle(self, user):
         # Toggle the like status of a user

@@ -12,7 +12,7 @@ from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
 from .forms import ReviewForm
-from .utils import validate_image_url, is_in_the_past, send_email
+from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space
 
 
 def get_event_image(event):
@@ -99,11 +99,10 @@ def my_event_list(request):
     past_organizing_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
                                 event_date__lte=timestamp)
-    past_events = WoofspotEvent.objects.filter(
-            Q(organizer=request.user, event_date__lte=timestamp) |  
-            Q(attendees=request.user, event_date__lte=timestamp))
+    past_events = list(past_attending_events) + list(past_organizing_events)
+    past_events.sort(reverse=True, key=lambda e : (e.event_date, e.event_start_time))
 
-    # Get image URLs for all events and other parameters
+    # Set image URLs and other parameters for all events 
     for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
             event.image_url = get_event_image(event)
@@ -240,6 +239,14 @@ def event_create(request):
         if form.is_valid():
             event = form.save(commit=False)
 
+            event.organizer = user
+
+            remove_leading_space(event)
+            
+            if not event.title.isascii() or not event.content.isascii() or not event.location.isascii():
+                form.add_error(None, "Please use only latin/accented characters")
+                return render(request, "event_app/event_create.html", {"form": form, "next": next,})
+
             slug_base = slugify(event.title)
             slug = slug_base
             counter = 1
@@ -250,8 +257,7 @@ def event_create(request):
                 counter += 1
             
             event.slug = slug
-            event.organizer = user
-            
+
             try:
                 event.full_clean()
                 event.save()
@@ -266,6 +272,7 @@ def event_create(request):
             form.add_error(None, "please make changes.")
             return render(request, "event_app/event_create.html", {"form": form, "next": next,})
     
+    # Handle page (GET)
     form = EventOrganizerForm()   
     return render(request, "event_app/event_create.html", {
         "form": form,
@@ -291,20 +298,30 @@ def event_edit(request, slug):
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             updated_event = form.save(commit=False)
+            remove_leading_space(updated_event)
 
             if form.changed_data:
-                updated_event.save()
-                action = "Event Changed"
-                send_email(user, updated_event, action)
-                messages.success(request, "Event updated successfully!")
-                return redirect(next)
+                if not updated_event.title.isascii() or not updated_event.content.isascii() or not updated_event.location.isascii():
+                    form.add_error(None, "Please use only latin/accented characters")
+                    return render(request, "event_app/event_create.html", {"form": form, "next": next,})    
+
+                try:
+                    event.full_clean()
+                    updated_event.save()
+                    action = "Event Changed"
+                    send_email(user, updated_event, action)
+                    messages.success(request, "Event updated successfully!")
+                    return redirect(next)
+                except ValidationError as e:
+                    form.add_error(None, e.messages)
+                    return render(request, "event_app/event_create.html", {"form": form, "event": event, "next": next,})
             else:
                 form.add_error(None, "No changes detected.")
                 return render(request, "event_app/event_edit.html", {"form": form, "event": event,
                                 "next": next })
 
         else:
-            form.add_error(None, "Form is invalid. Please correct the errors below.")
+            form.add_error(None, "please make changes.")
             return render(request, "event_app/event_edit.html", {"form": form, "event": event,
                             "next": next })
 

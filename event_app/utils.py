@@ -11,11 +11,18 @@ def validate_image_url(url, timeout=5):
     except requests.RequestException:
         pass
 
+
 # Return True if event date is in the past
 def is_in_the_past(date):
     return date <= now().date()
 
-# TODO: Move to utils.py file
+
+def remove_leading_space(event):
+    event.title.strip()
+    event.content.strip()
+    event.location.strip()
+
+
 def send_email(user, event, action):
     with get_connection(host=settings.EMAIL_HOST, 
             port=settings.EMAIL_PORT,  

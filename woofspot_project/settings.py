@@ -71,8 +71,8 @@ LOGOUT_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 7200
 # Update session expiry on every request
 SESSION_SAVE_EVERY_REQUEST = True
-# Lifetime of CSRF token is 1 hour
-CSRF_COOKIE_AGE = 3600
+# Lifetime of CSRF token is 2 hours
+CSRF_COOKIE_AGE = 7200
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

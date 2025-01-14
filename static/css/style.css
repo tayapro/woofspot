@@ -72,6 +72,8 @@ body {
 }
 
 /* The entire error list will be displayed in a custom section before the form.
+This is a deliberate measure to avoid having two separate error lists: 
+one before and one within the form.
 <ul class="errorlist">
     {% for key, values in form.errors.items %}
     <li>
@@ -82,15 +84,14 @@ body {
     </li>
     {% endfor %}
 </ul>
-This is a deliberate measure to avoid having two separate error lists: 
-one before and one within the form.
 */
-#signup-form .errorlist {
+#signup-form .errorlist,
+#event-edit-form .errorlist {
   display: none !important;
 }
 
+/* All errors will be displayed before form */
 form.login ul:last-of-type,
-form.password-change ul:last-of-type,
 form.signup ul:last-of-type {
   display: none !important;
 }
@@ -378,7 +379,7 @@ form.login p:last-of-type {
 /* Card's thumbnail area */
 .event-card {
   width: 350px;
-  height: 500px;
+  height: 530px;
 }
 
 .card-body {
@@ -386,12 +387,12 @@ form.login p:last-of-type {
 }
 
 .card-footer {
-  height: 200px;
+  height: 230px;
   width: 100%;
 }
 
 .event-card-image {
-  height: 330px;
+  height: 300px;
   width: 100%;
   background-position: 50% 50%;
   background-size: cover;
