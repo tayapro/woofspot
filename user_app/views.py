@@ -44,10 +44,3 @@ def profile(request):
         "next": next,
         "user": user,
     })
-
-
-def get_latest_message(request):
-    all_messages = list(messages.get_messages(request))
-    latest_message = all_messages[-1] if all_messages else None
-
-    return latest_message

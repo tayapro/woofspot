@@ -110,7 +110,9 @@
         </div>
     </nav>
 
+
     <!-- Modal Window to Messages -->
+    {% if messages %}
     <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -131,6 +133,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
 
 
@@ -145,54 +148,35 @@
         </script>
     <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+    <script type="module" src="{% static 'js/script.js' %}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll('.toggle-content').forEach(function (toggleLink) {
-                toggleLink.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const eventId = this.getAttribute('data-event-id');
-                    const truncatedElement = document.getElementById(`content-truncated-${eventId}`);
-                    const fullElement = document.getElementById(`content-full-${eventId}`);
-
-                    if (truncatedElement.classList.contains('d-none')) {
-                        truncatedElement.classList.remove('d-none');
-                        fullElement.classList.add('d-none');
-                        this.textContent = 'Show More';
-                    } else {
-                        truncatedElement.classList.add('d-none');
-                        fullElement.classList.remove('d-none');
-                        this.textContent = 'Show Less';
-                    }
-                });
-            });
-        });
-
+        // Messages modal window
         document.addEventListener("DOMContentLoaded", function () {
             const messagesModal = document.getElementById("messagesModal");
             const alerts = messagesModal.querySelectorAll(".alert");
-
             if (alerts.length > 0) {
                 const modal = new bootstrap.Modal(messagesModal);
 
-                alerts.forEach(alert => {
+                alerts.forEach((alert) => {
                     if (alert.classList.contains("success")) {
-                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` + alert.innerHTML;
+                        alert.innerHTML =
+                            `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` +
+                            alert.innerHTML;
                     }
                     if (alert.classList.contains("danger")) {
-                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` + alert.innerHTML;
+                        alert.innerHTML =
+                            `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` +
+                            alert.innerHTML;
                     }
                     if (alert.classList.contains("warning")) {
-                        alert.innerHTML = `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` + alert.innerHTML;
+                        alert.innerHTML =
+                            `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` +
+                            alert.innerHTML;
                     }
                     if (alert.classList.contains("info")) {
-                        alert.innerHTML = `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` + alert.innerHTML;
+                        alert.innerHTML =
+                            `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` +
+                            alert.innerHTML;
                     }
                 });
 

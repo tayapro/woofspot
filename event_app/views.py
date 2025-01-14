@@ -5,6 +5,9 @@ from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
 from django.utils.timezone import now
+from datetime import time, datetime
+from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 from .models import WoofspotEvent
 from .forms import EventOrganizerForm
 from .models import Rating
@@ -228,26 +231,75 @@ def like_toggle(request, slug):
 
 @login_required
 def event_create(request):
+    next = request.GET.get("next", reverse("home"))
     user = request.user
-    next = request.GET.get("next", reverse("my_event_list"))
 
     # Handle submit (POST)
     if request.method == "POST":
         form = EventOrganizerForm(request.POST, request.FILES)
-
         if form.is_valid():
+            print("form is valid")
             event = form.save(commit=False)
-            event.organizer = request.user
-            event.save()
-            action = "Event Created"
-            send_email(user, event, action)
-            return redirect("my_event_list")
-        else:
-            return render(request, "event_app/event_create.html", {"form": form })
+            
+            if WoofspotEvent.objects.filter(title=event.title).exists():
+                print("ALREADY EXIST")
+                form.add_error(None, "An event with this title already exists.")
+                return render(request, "event_app/event_create.html", {
+                    "form": form,
+                    "next": next,
+                })
+            
+            night_start = time(21, 0)
+            night_end = time(9, 0)
+            if event.event_start_time >= night_start or event.event_start_time < night_end:
+                form.add_error(None, "Event start time cannot be between 21:00 and 09:00.")
+                return render(request, "event_app/event_create.html", {
+                    "form": form,
+                    "next": next,
+                })
 
-    # Handle page (GET)
-    form = EventOrganizerForm()
-    return render(request, "event_app/event_create.html", {"form": form, "next": next })
+            start_datetime = datetime.combine(datetime.now(), event.event_start_time)
+            end_datetime = datetime.combine(datetime.now(), event.event_end_time)
+            time_difference = end_datetime - start_datetime
+
+            # 10800 is 3 hours
+            if time_difference.total_seconds() > 10800:
+                form.add_error(None, "Event's duration is too big.")
+                return render(request, "event_app/event_create.html", {
+                    "form": form,
+                    "next": next,
+                })
+
+            slug_base = slugify(event.title)
+            slug = slug_base
+            counter = 1
+            # In case if slug for existing event with new title is equal to created one
+            # generate a new slug
+            while WoofspotEvent.objects.filter(slug=slug).exists():
+                slug = f"{slug_base}-{counter}"
+                counter += 1
+            
+            event.slug = slug
+            event.organizer = user
+            
+            try:
+                event.save()
+                action = "Event Created"
+                send_email(user, event, action)
+                messages.success(request, "Event created successfully!")
+                return redirect(next)
+            except ValidationError as e:
+                form.add_error(None, e.messages)
+        else:
+            print("form is not valid")
+            print(f"ERRORS: {form.errors}")
+            messages.error(request, "Form is invalid. Please correct the errors below.")
+    
+    form = EventOrganizerForm()   
+    return render(request, "event_app/event_create.html", {
+        "form": form,
+        "next": next,
+    })
 
 
 @login_required
@@ -262,39 +314,36 @@ def event_edit(request, slug):
     original_date = event.event_date
     original_event_start_time = event.event_start_time
     original_event_end_time = event.event_end_time
-    
+
     # Handle submit (POST)
     if request.method == "POST":
         form = EventOrganizerForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             updated_event = form.save(commit=False)
-            
-            has_changes = (
-                updated_event.event_date != event.event_date or
-                updated_event.event_start_time != event.event_start_time or
-                updated_event.event_end_time != event.event_end_time or
-                updated_event.title != event.title or
-                updated_event.content != event.content or
-                updated_event.location != event.location)
 
-            if has_changes:
+            if form.changed_data:
                 updated_event.save()
                 action = "Event Changed"
                 send_email(user, updated_event, action)
+                messages.success(request, "Event updated successfully!")
                 return redirect(next)
             else:
-                print("No changes")
-                render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
+                form.add_error(None, "No changes detected.")
+                return render(request, "event_app/event_edit.html", {"form": form, "event": event,
+                                "next": next })
+
         else:
-            return render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
+            form.add_error(None, "Form is invalid. Please correct the errors below.")
+            return render(request, "event_app/event_edit.html", {"form": form, "event": event,
+                            "next": next })
 
     # Handle page (GET)
-    form = EventOrganizerForm(instance=event)
-    return render(request, "event_app/event_edit.html", 
-                  {
-                    "form": form, 
-                    "event": event,
-                    "next": next })
+    form = EventOrganizerForm()
+    return render(request, "event_app/event_edit.html", {
+        "form": form,
+        "event": event,
+        "next": next
+    })
 
 
 @login_required
@@ -324,11 +373,16 @@ def event_delete(request, slug):
 @login_required
 def rating_submit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+
+    if event.organizer == request.user:
+        return HttpResponseForbidden("Unauthorized access")
+
     next = request.GET.get("next", reverse("my_event_list"))
 
     # Handle submit (POST)
     if request.method == "POST":
         form = ReviewForm(request.POST, event=event)
+
         if form.is_valid():
             Rating.objects.filter(user=request.user, event=event).delete()
 
@@ -341,11 +395,10 @@ def rating_submit(request, slug):
             send_email(rating.user, rating.event, action)
 
             return redirect("event_view", slug=event.slug)
-
-        return render(request, "event_app/rating_submit.html", 
-                      {"next": next, 
-                      "form": form, 
-                      "event": event})
+        else:
+            form.add_error(None, "Form is invalid. Please correct the errors below.")
+            return render(request, "event_app/rating_submit.html", {"form": form, "event": event,
+                            "next": next,})
 
     # Handle page (GET)
     form = ReviewForm(event=event)

@@ -8,15 +8,16 @@
 {% block content %}
 <h2 class="text-center">Edit Event</h2>
 
-<ul class="errorlist">
+<!-- <ul class="errorlist">
     {% for key, value in form.errors.items %}
     <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
     {% endfor %}
-</ul>
+</ul> -->
 
 <div class="w-75" id="event-edit-form">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {{form.non_field_errors}}
         <div class="mb-3">
             {{ form.title.label_tag }}
             {{ form.title }}

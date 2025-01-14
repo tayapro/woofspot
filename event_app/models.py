@@ -48,11 +48,11 @@ class WoofspotEvent(models.Model):
 
     def clean(self):
         # Validate that end time is after start time
-        if self.event_date < date.today() or (self.event_date == date.today() and 
-          self.event_start_time < datetime.now().time()):
-            raise ValidationError("Event cannot be in the past.")
-        if self.event_end_time <= self.event_start_time:
-            raise ValidationError("Event end time must be after the start time.")
+        # if self.event_date < date.today() or (self.event_date == date.today() and 
+        #   self.event_start_time < datetime.now().time()):
+        #     raise ValidationError("Event cannot be in the past.")
+        # if self.event_end_time <= self.event_start_time:
+        #     raise ValidationError("Event end time must be after the start time.")
 
         super().clean()
 

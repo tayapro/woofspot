@@ -1,8 +1,9 @@
 from django import forms
-from .models import WoofspotEvent
-from .models import Rating
 from django.forms.widgets import ClearableFileInput
 from cloudinary.forms import CloudinaryJsFileField
+from datetime import date, timedelta
+from .models import WoofspotEvent
+from .models import Rating
 
 # Reusable styles
 TEXT_STYLES = {
@@ -57,6 +58,7 @@ class EventOrganizerForm(forms.ModelForm):
             'event_date': forms.DateInput(attrs={
                 **DATE_TIME_STYLES,  
                 'type': 'date',
+                'min': (date.today() + timedelta(days=1)).isoformat(),
             }),
             'event_start_time': forms.TimeInput(attrs={
                 **DATE_TIME_STYLES,  
@@ -105,14 +107,13 @@ class ReviewForm(forms.ModelForm):
                 'required': "Please select a rating.",
             },
         }
-
+    
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event', None)  
         super().__init__(*args, **kwargs)
 
     def clean(self):
         rating = self.cleaned_data.get('rating')
-        if not rating:
-            raise ValidationError("Please select a rating.")
-
+        review_text = self.cleaned_data.get('review_text')
+        
         return self.cleaned_data

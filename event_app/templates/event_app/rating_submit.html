@@ -10,12 +10,11 @@
 <h5 class="text-center text-body-secondary opacity-50">for</h5>
 <h3 class="text-center text-body-secondary opacity-75 mb-5">{{ event.title }}</h3>
 
-{% if form.errors %}
+
+{% if form.rating.errors %}
 <ul class="errorlist">
-    {% for field, errors in form.errors.items %}
-    {% for error in errors %}
+    {% for error in form.rating.errors %}
     <li>{{ error }}</li>
-    {% endfor %}
     {% endfor %}
 </ul>
 {% endif %}
