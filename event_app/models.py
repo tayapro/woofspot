@@ -6,10 +6,20 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 from django.core.files.uploadedfile import UploadedFile
 from cloudinary.uploader import destroy
-from datetime import datetime, date
+from datetime import datetime, date, time
 from django.contrib.auth.models import User
 
+def title_validation(value):
+    if WoofspotEvent.objects.filter(title=value).exists():
+        raise ValidationError("An event with this title already exists.")
 
+# Validate that the event date is not in the past
+def date_validation(value):
+    if value < date.today():
+        raise ValidationError("Event date cannot be in the past.")
+
+
+# Validate event's image file
 def file_validation(file):
     min_file_size = 20480 # 20kB
     max_file_size = 1024 * 1024 * 2 # 2mb file
@@ -29,11 +39,11 @@ def file_validation(file):
 
 
 class WoofspotEvent(models.Model):
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True, validators=[title_validation])
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
     location = models.CharField(max_length=200)
-    event_date = models.DateField()
+    event_date = models.DateField(validators=[date_validation])
     event_start_time = models.TimeField()
     event_end_time = models.TimeField()
     attendees = models.ManyToManyField(User, related_name="events_attending", blank=True)
@@ -47,14 +57,30 @@ class WoofspotEvent(models.Model):
         return f"Event: {self.title} at {self.location} on {self.event_date}"
 
     def clean(self):
-        # Validate that end time is after start time
-        # if self.event_date < date.today() or (self.event_date == date.today() and 
-        #   self.event_start_time < datetime.now().time()):
-        #     raise ValidationError("Event cannot be in the past.")
-        # if self.event_end_time <= self.event_start_time:
-        #     raise ValidationError("Event end time must be after the start time.")
-
         super().clean()
+
+        # Validate that end time is after start time
+        if self.event_date < date.today() or (self.event_date == date.today() and 
+          self.event_start_time < datetime.now().time()):
+            raise ValidationError("Event cannot be in the past")
+        if self.event_end_time <= self.event_start_time:
+            raise ValidationError("Event end time must be after the start time")
+
+        night_start = time(21, 0)
+        night_end = time(9, 0)
+        if self.event_start_time >= night_start or self.event_start_time < night_end:
+            raise ValidationError("Event start time cannot be between 21:00 and 09:00")
+
+        start_datetime = datetime.combine(datetime.now(), self.event_start_time)
+        end_datetime = datetime.combine(datetime.now(), self.event_end_time)
+        time_difference = end_datetime - start_datetime
+
+        # 10800 is 3 hours
+        if time_difference.total_seconds() > 10800:
+            raise ValidationError("Please make sure the event is no longer than three hours")
+
+        if time_difference.total_seconds() < 3600:
+            raise ValidationError("The minimum event duration is one hour")
 
     def save(self, *args, **kwargs):
         # Generate slug, perform validation and save the object
