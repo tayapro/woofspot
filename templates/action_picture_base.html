@@ -70,7 +70,9 @@
                     <div class="text-center d-flex align-items-center mb-3">
                         <img src="{% static 'images/branding_text.webp' %}" alt="Woofspot branding text image"
                             id="logo-text">
-                        <canvas id="rive-dog"></canvas>
+                        <!-- Pass the file path dynamically using a data-* attribute in the HTML template:  -->
+                        <canvas id="rive-dog"
+                            data-src="https://res.cloudinary.com/stipaxa/raw/upload/v1736892436/Woofspot/doggo.riv"></canvas>
                     </div>
 
                     {% block content %}
@@ -86,17 +88,6 @@
         </script>
     <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@rive-app/canvas@2.20.0"></script>
-    <script>
-        const r = new rive.Rive({
-            src: "{% static 'animations/doggo2.riv' %}",
-            canvas: document.getElementById("rive-dog"),
-            autoplay: true,
-            stateMachines: "State Machine 1",
-            onLoad: () => {
-                r.resizeDrawingSurfaceToCanvas();
-            },
-        });
-    </script>
     <script type="module" src="{% static 'js/script.js' %}"></script>
 </body>
 

@@ -1,15 +1,84 @@
+// Animated dog
+function drawAnimatedDog() {
+  const canvas = document.getElementById("rive-dog");
+
+  if (canvas) {
+    const src = canvas.getAttribute("data-src");
+
+    const r = new rive.Rive({
+      src: src,
+      canvas: canvas,
+      autoplay: true,
+      stateMachines: "State Machine 1",
+      onLoad: () => {
+        r.resizeDrawingSurfaceToCanvas();
+      },
+    });
+  }
+}
+
+
+// Messages modal window
+function drawModalWindow() {
+  const messagesModal = document.getElementById("messagesModal");
+
+  if (messagesModal) {
+    const alerts = messagesModal.querySelectorAll(".alert");
+    if (alerts.length > 0) {
+      const modal = new bootstrap.Modal(messagesModal);
+
+      // Remove `inert` when modal is shown
+      messagesModal.addEventListener("shown.bs.modal", function () {
+        messagesModal.removeAttribute("inert");
+      });
+
+      // Add `inert` when modal is hidden
+      messagesModal.addEventListener("hidden.bs.modal", function () {
+        messagesModal.setAttribute("inert", "");
+      });
+
+      alerts.forEach((alert) => {
+        if (alert.classList.contains("success")) {
+          alert.innerHTML =
+            `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` +
+            alert.innerHTML;
+        }
+        if (alert.classList.contains("danger")) {
+          alert.innerHTML =
+            `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` +
+            alert.innerHTML;
+        }
+        if (alert.classList.contains("warning")) {
+          alert.innerHTML =
+            `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` +
+            alert.innerHTML;
+        }
+        if (alert.classList.contains("info")) {
+          alert.innerHTML =
+            `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` +
+            alert.innerHTML;
+        }
+      });
+
+      modal.show();
+    }
+  }
+}
+
+
 // Tooltips
-document.addEventListener("DOMContentLoaded", function () {
+function drawTooltip() {
   var tooltipTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
   );
   tooltipTriggerList.forEach(function (tooltipTriggerEl) {
     new bootstrap.Tooltip(tooltipTriggerEl);
   });
-});
+}
 
-// Show more/less on event card
-document.addEventListener("DOMContentLoaded", function () {
+
+// Show more/less description on event card
+function showMoreLessText() {
   document.querySelectorAll(".toggle-content").forEach(function (toggleLink) {
     toggleLink.addEventListener("click", function (e) {
       e.preventDefault();
@@ -30,10 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-});
+}
+
 
 // Rating
-document.addEventListener("DOMContentLoaded", function () {
+function drawRatingStars() {
   const stars = document.querySelectorAll(".star-btn");
   const ratingInput = document.getElementById("rating-value");
 
@@ -56,4 +126,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  drawAnimatedDog();
+  drawModalWindow();
+  drawTooltip();
+  showMoreLessText();
+  drawRatingStars();
 });

@@ -113,7 +113,7 @@
 
     <!-- Modal Window to Messages -->
     {% if messages %}
-    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" inert>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,41 +149,6 @@
     <script src="https://kit.fontawesome.com/32c1244c27.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
     <script type="module" src="{% static 'js/script.js' %}"></script>
-    <script>
-        // Messages modal window
-        document.addEventListener("DOMContentLoaded", function () {
-            const messagesModal = document.getElementById("messagesModal");
-            const alerts = messagesModal.querySelectorAll(".alert");
-            if (alerts.length > 0) {
-                const modal = new bootstrap.Modal(messagesModal);
-
-                alerts.forEach((alert) => {
-                    if (alert.classList.contains("success")) {
-                        alert.innerHTML =
-                            `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` +
-                            alert.innerHTML;
-                    }
-                    if (alert.classList.contains("danger")) {
-                        alert.innerHTML =
-                            `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` +
-                            alert.innerHTML;
-                    }
-                    if (alert.classList.contains("warning")) {
-                        alert.innerHTML =
-                            `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` +
-                            alert.innerHTML;
-                    }
-                    if (alert.classList.contains("info")) {
-                        alert.innerHTML =
-                            `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` +
-                            alert.innerHTML;
-                    }
-                });
-
-                modal.show();
-            }
-        });
-    </script>
 </body>
 
 </html>
