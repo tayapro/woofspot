@@ -17,6 +17,15 @@ function drawAnimatedDog() {
   }
 }
 
+function showSpinner() {
+  const spinner = document.getElementById("loading-spinner");
+
+  // Show spinner on page unload
+  window.addEventListener("beforeunload", function () {
+    spinner.classList.remove("d-none");
+  });
+}
+
 // Messages modal window
 function drawModalWindow() {
   const messagesModal = document.getElementById("messagesModal");
@@ -130,6 +139,7 @@ function drawRatingStars() {
 
 document.addEventListener("DOMContentLoaded", function () {
   drawAnimatedDog();
+  showSpinner();
   drawModalWindow();
   drawTooltip();
   showMoreLessText();

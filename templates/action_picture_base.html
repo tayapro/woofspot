@@ -21,7 +21,7 @@
         meetups near you. Connect with like-minded individuals and share memorable experiences 
         with your pets in a community that celebrates companionship and fun.">
     <meta name="keywords"
-        content="pet, happy, dog parks, pet-friendly calendar, Ireland events, outdoor pet events, pet lovers">
+        content="pet, happy, dog parks, pet-friendly calendar, Ireland events, outdoor pet events, indoor pet events, pet lovers">
     <!-- Favicon -->
     <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
@@ -73,6 +73,12 @@
                         <!-- Pass the file path dynamically using a data-* attribute in the HTML template:  -->
                         <canvas id="rive-dog"
                             data-src="https://res.cloudinary.com/stipaxa/raw/upload/v1736892436/Woofspot/doggo.riv"></canvas>
+                    </div>
+
+                    <div id="loading-spinner" class="spinner-overlay d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
 
                     {% block content %}
