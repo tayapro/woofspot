@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
 from django.utils.timezone import now
-from datetime import time, datetime
+from datetime import time, datetime, date, timedelta
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from .models import WoofspotEvent
@@ -17,30 +17,29 @@ from .utils import validate_image_url, is_in_the_past, send_email, remove_leadin
 
 def get_event_image(event):
     if event.image and validate_image_url(event.image.url):
-            image_url = event.image.url
+        image_url = event.image.url
     else:
-            image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1736449375/Woofspot/image_coming_soon_3.webp"
+        image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1736449375/Woofspot/image_coming_soon_3.webp"
 
     return image_url
 
-# def get_all_events(request):
-#     return WoofspotEvent.objects.all()
+def query_all_events():
+    return WoofspotEvent.objects.all()
+    
 
-# def get_all_past_events(events):
-#     timestamp = now().date()
+def query_all_events_for_user(user):
+    # Avoid redundant queries
+    events = WoofspotEvent.objects.filter(Q(organizer=user) | Q(attendees=user)).distinct()
 
-#     past_events = []
-#     for event in events:
-#         if(event.)
+    return events
 
-#     return past_events
 
 def all_events_list(request):
-    timestamp = now().date()
-    events = WoofspotEvent.objects.all()
+    today = date.today()
 
-    future_events = WoofspotEvent.objects.filter(date__gt=timestamp)
-    past_events = WoofspotEvent.objects.filter(date__lte=timestamp)
+    events = query_all_events()
+    future_events = list(filter(lambda e: e.date > today, events))
+    past_events = list(filter(lambda e: e.date <= today, events))
 
     for events in (future_events, past_events):
         for event in events:
@@ -56,18 +55,20 @@ def all_events_list(request):
         "next": next,
     })
 
-def event_list(request):
-    timestamp = now().date()
+def carousel_event_list(request):
+    today = date.today()
+    four_weeks_from_now = today + timedelta(weeks=4)
 
-    events = WoofspotEvent.objects.filter(date__gt=timestamp)
+    events = query_all_events()
+    carousel_events = list(filter(lambda e: today <= e.date <= today + timedelta(weeks=4), events))
 
-    for event in events:
+    for event in carousel_events:
         event.image_url = get_event_image(event)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
 
     return render(request, "event_app/index.html", {
-        "events": events,
+        "events": carousel_events,
     })
 
 
@@ -97,20 +98,15 @@ def my_event_list(request):
     if not user.is_authenticated:
         return redirect(reverse("account_login"))
 
-    timestamp = now().date()
-    
-    hosted_by_me_future_events = WoofspotEvent.objects.filter(
-                                organizer=request.user,
-                                date__gt=timestamp)
-    planning_to_attend_events = WoofspotEvent.objects.filter(
-                                attendees=request.user,
-                                date__gt=timestamp)
-    past_attending_events = WoofspotEvent.objects.filter(
-                                attendees=request.user,
-                                date__lte=timestamp)
-    past_organizing_events = WoofspotEvent.objects.filter(
-                                organizer=request.user,
-                                date__lte=timestamp)
+    today = date.today()
+
+    events = query_all_events_for_user(request.user)
+
+    hosted_by_me_future_events = list(filter(lambda e: e.organizer == request.user and e.date > today, events))
+    planning_to_attend_events = list(filter(lambda e: request.user in e.attendees.all() and e.date > today, events))
+    past_attending_events = list(filter(lambda e: request.user in e.attendees.all() and e.date <= today, events))
+    past_organizing_events = list(filter(lambda e: e.organizer == request.user and e.date <= today, events))
+
     past_events = list(past_attending_events) + list(past_organizing_events)
     past_events.sort(reverse=True, key=lambda e : (e.date, e.start_time))
 
@@ -194,11 +190,9 @@ def event_search_results(request):
                     "search_results": search_results
                   })
 
-
+@login_required
 def my_event_search_results(request):
     user = request.user
-    if not user.is_authenticated:
-        return redirect(reverse("account_login"))
     
     events = WoofspotEvent.objects.filter(
         Q(attendees=user) | Q(organizer=user)
