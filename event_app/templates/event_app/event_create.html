@@ -10,7 +10,8 @@
 <h2 class="text-center">Create Event</h2>
 
 <p class="text-center fst-italic text-body-secondary text-opacity-75 px-3 mb-3 text-justify">
-    Ready to share your event? <br>A few guidelines: English text only, please. Images should be JPG, JPEG or PNG, and under
+    Ready to share your event? <br>A few guidelines: English text only, please. Images should be JPG, JPEG or PNG, and
+    under
     2MB.
 </p>
 
@@ -63,9 +64,9 @@
 
         <div class="d-flex flex-column flex-md-row gap-2">
             <input type="hidden" name="next" value="{{ request.path }}">
-            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill">Submit</button>
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale">Submit</button>
             <a href="{% url 'my_event_list' %}"
-                class="btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 flex-fill">Cancel</a>
+                class="btn btn-outline-default active text-body-secondary text-opacity-75 flex-fill btn-scale">Cancel</a>
         </div>
     </form>
 </div>

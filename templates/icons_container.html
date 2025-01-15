@@ -17,7 +17,7 @@
 <div>
     <form method="POST" action="{% url 'reservation_submit' event.slug %}?next={{ request.path }}">
         {% csrf_token %}
-        <button type="submit" name="reserve_spot" class="btn btn-link">
+        <button type="submit" name="reserve_spot" class="btn btn-link m-0 p-0 btn-scale">
             <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
                 data-bs-placement="top" title="Do You Want To Join?" aria-label="Join to event"></i></button>
     </form>
@@ -32,7 +32,7 @@
         data-bs-placement="top" title="Hosted by You" aria-label="Hosted by You"></i>
 </div>
 <div class="text-center d-flex flex-row">
-    <a href="{% url 'event_view' event.slug %}#reviews-section" class="btn btn-link m-0 px-0" tabindex="-1"
+    <a href="{% url 'event_view' event.slug %}#reviews-section" class="btn btn-link m-0 px-0 btn-scale" tabindex="-1"
         aria-disabled="true">
         <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
             title="Your Event's Rating" aria-label="Event's rating"></i>
@@ -53,7 +53,7 @@
         title="Attended by You" aria-label="Attended by you"></i>
 </div>
 <div class="text-center d-flex flex-row">
-    <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 px-0">
+    <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 px-0 btn-scale">
         <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
             title="Share Your Feedback" aria-label="Share feedback"></i>
     </a>

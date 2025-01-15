@@ -1,8 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"); */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lilita+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 :root {
   --font-family: "Rubik", sans-serif;
   --header-font-family: "Fredoka", sans-serif;
+  --logo-font-family: "Lilita One", sans-serif;
   --white-color: rgb(251, 251, 251);
   --bootstrap-black: rgb(8, 10, 12);
   --bootstrap-black-20: rgba(8, 10, 12, 0.2);
@@ -237,10 +239,13 @@ form.login p:last-of-type {
 }
 
 /* Landing page */
+#logo-nav {
+  font-family: var(--logo-font-family);
+}
 
 #bg-image {
-  height: calc(100vh - 10rem);
-  margin: 5rem 0rem;
+  height: calc(100vh - 9rem);
+  margin: 4.2rem 0rem;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -368,7 +373,7 @@ form.login p:last-of-type {
   opacity: 0.8;
 }
 
-#logo-text {
+#action-picture-logo-text {
   height: 60px;
   width: auto;
 }
@@ -461,6 +466,6 @@ form.login p:last-of-type {
   transform: scale(1.01);
 }
 
-.logo-img {
+.error-page-logo-img {
   height: calc(1.475rem + 2.7vw);
 }

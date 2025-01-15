@@ -25,7 +25,7 @@
 </div>
 
 <div class="text-center my-4">
-    <h2 class="bold-header-font text-black text-opacity-50">
+    <h2 class="text-black text-opacity-50">
         <a href="{% url 'all_events_list'%}?next={{ request.path }}"
             class="link-underline-light text-black text-opacity-50" data-bs-toggle="tooltip" data-bs-placement="top"
             title="Explore More Events" aria-label="Explore more events">
@@ -78,7 +78,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="d-flex flex-column justify-content-start">
+                            <div class="d-flex flex-column justify-content-start gap-1">
                                 {% include "icons_container.html" %}
                             </div>
                         </div>
@@ -99,7 +99,7 @@
 </div>
 
 <div class="faq-section container my-5 px-4 z-1">
-    <h2 class="text-center bold-header-font text-black text-opacity-50 mb-4">Everything You Need to Know</h2>
+    <h2 class="text-center text-black text-opacity-50 mb-4">Everything You Need to Know</h2>
     <div class="accordion" id="faqAccordion">
 
         <div class="accordion-item">

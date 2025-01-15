@@ -7,19 +7,19 @@
 
 {% block content %}
 <div class="text-center">
-    <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to delete the event {{event.title}}?
-    </h5>
+    <h5 class="text-black fw-light text-opacity-50">Are you sure you want to delete the event</h5>
+    <h5 class="text-black fw-light text-opacity-50 fw-semibold mt-2 mb-5">"{{event.title}}?"</h5>
 
-    <div class="d-flex justify-content-evenly">
+    <div class="d-flex justify-content-evenly flex-column-reverse flex-column flex-md-row gap-2">
         <a href="{{ next }}">
             <button type="submit"
-                class="btn btn-outline-default active text-body-secondary text-opacity-75 px-5">No</button>
+                class="btn btn-outline-default active text-body-secondary text-opacity-75 px-5 flex-fill btn-scale">No</button>
         </a>
 
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="event_id" value="{{ event.id }}">
-            <button type="submit" name="event_delete" class="btn btn-danger">
+            <button type="submit" name="event_delete" class="btn btn-danger opacity-75 flex-fill btn-scale">
                 Delete event
             </button>
         </form>

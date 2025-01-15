@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="text-center mt-5 pt-5">
-    <h2 class="bold-header-font text-black text-opacity-50 mt-5">SEARCH RESULTS</h2>
+    <h2 class="text-black text-opacity-50 mt-5">SEARCH RESULTS</h2>
 
     {% if query and search_results %}
     <p class="text-black text-opacity-50 pb-0 mb-0">Here are the results</p>
@@ -58,7 +58,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-start gap-2">
+                    <div class="d-flex flex-column justify-content-start gap-1">
                         {% include "icons_container.html" with is_past_event=False %}
                     </div>
                 </div>
@@ -85,7 +85,7 @@
  should redirect to home page, if next is one of search result URLs -->
 {% if next %}
 <div class="m-5 pb-5 text-center">
-    <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5">
+    <a href="{{ next }}" class="btn btn-outline-secondary rounded-pill pe-5 btn-scale">
         <i class="fa-solid fa-less-than"></i>&nbsp; &nbsp; &nbsp; &nbsp; Back</a>
 </div>
 {% endif %}

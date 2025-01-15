@@ -9,7 +9,7 @@
 <h2 class="text-center">Edit Event</h2>
 
 <p class="text-center fst-italic text-body-secondary text-opacity-75 px-3 mb-3 text-justify">
-    Updating your event? Remember: English text, JPG or PNG images under 2MB.
+    Updating your event? Remember: English text, JPG, JPEG or PNG images under 2MB.
 </p>
 
 <ul class="errorlist">
@@ -75,10 +75,10 @@
 
         <div class="d-flex flex-column flex-md-row gap-2">
             <input type="hidden" name="next" value="{{ request.path }}">
-            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill">Save
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale">Save
                 Changes</button>
             <a href="{{ next }}"
-                class="btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 flex-fill">Cancel</a>
+                class="btn btn-outline-default active text-body-secondary text-opacity-75 flex-fill btn-scale">Cancel</a>
         </div>
     </form>
 </div>

@@ -11,11 +11,12 @@
 
 <!-- Future Organizing Events Section -->
 <div class="text-center mt-5 pt-5 my-4">
-    <h2 class="bold-header-font text-black text-opacity-50 mt-5">Hosted By Me</h2>
+    <h2 class="text-black text-opacity-50 mt-5">Hosted By Me</h2>
 </div>
 
 <div class="mb-4 text-center">
-    <a href="{% url 'event_create' %}?next={{ request.path }}" class="btn btn-outline-success">Host New Event</a>
+    <a href="{% url 'event_create' %}?next={{ request.path }}" class="btn btn-outline-success btn-scale">Host New
+        Event</a>
 </div>
 
 {% if hosted_by_me_future_events %}
@@ -54,7 +55,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-start gap-2">
+                    <div class="d-flex flex-column justify-content-start gap-1">
                         {% include "icons_container.html" with is_past_event=False %}
                     </div>
                 </div>
@@ -71,7 +72,7 @@
 
 <!-- Planning To Attend Section -->
 <div class="text-center my-4">
-    <h2 class="bold-header-font text-black text-opacity-50">Planning To Attend</h2>
+    <h2 class="text-black text-opacity-50">Planning To Attend</h2>
 </div>
 {% if planning_to_attend_events %}
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
@@ -109,7 +110,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-start text-center">
+                    <div class="d-flex flex-column justify-content-start gap-1">
                         {% include "icons_container.html" with is_past_event=False %}
                     </div>
                 </div>
@@ -126,7 +127,7 @@
 
 <!-- Past Events Section -->
 <div class="text-center my-4">
-    <h2 class="bold-header-font text-black text-opacity-50">Past Events</h2>
+    <h2 class="text-black text-opacity-50">Past Events</h2>
 </div>
 
 {% if past_events %}
@@ -165,7 +166,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column justify-content-start gap-2">
+                    <div class="d-flex flex-column justify-content-start gap-1">
                         {% include "icons_container.html" with is_past_event=True %}
                     </div>
                 </div>
