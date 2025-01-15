@@ -19,9 +19,11 @@ function drawAnimatedDog() {
 
 function showSpinner() {
   const spinner = document.getElementById("loading-spinner");
+  const popoverMenu = document.getElementById("menu");
 
   // Show spinner on page unload
   window.addEventListener("beforeunload", function () {
+    popoverMenu.hidePopover();
     spinner.classList.remove("d-none");
   });
 }

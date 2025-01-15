@@ -44,6 +44,7 @@ def all_events_list(request):
     for events in (future_events, past_events):
         for event in events:
             event.image_url = get_event_image(event)
+            event.is_past = is_in_the_past(event.date)
             event.is_user_attendee = (request.user in event.attendees.all())
             event.average_rating = Rating.get_average_rating(event)
 
@@ -64,6 +65,7 @@ def carousel_event_list(request):
 
     for event in carousel_events:
         event.image_url = get_event_image(event)
+        event.is_past = is_in_the_past(event.date)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
 

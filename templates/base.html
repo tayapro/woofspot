@@ -52,7 +52,11 @@
                                 placeholder="Search..." minlength="2" size="20" autocomplete="off" aria-label="Search"
                                 required>
                         </label>
+                        {% if request.path != my_event_search_results_url and request.path != event_search_results_url%}
                         <input type="hidden" name="next" value="{{ request.path }}">
+                        {% else %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                        {% endif %}
                         <button type="submit" class="btn btn-subtle m-0" id="bth-search-form"><i
                                 class="fa-solid fa-magnifying-glass px-2"></i></button>
                     </div>
@@ -78,7 +82,7 @@
                         <ul
                             class="d-flex flex-column justify-content-between align-items-center p-4 rounded fs-3 gap-4 text-black text-opacity-50">
                             <li>
-                                <a href=" {% url 'home' %}?next={{ next }}" class="dropdown-item">
+                                <a href="{% url 'home' %}?next={{ next }}" class="dropdown-item">
                                     Home</a>
                             </li>
                             <li>
