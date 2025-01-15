@@ -10,10 +10,10 @@ from .models import WoofspotEvent
 @admin.register(WoofspotEvent)
 class WoofspotEventAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug', 'created_on', 'image_preview')
-    search_fields = ['title', 'content']
-    list_filter = ('location', 'event_date', 'created_on',)
+    search_fields = ['title', 'description']
+    list_filter = ('location', 'date', 'created_on',)
     prepopulated_fields = {'slug': ('title',)}
-    summernote_fields = ('content',)
+    summernote_fields = ('description',)
     readonly_fields = ['image_preview']
 
 

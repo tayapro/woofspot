@@ -3,8 +3,8 @@ Hello {{ user.username }},
 You've successfully created the event "{{ event.title }}"!
 
 Event details:
-- Date: {{ event.event_date }}
-- Time: {{ event.event_start_time }} - {{ event.event_end_time }}
+- Date: {{ event.date }}
+- Time: {{ event.start_time }} - {{ event.end_time }}
 - Location: {{ event.location }}
 
 Spread the word and invite others to join!

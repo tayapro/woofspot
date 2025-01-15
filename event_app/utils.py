@@ -19,7 +19,7 @@ def is_in_the_past(date):
 
 def remove_leading_space(event):
     event.title.strip()
-    event.content.strip()
+    event.description.strip()
     event.location.strip()
 
 

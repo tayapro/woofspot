@@ -17,9 +17,9 @@
       <div class="d-flex flex-row justify-content-between">
         <div class="flex-grow-1 mb-3">
           <h5 class="card-title mb-3">{{ event.title }}</h5>
-          <p class="card-text text-muted mb-0"><strong>Date:</strong> {{ event.event_date }}</p>
+          <p class="card-text text-muted mb-0"><strong>Date:</strong> {{ event.date }}</p>
           <p class="card-text text-muted mb-0"><strong>Time:</strong>
-            {{ event.event_start_time }} - {{ event.event_end_time }}
+            {{ event.start_time }} - {{ event.end_time }}
           </p>
           <p class="card-text text-muted"><strong class="mb-2">Location:</strong> {{ event.location }}</p>
         </div>
@@ -28,16 +28,16 @@
         </div>
       </div>
       <div>
-        <span id="content-truncated-{{ event.id }}" class="content-truncated">
-          {{ event.content|truncatewords:20 }}
+        <span id="description-truncated-{{ event.id }}" class="description-truncated">
+          {{ event.description|truncatewords:20 }}
         </span>
-        <span id="content-full-{{ event.id }}" class="d-none">
-          {{ event.content }}
+        <span id="description-full-{{ event.id }}" class="d-none">
+          {{ event.description }}
         </span>
         </p>
-        {% with event.content|truncatewords:20 as truncated_content %}
-        {% if event.content != truncated_content %}
-        <a href="#" class="toggle-content text-decoration-none" data-event-id="{{ event.id }}">
+        {% with event.description|truncatewords:20 as truncated_description %}
+        {% if event.description != truncated_description %}
+        <a href="#" class="toggle-description text-decoration-none" data-event-id="{{ event.id }}">
           Show More
         </a>
         {% endif %}

@@ -23,12 +23,24 @@ def get_event_image(event):
 
     return image_url
 
+# def get_all_events(request):
+#     return WoofspotEvent.objects.all()
+
+# def get_all_past_events(events):
+#     timestamp = now().date()
+
+#     past_events = []
+#     for event in events:
+#         if(event.)
+
+#     return past_events
+
 def all_events_list(request):
     timestamp = now().date()
     events = WoofspotEvent.objects.all()
 
-    future_events = WoofspotEvent.objects.filter(event_date__gt=timestamp)
-    past_events = WoofspotEvent.objects.filter(event_date__lte=timestamp)
+    future_events = WoofspotEvent.objects.filter(date__gt=timestamp)
+    past_events = WoofspotEvent.objects.filter(date__lte=timestamp)
 
     for events in (future_events, past_events):
         for event in events:
@@ -47,7 +59,7 @@ def all_events_list(request):
 def event_list(request):
     timestamp = now().date()
 
-    events = WoofspotEvent.objects.filter(event_date__gt=timestamp)
+    events = WoofspotEvent.objects.filter(date__gt=timestamp)
 
     for event in events:
         event.image_url = get_event_image(event)
@@ -65,7 +77,7 @@ def event_view(request, slug):
 
     event.average_rating = Rating.get_average_rating(event)
 
-    event.is_past = is_in_the_past(event.event_date)
+    event.is_past = is_in_the_past(event.date)
     event.is_user_attendee = (request.user in event.attendees.all())
 
     next = request.GET.get("next", reverse("my_event_list"))
@@ -89,24 +101,24 @@ def my_event_list(request):
     
     hosted_by_me_future_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__gt=timestamp)
+                                date__gt=timestamp)
     planning_to_attend_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__gt=timestamp)
+                                date__gt=timestamp)
     past_attending_events = WoofspotEvent.objects.filter(
                                 attendees=request.user,
-                                event_date__lte=timestamp)
+                                date__lte=timestamp)
     past_organizing_events = WoofspotEvent.objects.filter(
                                 organizer=request.user,
-                                event_date__lte=timestamp)
+                                date__lte=timestamp)
     past_events = list(past_attending_events) + list(past_organizing_events)
-    past_events.sort(reverse=True, key=lambda e : (e.event_date, e.event_start_time))
+    past_events.sort(reverse=True, key=lambda e : (e.date, e.start_time))
 
     # Set image URLs and other parameters for all events 
     for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
             event.image_url = get_event_image(event)
-            event.is_past = is_in_the_past(event.event_date)
+            event.is_past = is_in_the_past(event.date)
             event.is_user_attendee = (request.user in event.attendees.all())
             event.average_rating = Rating.get_average_rating(event)
 
@@ -164,13 +176,13 @@ def event_search_results(request):
     if query:
         search_results = WoofspotEvent.objects.filter(
             Q(title__icontains=query) |  
-            Q(content__icontains=query)  
+            Q(description__icontains=query)  
         )
     next = request.GET.get("next", "/")
 
     for event in search_results:
         event.image_url = get_event_image(event)
-        event.is_past = is_in_the_past(event.event_date)
+        event.is_past = is_in_the_past(event.date)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
 
@@ -196,12 +208,12 @@ def my_event_search_results(request):
     search_results = events
     if query:
         search_results = search_results.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
+            Q(title__icontains=query) | Q(description__icontains=query)
         )
 
     for event in search_results:
         event.image_url = get_event_image(event)
-        event.is_past = is_in_the_past(event.event_date)
+        event.is_past = is_in_the_past(event.date)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
     
@@ -243,7 +255,7 @@ def event_create(request):
 
             remove_leading_space(event)
             
-            if not event.title.isascii() or not event.content.isascii() or not event.location.isascii():
+            if not event.title.isascii() or not event.description.isascii() or not event.location.isascii():
                 form.add_error(None, "Please use only latin/accented characters")
                 return render(request, "event_app/event_create.html", {"form": form, "next": next,})
 
@@ -289,9 +301,9 @@ def event_edit(request, slug):
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
 
-    original_date = event.event_date
-    original_event_start_time = event.event_start_time
-    original_event_end_time = event.event_end_time
+    original_date = event.date
+    original_start_time = event.start_time
+    original_end_time = event.end_time
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -301,7 +313,7 @@ def event_edit(request, slug):
             remove_leading_space(updated_event)
 
             if form.changed_data:
-                if not updated_event.title.isascii() or not updated_event.content.isascii() or not updated_event.location.isascii():
+                if not updated_event.title.isascii() or not updated_event.description.isascii() or not updated_event.location.isascii():
                     form.add_error(None, "Please use only latin/accented characters")
                     return render(request, "event_app/event_create.html", {"form": form, "next": next,})    
 

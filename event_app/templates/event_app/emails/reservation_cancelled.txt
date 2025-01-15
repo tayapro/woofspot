@@ -1,6 +1,6 @@
 Hello {{ user.username }},
 
-Your reservation for "{{ event.title }} on {{ event.event_date }} has been successfully cancelled.
+Your reservation for "{{ event.title }} on {{ event.date }} has been successfully cancelled.
 We hope to see you at another woofspot event soon!
 
 If you have any questions, please don't hesitate to contact us, woofspot.app@gmail.com

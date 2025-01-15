@@ -38,11 +38,11 @@ def file_validation(file):
 class WoofspotEvent(models.Model):
     title = models.CharField(max_length=55, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    content = models.TextField()
+    description = models.TextField()
     location = models.CharField(max_length=50)
-    event_date = models.DateField(validators=[date_validation])
-    event_start_time = models.TimeField()
-    event_end_time = models.TimeField()
+    date = models.DateField(validators=[date_validation])
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     attendees = models.ManyToManyField(User, related_name="events_attending", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -51,25 +51,25 @@ class WoofspotEvent(models.Model):
     image = CloudinaryField('image', folder=settings.CLOUDINARY_UPLOAD_FOLDER, validators=[file_validation], resource_type='auto', blank=True)
 
     def __str__(self):
-        return f"Event: {self.title} at {self.location} on {self.event_date}"
+        return f"Event: {self.title} at {self.location} on {self.date}"
 
     def clean(self):
         super().clean()
 
         # Validate that end time is after start time
-        if self.event_date < date.today() or (self.event_date == date.today() and 
-          self.event_start_time < datetime.now().time()):
+        if self.date < date.today() or (self.date == date.today() and 
+          self.start_time < datetime.now().time()):
             raise ValidationError("Event cannot be in the past")
-        if self.event_end_time <= self.event_start_time:
+        if self.end_time <= self.start_time:
             raise ValidationError("Event end time must be after the start time")
 
         night_start = time(21, 0)
         night_end = time(9, 0)
-        if self.event_start_time >= night_start or self.event_start_time < night_end:
+        if self.start_time >= night_start or self.start_time < night_end:
             raise ValidationError("Event start time cannot be between 21:00 and 09:00")
 
-        start_datetime = datetime.combine(datetime.now(), self.event_start_time)
-        end_datetime = datetime.combine(datetime.now(), self.event_end_time)
+        start_datetime = datetime.combine(datetime.now(), self.start_time)
+        end_datetime = datetime.combine(datetime.now(), self.end_time)
         time_difference = end_datetime - start_datetime
 
         # 10800 is 3 hours
@@ -106,8 +106,8 @@ class WoofspotEvent(models.Model):
         self.save(update_fields=['image'])
 
     class Meta:
-        ordering = ["-event_date", "event_start_time"]
-        verbose_name = "Pet-Friendly Event"
+        ordering = ["-date", "start_time"]
+        verbose_name = "The Event"
 
 
 # 1 to 5 stars

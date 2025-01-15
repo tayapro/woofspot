@@ -3,8 +3,8 @@ Hello {{ user.username }},
 Please find new details for the event "{{ event.title }}"!
 
 Event details:
-- Date: {{ event.event_date }}
-- Time: {{ event.event_start_time }} - {{ event.event_end_time }}
+- Date: {{ event.date }}
+- Time: {{ event.start_time }} - {{ event.end_time }}
 - Location: {{ event.location }}
 
 If you have any questions, please don't hesitate to contact us, woofspot.app@gmail.com

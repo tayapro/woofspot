@@ -26,27 +26,27 @@ class EventOrganizerForm(forms.ModelForm):
         model = WoofspotEvent
         fields = [
             'title', 
-            'content', 
+            'description', 
             'location',
-            'event_date',
-            'event_start_time',
-            'event_end_time',
+            'date',
+            'start_time',
+            'end_time',
             'image',
         ]
         labels = {
             'title': 'Title',
-            'content': 'Description',
+            'description': 'Description',
             'location': 'Location',
-            'event_date': 'Date',
-            'event_start_time': 'From',
-            'event_end_time': 'To',
+            'date': 'Date',
+            'start_time': 'From',
+            'end_time': 'To',
         }
         widgets = {
             'title': forms.TextInput(attrs={
                 **TEXT_STYLES,  
                 'placeholder': 'Enter event title',
             }),
-            'content': forms.Textarea(attrs={
+            'description': forms.Textarea(attrs={
                 **TEXT_STYLES, 
                 'rows': 5,
                 'placeholder': 'Enter description for your event',
@@ -55,16 +55,16 @@ class EventOrganizerForm(forms.ModelForm):
                 **TEXT_STYLES,  
                 'placeholder': 'Enter event location',
             }),
-            'event_date': forms.DateInput(attrs={
+            'date': forms.DateInput(attrs={
                 **DATE_TIME_STYLES,  
                 'type': 'date',
                 'min': (date.today() + timedelta(days=1)).isoformat(),
             }),
-            'event_start_time': forms.TimeInput(attrs={
+            'start_time': forms.TimeInput(attrs={
                 **DATE_TIME_STYLES,  
                 'type': 'time',
             }),
-            'event_end_time': forms.TimeInput(attrs={
+            'end_time': forms.TimeInput(attrs={
                 **DATE_TIME_STYLES,  
                 'type': 'time',
             }),

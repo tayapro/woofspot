@@ -17,7 +17,6 @@ function drawAnimatedDog() {
   }
 }
 
-
 // Messages modal window
 function drawModalWindow() {
   const messagesModal = document.getElementById("messagesModal");
@@ -65,7 +64,6 @@ function drawModalWindow() {
   }
 }
 
-
 // Tooltips
 function drawTooltip() {
   var tooltipTriggerList = [].slice.call(
@@ -76,31 +74,33 @@ function drawTooltip() {
   });
 }
 
-
 // Show more/less description on event card
 function showMoreLessText() {
-  document.querySelectorAll(".toggle-content").forEach(function (toggleLink) {
-    toggleLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      const eventId = this.getAttribute("data-event-id");
-      const truncatedElement = document.getElementById(
-        `content-truncated-${eventId}`
-      );
-      const fullElement = document.getElementById(`content-full-${eventId}`);
+  document
+    .querySelectorAll(".toggle-description")
+    .forEach(function (toggleLink) {
+      toggleLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        const eventId = this.getAttribute("data-event-id");
+        const truncatedElement = document.getElementById(
+          `description-truncated-${eventId}`
+        );
+        const fullElement = document.getElementById(
+          `description-full-${eventId}`
+        );
 
-      if (truncatedElement.classList.contains("d-none")) {
-        truncatedElement.classList.remove("d-none");
-        fullElement.classList.add("d-none");
-        this.textContent = "Show More";
-      } else {
-        truncatedElement.classList.add("d-none");
-        fullElement.classList.remove("d-none");
-        this.textContent = "Show Less";
-      }
+        if (truncatedElement.classList.contains("d-none")) {
+          truncatedElement.classList.remove("d-none");
+          fullElement.classList.add("d-none");
+          this.textContent = "Show More";
+        } else {
+          truncatedElement.classList.add("d-none");
+          fullElement.classList.remove("d-none");
+          this.textContent = "Show Less";
+        }
+      });
     });
-  });
 }
-
 
 // Rating
 function drawRatingStars() {
@@ -127,7 +127,6 @@ function drawRatingStars() {
     });
   });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   drawAnimatedDog();
