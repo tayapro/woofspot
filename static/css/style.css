@@ -1,38 +1,14 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Lilita+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lilita+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 :root {
   --font-family: "Rubik", sans-serif;
   --header-font-family: "Fredoka", sans-serif;
   --logo-font-family: "Lilita One", sans-serif;
   --white-color: rgb(251, 251, 251);
-  --bootstrap-black: rgb(8, 10, 12);
-  --bootstrap-black-20: rgba(8, 10, 12, 0.2);
-  --bootstrap-danger-75: rgb(220, 53, 69, 0.75);
   --bootstrap-danger-90: rgb(220, 53, 69, 0.9);
-  --bootstrap-danger-100: rgb(220, 53, 69);
   --bootstrap-gray-100: rgb(243, 244, 247);
-  --bootstrap-gray-200: rgb(231, 234, 238);
-  --bootstrap-gray-300: rgb(219, 223, 230);
-  --bootstrap-gray-400: rgb(207, 212, 222);
-  --bootstrap-gray-500: rgb(170, 179, 197);
-  --bootstrap-gray-600: rgb(109, 125, 156);
-  --bootstrap-gray-700: rgb(74, 86, 109);
-  --bootstrap-gray-800: rgb(50, 58, 73);
-  --bootstrap-gray-900: rgb(33, 38, 49);
-  --bootstrap-bs-blue: rgb(13, 110, 253);
-  --bootstrap-bs-indigo: rgb(102, 16, 242);
-  --bootstrap-bs-purple: rgb(111, 66, 193);
-  --bootstrap-bs-pink: rgb(214, 51, 132);
-  --bootstrap-bs-orange: rgb(253, 126, 20);
-  --bootstrap-bs-yellow: rgb(255, 193, 7);
-  --bootstrap-bs-green: rgb(25, 135, 84);
-  --bootstrap-bs-teal: rgb(32, 201, 151);
-  --bootstrap-bs-cyan: rgb(13, 202, 240);
   --bootstrap-bs-gray: rgb(108, 117, 125);
   --bootstrap-bs-gray-75: rgba(108, 117, 125, 0.75);
-  --bootstrap-bs-gray-50: rgba(108, 117, 125, 0.5);
-  --bootstrap-bs-gray-25: rgba(108, 117, 125, 0.25);
   --bs-gray-700: rgb(73, 80, 87);
   --bs-gray-700-85: rgba(73, 80, 87, 0.85);
 }
@@ -48,18 +24,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.tooltip-inner {
-  background-color: var(--bootstrap-danger-75);
-  color: var(--white-color);
-  border: 1px solid var(--bootstrap-danger-90);
-  box-shadow: 0px 4px 6px var(--bootstrap-black-20);
-  margin-bottom: 0.5rem;
-}
-
-.tooltip-arrow {
-  display: none !important;
 }
 
 ::placeholder {
@@ -115,16 +79,6 @@ ul.errorlist {
   padding-left: 0;
 }
 
-#id_remember {
-  padding: 0.5rem;
-  width: 1rem;
-}
-
-#id_password_helptext,
-#id_remember {
-  font-size: smaller;
-}
-
 form.login p,
 form.signup p {
   margin-bottom: 0.5rem;
@@ -151,7 +105,6 @@ form.login p:last-of-type {
 }
 
 /* base.html styles */
-
 .spinner-overlay {
   position: fixed;
   top: 0;
@@ -165,11 +118,10 @@ form.login p:last-of-type {
   z-index: 1050; /* Higher than Bootstrap modals */
 }
 
-/* Popover menu */
+/* Popover Nav menu */
 #menu {
   width: 100%;
   height: 100%;
-  box-shadow: 0 2px 40px var(--bootstrap-black-20);
 
   /*  undo popover styles  */
   border: none;
@@ -309,12 +261,7 @@ form.login p:last-of-type {
   }
 }
 
-/* Get started page */
-.xmark-icon .fa-solid {
-  display: inline-block;
-  vertical-align: middle;
-}
-
+/* Login page */
 .google-icon {
   width: 24px;
   height: 24px;
@@ -341,30 +288,17 @@ form.login p:last-of-type {
 }
 
 /* Results page */
-.results-container {
-  height: calc(100vh - 130px);
-}
-
 .no-results img {
   height: 200px;
   width: auto;
 }
 
-/* Event view page */
-.event-image > img {
-  width: 500px;
-  height: auto;
-}
-
-.btn-scale {
-  transition: transform 0.2s ease-in-out;
-}
-
-.btn-scale:hover {
-  transform: scale(1.05);
-}
-
 /* Action picture base pages */
+.action-picture-base-container {
+  width: 100dvw !important;
+  height: 100dvh !important;
+}
+
 .action-picture-image {
   background-position: 50% 50%;
   background-size: cover;
@@ -385,12 +319,15 @@ form.login p:last-of-type {
   width: auto;
 }
 
-/* Event Card styles for My Events List page */
-
-/* Card's thumbnail area */
+/* Event Card styles */
 .event-card {
   width: 350px;
   height: 530px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.event-card:hover {
+  transform: scale(1.01);
 }
 
 .card-body {
@@ -409,28 +346,7 @@ form.login p:last-of-type {
   background-size: cover;
 }
 
-.event-card {
-  transition: transform 0.2s ease-in-out;
-}
-
-.event-card:hover {
-  transform: scale(1.01);
-}
-
-.action-picture-base-container {
-  width: 100dvw !important;
-  height: 100dvh !important;
-}
-
 /* Event View page */
-.content-truncated {
-  overflow: hidden;
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
 .event-view-image {
   background-size: cover;
   background-position: center;
@@ -440,10 +356,6 @@ form.login p:last-of-type {
 }
 
 @media (max-width: 768px) {
-  .custom-rounded-card-image-md {
-    height: 100%;
-  }
-
   .event-view-image {
     height: 100%;
   }
@@ -475,4 +387,13 @@ form.login p:last-of-type {
 
 .error-page-logo-img {
   height: calc(1.475rem + 2.7vw);
+}
+
+/* Other styles */
+.btn-scale {
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-scale:hover {
+  transform: scale(1.05);
 }

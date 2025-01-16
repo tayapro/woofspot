@@ -4,8 +4,7 @@ from django.http import HttpResponseForbidden, HttpResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
-from django.utils.timezone import now
-from datetime import time, datetime, date, timedelta
+from datetime import date, timedelta
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from .models import WoofspotEvent
@@ -23,21 +22,35 @@ def get_event_image(event):
 
     return image_url
 
-def query_all_events():
-    return WoofspotEvent.objects.all()
-    
+def query_all_events(request):
+    try:
+        events = WoofspotEvent.objects.all()
+        return events
+    except DatabaseError as db_error:
+        messages.error(request, "A database error occurred while retrieving events. Please try again later.")
+        return False
+    except Exception as e:
+        messages.error(request, f"An unexpected error occurred: {str(e)}")
+        return False
+        
 
-def query_all_events_for_user(user):
-    # Avoid redundant queries
-    events = WoofspotEvent.objects.filter(Q(organizer=user) | Q(attendees=user)).distinct()
-
-    return events
+def query_all_events_for_user(request, user):
+    try:
+        # Avoid redundant queries
+        events = WoofspotEvent.objects.filter(Q(organizer=user) | Q(attendees=user)).distinct()
+        return events
+    except DatabaseError as db_error:
+        messages.error(request, "A database error occurred while retrieving events. Please try again later.")
+        return False
+    except Exception as e:
+        messages.error(request, f"An unexpected error occurred: {str(e)}")
+        return False
 
 
 def all_events_list(request):
     today = date.today()
 
-    events = query_all_events()
+    events = query_all_events(request)
     future_events = list(filter(lambda e: e.date > today, events))
     past_events = list(filter(lambda e: e.date <= today, events))
 
@@ -60,8 +73,8 @@ def carousel_event_list(request):
     today = date.today()
     four_weeks_from_now = today + timedelta(weeks=4)
 
-    events = query_all_events()
-    carousel_events = list(filter(lambda e: today <= e.date <= today + timedelta(weeks=4), events))
+    events = query_all_events(request)
+    carousel_events = list(filter(lambda e: today <= e.date <= four_weeks_from_now, events))
 
     for event in carousel_events:
         event.image_url = get_event_image(event)
@@ -95,14 +108,11 @@ def event_view(request, slug):
     )
 
 
+@login_required
 def my_event_list(request):
-    user = request.user
-    if not user.is_authenticated:
-        return redirect(reverse("account_login"))
-
     today = date.today()
 
-    events = query_all_events_for_user(request.user)
+    events = query_all_events_for_user(request, request.user)
 
     hosted_by_me_future_events = list(filter(lambda e: e.organizer == request.user and e.date > today, events))
     planning_to_attend_events = list(filter(lambda e: request.user in e.attendees.all() and e.date > today, events))
@@ -121,7 +131,7 @@ def my_event_list(request):
             event.average_rating = Rating.get_average_rating(event)
 
     return render(request, "event_app/my_event_list.html",
-                 {"user": user,
+                 {"user": request.user,
                   "hosted_by_me_future_events": hosted_by_me_future_events,
                   "planning_to_attend_events": planning_to_attend_events,
                   "past_events": past_events,
@@ -130,7 +140,6 @@ def my_event_list(request):
 
 @login_required
 def reservation_submit(request, slug):
-    user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
     if request.method == "POST" and "reserve_spot" in request.POST:
@@ -140,21 +149,20 @@ def reservation_submit(request, slug):
             event.attendees.add(request.user)
             messages.success(request, "Slot is reserved!")
             action = "Reservation Confirmed"
-            send_email(user, event, action)
+            send_email(request.user, event, action)
 
     return redirect(reverse("event_view", args=[slug]))
 
 
 @login_required
 def reservation_cancel(request, slug):
-    user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
     next = request.GET.get("next", reverse("my_event_list"))
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
-        event.attendees.remove(user)
+        event.attendees.remove(request.user)
         action = "Reservation Cancelled"
-        send_email(user, event, action)
+        send_email(request.user, event, action)
 
         messages.success(request, "Slot is canceled!")
 
@@ -163,7 +171,7 @@ def reservation_cancel(request, slug):
     return render(request, "event_app/reservation_cancel.html",
     {
         "event": event,
-        "user": user,
+        "user": request.user,
         "next": next
     })
 
@@ -176,7 +184,7 @@ def event_search_results(request):
     query = request.GET.get("query", "").strip()
 
     if query:
-        search_results = query_all_events()
+        search_results = query_all_events(request)
         if search_type == "my" and request.user.is_authenticated:
             search_results = query_all_events_for_user(request.user)
         search_results = list(filter(lambda e: query.lower() in e.title.lower() or 
@@ -206,10 +214,10 @@ def event_search_results(request):
 @login_required
 def like_toggle(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-
+    event.like_toggle(request.user)
+    
     next = request.GET.get("next", "home")
 
-    event.like_toggle(request.user)
     return render(request, "like_container.html", {
         "next": next,
         "event": event
@@ -219,7 +227,6 @@ def like_toggle(request, slug):
 @login_required
 def event_create(request):
     next = request.GET.get("next", reverse("my_event_list"))
-    user = request.user
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -227,7 +234,7 @@ def event_create(request):
         if form.is_valid():
             event = form.save(commit=False)
 
-            event.organizer = user
+            event.organizer = request.user
 
             remove_leading_space(event)
             
@@ -250,7 +257,7 @@ def event_create(request):
                 event.full_clean()
                 event.save()
                 action = "Event Created"
-                send_email(user, event, action)
+                send_email(request.user, event, action)
                 messages.success(request, "Event created successfully!")
                 return redirect(next)
             except ValidationError as e:
@@ -270,7 +277,6 @@ def event_create(request):
 
 @login_required
 def event_edit(request, slug):
-    user = request.user
     event = get_object_or_404(WoofspotEvent, slug=slug)
     next = request.GET.get("next", reverse("my_event_list"))
 
@@ -297,7 +303,7 @@ def event_edit(request, slug):
                     event.full_clean()
                     updated_event.save()
                     action = "Event Changed"
-                    send_email(user, updated_event, action)
+                    send_email(request.user, updated_event, action)
                     messages.success(request, "Event updated successfully!")
                     return redirect(next)
                 except ValidationError as e:
@@ -325,7 +331,6 @@ def event_edit(request, slug):
 @login_required
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    user = request.user
     next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
@@ -335,7 +340,7 @@ def event_delete(request, slug):
         # Delete related ratings
         Rating.objects.filter(event=event).delete()
         action = "Event Cancelled"
-        send_email(user, event, action)
+        send_email(request.user, event, action)
         event.delete()
         return redirect("my_event_list")
     
