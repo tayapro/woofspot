@@ -186,7 +186,7 @@ def event_search_results(request):
     if query:
         search_results = query_all_events(request)
         if search_type == "my" and request.user.is_authenticated:
-            search_results = query_all_events_for_user(request.user)
+            search_results = query_all_events_for_user(request, request.user)
         search_results = list(filter(lambda e: query.lower() in e.title.lower() or 
                             query.lower() in e.description.lower(), 
                             search_results))
