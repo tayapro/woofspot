@@ -24,6 +24,7 @@ function showSpinner() {
   // Show spinner on page unload
   window.addEventListener("beforeunload", function () {
     popoverMenu.hidePopover();
+    bootstrap.Tooltip.getInstance("#event-calendar").hide();
     spinner.classList.remove("d-none");
   });
 }
