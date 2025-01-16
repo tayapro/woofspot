@@ -12,7 +12,7 @@
 
     {% if query and search_results %}
     <p class="text-black text-opacity-50 pb-0 mb-0">Here are the results</p>
-    {% if request.path == my_event_search_results_url %}
+    {% if search_type == "my" %}
     <p class="text-black text-opacity-50 mb-5">for your events matching "<strong>
             {{ query }}</strong>":</p>
     {% else%}

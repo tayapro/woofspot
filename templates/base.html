@@ -5,7 +5,6 @@
 {% url 'account_logout' as account_logout_url %}
 {% url 'my_event_list' as my_event_list_url %}
 {% url 'event_search_results' as event_search_results_url %}
-{% url 'my_event_search_results' as my_event_search_results_url %}
 
 
 <!DOCTYPE html>
@@ -41,24 +40,33 @@
 
         <div class="d-flex flex-row gap-2">
             <div class="d-flex gap-3">
-                <form method="GET" action="{% if request.path == my_event_list_url %}
-                                {% url 'my_event_search_results' %}
-                              {% else %}
-                                {% url 'event_search_results' %}
-                              {% endif %}" id="search-form" class="d-flex">
-                    <div class="search-form-container z-3 shadow-sm d-flex bg-light">
+                <form method="get" action="{% url 'event_search_results' %}?search_type={{search_type}}"
+                    id="search-form" class="d-flex align-items-center">
+                    <div class="z-3 shadow-sm d-flex bg-light" id="search-form-container">
+
+                        <select name="search_type" id="search-select"
+                            class="form-select rounded-start bg-secondary text-light w-auto" aria-label="Search Type">
+                            <option value="all">All</option>
+                            {% if user.is_authenticated and search_type == "my" %}
+                            <option value="my" selected>My</option>
+                            {% elif user.is_authenticated %}
+                            <option value="my">My</option>
+                            {% endif %}
+                        </select>
+
                         <label for="search-input">
-                            <input type="text" id="search-input" class="form-control m-0" name="query"
+                            <input type="text" id="search-input" class="form-control m-0 rounded-0" name="query"
                                 placeholder="Search..." minlength="2" size="20" autocomplete="off" aria-label="Search"
                                 required>
                         </label>
-                        {% if request.path != my_event_search_results_url and request.path != event_search_results_url%}
+                        {% if request.path != event_search_results_url%}
                         <input type="hidden" name="next" value="{{ request.path }}">
                         {% else %}
                         <input type="hidden" name="next" value="{{ next }}">
                         {% endif %}
-                        <button type="submit" class="btn btn-subtle m-0" id="bth-search-form"><i
-                                class="fa-solid fa-magnifying-glass px-2"></i></button>
+                        <button type="submit" class="btn btn-subtle m-0 rounded-end" id="bth-search-form">
+                            <i class="fa-solid fa-magnifying-glass px-2"></i>
+                        </button>
                     </div>
                 </form>
             </div>

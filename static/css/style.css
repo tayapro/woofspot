@@ -66,6 +66,13 @@ body {
   color: rgba(124, 124, 125, 0.6) !important;
 }
 
+#search-select {
+  border-radius: 5px 0 0 5px !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f8f9fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  color: #f8f9fa;
+  border: 1px solid rgb(108, 117, 125);
+}
+
 /* Custom allauth styles for login, signup, reset password pages */
 #login-form label,
 #signup-form label {
@@ -292,7 +299,7 @@ form.login p:last-of-type {
 }
 
 @media (max-width: 576px) {
-  .search-form-container {
+  #search-form-container {
     justify-content: center;
     position: fixed;
     bottom: 0;

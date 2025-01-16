@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path("", views.carousel_event_list, name="home"),
     path("my/event/list/", views.my_event_list, name="my_event_list"),
-    path("my/event/search/", views.my_event_search_results, name="my_event_search_results"),
     path("event/search/", views.event_search_results, name="event_search_results"),
     path("reservation/submit/<slug:slug>/", views.reservation_submit, name="reservation_submit"),
     path("reservation/cancel/<slug:slug>/", views.reservation_cancel, name="reservation_cancel"),

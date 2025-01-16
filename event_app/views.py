@@ -169,13 +169,20 @@ def reservation_cancel(request, slug):
 
 
 def event_search_results(request):
-    query = request.GET.get("query")  
-    search_results = []
+    search_type = request.GET.get("search_type", "all")
+    if search_type == "my" and not request.user.is_authenticated:
+        return redirect(reverse("account_login"))
+
+    query = request.GET.get("query", "").strip()
+
     if query:
-        search_results = WoofspotEvent.objects.filter(
-            Q(title__icontains=query) |  
-            Q(description__icontains=query)  
-        )
+        search_results = query_all_events()
+        if search_type == "my" and request.user.is_authenticated:
+            search_results = query_all_events_for_user(request.user)
+        search_results = list(filter(lambda e: query.lower() in e.title.lower() or 
+                            query.lower() in e.description.lower(), 
+                            search_results))
+
     next = request.GET.get("next", "/")
 
     for event in search_results:
@@ -184,44 +191,17 @@ def event_search_results(request):
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
 
-    return render(request,
-                  "event_app/event_search_results.html", 
-                  {
-                    "next": next,
-                    "query": query, 
-                    "search_results": search_results
-                  })
-
-@login_required
-def my_event_search_results(request):
-    user = request.user
-    
-    events = WoofspotEvent.objects.filter(
-        Q(attendees=user) | Q(organizer=user)
+    return render(
+        request,
+        "event_app/event_search_results.html",
+        {
+            "next": next,
+            "query": query,
+            "search_results": search_results,
+            "search_type": search_type,
+        },
     )
-    
-    query = request.GET.get("query")  
-    search_results = events
-    if query:
-        search_results = search_results.filter(
-            Q(title__icontains=query) | Q(description__icontains=query)
-        )
 
-    for event in search_results:
-        event.image_url = get_event_image(event)
-        event.is_past = is_in_the_past(event.date)
-        event.is_user_attendee = (request.user in event.attendees.all())
-        event.average_rating = Rating.get_average_rating(event)
-    
-    next = request.GET.get("next", reverse("my_event_list"))
-    
-    return render(request, 
-                  "event_app/event_search_results.html",
-                  {
-                    "next": next,
-                    "query": query,
-                    "search_results": search_results
-                  })
 
 @login_required
 def like_toggle(request, slug):
