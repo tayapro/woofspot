@@ -82,7 +82,7 @@
                         class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
                         <button class="btn rounded-circle close-btn position-fixed top-0 end-0 m-3 z-3"
                             popovertarget="menu" popovertargetaction="hide">
-                            <span aria-hidden="true"><i
+                            <span role="none"><i
                                     class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></span>
                             <span class="sr-only">Close menu</span>
                         </button>
@@ -125,7 +125,7 @@
 
     <!-- Modal Window to Messages -->
     {% if messages %}
-    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" inert>
+    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

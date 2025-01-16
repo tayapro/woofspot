@@ -23,8 +23,12 @@ function showSpinner() {
 
   // Show spinner on page unload
   window.addEventListener("beforeunload", function () {
-    popoverMenu.hidePopover();
-    bootstrap.Tooltip.getInstance("#event-calendar").hide();
+    if (popoverMenu) {
+      popoverMenu.hidePopover();
+    }
+    if (bootstrap.Tooltip.getInstance("#event-calendar")) {
+      bootstrap.Tooltip.getInstance("#event-calendar").hide();
+    }
     spinner.classList.remove("d-none");
   });
 }
@@ -37,16 +41,6 @@ function drawModalWindow() {
     const alerts = messagesModal.querySelectorAll(".alert");
     if (alerts.length > 0) {
       const modal = new bootstrap.Modal(messagesModal);
-
-      // Remove `inert` when modal is shown
-      messagesModal.addEventListener("shown.bs.modal", function () {
-        messagesModal.removeAttribute("inert");
-      });
-
-      // Add `inert` when modal is hidden
-      messagesModal.addEventListener("hidden.bs.modal", function () {
-        messagesModal.setAttribute("inert", "");
-      });
 
       alerts.forEach((alert) => {
         if (alert.classList.contains("success")) {
@@ -75,6 +69,24 @@ function drawModalWindow() {
     }
   }
 }
+
+// Hamburger Menu
+// function handleInertHamburgerMenu() {
+//   const menu = document.getElementById("menu");
+//   const closeButton = document.querySelector(".close-btn");
+
+//   closeButton.addEventListener("click", function () {
+//     menu.setAttribute("inert", "");
+//     menu.classList.add("d-none");
+//   });
+
+//   document.addEventListener("click", function (event) {
+//     if (event.target.matches("[popover]")) {
+//       menu.removeAttribute("inert");
+//       menu.classList.remove("d-none");
+//     }
+//   });
+// }
 
 // Tooltips
 function drawTooltip() {
