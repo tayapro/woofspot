@@ -60,9 +60,4 @@ urlpatterns = [
     path("trigger-400/", views.trigger_400, name="trigger_400"),
     path("trigger-403/", views.trigger_403, name="trigger_403"),
     path("trigger-500/", views.trigger_500, name="trigger_500"),
-]
-
-# Serve static and media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

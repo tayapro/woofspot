@@ -48,7 +48,7 @@ function drawModalWindow() {
             `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` +
             alert.innerHTML;
         }
-        if (alert.classList.contains("danger")) {
+        if (alert.classList.contains("error")) {
           alert.innerHTML =
             `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` +
             alert.innerHTML;

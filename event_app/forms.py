@@ -2,6 +2,8 @@ from django import forms
 from django.forms.widgets import ClearableFileInput
 from cloudinary.forms import CloudinaryJsFileField
 from datetime import date, timedelta
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email, MinLengthValidator
 from .models import WoofspotEvent
 from .models import Rating
 
@@ -117,3 +119,45 @@ class ReviewForm(forms.ModelForm):
         review_text = self.cleaned_data.get('review_text')
         
         return self.cleaned_data
+
+
+def validate_name(value):
+    """Ensure name is not empty or only spaces."""
+
+    if not value.strip():
+        raise ValidationError("Name cannot be empty or spaces.")
+
+def validate_comment(value):
+    """Ensure comment is more than 2 characters and not just spaces."""
+    
+    if len(value.strip()) <= 2:
+        raise ValidationError("Comment must be more than 2 characters and cannot be just spaces.")
+
+
+class ContactUsForm(forms.Form):
+    name = forms.CharField(
+        required=True,
+        max_length=100,
+        validators=[MinLengthValidator(2)],
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Enter your name",
+        }),
+        label="Name:"
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "class": "form-control",
+            "placeholder": "Enter your email",
+        }),
+        label="E-mail:"
+    )
+    comment = forms.CharField(
+        validators=[MinLengthValidator(5)],
+        widget=forms.Textarea(attrs={
+            "class": "form-control",
+            "rows": 4,
+            "placeholder": "Enter your message...",
+        }),
+        label="Comment:"
+    )

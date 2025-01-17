@@ -7,11 +7,9 @@ from django.db.models import Q
 from datetime import date, timedelta
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
-from .models import WoofspotEvent
-from .forms import EventOrganizerForm
-from .models import Rating
-from .forms import ReviewForm
-from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space
+from .models import WoofspotEvent, Rating
+from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
+from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, contact_us_send_email
 
 
 def get_event_image(event):
@@ -21,6 +19,7 @@ def get_event_image(event):
         image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1736449375/Woofspot/image_coming_soon_3.webp"
 
     return image_url
+
 
 def query_all_events(request):
     try:
@@ -69,7 +68,9 @@ def all_events_list(request):
         "next": next,
     })
 
-def carousel_event_list(request):
+
+def carousel_events_contact_us(request):
+    # Carousel section
     today = date.today()
     four_weeks_from_now = today + timedelta(weeks=4)
 
@@ -82,8 +83,40 @@ def carousel_event_list(request):
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
 
+    # Contact Us section
+
+    # Handle submit (POST)
+    if request.method == "POST":
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            comment = form.cleaned_data["comment"]
+
+            try:
+                contact_us_send_email(request, name, email, comment)
+                
+                messages.success(request, "Your message has been sent successfully!")
+                return render(request, "event_app/index.html", {
+                                    "events": carousel_events,
+                                    "form": ContactUsForm()})
+            except ValidationError as e:
+                form.add_error(None, e.messages)
+                return render(request, "event_app/index.html", {
+                    "events": carousel_events,
+                    "form": form})
+        else:
+            messages.error(request, "Please correct the errors in your Contact Us form.")
+            form.add_error(None, "please make changes.")
+            return render(request, "event_app/index.html", {
+                    "events": carousel_events,
+                    "form": form})
+
+    # Handle page (GET)
+    form = ContactUsForm()
     return render(request, "event_app/index.html", {
         "events": carousel_events,
+        "form": form
     })
 
 

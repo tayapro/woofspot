@@ -1,0 +1,34 @@
+<ul class="errorlist">
+    {% for key, values in form.errors.items %}
+    <li>
+        {% if key != '__all__' %}
+        {{ key|capfirst }}:
+        {% endif %}
+        {{ values|join:", " }}
+    </li>
+    {% endfor %}
+</ul>
+
+
+<form method="POST" class="bg-light p-4" id="contact-us-form">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        {{ form.email.label_tag|safe }}
+        {{ form.email }}
+    </div>
+    <div class="mb-3">
+        {{ form.comment.label_tag|safe }}
+        {{ form.comment }}
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit" class="btn-scale btn-scale btn btn-secondary px-5">
+            Contact us
+        </button>
+    </div>
+</form>

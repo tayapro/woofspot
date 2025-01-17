@@ -1,0 +1,13 @@
+Hello Woofspot Team,
+
+You have received a new message from the contact form:
+
+Name: {{ name }}, from email: {{ email_from }}
+
+Message:
+{{ comment }}
+
+Make sure to respond promptly if necessary.
+
+Thank you,
+Your Woofspot Contact Us Form

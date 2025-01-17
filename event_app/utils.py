@@ -56,7 +56,7 @@ def send_email(user, event, action):
     """
     Sends email notifications based on the specified action.
 
-    Args:
+    Parameters:
         user: The user object representing the recipient of the email.
         event: The event object containing event details.
         action: A string specifying the type of action triggering 
@@ -138,3 +138,35 @@ def send_email(user, event, action):
             email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
             email.attach_alternative(html_content, "text/html")
             email.send()
+
+
+def contact_us_send_email(request, name, email_from, comment):
+    """
+    Sends an email to the Woofspot team when the contact form is submitted.
+    
+    Parameters:
+        :param name: The name of the user submitting the form.
+        :param email_from: The email address of the user.
+        :param comment: The comment/message submitted by the user.
+    """
+        # Establish a connection to the email server
+    with get_connection(
+        host=settings.EMAIL_HOST,
+        port=settings.EMAIL_PORT,
+        username=settings.EMAIL_HOST_USER,
+        password=settings.EMAIL_HOST_PASSWORD,
+        use_tls=settings.EMAIL_USE_TLS,
+    ) as connection:
+        # Define recipient list and subject
+        recipient_list = ["woofspot.app@gmail.com"]
+        subject = f"Contact Form Submission from {name}"
+
+        # Prepare email content
+        context = {"name": name, "email_from": email_from, "comment": comment}
+        text_content = render_to_string("event_app/emails/contact_us_submitted.txt", context)
+        html_content = render_to_string("event_app/emails/contact_us_submitted.html", context)
+
+        # Create and send email
+        email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
+        email.attach_alternative(html_content, "text/html")
+        email.send()
