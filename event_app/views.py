@@ -9,7 +9,7 @@ from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from .models import WoofspotEvent, Rating
 from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
-from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, contact_us_send_email
+from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
 
 def get_event_image(event):
@@ -94,7 +94,7 @@ def carousel_events_contact_us(request):
             comment = form.cleaned_data["comment"]
 
             try:
-                contact_us_send_email(request, name, email, comment)
+                send_contact_us_email(name, email, comment)
                 
                 messages.success(request, "Your message has been sent successfully!")
                 return render(request, "event_app/index.html", {

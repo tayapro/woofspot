@@ -19,7 +19,7 @@ def validate_image_url(url, timeout=5):
         response = requests.head(url, timeout=timeout)
         return response.status_code == 200     
     except requests.RequestException as e:
-        print(f"Error validating URL {url}: {e}")
+        messages.error(request, "The image URL is invalid or inaccessible.")
         return False
 
 
@@ -140,7 +140,7 @@ def send_email(user, event, action):
             email.send()
 
 
-def contact_us_send_email(request, name, email_from, comment):
+def send_contact_us_email(name, email_from, comment):
     """
     Sends an email to the Woofspot team when the contact form is submitted.
     
