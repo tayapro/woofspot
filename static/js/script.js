@@ -70,6 +70,24 @@ function drawModalWindow() {
   }
 }
 
+function scrollToContactUsSection() {
+  const contactUsContainer = document.getElementById("contact-us-section");
+
+  if (contactUsContainer) {
+    const scrollToSection = contactUsContainer
+      .getAttribute("data-scroll-to")
+      .trim();
+
+    // Ensure that scrollToSection is valid
+    if (scrollToSection && scrollToSection !== "None") {
+      const targetElement = document.getElementById(scrollToSection);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
+}
+
 // Hamburger Menu
 // function handleInertHamburgerMenu() {
 //   const menu = document.getElementById("menu");
@@ -155,6 +173,7 @@ function drawRatingStars() {
 document.addEventListener("DOMContentLoaded", function () {
   drawAnimatedDog();
   showSpinner();
+  scrollToContactUsSection();
   drawModalWindow();
   drawTooltip();
   showMoreLessText();

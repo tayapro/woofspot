@@ -104,13 +104,14 @@ def carousel_events_contact_us(request):
                 form.add_error(None, e.messages)
                 return render(request, "event_app/index.html", {
                     "events": carousel_events,
-                    "form": form})
+                    "form": form,
+                    "scroll_to": "contact-us-section"})
         else:
-            messages.error(request, "Please correct the errors in your Contact Us form.")
             form.add_error(None, "please make changes.")
             return render(request, "event_app/index.html", {
                     "events": carousel_events,
-                    "form": form})
+                    "form": form,
+                    "scroll_to": "contact-us-section"})
 
     # Handle page (GET)
     form = ContactUsForm()
