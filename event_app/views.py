@@ -71,11 +71,11 @@ def all_events_list(request):
 
 def carousel_events_contact_us(request):
     # Carousel section
-    today = date.today()
-    four_weeks_from_now = today + timedelta(weeks=4)
+    tomorrow = date.today() + timedelta(days=1)
+    four_weeks = tomorrow + timedelta(days=1, weeks=4)
 
     events = query_all_events(request)
-    carousel_events = list(filter(lambda e: today <= e.date <= four_weeks_from_now, events))
+    carousel_events = list(filter(lambda e: tomorrow <= e.date <= four_weeks, events))
 
     for event in carousel_events:
         event.image_url = get_event_image(event)
