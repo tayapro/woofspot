@@ -209,6 +209,9 @@ def reservation_cancel(request, slug):
 
 
 def event_search_results(request):
+    search_results = WoofspotEvent.objects.none()
+    print(f"SEARCH_RESULTS: {search_results}")
+
     search_type = request.GET.get("search_type", "all")
     if search_type == "my" and not request.user.is_authenticated:
         return redirect(reverse("account_login"))
@@ -222,6 +225,8 @@ def event_search_results(request):
         search_results = list(filter(lambda e: query.lower() in e.title.lower() or 
                             query.lower() in e.description.lower(), 
                             search_results))
+    else:
+        messages.error(request, "Please try a different search.")
 
     next = request.GET.get("next", "/")
 
