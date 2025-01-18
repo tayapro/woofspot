@@ -97,9 +97,7 @@ def carousel_events_contact_us(request):
                 send_contact_us_email(name, email, comment)
                 
                 messages.success(request, "Your message has been sent successfully!")
-                return render(request, "event_app/index.html", {
-                                    "events": carousel_events,
-                                    "form": ContactUsForm()})
+                return redirect(reverse('home'))
             except ValidationError as e:
                 form.add_error(None, e.messages)
                 return render(request, "event_app/index.html", {
