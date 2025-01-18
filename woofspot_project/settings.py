@@ -216,3 +216,5 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
+
+CSRF_FAILURE_VIEW = "woofspot_project.views.custom_403_csrf"
