@@ -22,24 +22,10 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 from django.conf.urls.static import static
 from . import views
 
-
-# Custom error handlers
-def custom_400(request, exception):
-    return render(request, "400.html", status=400)
-
-def custom_403(request, exception):
-    return render(request, "403.html", status=403)
-
-def custom_404(request, exception):
-    return render(request, "404.html", status=404)
-
-def custom_500(request):
-    return render(request, "500.html", status=500)
-
-handler400 = custom_400
-handler403 = custom_403
-handler404 = custom_404
-handler500 = custom_500
+handler400 = 'woofspot_project.views.custom_400'
+handler403 = 'woofspot_project.views.custom_403'
+handler404 = 'woofspot_project.views.custom_404'
+handler500 = 'woofspot_project.views.custom_500'
 
 
 # URL patterns
@@ -56,8 +42,4 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Event app (root URL)
     path("", include("event_app.urls"), name="event-app-urls"),
-    # Other URL patterns
-    path("trigger-400/", views.trigger_400, name="trigger_400"),
-    path("trigger-403/", views.trigger_403, name="trigger_403"),
-    path("trigger-500/", views.trigger_500, name="trigger_500"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

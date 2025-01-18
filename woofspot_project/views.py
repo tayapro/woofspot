@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError
 
 
-def trigger_400(request):
-    return HttpResponseBadRequest(render(request, "400.html"))
+# Custom error handlers
+def custom_400(request, exception):
+    return  HttpResponseBadRequest(render(request, "400.html"))
 
-
-def trigger_403(request):
+def custom_403(request, exception):
     return HttpResponseForbidden(render(request, "403.html"))
 
+def custom_404(request, exception):
+    return HttpResponseNotFound(render(request, "404.html"))
 
-def trigger_500(request):
-    raise Exception("This is a test exception for the 500 error page.")
+def custom_500(request):
+    return HttpResponseServerError(render(request, "500.html"))

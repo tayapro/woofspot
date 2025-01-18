@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import date, timedelta
 from django.utils.text import slugify
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from .models import WoofspotEvent, Rating
 from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
 from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
@@ -318,7 +318,8 @@ def event_edit(request, slug):
     next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
-        return HttpResponseForbidden("Unauthorized access")
+        # To render the custom 403 template
+        raise PermissionDenied
 
     original_date = event.date
     original_start_time = event.start_time
