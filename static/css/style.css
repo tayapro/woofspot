@@ -5,12 +5,14 @@
   --header-font-family: "Fredoka", sans-serif;
   --logo-font-family: "Lilita One", sans-serif;
   --white-color: rgb(251, 251, 251);
+  --bootstrap-black-20: rgba(8, 10, 12, 0.2);
   --bootstrap-danger-90: rgb(220, 53, 69, 0.9);
   --bootstrap-gray-100: rgb(243, 244, 247);
   --bootstrap-bs-gray: rgb(108, 117, 125);
   --bootstrap-bs-gray-75: rgba(108, 117, 125, 0.75);
   --bs-gray-700: rgb(73, 80, 87);
   --bs-gray-700-85: rgba(73, 80, 87, 0.85);
+  --bootstrap-danger-75: rgb(220, 53, 69, 0.75);
 }
 
 * {
@@ -35,6 +37,17 @@ body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f8f9fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   color: #f8f9fa;
   border: 1px solid rgb(108, 117, 125);
+}
+
+.tooltip-inner {
+  background-color: var(--bootstrap-danger-75);
+  color: var(--white-color);
+  border: 1px solid var(--bootstrap-danger-90);
+  box-shadow: 0px 4px 6px var(--bootstrap-black-20);
+  margin-bottom: 0.5rem;
+}
+.tooltip-arrow {
+  display: none !important;
 }
 
 /* Custom allauth styles for login, signup, reset password pages */
