@@ -42,27 +42,30 @@ function drawModalWindow() {
     if (alerts.length > 0) {
       const modal = new bootstrap.Modal(messagesModal);
 
+      // Add icons to each type of alert
       alerts.forEach((alert) => {
+        let iconHTML = "";
         if (alert.classList.contains("success")) {
-          alert.innerHTML =
-            `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>` +
-            alert.innerHTML;
+          iconHTML = `<i class="fa-solid fa-xl fa-circle-check text-success me-2"></i>`;
+        } else if (alert.classList.contains("error")) {
+          iconHTML = `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>`;
+        } else if (alert.classList.contains("warning")) {
+          iconHTML = `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>`;
+        } else if (alert.classList.contains("info")) {
+          iconHTML = `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>`;
         }
-        if (alert.classList.contains("error")) {
-          alert.innerHTML =
-            `<i class="fa-solid fa-xl fa-circle-exclamation text-danger me-2"></i>` +
-            alert.innerHTML;
-        }
-        if (alert.classList.contains("warning")) {
-          alert.innerHTML =
-            `<i class="fa-solid fa-xl fa-triangle-exclamation text-warning me-2"></i>` +
-            alert.innerHTML;
-        }
-        if (alert.classList.contains("info")) {
-          alert.innerHTML =
-            `<i class="fa-solid fa-xl fa-circle-info text-info me-2"></i>` +
-            alert.innerHTML;
-        }
+        alert.innerHTML = `${iconHTML}${alert.innerHTML}`;
+      });
+
+      // Manage aria-hidden for accessibility
+      messagesModal.addEventListener("shown.bs.modal", () => {
+        messagesModal.removeAttribute("aria-hidden");
+        messagesModal.focus(); // Ensure focus is set to the modal
+      });
+
+      messagesModal.addEventListener("hidden.bs.modal", () => {
+        messagesModal.setAttribute("aria-hidden", "true");
+        messagesModal.classList.add("d-none");
       });
 
       modal.show();
@@ -87,24 +90,6 @@ function scrollToContactUsSection() {
     }
   }
 }
-
-// Hamburger Menu
-// function handleInertHamburgerMenu() {
-//   const menu = document.getElementById("menu");
-//   const closeButton = document.querySelector(".close-btn");
-
-//   closeButton.addEventListener("click", function () {
-//     menu.setAttribute("inert", "");
-//     menu.classList.add("d-none");
-//   });
-
-//   document.addEventListener("click", function (event) {
-//     if (event.target.matches("[popover]")) {
-//       menu.removeAttribute("inert");
-//       menu.classList.remove("d-none");
-//     }
-//   });
-// }
 
 // Tooltips
 function drawTooltip() {
