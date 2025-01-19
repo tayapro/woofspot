@@ -1,11 +1,5 @@
 {% load static %}
-{% url 'home' as home_url %}
-{% url 'account_login' as account_login_url %}
-{% url 'account_signup' as account_signup_url %}
-{% url 'account_logout' as account_logout_url %}
-{% url 'my_event_list' as my_event_list_url %}
 {% url 'event_search_results' as event_search_results_url %}
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +53,7 @@
                                 placeholder="Search..." minlength="2" size="20" autocomplete="off" aria-label="Search"
                                 required>
                         </label>
-                        {% if request.path != event_search_results_url%}
+                        {% if request.path != event_search_results_url %}
                         <input type="hidden" name="next" value="{{ request.path }}">
                         {% else %}
                         <input type="hidden" name="next" value="{{ next }}">

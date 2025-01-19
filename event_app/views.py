@@ -158,10 +158,10 @@ def reservation_submit(request, slug):
 
     if request.method == "POST" and "reserve_spot" in request.POST:
         if request.user in event.attendees.all():
-            messages.error(request, "You have already reserved a spot for this event.")
+            messages.error(request, "You have already reservation for this event.")
         else:
             event.attendees.add(request.user)
-            messages.success(request, "Slot is reserved!")
+            messages.success(request, "Reservation Confirmed!")
             action = "Reservation Confirmed"
             send_email(request.user, event, action)
 
@@ -178,7 +178,7 @@ def reservation_cancel(request, slug):
         action = "Reservation Cancelled"
         send_email(request.user, event, action)
 
-        messages.success(request, "Slot is canceled!")
+        messages.success(request, "Your reservation has been cancelled!")
 
         return redirect(reverse("my_event_list"))
         
@@ -302,6 +302,8 @@ def event_view(request, slug):
     event.is_user_attendee = (request.user in event.attendees.all())
 
     next = request.GET.get("next", reverse("my_event_list"))
+
+    print(f"NEXT: {next}")
 
     return render(
         request,
