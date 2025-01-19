@@ -3,8 +3,9 @@ from django.utils.timezone import now
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import get_connection, EmailMultiAlternatives
+from django.contrib import messages
 
-def validate_image_url(url, timeout=5):
+def validate_image_url(request, url, timeout=5):
     """
     Validate if the given URL point to an accessible image resource.
 
@@ -67,11 +68,11 @@ def send_email(user, event, action):
     """
 
     # Establish a connection to the email server
-    with get_connection(host=settings.EMAIL_HOST, 
-            port=settings.EMAIL_PORT,  
-            username=settings.EMAIL_HOST_USER, 
-            password=settings.EMAIL_HOST_PASSWORD, 
-            use_tls=settings.EMAIL_USE_TLS
+    with get_connection(host = settings.EMAIL_HOST, 
+            port = settings.EMAIL_PORT,  
+            username = settings.EMAIL_HOST_USER, 
+            password = settings.EMAIL_HOST_PASSWORD, 
+            use_tls = settings.EMAIL_USE_TLS
         ) as connection:  
         email_from = settings.EMAIL_HOST_USER 
         recipient_list = [user.email, ]
@@ -151,11 +152,11 @@ def send_contact_us_email(name, email_from, comment):
     """
         # Establish a connection to the email server
     with get_connection(
-        host=settings.EMAIL_HOST,
-        port=settings.EMAIL_PORT,
-        username=settings.EMAIL_HOST_USER,
-        password=settings.EMAIL_HOST_PASSWORD,
-        use_tls=settings.EMAIL_USE_TLS,
+        host = settings.EMAIL_HOST,
+        port = settings.EMAIL_PORT,
+        username = settings.EMAIL_HOST_USER,
+        password = settings.EMAIL_HOST_PASSWORD,
+        use_tls = settings.EMAIL_USE_TLS,
     ) as connection:
         # Define recipient list and subject
         recipient_list = ["woofspot.app@gmail.com"]

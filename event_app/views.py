@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, HttpResponse
@@ -7,18 +8,46 @@ from django.db.models import Q
 from datetime import date, timedelta
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.conf import settings
+from django.core.cache import cache
 from .models import WoofspotEvent, Rating
 from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
 from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
 
-def get_event_image(event):
-    if event.image and validate_image_url(event.image.url):
+def get_event_image(request, event):
+    if event.image and validate_image_url(request, event.image.url):
         image_url = event.image.url
     else:
-        image_url = "https://res.cloudinary.com/stipaxa/image/upload/v1736449375/Woofspot/image_coming_soon_3.webp"
+        image_url = os.environ.get("DEFAULT_IMAGE")
 
     return image_url
+
+
+def get_cached_image_urls(request, events):
+    cached_urls = {}
+    uncached_events = []
+
+    for event in events:
+        cache_key = f"event_{event.id}_image_urls"
+        print(f"CACHE_KEY: {cache_key}")
+        image_url = cache.get(cache_key)
+        if image_url:
+            cached_urls[event.id] = image_url
+        else:
+            uncached_events.append(event)
+
+    if uncached_events:
+        new_urls = {
+            event.id: event.image.url if event.image and validate_image_url(request, event.image.url) else None
+            for event in uncached_events
+        }
+
+        for event_id, url in new_urls.items():
+            cache.set(f"event_{event_id}_image_urls", url, timeout=3600)
+            cached_urls[event_id] = url
+
+    return cached_urls
 
 
 def query_all_events(request):
@@ -54,8 +83,10 @@ def all_events_list(request):
     past_events = list(filter(lambda e: e.date <= today, events))
 
     for events in (future_events, past_events):
+        image_urls = get_cached_image_urls(request, events)
         for event in events:
-            event.image_url = get_event_image(event)
+            event.image_url = image_urls.get(event.id)
+            # event.image_url = get_event_image(request, event)
             event.is_past = is_in_the_past(event.date)
             event.is_user_attendee = (request.user in event.attendees.all())
             event.average_rating = Rating.get_average_rating(event)
@@ -78,7 +109,7 @@ def carousel_events_contact_us(request):
     carousel_events = list(filter(lambda e: tomorrow <= e.date <= four_weeks, events))
 
     for event in carousel_events:
-        event.image_url = get_event_image(event)
+        event.image_url = get_event_image(request, event)
         event.is_past = is_in_the_past(event.date)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
@@ -121,7 +152,7 @@ def carousel_events_contact_us(request):
 
 def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    event.image_url = get_event_image(event)
+    event.image_url = get_event_image(request, event)
 
     event.average_rating = Rating.get_average_rating(event)
 
@@ -157,7 +188,7 @@ def my_event_list(request):
     # Set image URLs and other parameters for all events 
     for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
-            event.image_url = get_event_image(event)
+            event.image_url = get_event_image(request, event)
             event.is_past = is_in_the_past(event.date)
             event.is_user_attendee = (request.user in event.attendees.all())
             event.average_rating = Rating.get_average_rating(event)
@@ -210,7 +241,6 @@ def reservation_cancel(request, slug):
 
 def event_search_results(request):
     search_results = WoofspotEvent.objects.none()
-    print(f"SEARCH_RESULTS: {search_results}")
 
     search_type = request.GET.get("search_type", "all")
     if search_type == "my" and not request.user.is_authenticated:
@@ -231,7 +261,7 @@ def event_search_results(request):
     next = request.GET.get("next", "/")
 
     for event in search_results:
-        event.image_url = get_event_image(event)
+        event.image_url = get_event_image(request, event)
         event.is_past = is_in_the_past(event.date)
         event.is_user_attendee = (request.user in event.attendees.all())
         event.average_rating = Rating.get_average_rating(event)
