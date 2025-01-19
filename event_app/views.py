@@ -24,32 +24,6 @@ def get_event_image(request, event):
     return image_url
 
 
-def get_cached_image_urls(request, events):
-    cached_urls = {}
-    uncached_events = []
-
-    for event in events:
-        cache_key = f"event_{event.id}_image_urls"
-        print(f"CACHE_KEY: {cache_key}")
-        image_url = cache.get(cache_key)
-        if image_url:
-            cached_urls[event.id] = image_url
-        else:
-            uncached_events.append(event)
-
-    if uncached_events:
-        new_urls = {
-            event.id: event.image.url if event.image and validate_image_url(request, event.image.url) else None
-            for event in uncached_events
-        }
-
-        for event_id, url in new_urls.items():
-            cache.set(f"event_{event_id}_image_urls", url, timeout=3600)
-            cached_urls[event_id] = url
-
-    return cached_urls
-
-
 def query_all_events(request):
     try:
         events = WoofspotEvent.objects.all()
@@ -83,10 +57,8 @@ def all_events_list(request):
     past_events = list(filter(lambda e: e.date <= today, events))
 
     for events in (future_events, past_events):
-        image_urls = get_cached_image_urls(request, events)
         for event in events:
-            event.image_url = image_urls.get(event.id)
-            # event.image_url = get_event_image(request, event)
+            event.image_url = get_event_image(request, event)
             event.is_past = is_in_the_past(event.date)
             event.is_user_attendee = (request.user in event.attendees.all())
             event.average_rating = Rating.get_average_rating(event)
@@ -148,27 +120,6 @@ def carousel_events_contact_us(request):
         "events": carousel_events,
         "form": form
     })
-
-
-def event_view(request, slug):
-    event = get_object_or_404(WoofspotEvent, slug=slug)
-    event.image_url = get_event_image(request, event)
-
-    event.average_rating = Rating.get_average_rating(event)
-
-    event.is_past = is_in_the_past(event.date)
-    event.is_user_attendee = (request.user in event.attendees.all())
-
-    next = request.GET.get("next", reverse("my_event_list"))
-
-    return render(
-        request,
-        "event_app/event_view.html",
-        {
-            "event": event,
-            "next": next,
-        },
-    )
 
 
 @login_required
@@ -342,10 +293,29 @@ def event_create(request):
     })
 
 
+def event_view(request, slug):
+    event = get_object_or_404(WoofspotEvent, slug=slug)
+
+    event.image_url = get_event_image(request, event)
+    event.average_rating = Rating.get_average_rating(event)
+    event.is_past = is_in_the_past(event.date)
+    event.is_user_attendee = (request.user in event.attendees.all())
+
+    next = request.GET.get("next", reverse("my_event_list"))
+
+    return render(
+        request,
+        "event_app/event_view.html",
+        {
+            "event": event,
+            "next": next,
+        },
+    )
+
+
 @login_required
 def event_edit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
         # To render the custom 403 template
@@ -354,6 +324,8 @@ def event_edit(request, slug):
     original_date = event.date
     original_start_time = event.start_time
     original_end_time = event.end_time
+
+    next = request.GET.get("next", reverse("my_event_list"))
 
     # Handle submit (POST)
     if request.method == "POST":
@@ -399,10 +371,11 @@ def event_edit(request, slug):
 @login_required
 def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", reverse("my_event_list"))
 
     if event.organizer != request.user:
         return HttpResponseForbidden("Unauthorized access")
+
+    next = request.GET.get("next", reverse("my_event_list"))
     
     if request.method == "POST" and "event_delete" in request.POST:
         # Delete related ratings
