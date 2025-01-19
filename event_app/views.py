@@ -155,15 +155,18 @@ def my_event_list(request):
 @login_required
 def reservation_submit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
+    next = request.POST.get("next", reverse("home"))
 
     if request.method == "POST" and "reserve_spot" in request.POST:
         if request.user in event.attendees.all():
             messages.error(request, "You have already reservation for this event.")
         else:
             event.attendees.add(request.user)
-            messages.success(request, "Reservation Confirmed!")
+            messages.success(request, f"Reservation for {event.title} Confirmed!")
             action = "Reservation Confirmed"
             send_email(request.user, event, action)
+
+            return redirect(next)
 
     return redirect(reverse("event_view", args=[slug]))
 
@@ -171,7 +174,7 @@ def reservation_submit(request, slug):
 @login_required
 def reservation_cancel(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
-    next = request.GET.get("next", reverse("my_event_list"))
+    next = request.POST.get("next", reverse("my_event_list"))
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(request.user)
@@ -180,7 +183,7 @@ def reservation_cancel(request, slug):
 
         messages.success(request, "Your reservation has been cancelled!")
 
-        return redirect(reverse("my_event_list"))
+        return redirect(next)
         
     return render(request, "event_app/reservation_cancel.html",
     {
@@ -301,8 +304,7 @@ def event_view(request, slug):
     event.is_past = is_in_the_past(event.date)
     event.is_user_attendee = (request.user in event.attendees.all())
 
-    next = request.GET.get("next", reverse("my_event_list"))
-
+    next = request.GET.get("next") or request.POST.get("next", reverse("my_event_list"))
     print(f"NEXT: {next}")
 
     return render(
