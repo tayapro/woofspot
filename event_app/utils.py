@@ -6,25 +6,6 @@ from django.template.loader import render_to_string
 from django.utils.timezone import now
 
 
-def validate_image_url(request, url, timeout=5):
-    """
-    Validate if the given URL point to an accessible image resource.
-
-    Parameters:
-        url (str): The URL to validate.
-        timeout (int): Timeout for the request in seconds.
-
-    Returns:
-        bool: True if the URL is valid and accessible, False otherwise.
-    """
-    try:
-        response = requests.head(url, timeout=timeout)
-        return response.status_code == 200     
-    except requests.RequestException as e:
-        messages.error(request, "The image URL is invalid or inaccessible.")
-        return False
-
-
 def is_in_the_past(date):
     """
     Check if a given date is in the past or today.

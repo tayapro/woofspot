@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseForbidden, HttpResponseNotFound,
+                         HttpResponseServerError)
 
 
 # Custom error handlers
 def custom_400(request, exception):
-    return  HttpResponseBadRequest(render(request, "400.html"))
+    return HttpResponseBadRequest(render(request, "400.html"))
 
 
 def custom_403(request, exception):

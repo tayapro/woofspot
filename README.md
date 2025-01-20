@@ -1,4 +1,3 @@
-
 ## Table of Contents
 
 - [Project Description](#project-description)
@@ -27,10 +26,6 @@
   - [Code](#code)
 - [Acknowledgments](#acknowledgments)
 
-
-
-
-
 # Testing
 
 ## User Stories Testing
@@ -54,6 +49,28 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 
 #### event_app
 
+<details><summary><code>forms.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_event_app_forms.png" width="500" alt="PEP8 event_app forms validation image">
+</details>
+
 <details><summary><code>models.py</code> page passed without any errors or warnings.</summary>
 <img src="readme/PEP8_event_app_models.png" width="500" alt="PEP8 event_app models validation image">
+</details>
+
+<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_event_app_urls.png" width="500" alt="PEP8 event_app urls validation image">
+</details>
+
+#### woofspot_project
+
+<details><summary><code>settings.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_woofspot_project_settings.png" width="500" alt="PEP8 woofspot_project settings validation image">
+</details>
+
+<details><summary><code>views.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_woofspot_project_views.png" width="500" alt="PEP8 woofspot_project views validation image">
+</details>
+
+<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_woofspot_project_urls.png" width="500" alt="PEP8 woofspot_project urls validation image">
 </details>

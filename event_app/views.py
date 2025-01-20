@@ -14,7 +14,7 @@ import os
 
 from .forms import EventHostForm, ContactUsForm, ReviewForm
 from .models import WoofspotEvent, Rating
-from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
+from .utils import is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
 
 def get_event_image(request, event):
