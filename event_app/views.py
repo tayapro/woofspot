@@ -12,7 +12,7 @@ from datetime import date, timedelta
 from smtplib import SMTPException
 import os
 
-from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
+from .forms import EventHostForm, ContactUsForm, ReviewForm
 from .models import WoofspotEvent, Rating
 from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
@@ -247,7 +247,7 @@ def event_create(request):
 
     # Handle submit (POST)
     if request.method == "POST":
-        form = EventOrganizerForm(request.POST, request.FILES)
+        form = EventHostForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
 
@@ -289,7 +289,7 @@ def event_create(request):
         return render(request, "event_app/event_create.html", {"form": form, "next": next,})
     
     # Handle page (GET)
-    form = EventOrganizerForm()   
+    form = EventHostForm()   
     return render(request, "event_app/event_create.html", {
         "form": form,
         "next": next,
@@ -333,7 +333,7 @@ def event_edit(request, slug):
 
     # Handle submit (POST)
     if request.method == "POST":
-        form = EventOrganizerForm(request.POST, request.FILES, instance=event)
+        form = EventHostForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             updated_event = form.save(commit=False)
             remove_leading_space(updated_event)
@@ -364,7 +364,7 @@ def event_edit(request, slug):
         return render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
 
     # Handle page (GET)
-    form = EventOrganizerForm(instance=event)
+    form = EventHostForm(instance=event)
     return render(request, "event_app/event_edit.html", {
         "form": form,
         "event": event,
@@ -431,7 +431,6 @@ def rating_submit(request, slug):
 
             return redirect("event_view", slug=event.slug)
         else:
-            form.add_error(None, "Form is invalid. Please correct the errors below.")
             return render(request, "event_app/rating_submit.html", {"form": form, "event": event,
                             "next": next,})
 

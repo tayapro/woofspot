@@ -13,6 +13,7 @@ from datetime import datetime, date, time
 
 def date_validation(value):
     """
+    The validator for the date field in the WoofspotEvent model.
     Ensure the event date is not set in the past.
     Raises:
         ValidationError: If the date is earlier than tomorrow.
@@ -24,7 +25,8 @@ def date_validation(value):
 
 def file_validation(file):
     """
-    Validate the uploaded image file.
+    The validator for the image field in the WoofspotEvent model.
+    Validate the uploaded event's image file.
     Ensures the file size and type meet specified requirements.
     Raises:
         ValidationError: If the file is invalid.
@@ -81,11 +83,10 @@ class WoofspotEvent(models.Model):
     def clean(self):
         """
         Perform model-level validation for event timing.
-        Ensures start and end times are valid and within
-        specified constraints.
+        - Ensures start and end times are valid.
+        - Ensures no overlap with invalid times (e.g., night hours).
+        - Ensures duration constraints are respected (less 3 hours).
         """
-
-        super().clean()
 
         if self.date < date.today() or (self.date == date.today() and
            self.start_time < datetime.now().time()):
@@ -109,10 +110,19 @@ class WoofspotEvent(models.Model):
             raise ValidationError("Please make sure the event is no longer " +
                                   "than three hours")
 
+        # 3600 is 1 hour
         if time_difference.total_seconds() < 3600:
             raise ValidationError("The minimum event duration is one hour")
 
+        super().clean()
+
     def save(self, *args, **kwargs):
+        """
+        Validates the instance before saving.
+        Adds error handling for Cloudinary upload issues and
+        non specific exception.
+        """
+
         try:
             if not self.slug:
                 self.slug = slugify(self.title)
@@ -120,7 +130,8 @@ class WoofspotEvent(models.Model):
             super().save(*args, **kwargs)
 
         except CloudinaryError:
-            raise ValidationError("Image upload failed. Please check your connection or try again later.")
+            raise ValidationError("Image upload failed. Please check your " +
+                                  "connection or try again later.")
         except Exception as e:
             raise ValidationError(f"Unexpected error during save: {e}")
 
@@ -133,9 +144,12 @@ class WoofspotEvent(models.Model):
             # Remove the associated image from Cloudinary if it exists
             if self.image:
                 public_id = self.image.public_id
+                # Destroy is a Cloudinary-specific method
                 destroy(public_id, invalidate=True)
         except CloudinaryError:
-            raise ValidationError("Failed to delete image from Cloudinary. Please check your connection or try again later.")
+            raise ValidationError("Failed to delete image from Cloudinary. " +
+                                  "Please check your connection or try again" +
+                                  " later.")
 
         # Call the parent class's delete method
         super().delete(*args, **kwargs)
@@ -159,10 +173,12 @@ class WoofspotEvent(models.Model):
 
     def remove_image(self):
         """
-        Remove the event image from Cloudinary and unset the image field.
+        Remove the event image from Cloudinary and unset
+        the image field (admin panel).
         """
 
         public_id = self.image.public_id
+        # Destroy is a Cloudinary-specific method
         destroy(public_id, invalidate=True)
         self.image = None
         self.save(update_fields=['image'])
@@ -185,7 +201,6 @@ RATING_CHOICES = [(i, f"{i} Star{'s' if i > 1 else ''}") for i in range(1, 6)]
 class Rating(models.Model):
     """
     Represents a user's rating and optional review for an event.
-    Includes metadata for creation and update timestamps.
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -203,20 +218,25 @@ class Rating(models.Model):
         Parameters:
             event: The event for which to calculate the average rating.
         Returns:
-            float: The average rating for the event,
-                   or None if no ratings exist.
+            The average rating for the event, or None if no ratings exist.
+            An integer if the result is a whole number, or float with
+            precision up to 1 decimal place.
         """
 
-        average_rating = event.event_ratings.aggregate(Avg('rating'))['rating__avg']
+        if event is None:
+            return None
+
+        average_rating = event.event_ratings.aggregate(
+                            Avg('rating'))['rating__avg']
         if average_rating is None:
             return None
-            
-        rounded_rating = round(average_rating, 1)
-            
-        return int(rounded_rating) if rounded_rating.is_integer() else rounded_rating
-        
 
-    
+        rounded_rating = round(average_rating, 1)
+
+        return (int(rounded_rating)
+                if rounded_rating.is_integer()
+                else rounded_rating)
+
     def __str__(self):
         """
         Return a human-readable string representation of the rating.
