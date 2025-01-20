@@ -57,6 +57,11 @@ body {
   color: var(--bootstrap-bs-gray);
 }
 
+#id_password_helptext,
+#id_remember {
+  font-size: smaller;
+}
+
 /* The entire error list will be displayed in a custom section before the form.
 This is a deliberate measure to avoid having two separate error lists: 
 one before and one within the form.
