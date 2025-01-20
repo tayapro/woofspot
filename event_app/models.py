@@ -188,8 +188,16 @@ class Rating(models.Model):
                    or None if no ratings exist.
         """
 
-        return event.event_ratings.aggregate(Avg('rating'))['rating__avg']
+        average_rating = event.event_ratings.aggregate(Avg('rating'))['rating__avg']
+        if average_rating is None:
+            return None
+            
+        rounded_rating = round(average_rating, 1)
+            
+        return int(rounded_rating) if rounded_rating.is_integer() else rounded_rating
+        
 
+    
     def __str__(self):
         """
         Return a human-readable string representation of the rating.
