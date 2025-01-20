@@ -382,11 +382,18 @@ def event_delete(request, slug):
     next = request.GET.get("next", reverse("my_event_list"))
     
     if request.method == "POST" and "event_delete" in request.POST:
+        # Delete the image on Cloudinary if it exists
+        if event.image:
+            event.remove_image()
+
         # Delete related ratings
         Rating.objects.filter(event=event).delete()
+
         action = "Event Cancelled"
         send_email(request.user, event, action)
         event.delete()
+        messages.success(request, "Event deleted successfully!")
+
         return redirect("my_event_list")
     
     return render(request, "event_app/event_delete.html",
