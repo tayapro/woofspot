@@ -1,9 +1,10 @@
 import requests
-from django.utils.timezone import now
 from django.conf import settings
-from django.template.loader import render_to_string
 from django.core.mail import get_connection, EmailMultiAlternatives
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.utils.timezone import now
+
 
 def validate_image_url(request, url, timeout=5):
     """

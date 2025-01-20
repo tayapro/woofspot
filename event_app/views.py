@@ -1,22 +1,24 @@
-import os
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponse
-from django.urls import reverse
-from django.contrib import messages
-from django.db.models import Q
-from datetime import date, timedelta
-from django.utils.text import slugify
-from django.core.exceptions import ValidationError, PermissionDenied
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.cache import cache
-from .models import WoofspotEvent, Rating
+from django.db.models import Q
+from django.http import HttpResponseForbidden, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+from django.utils.text import slugify
+from datetime import date, timedelta
+from smtplib import SMTPException
+import os
+
 from .forms import EventOrganizerForm, ContactUsForm, ReviewForm
+from .models import WoofspotEvent, Rating
 from .utils import validate_image_url, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
 
 def get_event_image(request, event):
-    if event.image and validate_image_url(request, event.image.url):
+    if event.image and event.image.url:
         image_url = event.image.url
     else:
         image_url = os.environ.get("DEFAULT_IMAGE")
@@ -101,25 +103,19 @@ def carousel_events_contact_us(request):
                 
                 messages.success(request, "Your message has been sent successfully!")
                 return redirect(reverse('home'))
+            except SMTPException:
+                # Feedback for email sending error
+                form.add_error(None, "Failed to send email. Please check your connection or try again later.")
             except ValidationError as e:
                 form.add_error(None, e.messages)
-                return render(request, "event_app/index.html", {
-                    "events": carousel_events,
-                    "form": form,
-                    "scroll_to": "contact-us-section"})
         else:
             form.add_error(None, "please make changes.")
-            return render(request, "event_app/index.html", {
-                    "events": carousel_events,
-                    "form": form,
-                    "scroll_to": "contact-us-section"})
+            
+        return render(request, "event_app/index.html", {"events": carousel_events, "form": form, "scroll_to": "contact-us-section"})
 
     # Handle page (GET)
     form = ContactUsForm()
-    return render(request, "event_app/index.html", {
-        "events": carousel_events,
-        "form": form
-    })
+    return render(request, "event_app/index.html", {"events": carousel_events, "form": form})
 
 
 @login_required
@@ -280,13 +276,17 @@ def event_create(request):
                 action = "Event Created"
                 send_email(request.user, event, action)
                 messages.success(request, "Event created successfully!")
+
                 return redirect(next)
             except ValidationError as e:
                 form.add_error(None, e.messages)
-                return render(request, "event_app/event_create.html", {"form": form, "next": next,})
+            except SMTPException:
+                # Feedback for email sending error
+                form.add_error(None, "Failed to send email. Please check your connection or try again later.")
         else:
             form.add_error(None, "please make changes.")
-            return render(request, "event_app/event_create.html", {"form": form, "next": next,})
+        
+        return render(request, "event_app/event_create.html", {"form": form, "next": next,})
     
     # Handle page (GET)
     form = EventOrganizerForm()   
@@ -322,7 +322,7 @@ def event_edit(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
     if event.organizer != request.user:
-        # To render the custom 403 template
+        # To render the custom 403 page
         raise PermissionDenied
 
     original_date = event.date
@@ -352,16 +352,16 @@ def event_edit(request, slug):
                     return redirect(next)
                 except ValidationError as e:
                     form.add_error(None, e.messages)
-                    return render(request, "event_app/event_create.html", {"form": form, "event": event, "next": next,})
+                except SMTPException:
+                    # Feedback for email sending error
+                    form.add_error(None, "Failed to send email. Please check your connection or try again later.")
             else:
                 form.add_error(None, "No changes detected.")
-                return render(request, "event_app/event_edit.html", {"form": form, "event": event,
-                                "next": next })
 
         else:
             form.add_error(None, "please make changes.")
-            return render(request, "event_app/event_edit.html", {"form": form, "event": event,
-                            "next": next })
+
+        return render(request, "event_app/event_edit.html", {"form": form, "event": event, "next": next })
 
     # Handle page (GET)
     form = EventOrganizerForm(instance=event)
@@ -382,17 +382,19 @@ def event_delete(request, slug):
     next = request.GET.get("next", reverse("my_event_list"))
     
     if request.method == "POST" and "event_delete" in request.POST:
-        # Delete the image on Cloudinary if it exists
-        if event.image:
-            event.remove_image()
+        try:
+            # Delete related ratings
+            Rating.objects.filter(event=event).delete()
 
-        # Delete related ratings
-        Rating.objects.filter(event=event).delete()
-
-        action = "Event Cancelled"
-        send_email(request.user, event, action)
-        event.delete()
-        messages.success(request, "Event deleted successfully!")
+            action = "Event Cancelled"
+            send_email(request.user, event, action)
+            event.delete()
+            messages.success(request, "Event deleted successfully!")
+        except SMTPException:
+            # Feedback for email sending error
+            messages.error(request, "Failed to send email. Please check your connection or try again later.")
+        except Exception as e:
+            messages.error(request, f"Failed to delete event '{event.title}': the error - {e}")
 
         return redirect("my_event_list")
     

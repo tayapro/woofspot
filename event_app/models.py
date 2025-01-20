@@ -1,13 +1,14 @@
 from django.db import models
+from django.db.models import Avg
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
-from django.db.models import Avg
-from django.conf import settings
-from cloudinary.models import CloudinaryField
 from django.core.files.uploadedfile import UploadedFile
-from cloudinary.uploader import destroy
-from datetime import datetime, date, time
+from django.conf import settings
 from django.contrib.auth.models import User
+from cloudinary.uploader import destroy
+from cloudinary.models import CloudinaryField
+from cloudinary.exceptions import Error as CloudinaryError
+from datetime import datetime, date, time
 
 
 def date_validation(value):
@@ -112,14 +113,32 @@ class WoofspotEvent(models.Model):
             raise ValidationError("The minimum event duration is one hour")
 
     def save(self, *args, **kwargs):
-        """
-        Automatically generate a slug based on the title before saving.
-        """
+        try:
+            if not self.slug:
+                self.slug = slugify(self.title)
+            self.full_clean()
+            super().save(*args, **kwargs)
 
-        if not self.slug:
-            self.slug = slugify(self.title)
-        self.full_clean()
-        super().save(*args, **kwargs)
+        except CloudinaryError:
+            raise ValidationError("Image upload failed. Please check your connection or try again later.")
+        except Exception as e:
+            raise ValidationError(f"Unexpected error during save: {e}")
+
+    def delete(self, *args, **kwargs):
+        """
+        Override the delete method to handle Cloudinary image deletion.
+        Ensures graceful handling of errors during the image removal process.
+        """
+        try:
+            # Remove the associated image from Cloudinary if it exists
+            if self.image:
+                public_id = self.image.public_id
+                destroy(public_id, invalidate=True)
+        except CloudinaryError:
+            raise ValidationError("Failed to delete image from Cloudinary. Please check your connection or try again later.")
+
+        # Call the parent class's delete method
+        super().delete(*args, **kwargs)
 
     def like_toggle(self, user):
         """
