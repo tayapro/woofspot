@@ -1,3 +1,6 @@
+"""
+URL configuration for event_app application.
+"""
 from django.urls import path
 from . import views
 

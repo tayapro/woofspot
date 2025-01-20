@@ -1,3 +1,6 @@
+"""
+URL configuration for user_app application.
+"""
 from django.urls import path
 from . import views
 

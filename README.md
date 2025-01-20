@@ -18,7 +18,6 @@
 - [Testing](#testing)
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
-  - [Unit Testing](#unit-testing)
   - [Code Validation Testing](#code-validation-testing)
   - [Known Issues](#known-issues)
 - [Credits](#credits)
@@ -59,6 +58,20 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 
 <details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
 <img src="readme/PEP8_event_app_urls.png" width="500" alt="PEP8 event_app urls validation image">
+</details>
+
+#### user_app
+
+<details><summary><code>forms.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_user_app_forms.png" width="500" alt="PEP8 user_app forms validation image">
+</details>
+
+<details><summary><code>views.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_user_app_views.png" width="500" alt="PEP8 user_app views validation image">
+</details>
+
+<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<img src="readme/PEP8_user_app_urls.png" width="500" alt="PEP8 user_app urls validation image">
 </details>
 
 #### woofspot_project
