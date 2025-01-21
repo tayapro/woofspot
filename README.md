@@ -1,3 +1,7 @@
+# WOOFSPOT
+
+![Website Mock Up](readme/woofspot_mockup.png)
+
 ## Table of Contents
 
 - [Project Description](#project-description)
@@ -24,6 +28,8 @@
   - [Media](#media)
   - [Code](#code)
 - [Acknowledgments](#acknowledgments)
+
+---
 
 # Project Description
 
@@ -57,6 +63,8 @@ to explore events and connect with others.
 
 [Back to top](#table-of-contents)
 
+---
+
 # Technologies
 
 ## Languages
@@ -85,9 +93,9 @@ to explore events and connect with others.
 | [Font Awesome](https://fontawesome.com/)                         | Add icons to enhance user experience                |
 | [Balsamiq](https://balsamiq.com/)                                | Create the wireframes                               |
 | [Photopea](https://www.photopea.com/)                            | Work with images (resize, convert, etc)             |
+| [Vmake.ai](https://vmake.ai/image-outpainting)                   | Expand the image                                    |
 | [Inkscape](https://inkscape.org/)                                | Create Woofspot logo and action picture pages       |
 | [Rive](https://rive.app/)                                        | Animate dog for action picture pages                |
-| [Vmake.ai](https://vmake.ai/image-outpainting)                   | Expand the image                                    |
 | [Websitemockupgenerator](https://websitemockupgenerator.com)     | Create the README Mockup image                      |
 | [LucidChart](https://lucid.app)                                  | Create flowcharts                                   |
 | [Figma](https://www.figma.com)                                   | Create architecture abstraction layers image        |
@@ -101,6 +109,8 @@ to explore events and connect with others.
 > A complete list of project dependencies is available in the requirements.txt file.
 
 [Back to top](#table-of-contents)
+
+---
 
 # Deployment
 
@@ -163,8 +173,6 @@ To get started with Cloudinary:
 
 <img src="readme/Cloudinary_api_key.png" width="500" alt="Cloudinary API key image">
 
----
-
 ### Heroku Deployment
 
 Heroku, a cloud platform that enables easy application building, deployment, and management, was chosen for the Woofspot project. \
@@ -225,7 +233,7 @@ This section shows the connection between [Features](#features) and [UX design](
 
 The W3C Markup Validation Service was used to validate the website's HTML.
 
-> [!NOTE] 
+> [!NOTE]
 > The Django Allauth templates in `templates\account`, `templates\allauth`, `templates\mfa`, `templates\openid`,
 > `templates\socialaccount`, `templates\tests`, and `templates\usersessions` remain unmodified and were not validated.
 > Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`,
