@@ -77,6 +77,7 @@ to explore events and connect with others.
 | [Whitenoise](https://whitenoise.readthedocs.io/en/latest/#)      | Work with static files                              |
 | [Gitpod](https://www.gitpod.io/)                                 | Serves as cloud-based development environment       |
 | [Heroku](heroku.com)                                             | Deploy and Host the application                     |
+| Google API                                                       | Sign In with Google feature                         |
 | [Bootstrap5](https://getbootstrap.com/)                          | Enables responsive design and ready-made components |
 | [Neon Console](https://console.neon.tech/)                       | View and manage Woofspot database                   |
 | [Psycopg2](https://pypi.org/project/psycopg2/)                   | Connects Django to PostgreSQL                       |
@@ -100,6 +101,117 @@ to explore events and connect with others.
 > A complete list of project dependencies is available in the requirements.txt file.
 
 [Back to top](#table-of-contents)
+
+# Deployment
+
+> [!NOTE]
+> Before starting the deployment process, please note that you need two files in your repository:
+>
+> 1. `requirements.txt` with all actual dependencies.
+> 2. `env.py` file with environment variables, it's needed for deployment on Heroku and for local deployment as well. Sample `env.py` file:
+>
+> ```
+> import os
+>
+> os.environ.setdefault(
+>    "DATABASE_URL", "<USER_VALUE>")
+> os.environ.setdefault("SECRET_KEY", "<USER_VALUE>")
+>
+> os.environ.setdefault("CLOUDINARY_CLOUD_NAME", "<USER_VALUE>")
+> os.environ.setdefault("CLOUDINARY_API_KEY", "<USER_VALUE>")
+> os.environ.setdefault("CLOUDINARY_API_SECRET", "<USER_VALUE>")
+>
+> os.environ.setdefault("EMAIL_HOST_USER", "<USER_VALUE>")
+> os.environ.setdefault("EMAIL_HOST_PASSWORD", "<USER_VALUE>")
+>
+> os.environ.setdefault("DEFAULT_IMAGE", "https://res.cloudinary.com/....webp")
+> ```
+>
+> Also please note that the `DEBUG` flag in settings.py should be `False`.
+
+## How to clone
+
+1. Head over to the [Woofspot repository](https://github.com/tayapro/woofspot) on GitHub.
+2. Click the **Code** button (located on the right side of the page), select **HTTPS**, and copy the provided link.
+3. Open your terminal and navigate to the folder where you want to save the repository.
+4. In the terminal, type `git clone`, paste the copied URL, and hit **Enter** to start cloning.
+
+> [!NOTE]
+> To update requirements.txt with all actual dependencies, run: \
+> `pip3 freeze > requirements.txt` \
+> Check `DEBUG` flag in settings.py, should be `False`. \
+> \
+> Then commit the changes to GitHub, if needed.
+
+## Neon PostgeSQL Database
+
+This project uses Neon Console for PostgreSQL. The `DATABASE_URL` can be found in the Dashboard tab under Connection Details, as Connection string value:
+
+<img src="readme/Neon_database_url.png" width="500" alt="Neon DB url image">
+
+To use your own database, set it up and configure the `DATABASE_URL`.
+
+## Cloudinary API
+
+This project uses the Cloudinary API to store media files, as Heroku doesn’t support persistent storage for this type of data.
+
+To get started with Cloudinary:
+
+1. Create an account and log in.
+2. Head to the settings page.
+3. Click the **"Generate new API key"** button to create your own API credentials.
+
+<img src="readme/Cloudinary_api_key.png" width="500" alt="Cloudinary API key image">
+
+---
+
+### Heroku Deployment
+
+Heroku, a cloud platform that enables easy application building, deployment, and management, was chosen for the Woofspot project. \
+Follow these steps to deploy the Woofspot app on Heroku:
+
+1. **Fork or Clone the Repository**  
+   Start by forking or cloning the [Woofspot repository](https://github.com/tayapro/woofspot) to your local machine.
+
+2. **Log in to Heroku**  
+   Access your Heroku account or create one if you don’t have it yet.
+
+3. **Set Up a New Application**  
+   Create a new application on Heroku and name it as desired.
+
+4. **Configure Settings**
+
+   - Go to the **Settings** tab in your Heroku dashboard.
+
+   - In the **Config Vars** section, add the following environment variables with your own values:
+
+     - `CLOUDINARY_API_KEY`: Cloudinary API key, see the "Cloudinary API" section above.
+     - `CLOUDINARY_API_SECRET`: Cloudinary API secret, see the "Cloudinary API" section above.
+     - `CLOUDINARY_CLOUD_NAME`: Cloudinary cloud name, see the "Cloudinary API" section above.
+     - `DATABASE_URL`: database connection URL, see the "Neon PostgeSQL Database" section above.
+     - `DEFAULT_IMAGE`: URL for a default image.
+     - `EMAIL_HOST_USER`: Google email address, in current configuration _woofspot.app@gmail.com_.
+     - `EMAIL_HOST_PASSWORD`: Password to send emails using Google API, for more details how to set up it,
+       see [](https://www.geeksforgeeks.org/setup-sending-email-in-django-project/)
+     - `SECRET_KEY`: secret key.
+
+   - In the **Buildpacks** section, add the **Python** buildpack.
+
+5. **Deploy the Application**
+   - Navigate to the **Deploy** tab.
+   - Under **App connected to GitHub**, link your GitHub repository.
+   - In the **Manual deploy** section, select the `main` branch and click **Deploy Branch** to deploy your app.
+
+> [!NOTE]
+> To update requirements.txt with all actual dependencies, run: \
+> `pip3 freeze > requirements.txt` \
+> Check `DEBUG` flag in settings.py, should be `False`. \
+> \
+> Then commit the changes to GitHub.
+
+[Back to top](#table-of-contents)
+
+---
 
 # Testing
 
