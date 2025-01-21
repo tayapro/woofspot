@@ -208,7 +208,7 @@ def event_search_results(request):
     else:
         messages.error(request, "Please try a different search.")
 
-    next = request.GET.get("next", "/")
+    next = request.GET.get("next") or reverse("home")
 
     for event in search_results:
         event.image_url = get_event_image(request, event)
