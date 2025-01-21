@@ -25,6 +25,38 @@
   - [Code](#code)
 - [Acknowledgments](#acknowledgments)
 
+# Project Description
+
+## Purpose
+
+The Woofspot App is designed to bring pet owners and enthusiasts together through fun and engaging pet-friendly events.
+Whether you're looking to host, join, or review events, Woofspot makes it easy to connect with like-minded individuals
+in your local pet-loving community.
+
+With a focus on simplicity and usability, Woofspot offers features like:
+
+- Creating, editing, viewing, and deleting events
+- Browsing and searching for events
+- Leaving reviews and ratings for past events
+- Engaging with events through likes and reservations
+
+Built using Django, Woofspot combines robust functionality with a clean, responsive design. Tools like Cloudinary,
+Bootstrap, and Rive ensure smooth performance and an engaging user experience. Hosted on Heroku, the platform is
+reliable and accessible to users around the globe.
+
+## User Demographics
+
+Woofspot is tailored for anyone who loves pets and wants to be part of a vibrant community. Here’s who will benefit most:
+
+- Pet Owners: Looking for dog meetups, pet-friendly outings, or training sessions.
+- Event Organizers: Planning and managing gatherings for pet lovers.
+- Pet Enthusiasts: Animal lovers who want to participate in pet-friendly events, even if they don’t own a pet.
+
+The platform is designed to be intuitive and accessible, making it easy for users of all experience levels
+to explore events and connect with others.
+
+[Back to top](#table-of-contents)
+
 # Technologies
 
 ## Languages
