@@ -148,7 +148,7 @@ def reservation_submit(request, slug):
         else:
             event.attendees.add(request.user)
             messages.success(request, f"Reservation for {event.title} Confirmed!")
-            action = "Reservation Confirmed"
+            action = "reservation_confirmed"
             send_email(request.user, event, action)
 
             return redirect(next)
@@ -163,7 +163,7 @@ def reservation_cancel(request, slug):
 
     if request.method == "POST" and "cancel_reservation" in request.POST:  
         event.attendees.remove(request.user)
-        action = "Reservation Cancelled"
+        action = "reservation_cancelled"
         send_email(request.user, event, action)
 
         messages.success(request, "Your reservation has been cancelled!")
@@ -259,7 +259,7 @@ def event_create(request):
             try:
                 event.full_clean()
                 event.save()
-                action = "Event Created"
+                action = "event_created"
                 send_email(request.user, event, action)
                 messages.success(request, "Event created successfully!")
 
@@ -329,7 +329,7 @@ def event_edit(request, slug):
                 try:
                     event.full_clean()
                     updated_event.save()
-                    action = "Event Changed"
+                    action = "event_changed"
                     send_email(request.user, updated_event, action)
                     messages.success(request, "Event updated successfully!")
                     return redirect(next)
@@ -369,7 +369,7 @@ def event_delete(request, slug):
             # Delete related ratings
             Rating.objects.filter(event=event).delete()
 
-            action = "Event Cancelled"
+            action = "event_cancelled"
             send_email(request.user, event, action)
             event.delete()
             messages.success(request, "Event deleted successfully!")
@@ -409,7 +409,7 @@ def rating_submit(request, slug):
             rating.event = event
             rating.save()
 
-            action = "Rating Created"
+            action = "rating_created"
             send_email(rating.user, rating.event, action)
 
             return redirect("event_view", slug=event.slug)

@@ -1,8 +1,32 @@
 import os
+import re
 from django.conf import settings
 from django.core.mail import get_connection, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.timezone import now
+
+
+import re
+
+def convert_email_subject(text):
+    """
+    Convert a snake_case string into a capitalized title-like 
+    format suitable for email subjects.
+
+    Parameters:
+        text (str): The input string in snake_case format.
+
+    Returns:
+        str: The formatted string with spaces instead of 
+        underscores and the first letter capitalized.
+
+    Example:
+        >>> convert_email_subject("event_created")
+        'Event created'
+    """
+    text_with_spaces = re.sub(r'_', ' ', text)
+
+    return text_with_spaces.capitalize()
 
 
 def get_event_image(request, event):
@@ -51,7 +75,7 @@ def send_email(user, event, action):
         user: The user object representing the recipient of the email.
         event: The event object containing event details.
         action: A string specifying the type of action triggering 
-                the email (e.g., 'Event Created', 'Event Changed').
+                the email (e.g., 'event_created', 'event_changed').
 
     Returns:
         None: This function sends emails and does not return any value.
@@ -64,22 +88,12 @@ def send_email(user, event, action):
             password = settings.EMAIL_HOST_PASSWORD, 
             use_tls = settings.EMAIL_USE_TLS
         ) as connection:  
-        email_from = settings.EMAIL_HOST_USER 
-        recipient_list = [user.email, ]
+        email_from = settings.EMAIL_HOST_USER
+        context = {'user': user, 'event': event} 
+        subject = f"{convert_email_subject(action)}: {event.title}"        
+        recipient_list = [user.email, ]   
 
-        context = {'user': user, 'event': event}
-
-        subject = f"{action}: {event.title}"
-        if action == "Event Created":
-            # Event Created: Email only to the event organizer
-            text_content = render_to_string('event_app/emails/event_created.txt', context)
-            html_content = render_to_string('event_app/emails/event_created.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Event Changed":
-            # Event Changed: Notify all attendees and organizer
+        if action == "event_changed" or action == "event_cancelled":
             attendees = event.attendees.all()
             recipient_list = [attendee for attendee in attendees] + [event.organizer]
 
@@ -89,43 +103,16 @@ def send_email(user, event, action):
                     'event': event,
                 }
         
-                text_content = render_to_string('event_app/emails/event_changed.txt', context)
-                html_content = render_to_string('event_app/emails/event_changed.html', context)
+                text_content = render_to_string(f'event_app/emails/{action}.txt', context)
+                html_content = render_to_string(f'event_app/emails/{action}.html', context)
 
                 email = EmailMultiAlternatives(subject, text_content, email_from, [recipient.email],)
                 email.attach_alternative(html_content, "text/html")
                 email.send()
-        elif action == "Event Cancelled":
-            # Event Cancelled: Notify all attendees
-            attendees = event.attendees.all()
-            recipient_list = [attendee.email for attendee in attendees]
-            text_content = render_to_string('event_app/emails/event_cancelled.txt', context)
-            html_content = render_to_string('event_app/emails/event_cancelled.html', context)
-            
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Reservation Confirmed":
-            # Reservation Confirmed: Notify the user
-            text_content = render_to_string('event_app/emails/reservation_confirmed.txt', context)
-            html_content = render_to_string('event_app/emails/reservation_confirmed.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Reservation Cancelled":
-            # Reservation Cancelled: Notify the user
-            text_content = render_to_string('event_app/emails/reservation_cancelled.txt', context)
-            html_content = render_to_string('event_app/emails/reservation_cancelled.html', context)
-
-            email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-        elif action == "Rating Created":
-            # Rating Created: Notify the user
-            text_content = render_to_string('event_app/emails/rating_created.txt', context)
-            html_content = render_to_string('event_app/emails/rating_created.html', context)
-
+        
+        else:
+            text_content = render_to_string(f'event_app/emails/{action}.txt', context)
+            html_content = render_to_string(f'event_app/emails/{action}.html', context)  
             email = EmailMultiAlternatives(subject, text_content, email_from, recipient_list)
             email.attach_alternative(html_content, "text/html")
             email.send()
