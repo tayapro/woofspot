@@ -12,12 +12,14 @@
     <div class="d-flex justify-content-evenly">
         <a href="{% url 'home' %}">
             <button type="submit"
-                class="btn-scale btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 px-5">No</button>
+                class="btn-scale btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 px-5"
+                aria-label="Logout decline">No</button>
         </a>
 
         <form method="POST" action="{% url 'account_logout' %}">
             {% csrf_token %}
-            <button type="submit" class="btn-scale btn btn-secondary text-opacity-75 px-5">Yes</button>
+            <button type="submit" class="btn-scale btn btn-secondary text-opacity-75 px-5"
+                aria-label="Logout confirm">Yes</button>
         </form>
     </div>
 </div>

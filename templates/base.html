@@ -58,7 +58,8 @@
                         {% else %}
                         <input type="hidden" name="next" value="{{ next }}">
                         {% endif %}
-                        <button type="submit" class="btn btn-subtle m-0 rounded-end" id="bth-search-form">
+                        <button type="submit" class="btn btn-subtle m-0 rounded-end" id="bth-search-form"
+                            aria-label="Search Submit">
                             <i class="fa-solid fa-magnifying-glass px-2"></i>
                         </button>
                     </div>
@@ -67,7 +68,8 @@
 
             <div>
                 {% if user.is_authenticated %}
-                <button class="btn-scale menu-btn btn btn-subtle rounded-2 text-uppercase" popovertarget="menu">
+                <button class="btn-scale menu-btn btn btn-subtle rounded-2 text-uppercase" popovertarget="menu"
+                    aria-label="Hamburger Menu">
                     <i class="fa-solid fa-bars fa-xl text-black text-opacity-50"></i>
                     <span class="sr-only">Open menu</span>
                 </button>
@@ -75,7 +77,7 @@
                     <nav popover id="menu"
                         class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
                         <button class="btn rounded-circle close-btn position-fixed top-0 end-0 m-3 z-3"
-                            popovertarget="menu" popovertargetaction="hide">
+                            popovertarget="menu" popovertargetaction="hide" aria-label="Close Hamburger Menu">
                             <span role="none"><i
                                     class="fa-regular fa-circle-xmark fa-xl text-black text-opacity-25"></i></span>
                             <span class="sr-only">Close menu</span>
@@ -134,7 +136,8 @@
                     {% endfor %}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        aria-label="Close">Close</button>
                 </div>
             </div>
         </div>

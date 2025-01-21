@@ -64,7 +64,8 @@
 
         <div class="d-flex flex-column flex-md-row gap-2">
             <input type="hidden" name="next" value="{{ request.path }}">
-            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale">Submit</button>
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale"
+                aria-label="Create Event Submit">Submit</button>
             <a href="{% url 'my_event_list' %}"
                 class="btn btn-outline-default active text-body-secondary text-opacity-75 flex-fill btn-scale">Cancel</a>
         </div>

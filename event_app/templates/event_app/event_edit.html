@@ -75,7 +75,8 @@
 
         <div class="d-flex flex-column flex-md-row gap-2">
             <input type="hidden" name="next" value="{{ request.path }}">
-            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale">Save
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale"
+                aria-label="Event Edit accept">Save
                 Changes</button>
             <a href="{{ next }}"
                 class="btn btn-outline-default active text-body-secondary text-opacity-75 flex-fill btn-scale">Cancel</a>

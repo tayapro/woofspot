@@ -33,7 +33,7 @@
             {{ form.rating.label_tag }}
             <div id="star-rating" class="d-flex justify-content-center mb-3">
                 {% for i in "12345" %}
-                <button type="button" class="star-btn btn p-0" data-value="{{ i }}">
+                <button type="button" class="star-btn btn p-0" data-value="{{ i }}" aria-label="Rating value">
                     <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-value="{{ i }}"></i>
                 </button>
                 {% endfor %}
@@ -42,7 +42,8 @@
         </div>
 
         <div class="mb-5 pb-5 d-flex flex-column flex-md-row gap-2">
-            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale">Submit</button>
+            <button type="submit" class="btn btn-secondary text-opacity-75 flex-fill btn-scale"
+                aria-label="Rating Submit">Submit</button>
             <a href="{{ next }}"
                 class="btn btn-outline-default active text-body-secondary text-opacity-75 flex-fill btn-scale">Cancel</a>
         </div>

@@ -18,7 +18,7 @@
     <form method="POST" action="{% url 'reservation_submit' event.slug %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.path }}">
-        <button type="submit" name="reserve_spot" class="btn btn-link m-0 p-0 btn-scale">
+        <button type="submit" name="reserve_spot" class="btn btn-link m-0 p-0 btn-scale" aria-label="Join to Event">
             <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
                 data-bs-placement="top" title="Do You Want To Join?" aria-label="Join to event"></i></button>
     </form>
