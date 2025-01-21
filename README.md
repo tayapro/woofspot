@@ -25,6 +25,50 @@
   - [Code](#code)
 - [Acknowledgments](#acknowledgments)
 
+# Technologies
+
+## Languages
+
+- Python
+- HTML5
+- CSS
+- JavaScript
+
+## Frameworks, Libraries, Apps
+
+| Name                                                             | Purpose                                             |
+| :--------------------------------------------------------------- | :-------------------------------------------------- |
+| [Django](https://www.djangoproject.com/)                         | Build the app's backend and manages the database    |
+| [Django Allauth](https://docs.allauth.org/en/latest/)            | Accounts registration and authentication            |
+| [Django Summernote](https://pypi.org/project/django-summernote/) | Provide WYSIWYG editing                             |
+| [Gunicorn](https://gunicorn.org/)                                | Use as WSGI server that handles web requests        |
+| [Whitenoise](https://whitenoise.readthedocs.io/en/latest/#)      | Work with static files                              |
+| [Gitpod](https://www.gitpod.io/)                                 | Serves as cloud-based development environment       |
+| [Heroku](heroku.com)                                             | Deploy and Host the application                     |
+| [Bootstrap5](https://getbootstrap.com/)                          | Enables responsive design and ready-made components |
+| [Neon Console](https://console.neon.tech/)                       | View and manage Woofspot database                   |
+| [Psycopg2](https://pypi.org/project/psycopg2/)                   | Connects Django to PostgreSQL                       |
+| [Cloudinary](https://cloudinary.com/)                            | Store images                                        |
+| [Font Awesome](https://fontawesome.com/)                         | Add icons to enhance user experience                |
+| [Balsamiq](https://balsamiq.com/)                                | Create the wireframes                               |
+| [Photopea](https://www.photopea.com/)                            | Work with images (resize, convert, etc)             |
+| [Inkscape](https://inkscape.org/)                                | Create Woofspot logo and action picture pages       |
+| [Rive](https://rive.app/)                                        | Animate dog for action picture pages                |
+| [Vmake.ai](https://vmake.ai/image-outpainting)                   | Expand the image                                    |
+| [Websitemockupgenerator](https://websitemockupgenerator.com)     | Create the README Mockup image                      |
+| [LucidChart](https://lucid.app)                                  | Create flowcharts                                   |
+| [Figma](https://www.figma.com)                                   | Create architecture abstraction layers image        |
+| Git                                                              | Use for version control                             |
+| [GitHub](https://github.com/)                                    | Store the source code                               |
+| [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)                 | Validate Python code                                |
+| [W3C HTML Markup Validator](https://validator.w3.org/)           | Validate HTML code                                  |
+| [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)        | Validate CSS code                                   |
+
+> [!NOTE]
+> A complete list of project dependencies is available in the requirements.txt file.
+
+[Back to top](#table-of-contents)
+
 # Testing
 
 ## User Stories Testing
@@ -87,3 +131,5 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 <details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
 <img src="readme/PEP8_woofspot_project_urls.png" width="500" alt="PEP8 woofspot_project urls validation image">
 </details>
+
+[Back to top](#table-of-contents)
