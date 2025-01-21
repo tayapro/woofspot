@@ -320,10 +320,6 @@ form.login p:last-of-type {
   background-size: cover;
 }
 
-.action-picture-form h4 {
-  font-family: var(--header-font-family);
-}
-
 #rive-dog {
   height: 110px;
   width: 110px;
