@@ -14,16 +14,14 @@ import os
 
 from .forms import EventHostForm, ContactUsForm, ReviewForm
 from .models import WoofspotEvent, Rating
-from .utils import is_in_the_past, send_email, remove_leading_space, send_contact_us_email
+from .utils import get_event_image, is_in_the_past, send_email, remove_leading_space, send_contact_us_email
 
 
-def get_event_image(request, event):
-    if event.image and event.image.url:
-        image_url = event.image.url
-    else:
-        image_url = os.environ.get("DEFAULT_IMAGE")
-
-    return image_url
+def enhance_event_details(request, event):
+    event.image_url = get_event_image(request, event)
+    event.is_past = is_in_the_past(event.date)
+    event.is_user_attendee = (request.user in event.attendees.all())
+    event.average_rating = Rating.get_average_rating(event)
 
 
 def query_all_events(request):
@@ -60,10 +58,7 @@ def all_events_list(request):
 
     for events in (future_events, past_events):
         for event in events:
-            event.image_url = get_event_image(request, event)
-            event.is_past = is_in_the_past(event.date)
-            event.is_user_attendee = (request.user in event.attendees.all())
-            event.average_rating = Rating.get_average_rating(event)
+            enhance_event_details(request, event)
 
     next = request.GET.get("next", reverse("home"))
 
@@ -83,10 +78,7 @@ def carousel_events_contact_us(request):
     carousel_events = list(filter(lambda e: tomorrow <= e.date <= four_weeks, events))
 
     for event in carousel_events:
-        event.image_url = get_event_image(request, event)
-        event.is_past = is_in_the_past(event.date)
-        event.is_user_attendee = (request.user in event.attendees.all())
-        event.average_rating = Rating.get_average_rating(event)
+        enhance_event_details(request, event)
 
     # Contact Us section
 
@@ -135,10 +127,7 @@ def my_event_list(request):
     # Set image URLs and other parameters for all events 
     for events in (hosted_by_me_future_events, planning_to_attend_events, past_events):
         for event in events:
-            event.image_url = get_event_image(request, event)
-            event.is_past = is_in_the_past(event.date)
-            event.is_user_attendee = (request.user in event.attendees.all())
-            event.average_rating = Rating.get_average_rating(event)
+            enhance_event_details(request, event)
 
     return render(request, "event_app/my_event_list.html",
                  {"user": request.user,
@@ -211,10 +200,7 @@ def event_search_results(request):
     next = request.GET.get("next") or reverse("home")
 
     for event in search_results:
-        event.image_url = get_event_image(request, event)
-        event.is_past = is_in_the_past(event.date)
-        event.is_user_attendee = (request.user in event.attendees.all())
-        event.average_rating = Rating.get_average_rating(event)
+        enhance_event_details(request, event)
 
     return render(
         request,
@@ -299,10 +285,7 @@ def event_create(request):
 def event_view(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
-    event.image_url = get_event_image(request, event)
-    event.average_rating = Rating.get_average_rating(event)
-    event.is_past = is_in_the_past(event.date)
-    event.is_user_attendee = (request.user in event.attendees.all())
+    enhance_event_details(request, event)
 
     next = request.GET.get("next") or request.POST.get("next", reverse("my_event_list"))
     print(f"NEXT: {next}")

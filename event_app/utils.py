@@ -1,9 +1,17 @@
-import requests
+import os
 from django.conf import settings
 from django.core.mail import get_connection, EmailMultiAlternatives
-from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils.timezone import now
+
+
+def get_event_image(request, event):
+    if event.image and event.image.url:
+        image_url = event.image.url
+    else:
+        image_url = os.environ.get("DEFAULT_IMAGE")
+
+    return image_url
 
 
 def is_in_the_past(date):

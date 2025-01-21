@@ -223,8 +223,13 @@ This section shows the connection between [Features](#features) and [UX design](
 
 ### HTML
 
-The W3C Markup Validation Service was employed to check the HTML of the website.
-Only `layout.html` has been slightly changed.
+The W3C Markup Validation Service was used to validate the website's HTML.
+
+> [!NOTE] 
+> The Django Allauth templates in `templates\account`, `templates\allauth`, `templates\mfa`, `templates\openid`,
+> `templates\socialaccount`, `templates\tests`, and `templates\usersessions` remain unmodified and were not validated.
+> Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`,
+> and `templates\account\signup.html`) were validated. Results are shown below.
 
 <details><summary><code>XXXXX.html</code> page passed without any errors or warnings.</summary>
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
