@@ -344,3 +344,13 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 - Understanding of Django with [Django documentation](https://docs.djangoproject.com/en/5.1/).
 
 [Back to top](#table-of-contents)
+
+---
+
+# Acknowledgments
+
+Special thanks to my mentors, Ronan McClelland and Jubril Akolade, for their invaluable guidance and support.\
+Thanks to the amazing Slack Community and their extensive knowledge base, which helped resolve issues
+throughout this project's development.
+
+[Back to top](#table-of-contents)
