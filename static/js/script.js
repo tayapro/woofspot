@@ -156,13 +156,6 @@ function drawRatingStars() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Configure HTMX custom attributes after DOM is ready
-  htmx.config.attributes = {
-    post: "data-hx-post",
-    swap: "data-hx-swap",
-    headers: "data-hx-headers",
-  };
-
   drawAnimatedDog();
   showSpinner();
   scrollToContactUsSection();

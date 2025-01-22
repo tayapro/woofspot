@@ -47,7 +47,7 @@
         {% for event in events %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
             <div class="col d-flex justify-content-center align-items-center mb-4">
-                <div class="card event-card shadow-sm rounded-4">
+                <div class="card event-card shadow-sm rounded-4 mt-1">
                     <div class="event-card-image card-body p-0 rounded-4 rounded-bottom-0"
                         style="background-image: url('{{ event.image_url }}');" role="img"
                         aria-label="{{ event.title }}">

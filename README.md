@@ -66,6 +66,350 @@ to explore events and connect with others.
 
 ---
 
+# Features
+
+## Existing Features
+
+### F01 Navigation Bar
+
+The Woofspot pages feature a sticky navbar with an eye-catching colored Woofspot logo text.
+The layout includes a search section with different options for registered and unregistered users,
+plus a hamburger menu with popover functionality.
+On screens smaller than 665px, the search section appears at the bottom of the screen.
+
+_Screen more than 665px:_
+
+<img src="readme/f01_desktop.png" width="500" alt="navbar desktop image"/>
+
+_Screen less than 665px:_
+
+<img src="readme/f01_mobile1.png" width="300" alt="navbar mobile image"/> <br>
+<img src="readme/f01_mobile2.png" width="300" alt="navbar mobile image"/>
+
+### F02 Popover menu
+
+The menu is accessible on all device sizes, featuring a hamburger icon and popover functionality.
+Users can find important links such as "Home," "Username" (Profile), "My Events" (where users
+can view events they're hosting, attending, or have previously attended), and "Logout." Each
+link has a hover effect that slightly enlarges the text for a smooth interaction.
+
+<img src="readme/f02.png" width="300" alt="navbar mobile image"/>
+
+To close the popover menu, the user can click the circular "X" button in the top-right corner of the screen.
+
+### F03 Icons container
+
+Each Woofspot event card includes an Icons section where users can view various icons:
+
+- Status Icons: These indicate the user’s connection to the event:
+
+  - Host
+  - Attendee
+
+- Interaction Icons:
+  - Hosts can edit or delete upcoming events.
+  - Registered users can like an event. Clicking the heart icon toggles between solid and regular heart icons. If a non-registered user clicks the like icon, the app will redirect them to the Login page. \
+    **Note**: This feature is implemented using htmx, allowing it to work without re-rendering the entire page.
+  - Rating Star: The star rating appears in read-only mode for hosts and non-attendees, showing the score. For attendees, the star is a clickable link that redirects to the Review page, where they can leave a review and set a rating score.
+
+#### Icon sets examples:
+
+<table>
+<tr>
+<td><img src="readme/f03_non_registered_icons.png" width="35" alt="Icon set for past attendee event"></td>
+<td>
+Non registered user's future event 
+</td>
+</tr>
+<tr>
+<td><img src="readme/f03_future_host_icons.png" width="35" alt="Icon set for past attendee event"></td>
+<td>
+User's future event where they are marked as a host
+</td>
+</tr>
+<tr>
+<td><img src="readme/f03_past_attendee_icons.png" width="50" alt="Icon set for past attendee event"></td>
+<td>
+User's past event where they are marked as an attendee
+</td>
+</tr>
+<tr>
+<td><img src="readme/f03_future_attendee_icons.png" width="45" alt="Icon set for past attendee event"></td>
+<td>
+User's future event where they are marked as an attendee
+</td>
+</tr>
+</table>
+
+Each icon (except like) has a tooltip with a short, clear explanation for every screen size.
+
+<img src="readme/f03_tooltip.png" width="200" alt="tooltip for icon image"/>
+
+### F04 RIVE animated dog
+
+In the Woofspot project, a playful and engaging RIVE animated dog is featured across multiple pages,
+including the login, signup, logout, event creation, event editing, event deletion, reservation cancellation,
+and leave rating pages. This animated dog serves as a dynamic and visually appealing element to enhance
+the user experience.
+
+<img src="readme/f04_animated_doggy.gif" width="200" alt="Animated doggy gif">
+
+Particularly on mobile screens, where users may struggle to distinguish between various static pet images due
+to size constraints or color differences, the animated dog provides a fun and effective solution. Its lively
+animation draws attention and ensures a consistent and engaging experience for users across all devices.
+
+### F05 Home page - Image with Tagline
+
+The first thing users see when they visit Woofspot is a bright, colorful photo featuring excited dogs.
+What are they waiting for? Probably just a good ol' unleashed run or something exciting from their human.
+
+<img src="readme/f05_big_image.png" width="500" alt="Photo with dogs">
+
+This image perfectly captures the playful spirit of the site, instantly drawing users in with a sense of
+anticipation and joy. It sets the tone for the whole experience, echoing the fun and adventurous nature
+of spending time with a four-legged friend. Whether it's discovering new pet-friendly events or simply
+exploring the platform, the vibrant image hints at all the exciting adventures Woofspot has in store.
+
+### F06 Home page - Event Calendar Link and Upcoming Events Carousel
+
+Since Woofspot is all about pet-friendly events, users can easily find a link to the event calendar,
+where they can explore all upcoming and past events.
+
+<img src="readme/f06_carousel.png" width="500" alt="Photo with stretch cat">
+
+The attention-grabbing carousel of event cards showcases the next four weeks of events, giving users
+a sneak peek into the variety of activities they can join. It's a fun and interactive way to highlight
+just a few of the many exciting events Woofspot has to offer.
+
+The event titles act as links that take users to the event's detailed view page, where they can find
+all the related information.
+
+### F07 Home page - Everything You Need to Know accordion and Contact Us form
+
+What if a user has a few questions and wants more information about Woofspot’s event rules—like how to attend,
+or what to do if they have a great idea for the next event? The "Everything You Need to Know" section,
+presented in a simple and clear accordion format, provides all the answers in an easy-to-digest way.
+
+<img src="readme/f07_everything_you_need_to_know.png" width="500" alt="Everything you need to know">
+
+And if, after reading through the "Everything You Need to Know" section, users still have questions,
+they can reach out to the Woofspot team via the Contact Us form. Even if the user is already registered
+on Woofspot, they’ll need to fill out the email field, just in case we need to get in touch through
+a different contact email.
+
+<img src="readme/f07_contact_us.png" width="500" alt="Contact us form">
+
+### F08 Event Calendar page
+
+Let’s dive into the event calendar page! This page is accessible to everyone and is divided into two sections:
+future events and past events.
+All events features various icon sets (for more details, see _F03 Icons container_ above).
+
+<img src="readme/f08_future_events.png" width="500" alt="Future events">
+
+The design is clean and straightforward, with bright images for each event and clickable titles that make
+navigation easy. It’s simple, yet functional, ensuring users can quickly find the events they’re looking for.
+
+<img src="readme/f08_past_events.png" width="500" alt="Past events">
+
+Each card has a hover effect that slightly enlarges it, creating a smooth and interactive experience.
+
+### F09 My Events page
+
+The "My Events" page is a personalized place available to every registered user.
+It’s divided into three sections:
+
+- **Hosted by Me**: Here, users can manage their existing events and create new ones by clicking the "Host New Event" button.
+
+  <img src="readme/f09_hosted_by_me.png" width="500" alt="Hosted by me section">
+
+- **Planning to Attend**: In this section, users can see the events they’ve registered for (marked with a "ticket" icon).
+  They also have the option to cancel their reservation by clicking the "X" icon.
+
+  <img src="readme/f09_planning_to_attend.png" width="500" alt="Planning to attend section">
+
+- **Past Events**: This section includes events the user has attended, either as a host or an attendee.
+  Attendees can leave a review for events they’ve participated in.
+
+  <img src="readme/f09_past_events.png" width="500" alt="Past events section">
+
+If any section has an empty list of events, the user will see a friendly message, such as:
+
+- For Hosted by Me: "You’re not organizing any events yet."
+- For Planning to Attend: "You haven’t reserved a spot for any future events yet."
+- For Past Events: "You haven’t hosted any events or made any reservations yet."
+
+These messages help guide the user and keep the page informative, even when no events are present.
+
+### F10 Event Reservation Submit
+
+When the user clicks the plus icon (labeled "Join the event" in the tooltip) on an event card,
+whether on the Landing page, Event Calendar page, or Event View page, they’ll see a modal window with
+a "Reservation Confirmed" message.
+
+<img src="readme/f10_join_button.png" width="300" alt="Join button">
+
+<img src="readme/f10_reservation_message.png" width="300" alt="Reservation message">
+
+They’ll also receive an email from the Woofspot team with their
+reservation details and can continue exploring Woofspot.
+
+### F11 Event Reservation Cancel
+
+If for any reason the user wants to cancel their reservation, they can do so by clicking the "X" (Cancel Reservation)
+icon. They will then be redirected to the "Reservation Cancel" page, where they’ll be asked again to confirm
+their cancellation.
+
+<img src="readme/f11_reservation_cancel_button.png" width="300" alt="Reservation cancel button">
+
+On the desktop version, the screen is divided into two panels: on the left, there’s a photo featuring a curious cat
+and dog, seemingly asking, "Are you sure?" On the right, the user will see a simple form with a question and two
+buttons: "Cancel Spot" and "No".
+
+<p float="left">
+<img src="readme/f11_reservation_cancel_desktop.png" width="350" alt="Reservation cancel desktop">
+<img src="readme/f11_reservation_cancel_mobile.png" width="150" alt="Reservation cancel mobile">
+</p>
+
+On mobile devices, only the right-hand side panel with the buttons will be visible, offering a streamlined
+experience.
+
+By clicking "Cancel Spot" the user will see a modal window with a "Reservation cancelled" message.
+
+<img src="readme/f11_reservation_cancel_message.png" width="300" alt="Reservation cancel message">
+
+They’ll also receive an email from the Woofspot team with their reservation cancel confirmation and
+can continue exploring Woofspot.
+
+### F12 Event Review
+
+### F13 Event Management (CRUD)
+
+#### CREATE
+
+On the "My Events" page, every user can create a new event by clicking the "Host New Event" button.
+They will then be redirected to the Event Create page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a bright photo of a
+bulldog, and on the right, the user will see:
+
+- A gentle reminder about the format: English text, JPG, JPEG, or PNG images under 2MB.
+- A form with pre-filled fields ready for the user to edit, such as title, description, location, date, and time.
+- A field to choose a picture if desired (this is optional; if no image is chosen, a default image will be
+  added automatically).
+
+<p float="left">
+<img src="readme/f13_event_create_desktop.png" width="350" alt="Event create desktop">
+<img src="readme/f13_event_create_mobile.png" width="150" alt="Event create mobile">
+</p>
+
+When the user clicks "Submit," they will see a modal window with a "Event Created" message.
+
+<img src="readme/f13_event_create_message.png" width="300" alt="Event create message">
+
+If there are any form validation errors, the user will see a detailed description of the errors, such as:
+
+- Please use only Latin/accented characters.
+- Event start time cannot be between 21:00 and 09:00.
+- Please make sure the event is no longer than three hours.
+
+The user will also receive an email from the Woofspot team confirming the event creation.
+
+#### READ
+
+Each Woofspot event is showcased on a card that includes a vibrant photo, an engaging title, the
+event date and time, the location, and a short description to give users a quick overview. To make
+navigation even easier, each card features a set of icons that represent available actions (such as
+joining the event or liking it) and show the status related to the user's involvement. These icons
+help users quickly identify whether they are already registered for an event, whether they can edit
+or cancel their reservation, or whether there are any additional actions they can take, enhancing
+the overall user experience.
+
+<p float="left">
+<img src="readme/f13_event_view_desktop.png" width="350" alt="Event view desktop">
+<img src="readme/f13_event_view_mobile.png" width="150" alt="Event view mobile">
+</p>
+
+The event description is initially displayed with a brief summary. By clicking the "Show More" link,
+the user can expand it to view the full description.
+The "Back" button will take the user to the previous page.
+
+#### UPDATE
+
+An event has already been created but the user wants to make changes, they can do so by clicking
+the "pen to square" (Edit) icon. This will take them to the Event Edit page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a photo of a dog,
+and on the right, the user will see:
+
+A gentle reminder about the format: English text, JPG, JPEG, or PNG images under 2MB.\
+A form with fields that can be edited, including the title, description, location, date, and time.\
+Information about the current event image: This event has an image, and feel free to upload a new one.\
+A field to choose a new picture, if desired.
+
+<p float="left"> 
+<img src="readme/f13_event_edit_desktop.png" width="350" alt="Event edit desktop page"> 
+<img src="readme/f13_event_edit_mobile.png" width="150" alt="Event edit mobile page"> 
+</p>
+
+When the user clicks "Save Changes," they will see a modal window with a "Event Updated" message.
+
+<img src="readme/f13_event_edit_message.png" width="300" alt="Event edit message">
+
+In case of any form validation errors, the user will be informed with an error message
+displayed above the form, helping them correct any issues.
+
+<img src="readme/f13_event_edit_errors.png" width="250" alt="Event edit errors">
+
+Both the user and all event attendees will also receive an email from the Woofspot team notifying
+them of the event changes.
+
+#### DELETE
+
+If a user in the host role wants to delete their event, they can click the "bucket" (Delete) icon.
+This will take them to the Event Delete page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a photo of a sad dog,
+seemingly asking, "Are you sure about this?" On the right, the user will see a simple form with a
+question about the selected event and two options: "Delete Event" and "No".
+
+On mobile devices, only the right-hand panel with the buttons will be displayed, providing a
+streamlined experience.
+
+<p float="left">
+<img src="readme/f13_event_delete_desktop.png" width="350" alt="Event delete desktop page"> 
+<img src="readme/f13_event_delete_mobile.png" width="150" alt="Event delete mobile page"> 
+</p>
+
+When the user clicks "Delete Event," they will see a modal window with a "Event Deleted" message.
+
+<img src="readme/f13_event_delete_message.png" width="300" alt="Event edit message">
+
+The user will also receive an email from the Woofspot team confirming the event deletion.
+
+> [!NOTE]
+> If something goes wrong during the process of saving changes for Create/Edit/Delete or sending emails,
+> the user will be informed through a modal window displaying the error(s). This ensures the user is
+> aware of any issues and can take the necessary steps to resolve them.
+
+### F14 User Access and Logout pages
+
+### F15 Profile page
+
+The profile page displays the user's "username" and "email" in a read-only format.
+
+<img src="readme/f15_profile.png" width="300" alt="Profile">
+
+### F16 Email Notifications
+
+### F17 Spinner
+
+### F18 Woofspot Navigation though app
+
+[Back to top](#table-of-contents)
+
+---
+
 # Technologies
 
 ## Languages
@@ -97,6 +441,7 @@ to explore events and connect with others.
 | [Vmake.ai](https://vmake.ai/image-outpainting)                   | Expand the image                                    |
 | [Inkscape](https://inkscape.org/)                                | Create Woofspot logo and action picture pages       |
 | [Rive](https://rive.app/)                                        | Animate dog for action picture pages                |
+| [Ezgif](https://ezgif.com/)                                      | Conver video to gif                                 |
 | [Websitemockupgenerator](https://websitemockupgenerator.com)     | Create the README Mockup image                      |
 | [LucidChart](https://lucid.app)                                  | Create flowcharts                                   |
 | [Figma](https://www.figma.com)                                   | Create architecture abstraction layers image        |
@@ -243,7 +588,7 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > [!NOTE]
 > Received the following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
 > Warning: Consider using the h1 element as a top-level heading only
-
+>
 > The Popover API has been choosen to enhance the user experience by providing dynamic and interactive
 > content in a way that’s intuitive and accessible.
 > Although some custom attributes were flagged in validation, these are crucial for targeting specific
@@ -252,6 +597,21 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > Error: Attribute popover not allowed on element nav at this point.
 > Error: Attribute popovertarget not allowed on element button at this point.
 > Error: Attribute popovertargetaction not allowed on element button at this point.
+>
+> While integrating HTMX functionality into the Woofspot project, encountered the following validation issues:
+> Error: Attribute hx-swap not allowed on element div at this point.
+> Error: Attribute hx-post not allowed on element div at this point.
+> Error: Attribute hx-headers not allowed on element div at this point.
+> These warnings occur because certain HTMX attributes, such as hx-swap, hx-post, and hx-headers, are
+> applied to the <div> element that may not be considered valid targets for these attributes in some
+> contexts, based on HTML validation rules.
+> In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without
+> reloading the page. Although these attributes may not be strictly validated for use on <div>,
+> they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
+>
+> For now, validation warnings (Popover API & HTMX) are not critical and do not affect the functionality,
+> but future versions of the project may involve further refinement of element usage to ensure full compatibility
+> with validation standards.
 
 <details><summary><code>XXXXX.html</code></summary>
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
