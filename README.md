@@ -236,7 +236,7 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > [!NOTE]
 > The Django Allauth templates in `templates\account`, `templates\allauth`, `templates\mfa`, `templates\openid`,
 > `templates\socialaccount`, `templates\tests`, and `templates\usersessions` remain unmodified and were not validated.
-> Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`,
+> Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`, `templates\account\password_reset.html`
 > and `templates\account\signup.html`) were validated. Results are shown below.
 
 <details><summary><code>XXXXX.html</code> page passed without any errors or warnings.</summary>
@@ -288,5 +288,59 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 <details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
 <img src="readme/PEP8_woofspot_project_urls.png" width="500" alt="PEP8 woofspot_project urls validation image">
 </details>
+
+[Back to top](#table-of-contents)
+
+---
+
+# Credits
+
+## Content
+
+- The fonts used were imported from Google Fonts.
+- The icons were taken from Font Awesome.
+- [Google icon](https://icons8.com/icons/set/google) for "Sign in with Google" button.
+
+## Media
+
+- [Running puppy](https://unsplash.com/photos/a-small-white-teddy-bear-is-running-down-the-street-6_kWa9NvvCg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Freya Song](https://unsplash.com/@freyasong).
+- [Brown puppy on bed](https://unsplash.com/photos/brown-puppy-on-bed-V6G2m3D9IDI) photo by [Roberto Nickson](https://unsplash.com/@rpnickson).
+- [Bernese Mountain Dog and friend during warm days](https://unsplash.com/photos/black-white-and-brown-bernese-mountain-dog-lying-on-white-textile-sJgucUmcaKE?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Louis-Philippe Poitras](https://unsplash.com/@lppoitras).
+- [A crocheted Googlebot and Crawley](https://unsplash.com/photos/a-crocheted-stuffed-animal-next-to-a-crocheted-vase-M7ZuRWaaevw?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lizzi Sassman](https://unsplash.com/@okaylizzi).
+- [Dachshund resting on white hanged fabric](https://unsplash.com/photos/dachshund-resting-on-white-hanged-fabric-D1wiHCovGJ0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Erda Estremera](https://unsplash.com/@erdaest).
+- [Small brown dog sitting on white floor](https://unsplash.com/photos/a-small-brown-dog-sitting-on-top-of-a-white-floor-rermv-4qZsI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Petar Acanski](https://unsplash.com/@petaracanski).
+- [Happy french bulldog](https://unsplash.com/photos/brown-short-coated-dog-wearing-red-and-white-santa-costume-BVqQNu5J7qI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by []().
+- [Dog sleeping on floor](https://unsplash.com/photos/dog-sleeping-on-floor-LTQMgx8tYqM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Minh Pham](https://unsplash.com/@minhphamdesign).
+- [Long walks in the desert](https://unsplash.com/photos/person-walking-on-brown-sand-near-body-of-water-during-daytime-11ZynBe_DRA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
+- [Combination lock](https://unsplash.com/photos/closeup-photo-of-round-gray-combination-padlock-atW3fbSy_9Y?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Debby Hudson](https://unsplash.com/@hudsoncrafted).
+- [Night park bench](https://unsplash.com/photos/a-park-bench-sitting-on-the-side-of-a-path-YL2NV6GjXFA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [sq lim](https://unsplash.com/@sql).
+- [Wooden fence near body of water](https://unsplash.com/photos/brown-wooden-fence-near-body-of-water-nIhScs1bRYg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jaleel Akbash](https://unsplash.com/@jaleel_akbash).
+- [Dog sits in green grass field](https://unsplash.com/photos/short-coated-tan-dog-sits-in-green-grass-field-during-daytime-r1q76Rut5t8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Reed Shepherd](https://unsplash.com/@reed_shepherd1).
+- [Photo dog with hoomans](https://unsplash.com/photos/man-in-black-and-white-striped-shirt-beside-woman-in-black-and-white-stripe-shirt-RRh6wyEU_4Q?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Chewy](https://unsplash.com/@chewy).
+- [Yoga cat](https://unsplash.com/photos/russian-blue-cat-lying-on-brown-woven-chair-5ieFKjviwL8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Hana Oliver](https://unsplash.com/@hanako87).
+- [Pet clinic](https://unsplash.com/photos/white-and-black-short-coated-dog-wearing-white-and-black-polka-dot-shirt-loJL4ijUobg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
+- [Exotic animal](https://unsplash.com/photos/a-green-lizard-sitting-on-top-of-a-tree-branch-uWRGj2zhQJI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Viktoriia Kondratiuk](https://unsplash.com/@viktoriia_kondratiuk).
+- [Sad cat](https://unsplash.com/photos/selective-focus-photography-of-brown-tabby-cat-DM2Gr9U7lHo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Anna Ogiienko](https://unsplash.com/@panafotkas).
+- [Party dogs](https://unsplash.com/photos/white-long-coated-dog-sitting-on-brown-tree-log-during-daytime-cnBQdL559mY?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karolina Wv](https://unsplash.com/@karolinawv).
+- [Grumpy cat](https://unsplash.com/photos/orange-and-white-tabby-cat-sitting-on-brown-wooden-table-in-kitchen-room-w2DsS-ZAP4U?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Paul Hanaoka](https://unsplash.com/@plhnk).
+- [Sunset dog](https://unsplash.com/photos/white-long-coated-dog-on-green-grass-field-during-daytime-cLZQ9KHuTos?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Massimo Negrello](https://unsplash.com/@massimonegrello).
+- [Mountains dog](https://unsplash.com/photos/black-dog-with-red-collared-standing-on-gray-stone-during-cloudy-day-nk_uvN_b-w8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Patrick Hendry](https://unsplash.com/@worldsbetweenlines).
+- [Art studio cat](https://unsplash.com/photos/a-cat-sitting-on-a-desk-in-a-room-tNjJeDf6hJs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Sindy Süßengut](https://unsplash.com/@sindy_suessengut).
+- [Market dog](https://unsplash.com/photos/a-dog-is-sitting-on-a-table-in-a-flower-shop-mHw2MVxI8fM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Travis Leery](https://unsplash.com/@jersey_photos).
+- [Beach dogs](https://unsplash.com/photos/two-dogs-running-on-the-beach-with-a-teddy-bear-hZE7CNo8cdo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lisa Anderson](https://unsplash.com/@lisaaandy).
+- [Kittens on books shelf](https://unsplash.com/photos/a-couple-of-cats-laying-on-top-of-a-book-shelf-txzw_LiGa4w?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Duygu Güngör](https://unsplash.com/@duygug).
+- [Puppy on bed](https://unsplash.com/photos/brown-short-coated-dog-on-brown-wicker-basket-oeND26pmdNs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jordan Bigelow](https://unsplash.com/@jordanbigs).
+- [Woman with a dog in a kitchen](https://unsplash.com/photos/a-woman-standing-in-a-kitchen-with-a-dog-GF0RhSNQ5n8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Luzelle Cockburn](https://unsplash.com/@luzelle).
+- [Dog sitting in front of book](https://unsplash.com/photos/dog-sitting-in-front-of-book-Zqy-x7K5Qcg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jamie Street](https://unsplash.com/@jamie452).
+
+## Code
+
+- Popover menu is adapted from the [Everything you need to know about the Popover API](https://codepen.io/web-dot-dev/pen/vYbadaJ).
+- The Rive integration in this web app is adapted from [the Web (JS) implementation for Rive](https://rive.app/community/doc/web-js/docvlgbnS1mp).
+- Understanding of [Bootstrap Carousel](https://getbootstrap.com/docs/5.0/components/carousel/).
+- Knowledge of sending email in Django with [StackOverflow django-email questions](https://stackoverflow.com/questions/tagged/django-email?tab=Frequent).
+- Understanding of [Django-Browser-Reload](https://medium.com/@appseed.us/django-hot-reload-templates-and-static-4d74a774b26f).
+- Knowledge of Sign In with Google for Web with [Django Allauth social account Google](https://docs.allauth.org/en/dev/socialaccount/providers/google.html).
+- Understanding of Django with [Django documentation](https://docs.djangoproject.com/en/5.1/).
 
 [Back to top](#table-of-contents)
