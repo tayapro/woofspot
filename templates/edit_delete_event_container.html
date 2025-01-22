@@ -1,7 +1,7 @@
 <div class="edit-container">
     <a href="{% url 'event_edit' event.slug %}?next={{ request.path }}" class="btn btn-link btn-scale">
         <i class="fa-regular fa-pen-to-square fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-            data-bs-placement="top" title="Edit event" aria-label="Edit event"></i>
+            data-bs-placement="top" title="Edit event"></i>
     </a>
 </div>
 <div class="cancel-container">
@@ -10,7 +10,7 @@
         <input type="hidden" name="next" value="home">
         <button type="submit" class="btn btn-link btn-scale" aria-label="Cancel Event">
             <i class="fa-regular fa-trash-can fa-xl text-danger text-opacity-75" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Cancel event" aria-label="Cancel event"></i>
+                data-bs-placement="top" title="Cancel event"></i>
         </button>
     </form>
 </div>

@@ -22,7 +22,8 @@
 - [Testing](#testing)
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
-  - [Code Validation Testing](#code-validation-testing)
+  - [Code Validation](#code-validation)
+  - [Performance](#performance)
   - [Known Issues](#known-issues)
 - [Credits](#credits)
   - [Media](#media)
@@ -227,7 +228,7 @@ Follow these steps to deploy the Woofspot app on Heroku:
 
 This section shows the connection between [Features](#features) and [UX design](#ux-design) sections.
 
-## Code Validation Testing
+## Code Validation
 
 ### HTML
 
@@ -239,7 +240,20 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`, `templates\account\password_reset.html`
 > and `templates\account\signup.html`) were validated. Results are shown below.
 
-<details><summary><code>XXXXX.html</code> page passed without any errors or warnings.</summary>
+> [!NOTE]
+> Received the following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
+> Warning: Consider using the h1 element as a top-level heading only
+
+> The Popover API has been choosen to enhance the user experience by providing dynamic and interactive
+> content in a way that’s intuitive and accessible.
+> Although some custom attributes were flagged in validation, these are crucial for targeting specific
+> elements and triggering popover functionality in Woofspot project:
+> Error: Attribute popovertarget not allowed on element button at this point.
+> Error: Attribute popover not allowed on element nav at this point.
+> Error: Attribute popovertarget not allowed on element button at this point.
+> Error: Attribute popovertargetaction not allowed on element button at this point.
+
+<details><summary><code>XXXXX.html</code></summary>
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
 </details>
 

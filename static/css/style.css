@@ -266,7 +266,7 @@ form.login p:last-of-type {
   color: var(--white-color);
 }
 
-@media (max-width: 576px) {
+@media (max-width: 665px) {
   #search-form-container {
     justify-content: center;
     position: fixed;

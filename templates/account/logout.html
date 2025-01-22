@@ -10,11 +10,9 @@
     <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to log out?</h5>
 
     <div class="d-flex justify-content-evenly">
-        <a href="{% url 'home' %}">
-            <button type="submit"
-                class="btn-scale btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 px-5"
-                aria-label="Logout decline">No</button>
-        </a>
+        <a href="{% url 'home' %}"
+            class="btn-scale btn btn-outline-default active text-opacity-75 text-body-secondary text-opacity-75 px-5"
+            aria-label="Logout decline">No</a>
 
         <form method="POST" action="{% url 'account_logout' %}">
             {% csrf_token %}

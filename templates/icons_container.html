@@ -20,7 +20,7 @@
         <input type="hidden" name="next" value="{{ request.path }}">
         <button type="submit" name="reserve_spot" class="btn btn-link m-0 p-0 btn-scale" aria-label="Join to Event">
             <i class="fa-solid fa-plus fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Do You Want To Join?" aria-label="Join to event"></i></button>
+                data-bs-placement="top" title="Do You Want To Join?"></i></button>
     </form>
 </div>
 {% endif %}
@@ -51,12 +51,12 @@
 {% if event.is_past and user != event.organizer and event.is_user_attendee %}
 <div class="text-center">
     <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-        title="Attended by You" aria-label="Attended by you"></i>
+        title="Attended by You"></i>
 </div>
 <div class="text-center d-flex flex-row">
     <a href="{% url 'rating_submit' event.slug %}?next={{ request.path }}" class="btn btn-link m-0 px-0 btn-scale">
         <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="Share Your Feedback" aria-label="Share feedback"></i>
+            title="Share Your Feedback"></i>
     </a>
     <p class="fw-semibold text-warning text-opacity-75">
         {% if event.average_rating %}

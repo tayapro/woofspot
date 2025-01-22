@@ -9,7 +9,8 @@
 {% block content %}
 
 <div class="d-flex flex-column justify-content-end align-items-start rounded-2" id="bg-image" style="background-image: url(
-    https://res.cloudinary.com/stipaxa/image/upload/v1736896176/Woofspot/unleash_fun.webp)" aria-label="unleash fun">
+    https://res.cloudinary.com/stipaxa/image/upload/v1736896176/Woofspot/unleash_fun.webp)" role="img"
+    aria-label="unleash fun">
     <div class="d-flex flex-column w-100 p-3 p-md-4 p-lg-5 text-body-secondary 
     bg-info bg-opacity-75 rounded-2 rounded-top-0">
         <h1 class="h1 fw-semibold text-light text-opacity-100">WOOFSPOT</h1>
@@ -38,7 +39,7 @@
     <div class="carousel-indicators">
         {% for event in events %}
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ forloop.counter0 }}"
-            class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}"
+            class="{% if forloop.first %}active{% endif %}" {% if forloop.first %}aria-current="true" {% endif %}
             aria-label="Slide {{ forloop.counter }}"></button>
         {% endfor %}
     </div>
@@ -48,7 +49,8 @@
             <div class="col d-flex justify-content-center align-items-center mb-4">
                 <div class="card event-card shadow-sm rounded-4">
                     <div class="event-card-image card-body p-0 rounded-4 rounded-bottom-0"
-                        style="background-image: url('{{ event.image_url }}');" aria-label="{{ event.title }}">
+                        style="background-image: url('{{ event.image_url }}');" role="img"
+                        aria-label="{{ event.title }}">
                     </div>
                     <div
                         class="card-footer bg-light bg-opacity-100 text-white position-absolute bottom-0 w-100 p-3 rounded-4 rounded-top-0">
