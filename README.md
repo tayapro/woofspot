@@ -289,6 +289,262 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 <img src="readme/PEP8_woofspot_project_urls.png" width="500" alt="PEP8 woofspot_project urls validation image">
 </details>
 
+## Performance
+
+Google Lighthouse in Google Chrome Developer Tools was used to check the website performance.
+
+### Home
+
+<details><summary>Home desktop</summary>
+<img src="readme/landing_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/landing_page_desktop_numbers.png" width="300px" alt="Landing desktop numbers">
+
+<details><summary>Home mobile</summary>
+<img src="readme/landing_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/landing_page_mobile_numbers.png" width="300px" alt="Landing mobile numbers">
+
+### Event Calendar page
+
+<details><summary>Event Calendar desktop</summary>
+<img src="readme/event_calendar_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/event_calendar_page_desktop_numbers.png" width="300px" alt="Event Calendar desktop numbers">
+
+<details><summary>Event Calendar mobile</summary>
+<img src="readme/event_calendar_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/event_calendar_page_mobile_numbers.png" width="300px" alt="Event Calendar mobile numbers">
+
+### My Events page
+
+<details><summary>My Events desktop</summary>
+<img src="readme/my_events_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/my_events_page_desktop_numbers.png" width="300px" alt="My Events desktop numbers">
+
+<details><summary>My Events mobile</summary>
+<img src="readme/my_events_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/my_events_page_mobile_numbers.png" width="300px" alt="My Events mobile numbers">
+
+### Search Results page
+
+<details><summary>Search Results desktop</summary>
+<img src="readme/search_results_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/search_results_page_desktop_numbers.png" width="300px" alt="Search Results desktop numbers">
+
+<details><summary>Search Results mobile</summary>
+<img src="readme/search_resultspage_mobile.png" width="500px">
+</details>
+
+<img src="readme/search_results_page_mobile_numbers.png" width="300px" alt="Search Results mobile numbers">
+
+### No Search Results page
+
+<details><summary>No Search Results desktop</summary>
+<img src="readme/no_search_results_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/no_search_results_page_desktop_numbers.png" width="300px" alt="No Search Results desktop numbers">
+
+<details><summary>Search Results mobile</summary>
+<img src="readme/no_search_resultspage_mobile.png" width="500px">
+</details>
+
+<img src="readme/no_search_results_page_mobile_numbers.png" width="300px" alt="No Search Results mobile numbers">
+
+### Event Create page
+
+<details><summary>Event Create desktop</summary>
+<img src="readme/event_create_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/event_create_page_desktop_numbers.png" width="300px" alt="Event Create desktop numbers">
+
+<details><summary>Event Create mobile</summary>
+<img src="readme/event_create_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/event_create_page_mobile_numbers.png" width="300px" alt="Event Create mobile numbers">
+
+### Event View page
+
+<details><summary>Event View desktop</summary>
+<img src="readme/event_view_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/event_view_page_desktop_numbers.png" width="300px" alt="Event View desktop numbers">
+
+<details><summary>Event View mobile</summary>
+<img src="readme/event_view_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/event_view_page_mobile_numbers.png" width="300px" alt="Event View mobile numbers">
+
+### Event Edit page
+
+<details><summary>Event Edit desktop</summary>
+<img src="readme/event_edit_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/event_edit_page_desktop_numbers.png" width="300px" alt="Event Edit desktop numbers">
+
+<details><summary>Event Edit mobile</summary>
+<img src="readme/event_edit_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/event_edit_page_mobile_numbers.png" width="300px" alt="Event Edit mobile numbers">
+
+### Event Delete page
+
+<details><summary>Event Delete desktop</summary>
+<img src="readme/event_delete_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/event_delete_page_desktop_numbers.png" width="300px" alt="Event Delete desktop numbers">
+
+<details><summary>Event Delete mobile</summary>
+<img src="readme/event_delete_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/event_delete_page_mobile_numbers.png" width="300px" alt="Event Delete mobile numbers">
+
+### Rating Submit page
+
+<details><summary>Rating Submit desktop</summary>
+<img src="readme/rating_submit_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/rating_submit_page_desktop_numbers.png" width="300px" alt="Rating Submit desktop numbers">
+
+<details><summary>Rating Submit mobile</summary>
+<img src="readme/rating_submit_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/rating_submit_page_mobile_numbers.png" width="300px" alt="Rating Submit mobile numbers">
+
+### Reservation Cancelled page
+
+<details><summary>Reservation Cancelled desktop</summary>
+<img src="readme/reservation_cancelled_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/reservation_cancelled_page_desktop_numbers.png" width="300px" alt="Reservation Cancelled desktop numbers">
+
+<details><summary>Reservation Cancelled mobile</summary>
+<img src="readme/reservation_cancelled_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/reservation_cancelled_page_mobile_numbers.png" width="300px" alt="Reservation Cancelled mobile numbers">
+
+### Signup page
+
+<details><summary>Signup desktop</summary>
+<img src="readme/signup_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/signup_page_desktop_numbers.png" width="300px" alt="Signup desktop numbers">
+
+<details><summary>Signup mobile</summary>
+<img src="readme/signup_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/signup_page_mobile_numbers.png" width="300px" alt="Signup mobile numbers">
+
+### Login page
+
+<details><summary>Login desktop</summary>
+<img src="readme/login_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/login_page_desktop_numbers.png" width="300px" alt="Login desktop numbers">
+
+<details><summary>Login mobile</summary>
+<img src="readme/login_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/login_page_mobile_numbers.png" width="300px" alt="Login mobile numbers">
+
+### Logout page
+
+<details><summary>Logout desktop</summary>
+<img src="readme/logout_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/logout_page_desktop_numbers.png" width="300px" alt="Logout desktop numbers">
+
+<details><summary>Logout mobile</summary>
+<img src="readme/logout_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/logout_page_mobile_numbers.png" width="300px" alt="Logout mobile numbers">
+
+### Password Reset page
+
+<details><summary>Password Reset desktop</summary>
+<img src="readme/password_reset_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/password_reset_page_desktop_numbers.png" width="300px" alt="Password Reset desktop numbers">
+
+<details><summary>Password Reset mobile</summary>
+<img src="readme/password_reset_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/password_reset_page_mobile_numbers.png" width="300px" alt="Password Reset mobile numbers">
+
+### Profile page
+
+<details><summary>Profile desktop</summary>
+<img src="readme/profile_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/profile_page_desktop_numbers.png" width="300px" alt="Profile desktop numbers">
+
+<details><summary>Profile mobile</summary>
+<img src="readme/profile_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/profile_page_mobile_numbers.png" width="300px" alt="Profile mobile numbers">
+
+### 403 Error page
+
+<details><summary>403 desktop</summary>
+<img src="readme/403_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/403_page_desktop_numbers.png" width="300px" alt="403 desktop numbers">
+
+<details><summary>403 mobile</summary>
+<img src="readme/403_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/403_page_mobile_numbers.png" width="300px" alt="403 mobile numbers">
+
+### 404 Error page
+
+<details><summary>404 desktop</summary>
+<img src="readme/404_page_desktop.png" width="500px">
+</details>
+
+<img src="readme/404_page_desktop_numbers.png" width="300px" alt="404 desktop numbers">
+
+<details><summary>404 mobile</summary>
+<img src="readme/404_page_mobile.png" width="500px">
+</details>
+
+<img src="readme/404_page_mobile_numbers.png" width="300px" alt="404 mobile numbers">
+
 [Back to top](#table-of-contents)
 
 ---
