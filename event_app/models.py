@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from cloudinary.uploader import destroy
 from cloudinary.models import CloudinaryField
 from cloudinary.exceptions import Error as CloudinaryError
-from datetime import datetime, date, time
+from datetime import datetime, date, timedelta
 
 
 def date_validation(value):
@@ -41,12 +41,12 @@ def file_validation(file):
 
     if isinstance(file, UploadedFile):
         if file.size < min_file_size:
-            raise ValidationError("File should be larger than 20kB.")
+            raise ValidationError("File should be larger than 20kB")
         if file.size > max_file_size:
-            raise ValidationError("File shouldn't be larger than 2MB.")
+            raise ValidationError("File shouldn't be larger than 2MB")
 
         if file.content_type not in allowed_types:
-            raise ValidationError(f"Invalid image type.")
+            raise ValidationError(f"Invalid image type")
 
 
 class WoofspotEvent(models.Model):
@@ -87,6 +87,14 @@ class WoofspotEvent(models.Model):
         - Ensures no overlap with invalid times (e.g., night hours).
         - Ensures duration constraints are respected (less 3 hours).
         """
+
+        if not self.date or not self.start_time:
+            raise ValidationError("Date and start time must be provided")
+
+        # Maximum allowed date is today + 1 year
+        max_date = date.today() + timedelta(days=365)
+        if self.date > max_date:
+            raise ValidationError(f"Event date cannot be more than one year ahead. The latest allowed date is {max_date}")
 
         if self.date < date.today() or (self.date == date.today() and
            self.start_time < datetime.now().time()):

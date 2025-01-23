@@ -312,6 +312,11 @@ If there are any form validation errors, the user will see a detailed descriptio
 - Please use only Latin/accented characters.
 - Event start time cannot be between 21:00 and 09:00.
 - Please make sure the event is no longer than three hours.
+- The minimum event duration is one hour.
+- Event date cannot be more than one year ahead...
+- Image upload failed. Please check your connection or try again later.
+
+- Event cannot be in the past.
 
 The user will also receive an email from the Woofspot team confirming the event creation.
 
