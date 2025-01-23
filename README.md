@@ -267,8 +267,8 @@ and dog, seemingly asking, "Are you sure?" On the right, the user will see a sim
 buttons: "Cancel Spot" and "No".
 
 <p float="left">
-<img src="readme/f11_reservation_cancel_desktop.png" width="350" alt="Reservation cancel desktop">
-<img src="readme/f11_reservation_cancel_mobile.png" width="150" alt="Reservation cancel mobile">
+<img src="readme/f11_reservation_cancel_desktop.png" width="350" alt="Reservation cancel desktop">&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f11_reservation_cancel_mobile.png" width="158" alt="Reservation cancel mobile">
 </p>
 
 On mobile devices, only the right-hand side panel with the buttons will be visible, offering a streamlined
@@ -299,7 +299,7 @@ bulldog, and on the right, the user will see:
   added automatically).
 
 <p float="left">
-<img src="readme/f13_event_create_desktop.png" width="350" alt="Event create desktop">
+<img src="readme/f13_event_create_desktop.png" width="442" alt="Event create desktop">&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="readme/f13_event_create_mobile.png" width="150" alt="Event create mobile">
 </p>
 
@@ -307,18 +307,19 @@ When the user clicks "Submit," they will see a modal window with a "Event Create
 
 <img src="readme/f13_event_create_message.png" width="300" alt="Event create message">
 
+The user will also receive an email from the Woofspot team confirming the event creation.
+
 If there are any form validation errors, the user will see a detailed description of the errors, such as:
 
 - Please use only Latin/accented characters.
 - Event start time cannot be between 21:00 and 09:00.
 - Please make sure the event is no longer than three hours.
 - The minimum event duration is one hour.
-- Event date cannot be more than one year ahead...
-- Image upload failed. Please check your connection or try again later.
-
 - Event cannot be in the past.
-
-The user will also receive an email from the Woofspot team confirming the event creation.
+- Event date cannot be more than one year ahead...
+- Ensure this value has at least 5 characters (it has X). _for title, description and location fields_
+- Event date cannot be more than one year ahead. The latest allowed date is YYYY-MM-DD, please make changes.
+- Image upload failed. Please check your connection or try again later.
 
 #### READ
 
@@ -331,8 +332,8 @@ or cancel their reservation, or whether there are any additional actions they ca
 the overall user experience.
 
 <p float="left">
-<img src="readme/f13_event_view_desktop.png" width="350" alt="Event view desktop">
-<img src="readme/f13_event_view_mobile.png" width="150" alt="Event view mobile">
+<img src="readme/f13_event_view_desktop.png" width="505" alt="Event view desktop">&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f13_event_view_mobile.png" width="120" alt="Event view mobile">
 </p>
 
 The event description is initially displayed with a brief summary. By clicking the "Show More" link,
@@ -353,7 +354,7 @@ Information about the current event image: This event has an image, and feel fre
 A field to choose a new picture, if desired.
 
 <p float="left"> 
-<img src="readme/f13_event_edit_desktop.png" width="350" alt="Event edit desktop page"> 
+<img src="readme/f13_event_edit_desktop.png" width="331" alt="Event edit desktop page">&nbsp;&nbsp;&nbsp;&nbsp; 
 <img src="readme/f13_event_edit_mobile.png" width="150" alt="Event edit mobile page"> 
 </p>
 
@@ -382,7 +383,7 @@ On mobile devices, only the right-hand panel with the buttons will be displayed,
 streamlined experience.
 
 <p float="left">
-<img src="readme/f13_event_delete_desktop.png" width="350" alt="Event delete desktop page"> 
+<img src="readme/f13_event_delete_desktop.png" width="392" alt="Event delete desktop page">&nbsp;&nbsp;&nbsp;&nbsp; 
 <img src="readme/f13_event_delete_mobile.png" width="150" alt="Event delete mobile page"> 
 </p>
 
@@ -407,9 +408,31 @@ The profile page displays the user's "username" and "email" in a read-only forma
 
 ### F16 Email Notifications
 
+After every successful action with Event (Event create/edit/delete, Reservation Confirmed, Rating created)
+and after Sign Up on Woofspot platform, the user will receive email.
+
+Few examples:
+
+<p float="left">
+<img src="readme/f16_welcome_email.png" width="311" alt="Welcome email"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f16_event_changed_email.png" width="300" alt="Event changed email"> 
+</p>
+
 ### F17 Spinner
 
-### F18 Woofspot Navigation though app
+Since Woofspot features a large number of event images hosted on Cloudinary, some pages may
+take a little extra time to load while the images are being processed. To ensure users don’t
+feel frustrated during longer page loads, Woofspot displays a spinner to indicate that the
+page is "In Progress."
+
+<img src="readme/f17_spinner.png" width="300" alt="Spinner">
+
+> [!NOTE]
+> Currently, the implementation doesn't include improvements aimed at reducing page load times.
+> However, optimizing page load speed is part of our future plans.
+> For more details, please refer to the _Future Features_ section below.
+
+### F18 Admin Panel / Delete Event Image
 
 [Back to top](#table-of-contents)
 
