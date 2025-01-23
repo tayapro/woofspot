@@ -73,8 +73,12 @@ to explore events and connect with others.
 ### F01 Navigation Bar
 
 The Woofspot pages feature a sticky navbar with an eye-catching colored Woofspot logo text.
-The layout includes a search section with different options for registered and unregistered users,
-plus a hamburger menu with popover functionality.
+The layout includes a search section with different options tailored for both logged in and
+non logged in users. For logged in users, there’s a hamburger menu with popover functionality,
+offering quick access to various sections. For new or non logged in users, a "Get Started"
+button is displayed, guiding them to sign up or log in to access more features. This setup
+ensures a seamless user experience, regardless of user status.
+
 On screens smaller than 665px, the search section appears at the bottom of the screen.
 
 _Screen more than 665px:_
@@ -86,11 +90,22 @@ _Screen less than 665px:_
 <img src="readme/f01_mobile1.png" width="300" alt="navbar mobile image"/> <br>
 <img src="readme/f01_mobile2.png" width="300" alt="navbar mobile image"/>
 
+#### Search
+
+By default, the search option is set to search through all events. However,
+logged in users have the ability to refine their search to only include events they are involved in.
+They can do this by clicking on the "My" option in the search menu, which switches the search filter
+to only show their own events.
+
+<img src="readme/f01_search_menu.png" width="300" alt="Search menu"/>
+
+This makes it easier for users to find events they’ve hosted or are attending.
+
 ### F02 Popover menu
 
 The menu is accessible on all device sizes, featuring a hamburger icon and popover functionality.
 Users can find important links such as "Home," "Username" (Profile), "My Events" (where users
-can view events they're hosting, attending, or have previously attended), and "Logout." Each
+can view events they're hosting, attending, or have previously attended), and "Logout". Each
 link has a hover effect that slightly enlarges the text for a smooth interaction.
 
 <img src="readme/f02.png" width="300" alt="navbar mobile image"/>
@@ -108,8 +123,9 @@ Each Woofspot event card includes an Icons section where users can view various 
 
 - Interaction Icons:
   - Hosts can edit or delete upcoming events.
-  - Registered users can like an event. Clicking the heart icon toggles between solid and regular heart icons. If a non-registered user clicks the like icon, the app will redirect them to the Login page. \
-    **Note**: This feature is implemented using htmx, allowing it to work without re-rendering the entire page.
+  - Logged in users can like an event. Clicking the heart icon toggles between solid and regular heart icons.
+    If a non logged in user clicks the like icon, the app will redirect them to the Login page. \
+     **Note**: This feature is implemented using htmx, allowing it to work without re-rendering the entire page.
   - Rating Star: The star rating appears in read-only mode for hosts and non-attendees, showing the score. For attendees, the star is a clickable link that redirects to the Review page, where they can leave a review and set a rating score.
 
 #### Icon sets examples:
@@ -118,7 +134,7 @@ Each Woofspot event card includes an Icons section where users can view various 
 <tr>
 <td><img src="readme/f03_non_registered_icons.png" width="35" alt="Icon set for past attendee event"></td>
 <td>
-Non registered user's future event 
+Non logged in user's future event 
 </td>
 </tr>
 <tr>
@@ -193,7 +209,7 @@ presented in a simple and clear accordion format, provides all the answers in an
 <img src="readme/f07_everything_you_need_to_know.png" width="500" alt="Everything you need to know">
 
 And if, after reading through the "Everything You Need to Know" section, users still have questions,
-they can reach out to the Woofspot team via the Contact Us form. Even if the user is already registered
+they can reach out to the Woofspot team via the Contact Us form. Even if the user is already logged in
 on Woofspot, they’ll need to fill out the email field, just in case we need to get in touch through
 a different contact email.
 
@@ -216,14 +232,14 @@ Each card has a hover effect that slightly enlarges it, creating a smooth and in
 
 ### F09 My Events page
 
-The "My Events" page is a personalized place available to every registered user.
+The "My Events" page is a personalized place available to every logged in user.
 It’s divided into three sections:
 
 - **Hosted by Me**: Here, users can manage their existing events and create new ones by clicking the "Host New Event" button.
 
   <img src="readme/f09_hosted_by_me.png" width="500" alt="Hosted by me section">
 
-- **Planning to Attend**: In this section, users can see the events they’ve registered for (marked with a "ticket" icon).
+- **Planning to Attend**: In this section, users can see the events they have reservation for event (marked with a "ticket" icon).
   They also have the option to cancel their reservation by clicking the "X" icon.
 
   <img src="readme/f09_planning_to_attend.png" width="500" alt="Planning to attend section">
@@ -282,6 +298,17 @@ They’ll also receive an email from the Woofspot team with their reservation ca
 can continue exploring Woofspot.
 
 ### F12 Event Review
+
+Every user can leave a review and rating for a past event they’ve attended. On the Create Review page,
+they can rate the event with stars and provide a review. It’s not required to include review text, user
+can simply rate the event using the stars, making it a quick and easy way to share their feedback.
+
+<p float="left">
+<img src="readme/f12_review_page_desktop.png" width="363" alt="Review page desktop">&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f12_review_page_mobile.png" width="158" alt="Review page mobile">
+</p>
+
+All reviews can be seen on the Event View page, allowing other users to view feedback and ratings for the event.
 
 ### F13 Event Management (CRUD)
 
@@ -400,6 +427,98 @@ The user will also receive an email from the Woofspot team confirming the event 
 
 ### F14 User Access and Logout pages
 
+#### Login
+
+New or non logged in users on the Woofspot platform can easily log in by clicking the "Get Started" button
+on the navbar. This button redirects them to the Login page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a photo of a happy,
+running puppy, and on the right, the user will see several login options:
+
+Login with existing credentials: Enter your username and password.
+Link to sign up: If the user doesn’t have an account, they can click the link to the SignUp page for more details.
+Login with Google: For a quicker login, users can choose to log in with their Google account. For more details,
+see the Login with Google section below.
+On mobile devices, only the right-hand panel with the login options is displayed.
+
+<p>
+<img src="readme/f14_login_page_desktop.png" width="392" alt="login desktop page">&nbsp;&nbsp;&nbsp;&nbsp; 
+<img src="readme/f14_login_page_mobile.png" width="156" alt="login mobile page"> 
+</p>
+
+In case of an error, such as an incorrectly entered format or missing value, the user will be
+informed with an error message displayed above the form, guiding them to correct the input.
+
+Possible errors:
+
+- Username: This field is required.
+- Username: Enter a valid username. This value may contain only letters, numbers,
+  and @/./+/-/\_ characters.
+- Password1: This password is too common.
+
+#### Login with Google
+
+The "Login with Google" button is available on the Login page, offering a familiar and convenient way
+to sign in, just like on many other platforms. By clicking this button, the user will be redirected to
+Google’s Sign-In page, where they can select their Google account to log in to Woofspot.
+
+<img src="readme/f14_signin_with_google.png" width="392" alt="signin with google">
+
+After a successful login, the user will be redirected back to Woofspot and will see a modal window
+confirming the successful sign-in, making the process seamless and user-friendly.
+
+<img src="readme/f14_signin_with_google_modal_window.png" width="300" alt="signin with google modal window">
+
+#### SignUp
+
+The link to the signup page is one of the options on the Login page. By clicking on it,
+the user will be redirected to the "Signup" page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a photo of a
+happy running puppy, and on the right, the user will see a simple and intuitive form.
+
+On mobile devices, only the right-hand panel with the buttons is displayed, offering a more streamlined experience.
+
+This page also includes a link back to the "Login" page for easy navigation. The email field
+is required and will be used for all future communication and mailing.
+
+<p>
+<img src="readme/f14_signup_page_desktop.png" width="392" alt="signup desktop page">&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f14_signup_page_mobile.png" width="169" alt="signup mobile page">
+</p>
+
+In case of an error, such as an incorrectly entered format or missing value, the user will be
+informed with an error message displayed above the form, guiding them to correct the input.
+
+Possible errors:
+
+- Username: A user with that username already exists.
+- Username: This field is required.
+- Username: Enter a valid username. This value may contain only letters, numbers,
+  and @/./+/-/\_ characters.
+- Email: A user is already registered with this email address.
+- Password1: This password is too common.
+
+#### Logout
+
+A logged in user can log out by simply clicking "Logout" in the popover menu.
+This will redirect them to the logout page.
+
+On the desktop version, the screen is split into two panels: on the left, there’s a photo of a sad,
+sleepy puppy lying on a bed, and on the right, the user will see a simple form asking if they’re sure
+they want to log out, with two options: "Yes" and "No".
+
+On mobile devices, only the right-hand panel with the buttons is displayed, offering a more streamlined experience.
+
+<p float="left">
+<img src="readme/f14_logout_page_desktop.png" width="376" alt="Logout page desktop">&nbsp;&nbsp;&nbsp;&nbsp; 
+<img src="readme/f14_logout_page_mobile.png" width="150" alt="Logout page mobile"> 
+</p>
+
+For each option under this section, the user will see a modal window with a success message.
+This provides clear feedback to the user, confirming that the action they performed was successful,
+ensuring a smooth and informative experience.
+
 ### F15 Profile page
 
 The profile page displays the user's "username" and "email" in a read-only format.
@@ -423,16 +542,25 @@ Few examples:
 Since Woofspot features a large number of event images hosted on Cloudinary, some pages may
 take a little extra time to load while the images are being processed. To ensure users don’t
 feel frustrated during longer page loads, Woofspot displays a spinner to indicate that the
-page is "In Progress."
+page is "In Progress".
 
 <img src="readme/f17_spinner.png" width="300" alt="Spinner">
 
 > [!NOTE]
 > Currently, the implementation doesn't include improvements aimed at reducing page load times.
-> However, optimizing page load speed is part of our future plans.
+> However, optimizing page load speed is part of future plans.
 > For more details, please refer to the _Future Features_ section below.
 
 ### F18 Admin Panel / Delete Event Image
+
+On the Admin page, under the "The Events" section, the admin or superuser has the option
+to delete an event image by clicking the link under the image.
+
+<img src="readme/f18_admin_delete_image.png" width="500" alt="Admin delete image">
+
+In a successful scenario, the superuser will see a confirmation message in green, indicating
+that the image was successfully deleted. If there are any issues during the process, an error
+message will be displayed, guiding the admin to resolve the problem.
 
 [Back to top](#table-of-contents)
 
