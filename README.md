@@ -7,8 +7,14 @@
 - [Project Description](#project-description)
   - [Purpose](#purpose)
   - [User Demographics](#user-demographics)
-- [UX Design](#ux-design)
+- [UX design](#ux-design)
   - [User Stories](#user-stories)
+  - [Wireframes](#wireframes)
+  - [Key Design Decisions](#key-design-decisions)
+    - [Imagery](#imagery)
+    - [Color Scheme](#colour-scheme)
+    - [Typography](#typography)
+    - [Interactive Elements](#interactive-elements)
 - [Features](#features)
   - [Existing Features](#existing-features)
   - [Future Features](#future-features)
@@ -61,6 +67,67 @@ Woofspot is tailored for anyone who loves pets and wants to be part of a vibrant
 
 The platform is designed to be intuitive and accessible, making it easy for users of all experience levels
 to explore events and connect with others.
+
+[Back to top](#table-of-contents)
+
+---
+
+# UX Design
+
+## User Stories
+
+The list of user stories can be found in [**Woofspot GitHub project**](https://github.com/users/tayapro/projects/4).
+
+## Wireframes
+
+### Landing Page Wireframes
+
+## Key Design Decisions
+
+### Imagery
+
+For Woofspot has been picked a wide range of pet images to capture the fun and variety of
+experiences pet owners have. From cute puppies to a bold cat sitting on a dinner table,
+these images show the playful and sometimes cheeky side of pets. The mix of different
+animals and moments helps give the site a warm, welcoming vibe and makes it feel more
+relatable for everyone who loves pets, no matter their personality or quirks.
+
+### Color Scheme
+
+The main design highlight of Woofspot is its vibrant pet images. The website follows a minimalist
+design with a simple background, while various shades of grey are used for text and default
+colors from Bootstrap 5 are applied to most other elements. This creates a clean and modern
+look that lets the images stand out.
+
+<img src="readme/bootstrap_color_scheme.png" width="500" alt="bootstrap color scheme image"/>
+
+### Typography
+
+Woofspot project, selected a combination of fonts to enhance the overall design
+and user experience:
+
+- Rubik is used for body text, providing a clean and modern look that's easy to read
+  across different devices.
+- Fredoka is chosen for headers, adding a playful and friendly vibe that matches the fun
+  and approachable nature of Woofspot.
+- Lilita One is used for the Woofspot logo, giving it a unique, bold, and memorable
+  appearance that stands out.
+
+Together, these fonts create a balanced and visually appealing experience, aligning
+with Woofspot’s branding and overall aesthetic.
+
+### Interactive Elements
+
+In the Woofspot project, a playful and engaging RIVE animated dog is featured across multiple pages,
+including the login, signup, logout, event creation, event editing, event deletion, reservation cancellation,
+and leave rating pages. This animated dog serves as a dynamic and visually appealing element to enhance
+the user experience.
+
+<img src="readme/f04_animated_doggy.gif" width="200" alt="Animated doggy gif">
+
+Particularly on mobile screens, where users may struggle to distinguish between various static pet images due
+to size constraints or color differences, the animated dog provides a fun and effective solution. Its lively
+animation draws attention and ensures a consistent and engaging experience for users across all devices.
 
 [Back to top](#table-of-contents)
 
@@ -161,20 +228,7 @@ Each icon (except like) has a tooltip with a short, clear explanation for every 
 
 <img src="readme/f03_tooltip.png" width="200" alt="tooltip for icon image"/>
 
-### F04 RIVE animated dog
-
-In the Woofspot project, a playful and engaging RIVE animated dog is featured across multiple pages,
-including the login, signup, logout, event creation, event editing, event deletion, reservation cancellation,
-and leave rating pages. This animated dog serves as a dynamic and visually appealing element to enhance
-the user experience.
-
-<img src="readme/f04_animated_doggy.gif" width="200" alt="Animated doggy gif">
-
-Particularly on mobile screens, where users may struggle to distinguish between various static pet images due
-to size constraints or color differences, the animated dog provides a fun and effective solution. Its lively
-animation draws attention and ensures a consistent and engaging experience for users across all devices.
-
-### F05 Home page - Image with Tagline
+### F04 Home page - Image with Tagline
 
 The first thing users see when they visit Woofspot is a bright, colorful photo featuring excited dogs.
 What are they waiting for? Probably just a good ol' unleashed run or something exciting from their human.
@@ -186,7 +240,7 @@ anticipation and joy. It sets the tone for the whole experience, echoing the fun
 of spending time with a four-legged friend. Whether it's discovering new pet-friendly events or simply
 exploring the platform, the vibrant image hints at all the exciting adventures Woofspot has in store.
 
-### F06 Home page - Event Calendar Link and Upcoming Events Carousel
+### F05 Home page - Event Calendar Link and Upcoming Events Carousel
 
 Since Woofspot is all about pet-friendly events, users can easily find a link to the event calendar,
 where they can explore all upcoming and past events.
@@ -200,7 +254,7 @@ just a few of the many exciting events Woofspot has to offer.
 The event titles act as links that take users to the event's detailed view page, where they can find
 all the related information.
 
-### F07 Home page - Everything You Need to Know accordion and Contact Us form
+### F06 Home page - Everything You Need to Know accordion and Contact Us form
 
 What if a user has a few questions and wants more information about Woofspot’s event rules—like how to attend,
 or what to do if they have a great idea for the next event? The "Everything You Need to Know" section,
@@ -215,7 +269,7 @@ a different contact email.
 
 <img src="readme/f07_contact_us.png" width="500" alt="Contact us form">
 
-### F08 Event Calendar page
+### F07 Event Calendar page
 
 Let’s dive into the event calendar page! This page is accessible to everyone and is divided into two sections:
 future events and past events.
@@ -230,7 +284,7 @@ navigation easy. It’s simple, yet functional, ensuring users can quickly find 
 
 Each card has a hover effect that slightly enlarges it, creating a smooth and interactive experience.
 
-### F09 My Events page
+### F08 My Events page
 
 The "My Events" page is a personalized place available to every logged in user.
 It’s divided into three sections:
@@ -257,7 +311,7 @@ If any section has an empty list of events, the user will see a friendly message
 
 These messages help guide the user and keep the page informative, even when no events are present.
 
-### F10 Event Reservation Submit
+### F09 Event Reservation Submit
 
 When the user clicks the plus icon (labeled "Join the event" in the tooltip) on an event card,
 whether on the Landing page, Event Calendar page, or Event View page, they’ll see a modal window with
@@ -270,7 +324,7 @@ a "Reservation Confirmed" message.
 They’ll also receive an email from the Woofspot team with their
 reservation details and can continue exploring Woofspot.
 
-### F11 Event Reservation Cancel
+### F10 Event Reservation Cancel
 
 If for any reason the user wants to cancel their reservation, they can do so by clicking the "X" (Cancel Reservation)
 icon. They will then be redirected to the "Reservation Cancel" page, where they’ll be asked again to confirm
@@ -297,7 +351,7 @@ By clicking "Cancel Spot" the user will see a modal window with a "Reservation c
 They’ll also receive an email from the Woofspot team with their reservation cancel confirmation and
 can continue exploring Woofspot.
 
-### F12 Event Review
+### F11 Event Review
 
 Every user can leave a review and rating for a past event they’ve attended. On the Create Review page,
 they can rate the event with stars and provide a review. It’s not required to include review text, user
@@ -310,7 +364,7 @@ can simply rate the event using the stars, making it a quick and easy way to sha
 
 All reviews can be seen on the Event View page, allowing other users to view feedback and ratings for the event.
 
-### F13 Event Management (CRUD)
+### F12 Event Management (CRUD)
 
 #### CREATE
 
@@ -425,7 +479,7 @@ The user will also receive an email from the Woofspot team confirming the event 
 > the user will be informed through a modal window displaying the error(s). This ensures the user is
 > aware of any issues and can take the necessary steps to resolve them.
 
-### F14 User Access and Logout pages
+### F13 User Access and Logout pages
 
 #### Login
 
@@ -519,13 +573,13 @@ For each option under this section, the user will see a modal window with a succ
 This provides clear feedback to the user, confirming that the action they performed was successful,
 ensuring a smooth and informative experience.
 
-### F15 Profile page
+### F14 Profile page
 
 The profile page displays the user's "username" and "email" in a read-only format.
 
 <img src="readme/f15_profile.png" width="300" alt="Profile">
 
-### F16 Email Notifications
+### F15 Email Notifications
 
 After every successful action with Event (Event create/edit/delete, Reservation Confirmed/Cancelled, Rating created)
 and after Sign Up on Woofspot platform, the user will receive email.
@@ -537,7 +591,7 @@ Few examples:
 <img src="readme/f16_event_changed_email.png" width="300" alt="Event changed email"> 
 </p>
 
-### F17 Spinner
+### F16 Spinner
 
 Since Woofspot features a large number of event images hosted on Cloudinary, some pages may
 take a little extra time to load while the images are being processed. To ensure users don’t
@@ -551,7 +605,7 @@ page is "In Progress".
 > However, optimizing page load speed is part of future plans.
 > For more details, please refer to the _Future Features_ section below.
 
-### F18 Admin Panel / Delete Event Image
+### F17 Admin Panel / Delete Event Image
 
 On the Admin page, under the "The Events" section, the admin or superuser has the option
 to delete an event image by clicking the link under the image.
@@ -1152,6 +1206,7 @@ This issue behaves like a heisenbug - it fails intermittently, so it doesn’t a
 - [Puppy on bed](https://unsplash.com/photos/brown-short-coated-dog-on-brown-wicker-basket-oeND26pmdNs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jordan Bigelow](https://unsplash.com/@jordanbigs).
 - [Woman with a dog in a kitchen](https://unsplash.com/photos/a-woman-standing-in-a-kitchen-with-a-dog-GF0RhSNQ5n8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Luzelle Cockburn](https://unsplash.com/@luzelle).
 - [Dog sitting in front of book](https://unsplash.com/photos/dog-sitting-in-front-of-book-Zqy-x7K5Qcg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jamie Street](https://unsplash.com/@jamie452).
+- [Bootstrap Color scheme](https://mdbootstrap.com/docs/standard/content-styles/colors/) to README.
 
 ## Code
 
