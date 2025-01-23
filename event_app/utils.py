@@ -6,8 +6,6 @@ from django.template.loader import render_to_string
 from django.utils.timezone import now
 
 
-import re
-
 def convert_email_subject(text):
     """
     Convert a snake_case string into a capitalized title-like 

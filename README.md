@@ -408,7 +408,7 @@ The profile page displays the user's "username" and "email" in a read-only forma
 
 ### F16 Email Notifications
 
-After every successful action with Event (Event create/edit/delete, Reservation Confirmed, Rating created)
+After every successful action with Event (Event create/edit/delete, Reservation Confirmed/Cancelled, Rating created)
 and after Sign Up on Woofspot platform, the user will receive email.
 
 Few examples:
@@ -946,6 +946,40 @@ Google Lighthouse in Google Chrome Developer Tools was used to check the website
 </details>
 
 <img src="readme/404_page_mobile_numbers.png" width="300px" alt="404 mobile numbers">
+
+## Known Issues
+
+### `aria-hidden` issue
+
+```
+Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
+hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
+ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
+details, see the aria-hidden section of the WAI-ARIA specification
+at https://w3c.github.io/aria/#aria-hidden.
+
+Element with focus: button
+```
+
+Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
+"Close" button on Modal window with Django Messages.
+When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
+after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
+
+Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
+"Close" button on a modal that is triggered by Django Messages. When the modal
+appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
+it switches to `aria-hidden="true"`.
+
+**To reproduce the issue**:
+
+- Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
+  (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
+- Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
+
+This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
+
+[Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
 
 [Back to top](#table-of-contents)
 

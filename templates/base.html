@@ -129,12 +129,14 @@
 
     <!-- Modal Window to Messages -->
     {% if messages %}
-    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel"
+        style="display: block;" inert>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="messagesModalLabel">Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="messageModalHeaderCloseButton"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     {% for message in messages %}
@@ -145,7 +147,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        aria-label="Close">Close</button>
+                        id="messageModalFooterCloseButton" aria-label="Close">Close</button>
                 </div>
             </div>
         </div>

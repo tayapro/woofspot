@@ -33,7 +33,6 @@ function showSpinner() {
   });
 }
 
-// Messages modal window
 function drawModalWindow() {
   const messagesModal = document.getElementById("messagesModal");
 
@@ -57,14 +56,24 @@ function drawModalWindow() {
         alert.innerHTML = `${iconHTML}${alert.innerHTML}`;
       });
 
-      // Manage aria-hidden for accessibility
+      // Manage inert attribute for accessibility
       messagesModal.addEventListener("shown.bs.modal", () => {
-        messagesModal.removeAttribute("aria-hidden");
-        messagesModal.focus(); // Ensure focus is set to the modal
+        messagesModal.removeAttribute("inert");
+        messagesModal.focus();
       });
 
       messagesModal.addEventListener("hidden.bs.modal", () => {
-        messagesModal.setAttribute("aria-hidden", "true");
+        const closeButtonHeader = document.getElementById(
+          "messageModalHeaderCloseButton"
+        );
+        const closeButtonFooter = document.getElementById(
+          "messageModalFooterCloseButton"
+        );
+
+        closeButtonHeader.blur();
+        closeButtonFooter.blur();
+
+        messagesModal.setAttribute("inert", "true");
         messagesModal.classList.add("d-none");
       });
 
