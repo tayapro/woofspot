@@ -30,6 +30,34 @@ class EventHostForm(forms.ModelForm):
     and validations.
     """
 
+    # Title field with custom widget and validation
+    title = forms.CharField(
+        validators=[MinLengthValidator(5)],
+        widget=forms.TextInput(attrs={
+            **TEXT_STYLES,
+            'placeholder': 'Enter event title',
+        })
+    )
+
+    # Description field with custom widget and validation
+    description = forms.CharField(
+        validators=[MinLengthValidator(5)],
+        widget=forms.Textarea(attrs={
+            **TEXT_STYLES,
+            'rows': 5,
+            'placeholder': 'Enter description for your event',
+        })
+    )
+
+    # Location field with custom widget and validation
+    location = forms.CharField(
+        validators=[MinLengthValidator(5)],
+        widget=forms.TextInput(attrs={
+            **TEXT_STYLES,
+            'placeholder': 'Enter event location',
+        })
+    )
+
     class Meta:
         """
         Metadata for the EventHostForm.
@@ -56,19 +84,6 @@ class EventHostForm(forms.ModelForm):
         }
         widgets = {
             # Custom widgets for consistent styling and enhanced usability
-            'title': forms.TextInput(attrs={
-                **TEXT_STYLES,
-                'placeholder': 'Enter event title',
-            }),
-            'description': forms.Textarea(attrs={
-                **TEXT_STYLES,
-                'rows': 5,
-                'placeholder': 'Enter description for your event',
-            }),
-            'location': forms.TextInput(attrs={
-                **TEXT_STYLES,
-                'placeholder': 'Enter event location',
-            }),
             'date': forms.DateInput(attrs={
                 **DATE_TIME_STYLES,
                 'type': 'date',

@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from cloudinary.uploader import destroy
 from cloudinary.models import CloudinaryField
 from cloudinary.exceptions import Error as CloudinaryError
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, time, timedelta
 
 
 def date_validation(value):
