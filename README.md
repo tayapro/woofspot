@@ -11,7 +11,6 @@
   - [User Stories](#user-stories)
   - [Wireframes](#wireframes)
   - [Flowcharts](#flowcharts)
-  - [Data Model](#data-model)
   - [Key Design Decisions](#key-design-decisions)
     - [Imagery](#imagery)
     - [Color Scheme](#colour-scheme)
@@ -81,63 +80,67 @@ The list of user stories can be found in [**Woofspot GitHub project**](https://g
 
 ### Landing Page Wireframes
 
-<img src="readme/landing_page_wireframe.png" width="500" alt="landing page wireframe">
+<img src="readme/landing_page_wireframe.png" width="400" alt="landing page wireframe">
 
 ### Event Calendar Wireframes
 
-<img src="readme/event_calendar_page_wireframe.png" width="500" alt="event calendar page wireframe">
+<img src="readme/event_calendar_page_wireframe.png" width="400" alt="event calendar page wireframe">
 
 ### My Events Wireframes
 
-<img src="readme/my_events_page_wireframe.png" width="500" alt="my events page wireframe">
+<img src="readme/my_events_page_wireframe.png" width="400" alt="my events page wireframe">
 
 ### Login Wireframes
 
-<img src="readme/login_page_wireframe.png" width="500" alt="login page wireframe">
+<img src="readme/login_page_wireframe.png" width="400" alt="login page wireframe">
 
 ### Sign Up Wireframes
 
-<img src="readme/signup_page_wireframe.png" width="500" alt="signup page wireframe">
+<img src="readme/signup_page_wireframe.png" width="400" alt="signup page wireframe">
 
 ### Logout Wireframes
 
-<img src="readme/logout_page_wireframe.png" width="500" alt="logout page wireframe">
+<img src="readme/logout_page_wireframe.png" width="400" alt="logout page wireframe">
 
 ### Profile Wireframes
 
-<img src="readme/profile_page_wireframe.png" width="500" alt="profile page wireframe">
+<img src="readme/profile_page_wireframe.png" width="400" alt="profile page wireframe">
 
 ### Event Reservation Cancel Wireframes
 
-<img src="readme/reservation_cancel_page_wireframe.png" width="500" alt="event reservation cancel page wireframe">
+<img src="readme/reservation_cancel_page_wireframe.png" width="400" alt="event reservation cancel page wireframe">
 
 ### Event Create Wireframes
 
-<img src="readme/event_create_page_wireframe.png" width="500" alt="event create page wireframe">
+<img src="readme/event_create_page_wireframe.png" width="400" alt="event create page wireframe">
 
 ### Event View Wireframes
 
-<img src="readme/event_view_page_wireframe.png" width="500" alt="event view page wireframe">
+<img src="readme/event_view_page_wireframe.png" width="400" alt="event view page wireframe">
 
 ### Event Edit Wireframes
 
-<img src="readme/event_edit_page_wireframe.png" width="500" alt="event edit page wireframe">
+<img src="readme/event_edit_page_wireframe.png" width="400" alt="event edit page wireframe">
 
 ### Event Delete Wireframes
 
-<img src="readme/event_delete_page_wireframe.png" width="500" alt="event delete page wireframe">
+<img src="readme/event_delete_page_wireframe.png" width="400" alt="event delete page wireframe">
 
 ### Event Review Wireframes
 
-<img src="readme/event_review_page_wireframe.png" width="500" alt="event review page wireframe">
+<img src="readme/event_review_page_wireframe.png" width="400" alt="event review page wireframe">
 
 ### Error pages Wireframes
 
-<img src="readme/error_pages_wireframe.png" width="500" alt="Error pages wireframe">
+<img src="readme/error_pages_wireframe.png" width="400" alt="error pages wireframe">
 
 ## Flowcharts
 
-## Data Model
+Lucidchart was used to create the ERD (Entity Relationship Diagram) for the models in
+the Woofspot project. It provided a clear visualization of the relationships between
+different entities in the database, helping to structure and plan the data flow effectively.
+
+<img src="readme/woofspot_flowchart.png" width="350" alt="woofspot flowchart">
 
 ## Key Design Decisions
 
@@ -672,6 +675,31 @@ to delete an event image by clicking the link under the image.
 In a successful scenario, the superuser will see a confirmation message in green, indicating
 that the image was successfully deleted. If there are any issues during the process, an error
 message will be displayed, guiding the admin to resolve the problem.
+
+## Future Features
+
+1. Image Optimization and Lazy Loading:
+
+   - Implement lazy loading for images to improve page load times by loading images only when
+     they come into the user's viewport.
+   - Optimize image sizes and formats to reduce page load time, ensuring a faster and more
+     responsive user experience.
+   - Consider using tools like Cloudinary for automatic image resizing and format optimization.
+
+2. Browser Caching and Server-Side Caching:
+
+   - Implement browser caching to reduce the number of requests made to the server for static files,
+     improving load times for returning users.
+   - Set up server-side caching (e.g., using Django's caching framework) to store and serve
+     cached pages or data, reducing database queries and improving performance.
+   - Explore cache busting techniques for static files to ensure that users always get the latest version.
+
+3. Token-Based Authentication:
+   - Implement token-based authentication for enhanced security, particularly for
+     API access or mobile app integration.
+   - Use Django REST Framework (DRF) with JWT (JSON Web Tokens) for secure authentication
+     of API requests.
+   - Ensure secure token management, including token expiration, refresh tokens, and proper storage.
 
 [Back to top](#table-of-contents)
 
