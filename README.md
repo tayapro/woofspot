@@ -1009,6 +1009,25 @@ All pages passed without any errors or warnings:
 <img src="readme/W3HTML_validation_welcome_email.png" width="500" alt="W3C welcome_email.html validation image">
 </details>
 
+#### Templates
+
+The files from the templates folder (except errors templaes) do not render all at once; instead, they are used as blocks -
+reusable components — to build more complex templates. By breaking down larger templates into individual pieces such as `base.html`,
+`icons_container.html`, `like_container.html`, `event_card_container.html`, and more, each component serves
+a specific function, making the templates easier to manage and ensuring everything works as expected when
+combined.
+
+<img src="readme/templates_diagram.png" width="800" alt="templates_diagram image">
+
+#### User_app
+
+All following pages have passed without errors or warnings, except for validation issues
+related to the Popover API and HTMX (for more details, please refer to the section above):
+
+<details><summary><code>profile.html</code></summary>
+<img src="readme/W3HTML_validation_profile.png" width="500" alt="W3C profile.html validation image">
+</details>
+
 ### Python
 
 All files passed without any errors or warnings on [CI Python Linter](https://pep8ci.herokuapp.com/).
