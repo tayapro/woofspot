@@ -745,6 +745,7 @@ message will be displayed, guiding the admin to resolve the problem.
 | [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)                 | Validate Python code                                |
 | [W3C HTML Markup Validator](https://validator.w3.org/)           | Validate HTML code                                  |
 | [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)        | Validate CSS code                                   |
+| [JShint](https://jshint.com/)                                    | Validate JS code                                    |
 
 > [!NOTE]
 > A complete list of project dependencies is available in the requirements.txt file.
@@ -1027,6 +1028,38 @@ related to the Popover API and HTMX (for more details, please refer to the secti
 <details><summary><code>profile.html</code></summary>
 <img src="readme/W3HTML_validation_profile.png" width="500" alt="W3C profile.html validation image">
 </details>
+
+### CSS
+
+The following errors were encountered with the Popover menu style:
+
+```
+151	#menu	Property transition-behavior doesn't exist : allow-discrete
+152	#menu	Property translate doesn't exist : 100% 0
+156	#menu	Parse Error &:popover-open { translate: 0 0; }
+```
+
+At this stage of development, these issues are acceptable and can be addressed in
+the next release or double-checked using the jigsaw.w3.org validator.
+
+For reference, https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior.
+
+### JS
+
+The JSHint Validation Service was used to check the script.js file, which passed without any errors.
+Currently, there are some warnings regarding ES6 compatibility. Based on https://caniuse.com/?search=es6
+
+> As ES6 refers to a huge specification and browsers have various levels of support, "Supported"
+> means at least 95% of the spec is supported.
+
+they can be safely ignored for Woofspot project.
+
+<details><summary><code>script.js</code></summary>
+<img src="readme/jshint_validation_script.png" width="500" alt="jshint_script validation image">
+</details>
+
+To avoid issues with undefined variables like bootstrap and rive, a directive comment has been added
+at the top of the JavaScript file to inform JSHint that bootstrap and rive are global variables.
 
 ### Python
 
