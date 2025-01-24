@@ -31,6 +31,11 @@ function showSpinner() {
     }
     spinner.classList.remove("d-none");
   });
+
+  // Hide spinner once the page has fully loaded
+  window.addEventListener("load", function () {
+    spinner.classList.add("d-none");
+  });
 }
 
 function drawModalWindow() {
