@@ -880,33 +880,47 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`, `templates\account\password_reset.html`
 > and `templates\account\signup.html`) were validated. Results are shown below.
 
-> [!NOTE]
-> Received the following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
-> Warning: Consider using the h1 element as a top-level heading only
->
-> The Popover API has been choosen to enhance the user experience by providing dynamic and interactive
-> content in a way that’s intuitive and accessible.
-> Although some custom attributes were flagged in validation, these are crucial for targeting specific
-> elements and triggering popover functionality in Woofspot project:
-> Error: Attribute popovertarget not allowed on element button at this point.
-> Error: Attribute popover not allowed on element nav at this point.
-> Error: Attribute popovertarget not allowed on element button at this point.
-> Error: Attribute popovertargetaction not allowed on element button at this point.
->
-> While integrating HTMX functionality into the Woofspot project, encountered the following validation issues:
-> Error: Attribute hx-swap not allowed on element div at this point.
-> Error: Attribute hx-post not allowed on element div at this point.
-> Error: Attribute hx-headers not allowed on element div at this point.
-> These warnings occur because certain HTMX attributes, such as hx-swap, hx-post, and hx-headers, are
-> applied to the <div> element that may not be considered valid targets for these attributes in some
-> contexts, based on HTML validation rules.
-> In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without
-> reloading the page. Although these attributes may not be strictly validated for use on <div>,
-> they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
->
-> For now, validation warnings (Popover API & HTMX) are not critical and do not affect the functionality,
-> but future versions of the project may involve further refinement of element usage to ensure full compatibility
-> with validation standards.
+#### NOTE:
+
+1. The following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
+
+```
+Warning: Consider using the h1 element as a top-level heading only
+```
+
+2. Currently, the following rendered templates are encountering errors related to the Popover API and HTMX elements: `my_events`, `profile`, `search_results`, `event_view`, `index`, `all_events`.
+
+   2.1 The Popover API has been choosen to enhance the user experience by providing dynamic and interactive content in a way that’s intuitive and accessible.
+   Found opend GitHub ticket [Allow new attributes: popover, popovertarget and popovertargetaction](https://github.com/w3c/markup-validator/issues/88).
+   Based on [spec.whatwg.org/popover](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute):
+
+   ```
+   All HTML elements may have the popover content attribute set.
+   Buttons may have the following content attributes: popovertarget, popovertargetaction.
+   ```
+
+   Although some attributes were flagged in validation, these are crucial for targeting specific elements and triggering popover functionality in Woofspot project:
+
+   ```
+   Error: Attribute popovertarget not allowed on element button at this point.
+   Error: Attribute popover not allowed on element nav at this point.
+   Error: Attribute popovertarget not allowed on element button at this point.
+   Error: Attribute popovertargetaction not allowed on element button at this point.
+   ```
+
+   2.2 While integrating `HTMX` functionality into the Woofspot project, encountered the following validation issues:
+
+   ```
+   Error: Attribute hx-swap not allowed on element div at this point.
+   Error: Attribute hx-post not allowed on element div at this point.
+   Error: Attribute hx-headers not allowed on element div at this point.
+   ```
+
+   These warnings occur because certain HTMX attributes, such as hx-swap, hx-post, and hx-headers, are applied to the `div` element that may not be considered valid targets for these attributes in some contexts, based on HTML validation rules.
+   In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without reloading the page. Although these attributes may not be strictly validated for use on `div`, they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
+
+Validation warnings above (Popover API & HTMX) do not affect the functionality,
+but future versions of the project may involve further refinement of element usage to ensure full compatibility with validation standards.
 
 <details><summary><code>XXXXX.html</code></summary>
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
