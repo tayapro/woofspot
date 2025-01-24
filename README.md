@@ -934,6 +934,10 @@ All following pages have passed without errors or warnings:
 <img src="readme/W3HTML_validation_event_create.png" width="500" alt="W3C event_create.html validation image">
 </details>
 
+<details><summary><code>event_delete.html</code></summary>
+<img src="readme/W3HTML_validation_event_delete.png" width="500" alt="W3C event_delete.html validation image">
+</details>
+
 <details><summary><code>event_edit.html</code></summary>
 <img src="readme/W3HTML_validation_event_edit.png" width="500" alt="W3C event_edit.html validation image">
 </details>
@@ -947,10 +951,6 @@ related to the Popover API and HTMX (for more details, please refer to the secti
 
 <details><summary><code>all_events.html</code></summary>
 <img src="readme/W3HTML_validation_all_events.png" width="500" alt="W3C all_events.html validation image">
-</details>
-
-<details><summary><code>event_delete.html</code></summary>
-<img src="readme/W3HTML_validation_event_delete.png" width="500" alt="W3C event_delete.html validation image">
 </details>
 
 <details><summary><code>event_search_results.html</code></summary>
