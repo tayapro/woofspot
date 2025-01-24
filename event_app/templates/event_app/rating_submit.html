@@ -30,14 +30,14 @@
         <hr class="my-2 border-secondary-subtle">
 
         <div class="text-center">
-            {{ form.rating.label_tag }}
-            <div id="star-rating" class="d-flex justify-content-center mb-3">
+            <div id="id-rating" class="d-flex justify-content-center mb-3">
+                <label for="rating-value">{{ form.rating.label }}</label>
                 {% for i in "12345" %}
                 <button type="button" class="star-btn btn p-0" data-value="{{ i }}" aria-label="Rating value">
                     <i class="fa-regular fa-star fa-xl text-warning text-opacity-75" data-value="{{ i }}"></i>
                 </button>
                 {% endfor %}
-                <input type="hidden" name="rating" id="rating-value" required>
+                <input name="rating" id="rating-value" value="" style="display:none">
             </div>
         </div>
 
