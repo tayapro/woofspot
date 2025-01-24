@@ -10,6 +10,8 @@
 - [UX design](#ux-design)
   - [User Stories](#user-stories)
   - [Wireframes](#wireframes)
+  - [Flowcharts](#flowcharts)
+  - [Data Model](#data-model)
   - [Key Design Decisions](#key-design-decisions)
     - [Imagery](#imagery)
     - [Color Scheme](#colour-scheme)
@@ -18,9 +20,6 @@
 - [Features](#features)
   - [Existing Features](#existing-features)
   - [Future Features](#future-features)
-- [Technical Overview](#technical-overview)
-  - [Flowcharts](#flowcharts)
-  - [Data Model](#data-model)
 - [Technologies](#technologies)
 - [Deployment](#deployment)
   - [Github](#github)
@@ -81,6 +80,64 @@ The list of user stories can be found in [**Woofspot GitHub project**](https://g
 ## Wireframes
 
 ### Landing Page Wireframes
+
+<img src="readme/landing_page_wireframe.png" width="500" alt="landing page wireframe">
+
+### Event Calendar Wireframes
+
+<img src="readme/event_calendar_page_wireframe.png" width="500" alt="event calendar page wireframe">
+
+### My Events Wireframes
+
+<img src="readme/my_events_page_wireframe.png" width="500" alt="my events page wireframe">
+
+### Login Wireframes
+
+<img src="readme/login_page_wireframe.png" width="500" alt="login page wireframe">
+
+### Sign Up Wireframes
+
+<img src="readme/signup_page_wireframe.png" width="500" alt="signup page wireframe">
+
+### Logout Wireframes
+
+<img src="readme/logout_page_wireframe.png" width="500" alt="logout page wireframe">
+
+### Profile Wireframes
+
+<img src="readme/profile_page_wireframe.png" width="500" alt="profile page wireframe">
+
+### Event Reservation Cancel Wireframes
+
+<img src="readme/reservation_cancel_page_wireframe.png" width="500" alt="event reservation cancel page wireframe">
+
+### Event Create Wireframes
+
+<img src="readme/event_create_page_wireframe.png" width="500" alt="event create page wireframe">
+
+### Event View Wireframes
+
+<img src="readme/event_view_page_wireframe.png" width="500" alt="event view page wireframe">
+
+### Event Edit Wireframes
+
+<img src="readme/event_edit_page_wireframe.png" width="500" alt="event edit page wireframe">
+
+### Event Delete Wireframes
+
+<img src="readme/event_delete_page_wireframe.png" width="500" alt="event delete page wireframe">
+
+### Event Review Wireframes
+
+<img src="readme/event_review_page_wireframe.png" width="500" alt="event review page wireframe">
+
+### Error pages Wireframes
+
+<img src="readme/error_pages_wireframe.png" width="500" alt="Error pages wireframe">
+
+## Flowcharts
+
+## Data Model
 
 ## Key Design Decisions
 
