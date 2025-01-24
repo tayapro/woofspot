@@ -880,7 +880,7 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 > Only the customized templates (`templates\account\login.html`, `templates\account\logout.html`, `templates\account\password_reset.html`
 > and `templates\account\signup.html`) were validated. Results are shown below.
 
-#### NOTE:
+#### Popover API & HTMX validation issues:
 
 1. The following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
 
@@ -926,7 +926,52 @@ but future versions of the project may involve further refinement of element usa
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
 </details>
 
-#### event_app
+#### Event_app
+
+All following pages have passed without errors or warnings:
+
+<details><summary><code>event_create.html</code></summary>
+<img src="readme/W3HTML_validation_event_create.png" width="500" alt="W3C event_create.html validation image">
+</details>
+
+<details><summary><code>event_edit.html</code></summary>
+<img src="readme/W3HTML_validation_event_edit.png" width="500" alt="W3C event_edit.html validation image">
+</details>
+
+<details><summary><code>reservation_cancel.html</code></summary>
+<img src="readme/W3HTML_validation_reservation_cancel.png" width="500" alt="W3C reservation_cancel.html validation image">
+</details>
+
+All following pages have passed without errors or warnings, except for validation issues
+related to the Popover API and HTMX (for more details, please refer to the section above):
+
+<details><summary><code>all_events.html</code></summary>
+<img src="readme/W3HTML_validation_all_events.png" width="500" alt="W3C all_events.html validation image">
+</details>
+
+<details><summary><code>event_delete.html</code></summary>
+<img src="readme/W3HTML_validation_event_delete.png" width="500" alt="W3C event_delete.html validation image">
+</details>
+
+<details><summary><code>event_search_results.html</code></summary>
+<img src="readme/W3HTML_validation_event_search_results.png" width="500" alt="W3C event_search_results.html validation image">
+</details>
+
+<details><summary><code>event_view.html</code></summary>
+<img src="readme/W3HTML_validation_event_view.png" width="500" alt="W3C event_view.html validation image">
+</details>
+
+<details><summary><code>index.html</code></summary>
+<img src="readme/W3HTML_validation_index.png" width="500" alt="W3C index.html validation image">
+</details>
+
+<details><summary><code>my_event_list.html</code></summary>
+<img src="readme/W3HTML_validation_my_event_list.png" width="500" alt="W3C my_event_list.html validation image">
+</details>
+
+<details><summary><code>rating_submit.html</code></summary>
+<img src="readme/W3HTML_validation_rating_submit.png" width="500" alt="W3C rating_submit.html validation image">
+</details>
 
 **Email templates**
 
