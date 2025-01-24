@@ -942,6 +942,10 @@ All following pages have passed without errors or warnings:
 <img src="readme/W3HTML_validation_event_edit.png" width="500" alt="W3C event_edit.html validation image">
 </details>
 
+<details><summary><code>rating_submit.html</code></summary>
+<img src="readme/W3HTML_validation_rating_submit.png" width="500" alt="W3C rating_submit.html validation image">
+</details>
+
 <details><summary><code>reservation_cancel.html</code></summary>
 <img src="readme/W3HTML_validation_reservation_cancel.png" width="500" alt="W3C reservation_cancel.html validation image">
 </details>
@@ -967,10 +971,6 @@ related to the Popover API and HTMX (for more details, please refer to the secti
 
 <details><summary><code>my_event_list.html</code></summary>
 <img src="readme/W3HTML_validation_my_event_list.png" width="500" alt="W3C my_event_list.html validation image">
-</details>
-
-<details><summary><code>rating_submit.html</code></summary>
-<img src="readme/W3HTML_validation_rating_submit.png" width="500" alt="W3C rating_submit.html validation image">
 </details>
 
 **Email templates**
