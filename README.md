@@ -926,6 +926,44 @@ but future versions of the project may involve further refinement of element usa
 <img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
 </details>
 
+#### event_app
+
+**Email templates**
+
+All pages passed without any errors or warnings:
+
+<details><summary><code>contact_us_submitted.html</code></summary>
+<img src="readme/W3HTML_validation_contact_us_submitted.png" width="500" alt="W3C validation_contact_us_submitted.html validation image">
+</details>
+
+<details><summary><code>event_cancelled.html</code></summary>
+<img src="readme/W3HTML_validation_event_cancelled.png" width="500" alt="W3C event_cancelled.html validation image">
+</details>
+
+<details><summary><code>event_changed.html</code></summary>
+<img src="readme/W3HTML_validation_event_changed.png" width="500" alt="W3C event_changed.html validation image">
+</details>
+
+<details><summary><code>event_created.html</code></summary>
+<img src="readme/W3HTML_validation_event_created.png" width="500" alt="W3C event_created.html validation image">
+</details>
+
+<details><summary><code>rating_created.html</code></summary>
+<img src="readme/W3HTML_validation_rating_created.png" width="500" alt="W3C rating_created.html validation image">
+</details>
+
+<details><summary><code>reservation_cancelled.html</code></summary>
+<img src="readme/W3HTML_validation_reservation_cancelled.png" width="500" alt="W3C reservation_cancelled.html validation image">
+</details>
+
+<details><summary><code>reservation_confirmed.html</code></summary>
+<img src="readme/W3HTML_validation_reservation_confirmed.png" width="500" alt="W3C reservation_confirmed.html validation image">
+</details>
+
+<details><summary><code>welcome_email.html</code></summary>
+<img src="readme/W3HTML_validation_welcome_email.png" width="500" alt="W3C welcome_email.html validation image">
+</details>
+
 ### Python
 
 All files passed without any errors or warnings on [CI Python Linter](https://pep8ci.herokuapp.com/).
