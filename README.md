@@ -916,7 +916,7 @@ Warning: Consider using the h1 element as a top-level heading only
    Error: Attribute hx-headers not allowed on element div at this point.
    ```
 
-   These warnings occur because certain HTMX attributes, such as hx-swap, hx-post, and hx-headers, are applied to the `div` element that may not be considered valid targets for these attributes in some contexts, based on HTML validation rules.
+   These warnings occur because certain HTMX attributes, such as `hx-swap`, `hx-post`, and `hx-headers`, are applied to the `div` element that may not be considered valid targets for these attributes in some contexts, based on current HTML validation rules.
    In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without reloading the page. Although these attributes may not be strictly validated for use on `div`, they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
 
 Validation warnings above (Popover API & HTMX) do not affect the functionality,
