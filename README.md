@@ -424,6 +424,10 @@ can simply rate the event using the stars, making it a quick and easy way to sha
 
 All reviews can be seen on the Event View page, allowing other users to view feedback and ratings for the event.
 
+> [!NOTE]
+> Users can leave as many reviews as they like, but only the most recent one will be
+> counted and displayed on the event’s view page.
+
 ### F12 Event Management (CRUD)
 
 #### CREATE
@@ -695,11 +699,15 @@ message will be displayed, guiding the admin to resolve the problem.
    - Explore cache busting techniques for static files to ensure that users always get the latest version.
 
 3. Token-Based Authentication:
+
    - Implement token-based authentication for enhanced security, particularly for
      API access or mobile app integration.
    - Use Django REST Framework (DRF) with JWT (JSON Web Tokens) for secure authentication
      of API requests.
    - Ensure secure token management, including token expiration, refresh tokens, and proper storage.
+
+4. Django’s built-in logging system will be implemented to track events and errors,
+   which will help with debugging and performance monitoring.
 
 [Back to top](#table-of-contents)
 
@@ -864,6 +872,8 @@ Follow these steps to deploy the Woofspot app on Heroku:
 ---
 
 # Testing
+
+## Responsivness testing
 
 ## User Stories Testing
 
