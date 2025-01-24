@@ -99,7 +99,7 @@ class EventHostForm(forms.ModelForm):
                 'type': 'time',
             }),
             'image': CustomClearableFileInput(attrs={
-                'class': 'form-control custom-clearable-file-input',
+                'class': 'w-100 form-control custom-clearable-file-input',
                 'accept': 'image/*',
             }),
         }

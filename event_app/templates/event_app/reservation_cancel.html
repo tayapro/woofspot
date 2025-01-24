@@ -11,11 +11,8 @@
     <h5 class="text-black fw-light text-opacity-50 mt-2 mb-5">Are you sure you want to cancel?</h5>
 
     <div class="d-flex justify-content-evenly flex-column-reverse flex-column flex-md-row gap-2">
-        <a href="{{ next }}">
-            <button type="submit"
-                class="btn btn-outline-default active text-body-secondary text-opacity-75 px-5 flex-fill btn-scale"
-                aria-label="Reservation Cancel decline">No</button>
-        </a>
+        <a href="{{ next }}"
+            class="btn btn-outline-default active text-body-secondary text-opacity-75 px-5 flex-fill btn-scale">No</a>
 
         <form method="POST">
             {% csrf_token %}

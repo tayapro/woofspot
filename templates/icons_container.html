@@ -7,7 +7,7 @@
 {% include "like_container.html" %}
 <div>
     <i class="fa-solid fa-ticket fa-xl text-primary text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-        title="Planning To Attend" aria-label="Attend"></i>
+        title="Planning To Attend"></i>
 </div>
 {% include "cancel_reservation_container.html"%}
 {% endif %}
@@ -30,13 +30,12 @@
 {% if event.is_past and user == event.organizer %}
 <div class="text-center">
     <i class="fa-solid fa-clipboard-list fa-xl text-success text-opacity-75" data-bs-toggle="tooltip"
-        data-bs-placement="top" title="Hosted by You" aria-label="Hosted by You"></i>
+        data-bs-placement="top" title="Hosted by You"></i>
 </div>
 <div class="text-center d-flex flex-row">
-    <a href="{% url 'event_view' event.slug %}#reviews-section" class="btn btn-link m-0 px-0 btn-scale" tabindex="-1"
-        aria-disabled="true">
+    <a href="{% url 'event_view' event.slug %}#reviews-section" class="btn btn-link m-0 px-0 btn-scale">
         <i class="fa-solid fa-star fa-xl text-warning text-opacity-75" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="Your Event's Rating" aria-label="Event's rating"></i>
+            title="Your Event's Rating"></i>
     </a>
     <p class="fw-semibold text-warning text-opacity-75">
         {% if event.average_rating %}
@@ -70,7 +69,7 @@
 
 {% if event.is_past and user != event.organizer and not event.is_user_attendee %}
 <div class="tooltip-wrapper text-center d-flex flex-row m-0 p-0">
-    <div data-bs-toggle="tooltip" data-bs-placement="top" title="The Event's Rating" aria-label="The event's rating">
+    <div data-bs-toggle="tooltip" data-bs-placement="top" title="The Event's Rating">
         <a href="#" class="btn disabled opacity-100 text-warning text-opacity-75 border-0 m-0 px-0">
             <i class="fa-solid fa-star fa-xl text-warning text-opacity-75"></i>
         </a>

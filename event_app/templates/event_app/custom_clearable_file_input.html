@@ -1,4 +1,3 @@
 <div class="border-opacity-25 border border-secondary rounded-2">
-    <input class="w-100" type="file" name="{{ widget.name }}" id="{{ widget.attrs.id }}" {%
-        include "django/forms/widgets/attrs.html" %}>
+    <input type="file" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
 </div>
