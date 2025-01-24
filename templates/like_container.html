@@ -1,5 +1,5 @@
-<div class="d-flex align-items-center justify-content-center" aria-label="Like event"
-    hx-post="{% url 'like_toggle' event.slug %}" hx-swap="outerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<div class="d-flex align-items-center justify-content-center" hx-post="{% url 'like_toggle' event.slug %}"
+    hx-swap="outerHTML" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% if user.is_authenticated %}
     <button type="submit" class="btn p-0">
         {% if user in event.liked_by.all %}
