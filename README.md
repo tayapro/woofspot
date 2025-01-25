@@ -467,9 +467,13 @@ If there are any form validation errors, the user will see a detailed descriptio
 - The minimum event duration is one hour.
 - Event cannot be in the past.
 - Event date cannot be more than one year ahead...
-- Ensure this value has at least 5 characters (it has X). _for title, description and location fields_
+- Ensure this value has at least 5 characters (it has _N_). _for title, description and location fields_
 - Event date cannot be more than one year ahead. The latest allowed date is YYYY-MM-DD, please make changes.
 - Image upload failed. Please check your connection or try again later.
+
+>[!NOTE]
+> The option for adding an image wasn’t included in the form because users are likely to try 
+> adding an image first, and this approach is more suitable for Woofspot.
 
 #### READ
 
@@ -648,7 +652,19 @@ The profile page displays the user's "username" and "email" in a read-only forma
 
 <img src="readme/f15_profile.png" width="300" alt="Profile">
 
-### F15 Email Notifications
+### F15 Search result page
+
+The search results page displays a list of events that match the search query.
+
+<p float="left">
+<img src="readme/f15_search_results.png" width="376" alt="Search results">&nbsp;&nbsp;&nbsp;&nbsp; 
+<img src="readme/f15_search_no_results.png" width="227" alt="Search no results"> 
+</p>
+
+If no events are found, the user will be greeted with a cute crochet creature.\
+The user can click the "Back" button to return to the previous page.
+
+### F16 Email Notifications
 
 After every successful action with Event (Event create/edit/delete, Reservation Confirmed/Cancelled, Rating created)
 and after Sign Up on Woofspot platform, the user will receive email.
@@ -660,7 +676,7 @@ Few examples:
 <img src="readme/f16_event_changed_email.png" width="300" alt="Event changed email"> 
 </p>
 
-### F16 Spinner
+### F17 Spinner
 
 Since Woofspot features a large number of event images hosted on Cloudinary, some pages may
 take a little extra time to load while the images are being processed. To ensure users don’t
@@ -674,7 +690,7 @@ page is "In Progress".
 > However, optimizing page load speed is part of future plans.
 > For more details, please refer to the _Future Features_ section below.
 
-### F17 Admin Panel / Delete Event Image
+### F18 Admin Panel / Delete Event Image
 
 On the Admin page, under the "The Events" section, the admin or superuser has the option
 to delete an event image by clicking the link under the image.
