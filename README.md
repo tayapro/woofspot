@@ -830,7 +830,29 @@ To get started with Cloudinary:
 
 ## Google API
 
-How to setup
+### Google Cloud Console set up
+
+- Go to the Google Cloud Console. Create a new project (Woofspot) and enable the Google+ API.
+
+  <img src="readme/Google_API_console_Client_ID.png" width="800" alt="Google_API_console_Client_ID validation image">
+
+- Create OAuth 2.0 credentials and note down the Client ID and Client Secret.
+
+### Django social account set up
+
+- Go to the Django admin panel.
+- Navigate to Social Accounts > Social Applications.
+- Click Add social application - Google_login, provider - Google.
+- Fill in the required fields (e.g., provider, name, client ID, client secret).
+- Add site's URL to "Chosen sites".
+- Save the application.
+
+### Gmail app password set up
+
+Configure [Google app password](https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237),
+it needs for `EMAIL_HOST_PASSWORD`, see **Configure Settings** bellow.
+
+For reference, [Django smtp-backend](https://docs.djangoproject.com/en/5.1/topics/email/#smtp-backend).
 
 ## Heroku Deployment
 
@@ -858,8 +880,7 @@ Follow these steps to deploy the Woofspot app on Heroku:
      - `DATABASE_URL`: database connection URL, see the "Neon PostgeSQL Database" section above.
      - `DEFAULT_IMAGE`: URL for a default image.
      - `EMAIL_HOST_USER`: Google email address, in current configuration _woofspot.app@gmail.com_.
-     - `EMAIL_HOST_PASSWORD`: Password to send emails using Google API, for more details how to set up it,
-       see [](https://www.geeksforgeeks.org/setup-sending-email-in-django-project/)
+     - `EMAIL_HOST_PASSWORD`: Password to send emails using Google API.
      - `SECRET_KEY`: secret key.
 
    - In the **Buildpacks** section, add the **Python** buildpack.
