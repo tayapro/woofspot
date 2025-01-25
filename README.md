@@ -873,7 +873,35 @@ Follow these steps to deploy the Woofspot app on Heroku:
 
 # Testing
 
-## Responsivness testing
+## Responsivness Testing
+
+## Browser compatibility Testing
+
+Testing has been carried out on the following devices:
+
+- Macbook Sanoma Version 14.4.1:
+
+  - Chrome Version 131.0.6778.265
+  - Firefox Version 134.0.2
+
+- Samsung S20:
+
+  - Chrome Version 132.0.6834.80
+
+- iPhone 14:
+
+  - Safari ios 18.1.1
+
+- iPad Air 5th generation:
+
+  - Safari ios 18.1.1
+
+- Windows PC:
+
+  - Firefox 134.0.2 (Windows 11)
+
+- Macbook Pro 2019:
+  - Safari ios 17.6
 
 ## User Stories Testing
 
@@ -1375,37 +1403,44 @@ Google Lighthouse in Google Chrome Developer Tools was used to check the website
 
 ## Known Issues
 
-### `aria-hidden` issue
+1. `aria-hidden` issue
 
-```
-Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
-hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
-ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
-details, see the aria-hidden section of the WAI-ARIA specification
-at https://w3c.github.io/aria/#aria-hidden.
+    ```
+    Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
+    hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
+    ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
+    details, see the aria-hidden section of the WAI-ARIA specification
+    at https://w3c.github.io/aria/#aria-hidden.
 
-Element with focus: button
-```
+    Element with focus: button
+    ```
 
-Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
-"Close" button on Modal window with Django Messages.
-When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
-after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
+    Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
+    "Close" button on Modal window with Django Messages.
+    When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
+    after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
 
-Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
-"Close" button on a modal that is triggered by Django Messages. When the modal
-appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
-it switches to `aria-hidden="true"`.
+    Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
+    "Close" button on a modal that is triggered by Django Messages. When the modal
+    appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
+    it switches to `aria-hidden="true"`.
 
-**To reproduce the issue**:
+    **To reproduce the issue**:
 
-- Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
-  (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
-- Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
+    - Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
+      (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
+    - Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
 
-This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
+    This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
 
-[Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
+    [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
+
+2. Spinner Not Displaying in Safari
+
+   The spinner is not visible in the Safari browser. This issue might be related to specific CSS rendering or
+   JavaScript behavior in Safari.
+   The issue is still under investigation, and potential fixes related to CSS display properties, JavaScript
+   event handling, or cache issues are being considered.
 
 [Back to top](#table-of-contents)
 
