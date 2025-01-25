@@ -21,9 +21,14 @@
   - [Future Features](#future-features)
 - [Technologies](#technologies)
 - [Deployment](#deployment)
-  - [Github](#github)
+  - [How to clone](#how-to-clone)
+  - [Neon PostgeSQL Database](#neon-postgesql-database)
+  - [Cloudinary API](#cloudinary-api)
+  - [Google API](#google-api)
   - [Heroku](#heroku)
 - [Testing](#testing)
+  - [Responsivness Testing](#responsivness-testing)
+  - [Browser compatibility Testing](#browser-compatibility-testing)
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
   - [Code Validation](#code-validation)
@@ -823,7 +828,11 @@ To get started with Cloudinary:
 
 <img src="readme/Cloudinary_api_key.png" width="500" alt="Cloudinary API key image">
 
-### Heroku Deployment
+## Google API
+
+How to setup
+
+## Heroku Deployment
 
 Heroku, a cloud platform that enables easy application building, deployment, and management, was chosen for the Woofspot project. \
 Follow these steps to deploy the Woofspot app on Heroku:
@@ -875,6 +884,13 @@ Follow these steps to deploy the Woofspot app on Heroku:
 
 ## Responsivness Testing
 
+Responsive layout has been check for all screen sizes, and focused on most popular, based on [screen-resolution-stats](https://gs.statcounter.com/screen-resolution-stats/all/worldwide/2024).
+
+The layout has been optimized for common screen sizes, ensuring a seamless user experience across devices.
+For older or less common screen sizes, scroll options have been implemented to ensure content remains
+accessible, preventing any layout issues and providing smooth navigation for users with smaller
+or non-standard screens.
+
 ## Browser compatibility Testing
 
 Testing has been carried out on the following devices:
@@ -921,15 +937,9 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 
 #### Popover API & HTMX validation issues:
 
-1. The following warning for the WOOFSPOT element (logo and landing page link) in the navigation bar.
+1. Currently, the following rendered templates are encountering errors related to the Popover API and HTMX elements: `my_events`, `profile`, `search_results`, `event_view`, `index`, `all_events`.
 
-```
-Warning: Consider using the h1 element as a top-level heading only
-```
-
-2. Currently, the following rendered templates are encountering errors related to the Popover API and HTMX elements: `my_events`, `profile`, `search_results`, `event_view`, `index`, `all_events`.
-
-   2.1 The Popover API has been choosen to enhance the user experience by providing dynamic and interactive content in a way that’s intuitive and accessible.
+   1.1 The Popover API has been choosen to enhance the user experience by providing dynamic and interactive content in a way that’s intuitive and accessible.
    Found opend GitHub ticket [Allow new attributes: popover, popovertarget and popovertargetaction](https://github.com/w3c/markup-validator/issues/88).
    Based on [spec.whatwg.org/popover](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute):
 
@@ -947,7 +957,7 @@ Warning: Consider using the h1 element as a top-level heading only
    Error: Attribute popovertargetaction not allowed on element button at this point.
    ```
 
-   2.2 While integrating `HTMX` functionality into the Woofspot project, encountered the following validation issues:
+   1.2 While integrating `HTMX` functionality into the Woofspot project, encountered the following validation issues:
 
    ```
    Error: Attribute hx-swap not allowed on element div at this point.
@@ -960,10 +970,6 @@ Warning: Consider using the h1 element as a top-level heading only
 
 Validation warnings above (Popover API & HTMX) do not affect the functionality,
 but future versions of the project may involve further refinement of element usage to ensure full compatibility with validation standards.
-
-<details><summary><code>XXXXX.html</code></summary>
-<img src="readme/W3HTML_validation_XXXXX.png" width="500" alt="W3C XXXXXX.html validation image">
-</details>
 
 #### Event_app
 
@@ -1405,35 +1411,35 @@ Google Lighthouse in Google Chrome Developer Tools was used to check the website
 
 1. `aria-hidden` issue
 
-    ```
-    Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
-    hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
-    ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
-    details, see the aria-hidden section of the WAI-ARIA specification
-    at https://w3c.github.io/aria/#aria-hidden.
+   ```
+   Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
+   hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
+   ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
+   details, see the aria-hidden section of the WAI-ARIA specification
+   at https://w3c.github.io/aria/#aria-hidden.
 
-    Element with focus: button
-    ```
+   Element with focus: button
+   ```
 
-    Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
-    "Close" button on Modal window with Django Messages.
-    When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
-    after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
+   Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
+   "Close" button on Modal window with Django Messages.
+   When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
+   after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
 
-    Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
-    "Close" button on a modal that is triggered by Django Messages. When the modal
-    appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
-    it switches to `aria-hidden="true"`.
+   Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
+   "Close" button on a modal that is triggered by Django Messages. When the modal
+   appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
+   it switches to `aria-hidden="true"`.
 
-    **To reproduce the issue**:
+   **To reproduce the issue**:
 
-    - Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
-      (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
-    - Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
+   - Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
+     (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
+   - Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
 
-    This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
+   This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
 
-    [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
+   [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
 
 2. Spinner Not Displaying in Safari
 
