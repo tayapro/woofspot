@@ -94,7 +94,9 @@ class WoofspotEvent(models.Model):
         # Maximum allowed date is today + 1 year
         max_date = date.today() + timedelta(days=365)
         if self.date > max_date:
-            raise ValidationError(f"Event date cannot be more than one year ahead. The latest allowed date is {max_date}")
+            raise ValidationError(
+                f"Event date cannot be more than one year ahead. "
+                f"The latest allowed date is {max_date}")
 
         if self.date < date.today() or (self.date == date.today() and
            self.start_time < datetime.now().time()):

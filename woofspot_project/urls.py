@@ -33,7 +33,7 @@ urlpatterns = [
     path("user/", include("user_app.urls")),
 
     # Adds authentication functionalities (e.g., login, logout)
-    path("accounts/", include("allauth.urls")),  
+    path("accounts/", include("allauth.urls")),
 
     # Routes for event-related views
     path("", include("event_app.urls"), name="event-app-urls"),

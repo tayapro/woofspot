@@ -451,7 +451,7 @@ and dog, seemingly asking, "Are you sure?" On the right, the user will see a sim
 buttons: "Cancel Spot" and "No".
 
 <p float="left">
-<img src="readme/f11_reservation_cancel_desktop.png" width="350" alt="Reservation cancel desktop">&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="readme/f11_reservation_cancel_desktop.png" width="373" alt="Reservation cancel desktop">&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="readme/f11_reservation_cancel_mobile.png" width="158" alt="Reservation cancel mobile">
 </p>
 
@@ -586,7 +586,7 @@ On mobile devices, only the right-hand panel with the buttons will be displayed,
 streamlined experience.
 
 <p float="left">
-<img src="readme/f13_event_delete_desktop.png" width="392" alt="Event delete desktop page">&nbsp;&nbsp;&nbsp;&nbsp; 
+<img src="readme/f13_event_delete_desktop.png" width="352" alt="Event delete desktop page">&nbsp;&nbsp;&nbsp;&nbsp; 
 <img src="readme/f13_event_delete_mobile.png" width="150" alt="Event delete mobile page"> 
 </p>
 
@@ -1196,15 +1196,16 @@ Custom allauth pages `login.html`, `logout.html` and `password_reset.html` passe
 <img src="readme/W3HTML_validation_password_reset.png" width="500" alt="W3C password_reset.html validation image">
 </details>
 
-The `signup.html` page failed: 
+The `signup.html` page failed:
 
 <details><summary><code>signup.html</code></summary>
 <img src="readme/W3HTML_validation_signup.png" width="500" alt="W3C signup.html validation image">
 </details>
 
-There is some unknown issues to parse form elements as <p>
+There is some issues to parse form elements as {{ form.as_p }}.
 
 Default Django template's code looks good:
+
 ```
   <p>↩
     <label for="id_password1">Password:</label>↩
@@ -1216,8 +1217,7 @@ Default Django template's code looks good:
   </p>↩
 ```
 
-For future development crispy_forms will be used.
-
+For future development crispy_forms will be implemented.
 
 #### User_app
 
@@ -1266,43 +1266,59 @@ All files passed without any errors or warnings on [CI Python Linter](https://pe
 
 #### event_app
 
-<details><summary><code>forms.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>admin.py</code></summary>
+<img src="readme/PEP8_event_app_admin.png" width="500" alt="PEP8 event_app forms validation image">
+</details>
+
+<details><summary><code>forms.py</code></summary>
 <img src="readme/PEP8_event_app_forms.png" width="500" alt="PEP8 event_app forms validation image">
 </details>
 
-<details><summary><code>models.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>models.py</code></summary>
 <img src="readme/PEP8_event_app_models.png" width="500" alt="PEP8 event_app models validation image">
 </details>
 
-<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>signals.py</code></summary>
+<img src="readme/PEP8_event_app_signals.png" width="500" alt="PEP8 event_app signals validation image">
+</details>
+
+<details><summary><code>utils.py</code></summary>
+<img src="readme/PEP8_event_app_utils.png" width="500" alt="PEP8 event_app utils validation image">
+</details>
+
+<details><summary><code>urls.py</code></summary>
 <img src="readme/PEP8_event_app_urls.png" width="500" alt="PEP8 event_app urls validation image">
+</details>
+
+<details><summary><code>views.py</code></summary>
+<img src="readme/PEP8_event_app_views.png" width="500" alt="PEP8 event_app views validation image">
 </details>
 
 #### user_app
 
-<details><summary><code>forms.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>forms.py</code></summary>
 <img src="readme/PEP8_user_app_forms.png" width="500" alt="PEP8 user_app forms validation image">
 </details>
 
-<details><summary><code>views.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>views.py</code></summary>
 <img src="readme/PEP8_user_app_views.png" width="500" alt="PEP8 user_app views validation image">
 </details>
 
-<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>urls.py</code></summary>
 <img src="readme/PEP8_user_app_urls.png" width="500" alt="PEP8 user_app urls validation image">
 </details>
 
 #### woofspot_project
 
-<details><summary><code>settings.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>settings.py</code></summary>
 <img src="readme/PEP8_woofspot_project_settings.png" width="500" alt="PEP8 woofspot_project settings validation image">
 </details>
 
-<details><summary><code>views.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>views.py</code></summary>
 <img src="readme/PEP8_woofspot_project_views.png" width="500" alt="PEP8 woofspot_project views validation image">
 </details>
 
-<details><summary><code>urls.py</code> page passed without any errors or warnings.</summary>
+<details><summary><code>urls.py</code></summary>
 <img src="readme/PEP8_woofspot_project_urls.png" width="500" alt="PEP8 woofspot_project urls validation image">
 </details>
 
