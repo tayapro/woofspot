@@ -288,7 +288,6 @@ def event_view(request, slug):
     enhance_event_details(request, event)
 
     next = request.GET.get("next") or request.POST.get("next", reverse("my_event_list"))
-    print(f"NEXT: {next}")
 
     return render(
         request,

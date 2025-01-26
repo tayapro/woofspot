@@ -16,6 +16,7 @@
     - [Color Scheme](#colour-scheme)
     - [Typography](#typography)
     - [Interactive Elements](#interactive-elements)
+- [Agile Methodology](#agile-methodology)
 - [Features](#features)
   - [Existing Features](#existing-features)
   - [Future Features](#future-features)
@@ -193,6 +194,55 @@ the user experience.
 Particularly on mobile screens, where users may struggle to distinguish between various static pet images due
 to size constraints or color differences, the animated dog provides a fun and effective solution. Its lively
 animation draws attention and ensures a consistent and engaging experience for users across all devices.
+
+[Back to top](#table-of-contents)
+
+---
+
+# Agile Methodology
+
+## GitHub Projects
+
+GitHub Projects was used as an Agile tool to help manage this project. While it’s not a specialized project
+management tool, it can be effectively adapted to work with Agile methodologies by using tags and organizing
+issues into projects.
+
+The link to the Woofspot board can be found [here](https://github.com/users/tayapro/projects/4/views/1).
+
+Through GitHub Projects, user stories, issues, and tasks were planned and tracked on a weekly basis,
+using a simple Kanban board. This allowed for easy monitoring of progress and adjustments as needed.
+
+<img src="readme/kanban_board.png" width="600" alt="Kanban board">
+
+To prioritize tasks, the MoSCoW method was applied, and custom GitHub project labels were created. This helped
+ensure that the most important tasks were given priority within the limited time available, ensuring focus on
+delivering the key features first.
+
+## Milestones
+
+Milestones were used to organize user stories into groups, each with an assigned deadline.
+
+<img src="readme/milestones.png" width="600" alt="milestones">
+
+This helped ensure that the development process stayed on track, with features and tasks prioritized
+appropriately based on deadlines and importance.
+
+## MoSCoW Prioritization
+
+Before prioritizing and implementing tasks, the Epics were broken down into smaller, manageable user stories.
+This allowed for the application of the MoSCoW prioritization method to the user stories within the Issues
+tab on GitHub.
+
+The MoSCoW method helped categorize the tasks as follows:
+
+- _Must Have_: These are the essential features that are guaranteed to be delivered.
+- _Should Have_: These tasks add significant value, though they aren’t critical for the project’s success.
+- _Could Have_: These are nice-to-have features that have a smaller impact if left out.
+- _Won't Have_: These are tasks that are not a priority for this iteration and won’t be included in the
+  current development cycle.
+
+This approach ensured a focus on delivering the most important features first, while also planning
+for additional features that could enhance the user experience in later iterations.
 
 [Back to top](#table-of-contents)
 
@@ -471,8 +521,8 @@ If there are any form validation errors, the user will see a detailed descriptio
 - Event date cannot be more than one year ahead. The latest allowed date is YYYY-MM-DD, please make changes.
 - Image upload failed. Please check your connection or try again later.
 
->[!NOTE]
-> The option for adding an image wasn’t included in the form because users are likely to try 
+> [!NOTE]
+> The option for adding an image wasn’t included in the form because users are likely to try
 > adding an image first, and this approach is more suitable for Woofspot.
 
 #### READ
@@ -690,15 +740,15 @@ page is "In Progress".
 > However, optimizing page load speed is part of future plans.
 > For more details, please refer to the _Future Features_ section below.
 
-### F18 Admin Panel / Delete Event Image
+### F18 Admin Panel / Event Image Management
 
 On the Admin page, under the "The Events" section, the admin or superuser has the option
-to delete an event image by clicking the link under the image.
+to add and delete an event image.
 
 <img src="readme/f18_admin_delete_image.png" width="500" alt="Admin delete image">
 
 In a successful scenario, the superuser will see a confirmation message in green, indicating
-that the image was successfully deleted. If there are any issues during the process, an error
+that the image was successfully created/deleted. If there are any issues during the process, an error
 message will be displayed, guiding the admin to resolve the problem.
 
 ## Future Features

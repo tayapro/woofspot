@@ -27,9 +27,8 @@ urlpatterns = [
     # Summernote WYSIWYG editor
     path("summernote/", include("django_summernote.urls")),
 
-    # User authentication and management
-    # Includes custom overrides for Django Allauth features
-    path("", include("user_app.urls")),
+    # User profile
+    path("user/", include("user_app.urls")),
     # Adds authentication functionalities (e.g., login, logout)
     path("accounts/", include("allauth.urls")),  
 
