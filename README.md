@@ -1007,14 +1007,13 @@ Testing has been carried out on the following devices:
 
 ## User Stories / Features Testing
 
-The tests for Features and User Stories were done together to show how closely they are connected. 
-By testing them at the same time, it was easier to make sure that the features implemented actually 
+The tests for Features and User Stories were done together to show how closely they are connected.
+By testing them at the same time, it was easier to make sure that the features implemented actually
 fulfill the user stories, ensuring everything works as expected and provides real value to the users.
-This approach also helped make the testing process more efficient, as it allowed for a quicker overall 
+This approach also helped make the testing process more efficient, as it allowed for a quicker overall
 check of the system and confirmed that all key features were properly covered within the user experience.
 
-
-Link to [test results](https://docs.google.com/spreadsheets/d/1elLslr4vKWIVPbUoRSMJZiThs1BR5yX9vEiOy9n9PRY/edit?gid=184015431#gid=184015431), column _I_ contain User Stories links, column _H_ - features.  
+Link to [test results](https://docs.google.com/spreadsheets/d/1elLslr4vKWIVPbUoRSMJZiThs1BR5yX9vEiOy9n9PRY/edit?gid=184015431#gid=184015431), column _I_ contain User Stories links, column _H_ - features.
 
 Link to [User Stories](https://github.com/tayapro/woofspot/issues?q=is%3Aissue).
 
@@ -1158,6 +1157,24 @@ a specific function, making the templates easier to manage and ensuring everythi
 combined.
 
 <img src="readme/templates_diagram.png" width="800" alt="templates_diagram image">
+
+Error pages passed without any errors or warnings:
+
+<details><summary><code>400.html</code></summary>
+<img src="readme/W3HTML_validation_400.png" width="500" alt="W3C 400.html validation image">
+</details>
+
+<details><summary><code>403.html</code></summary>
+<img src="readme/W3HTML_validation_403.png" width="500" alt="W3C 403.html validation image">
+</details>
+
+<details><summary><code>404.html</code></summary>
+<img src="readme/W3HTML_validation_404.png" width="500" alt="W3C 404.html validation image">
+</details>
+
+<details><summary><code>500.html</code></summary>
+<img src="readme/W3HTML_validation_500.png" width="500" alt="W3C 500.html validation image">
+</details>
 
 #### User_app
 
