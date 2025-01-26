@@ -30,8 +30,7 @@
 - [Testing](#testing)
   - [Responsivness Testing](#responsivness-testing)
   - [Browser compatibility Testing](#browser-compatibility-testing)
-  - [User Stories Testing](#user-stories-testing)
-  - [Manual Testing](#manual-testing)
+  - [User Stories / Features Testing](#user-stories--features-testing)
   - [Code Validation](#code-validation)
   - [Performance](#performance)
   - [Known Issues](#known-issues)
@@ -1006,9 +1005,9 @@ Testing has been carried out on the following devices:
 - Macbook Pro 2019:
   - Safari ios 17.6
 
-## User Stories Testing
+## User Stories / Features Testing
 
-This section shows the connection between [Features](#features) and [UX design](#ux-design) sections.
+The [conducted tests](https://docs.google.com/spreadsheets/d/1elLslr4vKWIVPbUoRSMJZiThs1BR5yX9vEiOy9n9PRY/edit?gid=184015431#gid=184015431) shows the connection between [Features](#features) and [User Stories](https://github.com/tayapro/woofspot/issues?q=is%3Aissue).
 
 ## Code Validation
 
