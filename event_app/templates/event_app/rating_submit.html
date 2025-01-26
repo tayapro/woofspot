@@ -21,6 +21,7 @@
 
 <div class="w-75" id="event-rating-form">
     <form method="POST">
+        {% csrf_token %}
         <div class="mb-3">
             {{ form.review_text.label_tag }}
             {{ form.review_text }}
