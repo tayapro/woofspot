@@ -1108,6 +1108,8 @@ related to the Popover API and HTMX (for more details, please refer to the secti
 <img src="readme/W3HTML_validation_index.png" width="500" alt="W3C index.html validation image">
 </details>
 
+> [!NOTE] > The `Contact_us.html` template has been included in the `index.html` and was validated within the `index.html` file.
+
 <details><summary><code>my_event_list.html</code></summary>
 <img src="readme/W3HTML_validation_my_event_list.png" width="500" alt="W3C my_event_list.html validation image">
 </details>
@@ -1131,6 +1133,10 @@ All pages passed without any errors or warnings:
 <details><summary><code>event_created.html</code></summary>
 <img src="readme/W3HTML_validation_event_created.png" width="500" alt="W3C event_created.html validation image">
 </details>
+
+> [!NOTE]
+> The `custom_clearable_file_input.html` is used in the formEventHostForm as template and was validated within the `event_create.html`
+> and `event_edit.html` files.
 
 <details><summary><code>rating_created.html</code></summary>
 <img src="readme/W3HTML_validation_rating_created.png" width="500" alt="W3C rating_created.html validation image">
@@ -1175,6 +1181,43 @@ Error pages passed without any errors or warnings:
 <details><summary><code>500.html</code></summary>
 <img src="readme/W3HTML_validation_500.png" width="500" alt="W3C 500.html validation image">
 </details>
+
+Custom allauth pages `login.html`, `logout.html` and `password_reset.html` passed without any errors or warning:
+
+<details><summary><code>login.html</code></summary>
+<img src="readme/W3HTML_validation_login.png" width="500" alt="W3C login.html validation image">
+</details>
+
+<details><summary><code>logout.html</code></summary>
+<img src="readme/W3HTML_validation_logout.png" width="500" alt="W3C logout.html validation image">
+</details>
+
+<details><summary><code>password_reset.html</code></summary>
+<img src="readme/W3HTML_validation_password_reset.png" width="500" alt="W3C password_reset.html validation image">
+</details>
+
+The `signup.html` page failed: 
+
+<details><summary><code>signup.html</code></summary>
+<img src="readme/W3HTML_validation_signup.png" width="500" alt="W3C signup.html validation image">
+</details>
+
+There is some unknown issues to parse form elements as <p>
+
+Default Django template's code looks good:
+```
+  <p>↩
+    <label for="id_password1">Password:</label>↩
+    <input type="password" name="password1" placeholder="Password" autocomplete="new-password" class="form-control" style="min-width: 200px; width: 100%; font-weight: 300;" required aria-describedby="id_password1_helptext" id="id_password1">↩
+    ↩
+      <span class="helptext" id="id_password1_helptext"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></span>↩
+    ↩
+    ↩
+  </p>↩
+```
+
+For future development crispy_forms will be used.
+
 
 #### User_app
 
