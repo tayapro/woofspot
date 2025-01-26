@@ -1007,7 +1007,16 @@ Testing has been carried out on the following devices:
 
 ## User Stories / Features Testing
 
-The [conducted tests](https://docs.google.com/spreadsheets/d/1elLslr4vKWIVPbUoRSMJZiThs1BR5yX9vEiOy9n9PRY/edit?gid=184015431#gid=184015431) shows the connection between [Features](#features) and [User Stories](https://github.com/tayapro/woofspot/issues?q=is%3Aissue).
+The tests for Features and User Stories were done together to show how closely they are connected. 
+By testing them at the same time, it was easier to make sure that the features implemented actually 
+fulfill the user stories, ensuring everything works as expected and provides real value to the users.
+This approach also helped make the testing process more efficient, as it allowed for a quicker overall 
+check of the system and confirmed that all key features were properly covered within the user experience.
+
+
+Link to [test results](https://docs.google.com/spreadsheets/d/1elLslr4vKWIVPbUoRSMJZiThs1BR5yX9vEiOy9n9PRY/edit?gid=184015431#gid=184015431), column _I_ contain User Stories links, column _H_ - features.  
+
+Link to [User Stories](https://github.com/tayapro/woofspot/issues?q=is%3Aissue).
 
 ## Code Validation
 
