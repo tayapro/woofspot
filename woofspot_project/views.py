@@ -26,7 +26,7 @@ def custom_403(request, exception):
         request: The HTTP request object.
         exception: The exception that triggered the error.
     """
-    return HttpResponseForbidden(render(request, "403.html"))
+    return HttpResponseForbidden(render(request, "403.html"), status=403)
 
 
 def custom_404(request, exception):
