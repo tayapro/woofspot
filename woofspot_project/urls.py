@@ -18,6 +18,8 @@ handler403 = 'woofspot_project.views.custom_403'
 handler404 = 'woofspot_project.views.custom_404'
 # Custom handler for Server Error (500)
 handler500 = 'woofspot_project.views.custom_500'
+# CSRF-specific 403 error handler
+handler403_csrf = 'woofspot_project.views.custom_403_csrf'
 
 # URL patterns for the project
 urlpatterns = [
@@ -29,6 +31,7 @@ urlpatterns = [
 
     # User profile
     path("user/", include("user_app.urls")),
+
     # Adds authentication functionalities (e.g., login, logout)
     path("accounts/", include("allauth.urls")),  
 
