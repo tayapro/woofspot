@@ -750,6 +750,17 @@ In a successful scenario, the superuser will see a confirmation message in green
 that the image was successfully created/deleted. If there are any issues during the process, an error
 message will be displayed, guiding the admin to resolve the problem.
 
+---
+
+> [!NOTE]
+> In this Django project, custom error pages have been implemented to enhance the user experience
+> when encountering different types of errors. Specifically, custom pages are rendered for common
+> HTTP errors such as 400 (Bad Request), 403 (Forbidden), 404 (Not Found), and 500 (Server Error).
+> These custom error pages provide clear, user-friendly messages to guide users, ensuring that even
+> when something goes wrong, they are informed in a way that aligns with the overall look and feel
+> of the website. For example, the 403 page is displayed when users attempt to access a restricted
+> resource without proper authorization.
+
 ## Future Features
 
 1. Image Optimization and Lazy Loading:
