@@ -624,7 +624,7 @@ def event_delete(request, slug):
     event = get_object_or_404(WoofspotEvent, slug=slug)
 
     if event.organizer != request.user:
-        return HttpResponseForbidden("Unauthorized access")
+        raise PermissionDenied
 
     next = request.GET.get("next", reverse("my_event_list"))
 
