@@ -34,12 +34,14 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-tayapro-woofspot-dr7arhh9daf.ws.codeinstitute-ide.net',
-                 '.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST")]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
+    "https://*.tayadev.com"
 ]
 
 # Application definition

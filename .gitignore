@@ -12,3 +12,6 @@ blog/fixtures/
 staticfiles/
 client_secret.json
 cloudinary_python.txt
+myenv/
+.env
+caddy/
