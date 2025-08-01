@@ -949,19 +949,13 @@ Before proceeding, ensure the following are set up:
 
 ### Deployment Steps on VPS
 
-1.  Create required folders
-
-    ```
-    mkdir -p woofspot caddy
-    ```
-
-2.  Clone woofspot repository and move into the project folder
+1.  Clone woofspot repository and move into the project folder:
 
     ```
     git clone git@github.com:tayapro/woofspot.git && cd woofspot
     ```
 
-3.  Create `.env.woofspot` file inside the `woofspot/` folder and set [environment variables](#environment-variables).
+2.  Create `.env` file inside the `woofspot/` folder and set [environment variables](#environment-variables).
     Add one extra variable: `ALLOWED_HOST=.<YOUR_DOMAIN>`.
     Full list of environment variables:
 
@@ -975,13 +969,32 @@ Before proceeding, ensure the following are set up:
     -   EMAIL_HOST_PASSWORD
     -   ALLOWED_HOST
 
-4.  Run the `build.sh` script to build the Docker image.
+3.  Run the `build.sh` script to build the Docker image.
+
+4.  Create `caddy` folder
+
+    ```
+    mkdir -p caddy
+    ```
+
+5.  Create the `Caddyfile` in the `caddy/` folder, example:
+
+    ```
+    woofspot.<YOUR_DOMAIN> {
+        reverse_proxy woofspot:8001
+    }
+    ```
 
 > [!NOTE]
-> The example use Docker Hub.  
-> If you're using another container registry, you may need to adjust the image tag and use the appropriate login command.
+> Replace **`<YOUR_DOMAIN>`** with your actual domain.
+> By default, the Dockerfile uses EXPOSE 8001. If you want to use a different port:
+>
+> -   Update the port in the Dockerfile
+> -   Rebuild the Docker image
+> -   Restart the container
+> -   And update the Caddyfile to match the new port
 
-5.  Create `docker-compose.yml` in the root directory
+6.  Create `docker-compose.yml` in the root directory:
 
     ```
     networks:
@@ -1003,31 +1016,14 @@ Before proceeding, ensure the following are set up:
       woofspot:
         image: woofspot:1.0.0
         env_file:
-          - ./woofspot/.env.woofspot
+          - ./woofspot/.env
         networks:
           - mynet
         container_name: woofspot
         restart: unless-stopped
     ```
 
-6.  Create the `Caddyfile` in the `caddy/` folder, example:
-
-    ```
-    woofspot.<YOUR_DOMAIN> {
-        reverse_proxy woofspot:8001
-    }
-    ```
-
-> [!NOTE]
-> Replace **`<YOUR_DOMAIN>`** with your actual domain.
-> By default, the Dockerfile uses EXPOSE 8001. If you want to use a different port:
->
-> -   Update the port in the Dockerfile
-> -   Rebuild the Docker image
-> -   Restart the container
-> -   And update the Caddyfile to match the new port
-
-6.  Run the container:
+7.  Run the container:
 
     ```
     docker-compose up -d
