@@ -4,40 +4,41 @@
 
 ## Table of Contents
 
-- [Project Description](#project-description)
-  - [Purpose](#purpose)
-  - [User Demographics](#user-demographics)
-- [UX design](#ux-design)
-  - [User Stories](#user-stories)
-  - [Wireframes](#wireframes)
-  - [Flowcharts](#flowcharts)
-  - [Key Design Decisions](#key-design-decisions)
-    - [Imagery](#imagery)
-    - [Color Scheme](#colour-scheme)
-    - [Typography](#typography)
-    - [Interactive Elements](#interactive-elements)
-- [Agile Methodology](#agile-methodology)
-- [Features](#features)
-  - [Existing Features](#existing-features)
-  - [Future Features](#future-features)
-- [Technologies](#technologies)
-- [Deployment](#deployment)
-  - [How to clone](#how-to-clone)
-  - [Neon PostgeSQL Database](#neon-postgesql-database)
-  - [Cloudinary API](#cloudinary-api)
-  - [Google API](#google-api)
-  - [Heroku](#heroku)
-- [Testing](#testing)
-  - [Responsivness Testing](#responsivness-testing)
-  - [Browser compatibility Testing](#browser-compatibility-testing)
-  - [User Stories / Features Testing](#user-stories--features-testing)
-  - [Code Validation](#code-validation)
-  - [Performance](#performance)
-  - [Known Issues](#known-issues)
-- [Credits](#credits)
-  - [Media](#media)
-  - [Code](#code)
-- [Acknowledgments](#acknowledgments)
+-   [Project Description](#project-description)
+    -   [Purpose](#purpose)
+    -   [User Demographics](#user-demographics)
+-   [UX design](#ux-design)
+    -   [User Stories](#user-stories)
+    -   [Wireframes](#wireframes)
+    -   [Flowcharts](#flowcharts)
+    -   [Key Design Decisions](#key-design-decisions)
+        -   [Imagery](#imagery)
+        -   [Color Scheme](#colour-scheme)
+        -   [Typography](#typography)
+        -   [Interactive Elements](#interactive-elements)
+-   [Agile Methodology](#agile-methodology)
+-   [Features](#features)
+    -   [Existing Features](#existing-features)
+    -   [Future Features](#future-features)
+-   [Technologies](#technologies)
+-   [Deployment](#deployment)
+    -   [How to clone](#how-to-clone)
+    -   [Neon PostgeSQL Database](#neon-postgesql-database)
+    -   [Cloudinary API](#cloudinary-api)
+    -   [Google API](#google-api)
+    -   [VPS (Virtual Private Server)](#vps-virtual-private-server)
+    -   [Heroku](#heroku)
+-   [Testing](#testing)
+    -   [Responsivness Testing](#responsivness-testing)
+    -   [Browser compatibility Testing](#browser-compatibility-testing)
+    -   [User Stories / Features Testing](#user-stories--features-testing)
+    -   [Code Validation](#code-validation)
+    -   [Performance](#performance)
+    -   [Known Issues](#known-issues)
+-   [Credits](#credits)
+    -   [Media](#media)
+    -   [Code](#code)
+-   [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -51,22 +52,22 @@ in your local pet-loving community.
 
 With a focus on simplicity and usability, Woofspot offers features like:
 
-- Creating, editing, viewing, and deleting events
-- Browsing and searching for events
-- Leaving reviews and ratings for past events
-- Engaging with events through likes and reservations
+-   Creating, editing, viewing, and deleting events
+-   Browsing and searching for events
+-   Leaving reviews and ratings for past events
+-   Engaging with events through likes and reservations
 
 Built using Django, Woofspot combines robust functionality with a clean, responsive design. Tools like Cloudinary,
-Bootstrap, and Rive ensure smooth performance and an engaging user experience. Hosted on Heroku, the platform is
+Bootstrap, and Rive ensure smooth performance and an engaging user experience. Hosted on VPS, the platform is
 reliable and accessible to users around the globe.
 
 ## User Demographics
 
 Woofspot is tailored for anyone who loves pets and wants to be part of a vibrant community. Here’s who will benefit most:
 
-- Pet Owners: Looking for dog meetups, pet-friendly outings, or training sessions.
-- Event Organizers: Planning and managing gatherings for pet lovers.
-- Pet Enthusiasts: Animal lovers who want to participate in pet-friendly events, even if they don’t own a pet.
+-   Pet Owners: Looking for dog meetups, pet-friendly outings, or training sessions.
+-   Event Organizers: Planning and managing gatherings for pet lovers.
+-   Pet Enthusiasts: Animal lovers who want to participate in pet-friendly events, even if they don’t own a pet.
 
 The platform is designed to be intuitive and accessible, making it easy for users of all experience levels
 to explore events and connect with others.
@@ -171,12 +172,12 @@ look that lets the images stand out.
 Woofspot project, selected a combination of fonts to enhance the overall design
 and user experience:
 
-- Rubik is used for body text, providing a clean and modern look that's easy to read
-  across different devices.
-- Fredoka is chosen for headers, adding a playful and friendly vibe that matches the fun
-  and approachable nature of Woofspot.
-- Lilita One is used for the Woofspot logo, giving it a unique, bold, and memorable
-  appearance that stands out.
+-   Rubik is used for body text, providing a clean and modern look that's easy to read
+    across different devices.
+-   Fredoka is chosen for headers, adding a playful and friendly vibe that matches the fun
+    and approachable nature of Woofspot.
+-   Lilita One is used for the Woofspot logo, giving it a unique, bold, and memorable
+    appearance that stands out.
 
 Together, these fonts create a balanced and visually appealing experience, aligning
 with Woofspot’s branding and overall aesthetic.
@@ -234,11 +235,11 @@ tab on GitHub.
 
 The MoSCoW method helped categorize the tasks as follows:
 
-- _Must Have_: These are the essential features that are guaranteed to be delivered.
-- _Should Have_: These tasks add significant value, though they aren’t critical for the project’s success.
-- _Could Have_: These are nice-to-have features that have a smaller impact if left out.
-- _Won't Have_: These are tasks that are not a priority for this iteration and won’t be included in the
-  current development cycle.
+-   _Must Have_: These are the essential features that are guaranteed to be delivered.
+-   _Should Have_: These tasks add significant value, though they aren’t critical for the project’s success.
+-   _Could Have_: These are nice-to-have features that have a smaller impact if left out.
+-   _Won't Have_: These are tasks that are not a priority for this iteration and won’t be included in the
+    current development cycle.
 
 This approach ensured a focus on delivering the most important features first, while also planning
 for additional features that could enhance the user experience in later iterations.
@@ -297,17 +298,17 @@ To close the popover menu, the user can click the circular "X" button in the top
 
 Each Woofspot event card includes an Icons section where users can view various icons:
 
-- Status Icons: These indicate the user’s connection to the event:
+-   Status Icons: These indicate the user’s connection to the event:
 
-  - Host
-  - Attendee
+    -   Host
+    -   Attendee
 
-- Interaction Icons:
-  - Hosts can edit or delete upcoming events.
-  - Logged in users can like an event. Clicking the heart icon toggles between solid and regular heart icons.
-    If a non logged in user clicks the like icon, the app will redirect them to the Login page. \
-     **Note**: This feature is implemented using htmx, allowing it to work without re-rendering the entire page.
-  - Rating Star: The star rating appears in read-only mode for hosts and non-attendees, showing the score. For attendees, the star is a clickable link that redirects to the Review page, where they can leave a review and set a rating score.
+-   Interaction Icons:
+    -   Hosts can edit or delete upcoming events.
+    -   Logged in users can like an event. Clicking the heart icon toggles between solid and regular heart icons.
+        If a non logged in user clicks the like icon, the app will redirect them to the Login page. \
+         **Note**: This feature is implemented using htmx, allowing it to work without re-rendering the entire page.
+    -   Rating Star: The star rating appears in read-only mode for hosts and non-attendees, showing the score. For attendees, the star is a clickable link that redirects to the Review page, where they can leave a review and set a rating score.
 
 #### Icon sets examples:
 
@@ -403,25 +404,25 @@ Each card has a hover effect that slightly enlarges it, creating a smooth and in
 The "My Events" page is a personalized place available to every logged in user.
 It’s divided into three sections:
 
-- **Hosted by Me**: Here, users can manage their existing events and create new ones by clicking the "Host New Event" button.
+-   **Hosted by Me**: Here, users can manage their existing events and create new ones by clicking the "Host New Event" button.
 
-  <img src="readme/f09_hosted_by_me.png" width="500" alt="Hosted by me section">
+    <img src="readme/f09_hosted_by_me.png" width="500" alt="Hosted by me section">
 
-- **Planning to Attend**: In this section, users can see the events they have reservation for event (marked with a "ticket" icon).
-  They also have the option to cancel their reservation by clicking the "X" icon.
+-   **Planning to Attend**: In this section, users can see the events they have reservation for event (marked with a "ticket" icon).
+    They also have the option to cancel their reservation by clicking the "X" icon.
 
-  <img src="readme/f09_planning_to_attend.png" width="500" alt="Planning to attend section">
+    <img src="readme/f09_planning_to_attend.png" width="500" alt="Planning to attend section">
 
-- **Past Events**: This section includes events the user has attended, either as a host or an attendee.
-  Attendees can leave a review for events they’ve participated in.
+-   **Past Events**: This section includes events the user has attended, either as a host or an attendee.
+    Attendees can leave a review for events they’ve participated in.
 
-  <img src="readme/f09_past_events.png" width="500" alt="Past events section">
+    <img src="readme/f09_past_events.png" width="500" alt="Past events section">
 
 If any section has an empty list of events, the user will see a friendly message, such as:
 
-- For Hosted by Me: "You’re not organizing any events yet."
-- For Planning to Attend: "You haven’t reserved a spot for any future events yet."
-- For Past Events: "You haven’t hosted any events or made any reservations yet."
+-   For Hosted by Me: "You’re not organizing any events yet."
+-   For Planning to Attend: "You haven’t reserved a spot for any future events yet."
+-   For Past Events: "You haven’t hosted any events or made any reservations yet."
 
 These messages help guide the user and keep the page informative, even when no events are present.
 
@@ -492,10 +493,10 @@ They will then be redirected to the Event Create page.
 On the desktop version, the screen is split into two panels: on the left, there’s a bright photo of a
 bulldog, and on the right, the user will see:
 
-- A gentle reminder about the format: English text, JPG, JPEG, or PNG images under 2MB.
-- A form with pre-filled fields ready for the user to edit, such as title, description, location, date, and time.
-- A field to choose a picture if desired (this is optional; if no image is chosen, a default image will be
-  added automatically).
+-   A gentle reminder about the format: English text, JPG, JPEG, or PNG images under 2MB.
+-   A form with pre-filled fields ready for the user to edit, such as title, description, location, date, and time.
+-   A field to choose a picture if desired (this is optional; if no image is chosen, a default image will be
+    added automatically).
 
 <p float="left">
 <img src="readme/f13_event_create_desktop.png" width="442" alt="Event create desktop">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -510,15 +511,15 @@ The user will also receive an email from the Woofspot team confirming the event 
 
 If there are any form validation errors, the user will see a detailed description of the errors, such as:
 
-- Please use only Latin/accented characters.
-- Event start time cannot be between 21:00 and 09:00.
-- Please make sure the event is no longer than three hours.
-- The minimum event duration is one hour.
-- Event cannot be in the past.
-- Event date cannot be more than one year ahead...
-- Ensure this value has at least 5 characters (it has _N_). _for title, description and location fields_
-- Event date cannot be more than one year ahead. The latest allowed date is YYYY-MM-DD, please make changes.
-- Image upload failed. Please check your connection or try again later.
+-   Please use only Latin/accented characters.
+-   Event start time cannot be between 21:00 and 09:00.
+-   Please make sure the event is no longer than three hours.
+-   The minimum event duration is one hour.
+-   Event cannot be in the past.
+-   Event date cannot be more than one year ahead...
+-   Ensure this value has at least 5 characters (it has _N_). _for title, description and location fields_
+-   Event date cannot be more than one year ahead. The latest allowed date is YYYY-MM-DD, please make changes.
+-   Image upload failed. Please check your connection or try again later.
 
 > [!NOTE]
 > The option for adding an image wasn’t included in the form because users are likely to try
@@ -627,10 +628,10 @@ informed with an error message displayed above the form, guiding them to correct
 
 Possible errors:
 
-- Username: This field is required.
-- Username: Enter a valid username. This value may contain only letters, numbers,
-  and @/./+/-/\_ characters.
-- Password1: This password is too common.
+-   Username: This field is required.
+-   Username: Enter a valid username. This value may contain only letters, numbers,
+    and @/./+/-/\_ characters.
+-   Password1: This password is too common.
 
 #### Login with Google
 
@@ -668,12 +669,12 @@ informed with an error message displayed above the form, guiding them to correct
 
 Possible errors:
 
-- Username: A user with that username already exists.
-- Username: This field is required.
-- Username: Enter a valid username. This value may contain only letters, numbers,
-  and @/./+/-/\_ characters.
-- Email: A user is already registered with this email address.
-- Password1: This password is too common.
+-   Username: A user with that username already exists.
+-   Username: This field is required.
+-   Username: Enter a valid username. This value may contain only letters, numbers,
+    and @/./+/-/\_ characters.
+-   Email: A user is already registered with this email address.
+-   Password1: This password is too common.
 
 #### Logout
 
@@ -765,27 +766,27 @@ message will be displayed, guiding the admin to resolve the problem.
 
 1. Image Optimization and Lazy Loading:
 
-   - Implement lazy loading for images to improve page load times by loading images only when
-     they come into the user's viewport.
-   - Optimize image sizes and formats to reduce page load time, ensuring a faster and more
-     responsive user experience.
-   - Consider using tools like Cloudinary for automatic image resizing and format optimization.
+    - Implement lazy loading for images to improve page load times by loading images only when
+      they come into the user's viewport.
+    - Optimize image sizes and formats to reduce page load time, ensuring a faster and more
+      responsive user experience.
+    - Consider using tools like Cloudinary for automatic image resizing and format optimization.
 
 2. Browser Caching and Server-Side Caching:
 
-   - Implement browser caching to reduce the number of requests made to the server for static files,
-     improving load times for returning users.
-   - Set up server-side caching (e.g., using Django's caching framework) to store and serve
-     cached pages or data, reducing database queries and improving performance.
-   - Explore cache busting techniques for static files to ensure that users always get the latest version.
+    - Implement browser caching to reduce the number of requests made to the server for static files,
+      improving load times for returning users.
+    - Set up server-side caching (e.g., using Django's caching framework) to store and serve
+      cached pages or data, reducing database queries and improving performance.
+    - Explore cache busting techniques for static files to ensure that users always get the latest version.
 
 3. Token-Based Authentication:
 
-   - Implement token-based authentication for enhanced security, particularly for
-     API access or mobile app integration.
-   - Use Django REST Framework (DRF) with JWT (JSON Web Tokens) for secure authentication
-     of API requests.
-   - Ensure secure token management, including token expiration, refresh tokens, and proper storage.
+    - Implement token-based authentication for enhanced security, particularly for
+      API access or mobile app integration.
+    - Use Django REST Framework (DRF) with JWT (JSON Web Tokens) for secure authentication
+      of API requests.
+    - Ensure secure token management, including token expiration, refresh tokens, and proper storage.
 
 4. Django’s built-in logging system will be implemented to track events and errors,
    which will help with debugging and performance monitoring.
@@ -798,15 +799,17 @@ message will be displayed, guiding the admin to resolve the problem.
 
 ## Languages
 
-- Python
-- HTML5
-- CSS
-- JavaScript
+-   Python
+-   HTML5
+-   CSS
+-   JavaScript
 
 ## Frameworks, Libraries, Apps
 
 | Name                                                             | Purpose                                             |
 | :--------------------------------------------------------------- | :-------------------------------------------------- |
+| [VPS (Contabo)](https://contabo.com/en/vps/)                     | Host the app in a custom server environment         |
+| [Docker](https://www.docker.com)                                 | Containerize the app for consistent deployment      |
 | [Django](https://www.djangoproject.com/)                         | Build the app's backend and manages the database    |
 | [Django Allauth](https://docs.allauth.org/en/latest/)            | Accounts registration and authentication            |
 | [Django Summernote](https://pypi.org/project/django-summernote/) | Provide WYSIWYG editing                             |
@@ -894,7 +897,7 @@ To use your own database, set it up and configure the `DATABASE_URL`.
 
 ## Cloudinary API
 
-This project uses the Cloudinary API to store media files, as Heroku doesn’t support persistent storage for this type of data.
+This project uses the Cloudinary API to store media files.
 
 To get started with Cloudinary:
 
@@ -908,20 +911,20 @@ To get started with Cloudinary:
 
 ### Google Cloud Console set up
 
-- Go to the Google Cloud Console. Create a new project (Woofspot) and enable the Google+ API.
+-   Go to the Google Cloud Console. Create a new project (Woofspot) and enable the Google+ API.
 
-  <img src="readme/Google_API_console_Client_ID.png" width="800" alt="Google_API_console_Client_ID validation image">
+    <img src="readme/Google_API_console_Client_ID.png" width="800" alt="Google_API_console_Client_ID validation image">
 
-- Create OAuth 2.0 credentials and note down the Client ID and Client Secret.
+-   Create OAuth 2.0 credentials and note down the Client ID and Client Secret.
 
 ### Django social account set up
 
-- Go to the Django admin panel.
-- Navigate to Social Accounts > Social Applications.
-- Click Add social application - Google_login, provider - Google.
-- Fill in the required fields (e.g., provider, name, client ID, client secret).
-- Add site's URL to "Chosen sites".
-- Save the application.
+-   Go to the Django admin panel.
+-   Navigate to Social Accounts > Social Applications.
+-   Click Add social application - Google_login, provider - Google.
+-   Fill in the required fields (e.g., provider, name, client ID, client secret).
+-   Add site's URL to "Chosen sites".
+-   Save the application.
 
 ### Gmail app password set up
 
@@ -929,6 +932,123 @@ Configure [Google app password](https://knowledge.workspace.google.com/kb/how-to
 it needs for `EMAIL_HOST_PASSWORD`, see **Configure Settings** bellow.
 
 For reference, [Django smtp-backend](https://docs.djangoproject.com/en/5.1/topics/email/#smtp-backend).
+
+## VPS (Virtual Private Server)
+
+The Woofspot app is deployed on a VPS using Docker and Caddy for a lightweight, self-hosted setup.
+
+### Pre-requirements
+
+Before proceeding, ensure the following are set up:
+
+-   A running VPS
+-   Docker and Docker Compose installed on the VPS
+-   Git client installed on the VPS
+-   Ports 80 and 443 are open on the VPS
+-   A public domain with an A and/or AAAA DNS record pointing to the VPS
+
+### Deployment Steps on VPS
+
+1.  Create required folders
+
+    ```
+    mkdir -p woofspot caddy
+    ```
+
+2.  Clone woofspot repository and move into the project folder
+
+    ```
+    git clone git@github.com:tayapro/woofspot.git && cd woofspot
+    ```
+
+3.  Create `.env.woofspot` file inside the `woofspot/` folder and set [environment variables](#environment-variables).
+    Add one extra variable: `ALLOWED_HOST=.<YOUR_DOMAIN>`.
+    Full list of environment variables:
+
+    -   DATABASE_URL
+    -   SECRET_KEY
+    -   CLOUDINARY_CLOUD_NAME
+    -   CLOUDINARY_API_KEY
+    -   CLOUDINARY_API_SECRET
+    -   DEFAULT_IMAGE
+    -   EMAIL_HOST_USER
+    -   EMAIL_HOST_PASSWORD
+    -   ALLOWED_HOST
+
+4.  Run the `build.sh` script to build the Docker image.
+
+> [!NOTE]
+> The example use Docker Hub.  
+> If you're using another container registry, you may need to adjust the image tag and use the appropriate login command.
+
+5.  Create `docker-compose.yml` in the root directory
+
+    ```
+    networks:
+      mynet:
+
+    services:
+      caddy:
+        image: caddy:latest
+        networks:
+          - mynet
+        ports:
+          - 443:443
+          - 80:80
+        volumes:
+          - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
+          - ${PWD}/caddy/data:/data
+        container_name: caddy
+        restart: unless-stopped
+      woofspot:
+        image: woofspot:1.0.0
+        env_file:
+          - ./woofspot/.env.woofspot
+        networks:
+          - mynet
+        container_name: woofspot
+        restart: unless-stopped
+    ```
+
+6.  Create the `Caddyfile` in the `caddy/` folder, example:
+
+    ```
+    woofspot.<YOUR_DOMAIN> {
+        reverse_proxy woofspot:8001
+    }
+    ```
+
+> [!NOTE]
+> Replace **`<YOUR_DOMAIN>`** with your actual domain.
+> By default, the Dockerfile uses EXPOSE 8001. If you want to use a different port:
+>
+> -   Update the port in the Dockerfile
+> -   Rebuild the Docker image
+> -   Restart the container
+> -   And update the Caddyfile to match the new port
+
+6.  Run the container:
+
+    ```
+    docker-compose up -d
+    ```
+
+Then visit `https://woofspot.<YOUR_DOMAIN>` to verify it's working.
+
+#### File Structure
+
+The project directory on the VPS should look like this:
+
+    ```
+    root@vps:~# tree
+    .
+    ├── caddy
+    │   └── Caddyfile
+    ├── docker-compose.yml
+    └── woofspot
+        ├── .env.woofspot
+        └── ...
+    ```
 
 ## Heroku Deployment
 
@@ -946,25 +1066,25 @@ Follow these steps to deploy the Woofspot app on Heroku:
 
 4. **Configure Settings**
 
-   - Go to the **Settings** tab in your Heroku dashboard.
+    - Go to the **Settings** tab in your Heroku dashboard.
 
-   - In the **Config Vars** section, add the following environment variables with your own values:
+    - In the **Config Vars** section, add the following [environment variables](#environment-variables) with your own values:
 
-     - `CLOUDINARY_API_KEY`: Cloudinary API key, see the "Cloudinary API" section above.
-     - `CLOUDINARY_API_SECRET`: Cloudinary API secret, see the "Cloudinary API" section above.
-     - `CLOUDINARY_CLOUD_NAME`: Cloudinary cloud name, see the "Cloudinary API" section above.
-     - `DATABASE_URL`: database connection URL, see the "Neon PostgeSQL Database" section above.
-     - `DEFAULT_IMAGE`: URL for a default image.
-     - `EMAIL_HOST_USER`: Google email address, in current configuration _woofspot.app@gmail.com_.
-     - `EMAIL_HOST_PASSWORD`: Password to send emails using Google API.
-     - `SECRET_KEY`: secret key.
+        - `CLOUDINARY_API_KEY`: Cloudinary API key, see the "Cloudinary API" section above.
+        - `CLOUDINARY_API_SECRET`: Cloudinary API secret, see the "Cloudinary API" section above.
+        - `CLOUDINARY_CLOUD_NAME`: Cloudinary cloud name, see the "Cloudinary API" section above.
+        - `DATABASE_URL`: database connection URL, see the "Neon PostgeSQL Database" section above.
+        - `DEFAULT_IMAGE`: URL for a default image.
+        - `EMAIL_HOST_USER`: Google email address, in current configuration _woofspot.app@gmail.com_.
+        - `EMAIL_HOST_PASSWORD`: Password to send emails using Google API.
+        - `SECRET_KEY`: secret key.
 
-   - In the **Buildpacks** section, add the **Python** buildpack.
+    - In the **Buildpacks** section, add the **Python** buildpack.
 
 5. **Deploy the Application**
-   - Navigate to the **Deploy** tab.
-   - Under **App connected to GitHub**, link your GitHub repository.
-   - In the **Manual deploy** section, select the `main` branch and click **Deploy Branch** to deploy your app.
+    - Navigate to the **Deploy** tab.
+    - Under **App connected to GitHub**, link your GitHub repository.
+    - In the **Manual deploy** section, select the `main` branch and click **Deploy Branch** to deploy your app.
 
 > [!NOTE]
 > To update requirements.txt with all actual dependencies, run: \
@@ -992,29 +1112,29 @@ or non-standard screens.
 
 Testing has been carried out on the following devices:
 
-- Macbook Sanoma Version 14.4.1:
+-   Macbook Sanoma Version 14.4.1:
 
-  - Chrome Version 131.0.6778.265
-  - Firefox Version 134.0.2
+    -   Chrome Version 131.0.6778.265
+    -   Firefox Version 134.0.2
 
-- Samsung S20:
+-   Samsung S20:
 
-  - Chrome Version 132.0.6834.80
+    -   Chrome Version 132.0.6834.80
 
-- iPhone 14:
+-   iPhone 14:
 
-  - Safari ios 18.1.1
+    -   Safari ios 18.1.1
 
-- iPad Air 5th generation:
+-   iPad Air 5th generation:
 
-  - Safari ios 18.1.1
+    -   Safari ios 18.1.1
 
-- Windows PC:
+-   Windows PC:
 
-  - Firefox 134.0.2 (Windows 11)
+    -   Firefox 134.0.2 (Windows 11)
 
-- Macbook Pro 2019:
-  - Safari ios 17.6
+-   Macbook Pro 2019:
+    -   Safari ios 17.6
 
 ## User Stories / Features Testing
 
@@ -1044,34 +1164,34 @@ The W3C Markup Validation Service was used to validate the website's HTML.
 
 1. Currently, the following rendered templates are encountering errors related to the Popover API and HTMX elements: `my_events`, `profile`, `search_results`, `event_view`, `index`, `all_events`.
 
-   1.1 The Popover API has been choosen to enhance the user experience by providing dynamic and interactive content in a way that’s intuitive and accessible.
-   Found opend GitHub ticket [Allow new attributes: popover, popovertarget and popovertargetaction](https://github.com/w3c/markup-validator/issues/88).
-   Based on [spec.whatwg.org/popover](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute):
+    1.1 The Popover API has been choosen to enhance the user experience by providing dynamic and interactive content in a way that’s intuitive and accessible.
+    Found opend GitHub ticket [Allow new attributes: popover, popovertarget and popovertargetaction](https://github.com/w3c/markup-validator/issues/88).
+    Based on [spec.whatwg.org/popover](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute):
 
-   ```
-   All HTML elements may have the popover content attribute set.
-   Buttons may have the following content attributes: popovertarget, popovertargetaction.
-   ```
+    ```
+    All HTML elements may have the popover content attribute set.
+    Buttons may have the following content attributes: popovertarget, popovertargetaction.
+    ```
 
-   Although some attributes were flagged in validation, these are crucial for targeting specific elements and triggering popover functionality in Woofspot project:
+    Although some attributes were flagged in validation, these are crucial for targeting specific elements and triggering popover functionality in Woofspot project:
 
-   ```
-   Error: Attribute popovertarget not allowed on element button at this point.
-   Error: Attribute popover not allowed on element nav at this point.
-   Error: Attribute popovertarget not allowed on element button at this point.
-   Error: Attribute popovertargetaction not allowed on element button at this point.
-   ```
+    ```
+    Error: Attribute popovertarget not allowed on element button at this point.
+    Error: Attribute popover not allowed on element nav at this point.
+    Error: Attribute popovertarget not allowed on element button at this point.
+    Error: Attribute popovertargetaction not allowed on element button at this point.
+    ```
 
-   1.2 While integrating `HTMX` functionality into the Woofspot project, encountered the following validation issues:
+    1.2 While integrating `HTMX` functionality into the Woofspot project, encountered the following validation issues:
 
-   ```
-   Error: Attribute hx-swap not allowed on element div at this point.
-   Error: Attribute hx-post not allowed on element div at this point.
-   Error: Attribute hx-headers not allowed on element div at this point.
-   ```
+    ```
+    Error: Attribute hx-swap not allowed on element div at this point.
+    Error: Attribute hx-post not allowed on element div at this point.
+    Error: Attribute hx-headers not allowed on element div at this point.
+    ```
 
-   These warnings occur because certain HTMX attributes, such as `hx-swap`, `hx-post`, and `hx-headers`, are applied to the `div` element that may not be considered valid targets for these attributes in some contexts, based on current HTML validation rules.
-   In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without reloading the page. Although these attributes may not be strictly validated for use on `div`, they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
+    These warnings occur because certain HTMX attributes, such as `hx-swap`, `hx-post`, and `hx-headers`, are applied to the `div` element that may not be considered valid targets for these attributes in some contexts, based on current HTML validation rules.
+    In Woofspot project, these attributes are used to enhance dynamic content loading and interaction without reloading the page. Although these attributes may not be strictly validated for use on `div`, they are functional within the HTMX framework and contribute to the interactive behavior of the platform.
 
 Validation warnings above (Popover API & HTMX) do not affect the functionality,
 but future versions of the project may involve further refinement of element usage to ensure full compatibility with validation standards.
@@ -1593,42 +1713,42 @@ Google Lighthouse in Google Chrome Developer Tools was used to check the website
 
 1. `aria-hidden` issue
 
-   ```
-   Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
-   hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
-   ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
-   details, see the aria-hidden section of the WAI-ARIA specification
-   at https://w3c.github.io/aria/#aria-hidden.
+    ```
+    Blocked aria-hidden on an element because its descendant retained focus. The focus must not be
+    hidden from assistive technology users. Avoid using aria-hidden on a focused element or its
+    ancestor. Consider using the inert attribute instead, which will also prevent focus. For more
+    details, see the aria-hidden section of the WAI-ARIA specification
+    at https://w3c.github.io/aria/#aria-hidden.
 
-   Element with focus: button
-   ```
+    Element with focus: button
+    ```
 
-   Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
-   "Close" button on Modal window with Django Messages.
-   When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
-   after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
+    Bootstrap automatically add `aria-hidden` class to Bootstrap modal window, after clicking
+    "Close" button on Modal window with Django Messages.
+    When this modal window just appears on screen Bootstrap add `aria-modal="true"` attribute and
+    after closing the modal window, Bootstrap switch to `aria-hidden="true"`.
 
-   Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
-   "Close" button on a modal that is triggered by Django Messages. When the modal
-   appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
-   it switches to `aria-hidden="true"`.
+    Bootstrap automatically adds the aria-hidden attribute to the modal window when you click the
+    "Close" button on a modal that is triggered by Django Messages. When the modal
+    appears on the screen, Bootstrap adds the `aria-modal="true"` attribute, but after closing the modal,
+    it switches to `aria-hidden="true"`.
 
-   **To reproduce the issue**:
+    **To reproduce the issue**:
 
-   - Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
-     (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
-   - Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
+    - Log in, and when you see the modal window, inspect the DOM in your browser’s Developer Tools
+      (using Chrome's developer tools), Bootstrap add `aria-modal="true"` attribute:
+    - Click the "Close" button, then check the DOM again, Bootstrap switch to `aria-hidden="true"`:
 
-   This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
+    This issue behaves like a heisenbug - it fails intermittently, so it doesn’t always reproduce on the first try.
 
-   [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
+    [Bootstrap 5 documentation](https://getbootstrap.com/docs/5.0/components/modal/)
 
 2. Spinner Not Displaying in Safari
 
-   The spinner is not visible in the Safari browser. This issue might be related to specific CSS rendering or
-   JavaScript behavior in Safari.
-   The issue is still under investigation, and potential fixes related to CSS display properties, JavaScript
-   event handling, or cache issues are being considered.
+    The spinner is not visible in the Safari browser. This issue might be related to specific CSS rendering or
+    JavaScript behavior in Safari.
+    The issue is still under investigation, and potential fixes related to CSS display properties, JavaScript
+    event handling, or cache issues are being considered.
 
 [Back to top](#table-of-contents)
 
@@ -1638,52 +1758,52 @@ Google Lighthouse in Google Chrome Developer Tools was used to check the website
 
 ## Content
 
-- The fonts used were imported from Google Fonts.
-- The icons were taken from Font Awesome.
-- [Google icon](https://icons8.com/icons/set/google) for "Sign in with Google" button.
+-   The fonts used were imported from Google Fonts.
+-   The icons were taken from Font Awesome.
+-   [Google icon](https://icons8.com/icons/set/google) for "Sign in with Google" button.
 
 ## Media
 
-- [Running puppy](https://unsplash.com/photos/a-small-white-teddy-bear-is-running-down-the-street-6_kWa9NvvCg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Freya Song](https://unsplash.com/@freyasong).
-- [Brown puppy on bed](https://unsplash.com/photos/brown-puppy-on-bed-V6G2m3D9IDI) photo by [Roberto Nickson](https://unsplash.com/@rpnickson).
-- [Bernese Mountain Dog and friend during warm days](https://unsplash.com/photos/black-white-and-brown-bernese-mountain-dog-lying-on-white-textile-sJgucUmcaKE?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Louis-Philippe Poitras](https://unsplash.com/@lppoitras).
-- [A crocheted Googlebot and Crawley](https://unsplash.com/photos/a-crocheted-stuffed-animal-next-to-a-crocheted-vase-M7ZuRWaaevw?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lizzi Sassman](https://unsplash.com/@okaylizzi).
-- [Dachshund resting on white hanged fabric](https://unsplash.com/photos/dachshund-resting-on-white-hanged-fabric-D1wiHCovGJ0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Erda Estremera](https://unsplash.com/@erdaest).
-- [Small brown dog sitting on white floor](https://unsplash.com/photos/a-small-brown-dog-sitting-on-top-of-a-white-floor-rermv-4qZsI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Petar Acanski](https://unsplash.com/@petaracanski).
-- [Happy french bulldog](https://unsplash.com/photos/brown-short-coated-dog-wearing-red-and-white-santa-costume-BVqQNu5J7qI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by []().
-- [Dog sleeping on floor](https://unsplash.com/photos/dog-sleeping-on-floor-LTQMgx8tYqM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Minh Pham](https://unsplash.com/@minhphamdesign).
-- [Long walks in the desert](https://unsplash.com/photos/person-walking-on-brown-sand-near-body-of-water-during-daytime-11ZynBe_DRA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
-- [Combination lock](https://unsplash.com/photos/closeup-photo-of-round-gray-combination-padlock-atW3fbSy_9Y?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Debby Hudson](https://unsplash.com/@hudsoncrafted).
-- [Night park bench](https://unsplash.com/photos/a-park-bench-sitting-on-the-side-of-a-path-YL2NV6GjXFA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [sq lim](https://unsplash.com/@sql).
-- [Wooden fence near body of water](https://unsplash.com/photos/brown-wooden-fence-near-body-of-water-nIhScs1bRYg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jaleel Akbash](https://unsplash.com/@jaleel_akbash).
-- [Dog sits in green grass field](https://unsplash.com/photos/short-coated-tan-dog-sits-in-green-grass-field-during-daytime-r1q76Rut5t8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Reed Shepherd](https://unsplash.com/@reed_shepherd1).
-- [Photo dog with hoomans](https://unsplash.com/photos/man-in-black-and-white-striped-shirt-beside-woman-in-black-and-white-stripe-shirt-RRh6wyEU_4Q?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Chewy](https://unsplash.com/@chewy).
-- [Yoga cat](https://unsplash.com/photos/russian-blue-cat-lying-on-brown-woven-chair-5ieFKjviwL8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Hana Oliver](https://unsplash.com/@hanako87).
-- [Pet clinic](https://unsplash.com/photos/white-and-black-short-coated-dog-wearing-white-and-black-polka-dot-shirt-loJL4ijUobg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
-- [Exotic animal](https://unsplash.com/photos/a-green-lizard-sitting-on-top-of-a-tree-branch-uWRGj2zhQJI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Viktoriia Kondratiuk](https://unsplash.com/@viktoriia_kondratiuk).
-- [Sad cat](https://unsplash.com/photos/selective-focus-photography-of-brown-tabby-cat-DM2Gr9U7lHo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Anna Ogiienko](https://unsplash.com/@panafotkas).
-- [Party dogs](https://unsplash.com/photos/white-long-coated-dog-sitting-on-brown-tree-log-during-daytime-cnBQdL559mY?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karolina Wv](https://unsplash.com/@karolinawv).
-- [Grumpy cat](https://unsplash.com/photos/orange-and-white-tabby-cat-sitting-on-brown-wooden-table-in-kitchen-room-w2DsS-ZAP4U?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Paul Hanaoka](https://unsplash.com/@plhnk).
-- [Sunset dog](https://unsplash.com/photos/white-long-coated-dog-on-green-grass-field-during-daytime-cLZQ9KHuTos?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Massimo Negrello](https://unsplash.com/@massimonegrello).
-- [Mountains dog](https://unsplash.com/photos/black-dog-with-red-collared-standing-on-gray-stone-during-cloudy-day-nk_uvN_b-w8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Patrick Hendry](https://unsplash.com/@worldsbetweenlines).
-- [Art studio cat](https://unsplash.com/photos/a-cat-sitting-on-a-desk-in-a-room-tNjJeDf6hJs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Sindy Süßengut](https://unsplash.com/@sindy_suessengut).
-- [Market dog](https://unsplash.com/photos/a-dog-is-sitting-on-a-table-in-a-flower-shop-mHw2MVxI8fM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Travis Leery](https://unsplash.com/@jersey_photos).
-- [Beach dogs](https://unsplash.com/photos/two-dogs-running-on-the-beach-with-a-teddy-bear-hZE7CNo8cdo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lisa Anderson](https://unsplash.com/@lisaaandy).
-- [Kittens on books shelf](https://unsplash.com/photos/a-couple-of-cats-laying-on-top-of-a-book-shelf-txzw_LiGa4w?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Duygu Güngör](https://unsplash.com/@duygug).
-- [Puppy on bed](https://unsplash.com/photos/brown-short-coated-dog-on-brown-wicker-basket-oeND26pmdNs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jordan Bigelow](https://unsplash.com/@jordanbigs).
-- [Woman with a dog in a kitchen](https://unsplash.com/photos/a-woman-standing-in-a-kitchen-with-a-dog-GF0RhSNQ5n8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Luzelle Cockburn](https://unsplash.com/@luzelle).
-- [Dog sitting in front of book](https://unsplash.com/photos/dog-sitting-in-front-of-book-Zqy-x7K5Qcg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jamie Street](https://unsplash.com/@jamie452).
-- [Bootstrap Color scheme](https://mdbootstrap.com/docs/standard/content-styles/colors/) to README.
+-   [Running puppy](https://unsplash.com/photos/a-small-white-teddy-bear-is-running-down-the-street-6_kWa9NvvCg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Freya Song](https://unsplash.com/@freyasong).
+-   [Brown puppy on bed](https://unsplash.com/photos/brown-puppy-on-bed-V6G2m3D9IDI) photo by [Roberto Nickson](https://unsplash.com/@rpnickson).
+-   [Bernese Mountain Dog and friend during warm days](https://unsplash.com/photos/black-white-and-brown-bernese-mountain-dog-lying-on-white-textile-sJgucUmcaKE?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Louis-Philippe Poitras](https://unsplash.com/@lppoitras).
+-   [A crocheted Googlebot and Crawley](https://unsplash.com/photos/a-crocheted-stuffed-animal-next-to-a-crocheted-vase-M7ZuRWaaevw?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lizzi Sassman](https://unsplash.com/@okaylizzi).
+-   [Dachshund resting on white hanged fabric](https://unsplash.com/photos/dachshund-resting-on-white-hanged-fabric-D1wiHCovGJ0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Erda Estremera](https://unsplash.com/@erdaest).
+-   [Small brown dog sitting on white floor](https://unsplash.com/photos/a-small-brown-dog-sitting-on-top-of-a-white-floor-rermv-4qZsI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Petar Acanski](https://unsplash.com/@petaracanski).
+-   [Happy french bulldog](https://unsplash.com/photos/brown-short-coated-dog-wearing-red-and-white-santa-costume-BVqQNu5J7qI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by []().
+-   [Dog sleeping on floor](https://unsplash.com/photos/dog-sleeping-on-floor-LTQMgx8tYqM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Minh Pham](https://unsplash.com/@minhphamdesign).
+-   [Long walks in the desert](https://unsplash.com/photos/person-walking-on-brown-sand-near-body-of-water-during-daytime-11ZynBe_DRA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
+-   [Combination lock](https://unsplash.com/photos/closeup-photo-of-round-gray-combination-padlock-atW3fbSy_9Y?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Debby Hudson](https://unsplash.com/@hudsoncrafted).
+-   [Night park bench](https://unsplash.com/photos/a-park-bench-sitting-on-the-side-of-a-path-YL2NV6GjXFA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [sq lim](https://unsplash.com/@sql).
+-   [Wooden fence near body of water](https://unsplash.com/photos/brown-wooden-fence-near-body-of-water-nIhScs1bRYg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jaleel Akbash](https://unsplash.com/@jaleel_akbash).
+-   [Dog sits in green grass field](https://unsplash.com/photos/short-coated-tan-dog-sits-in-green-grass-field-during-daytime-r1q76Rut5t8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Reed Shepherd](https://unsplash.com/@reed_shepherd1).
+-   [Photo dog with hoomans](https://unsplash.com/photos/man-in-black-and-white-striped-shirt-beside-woman-in-black-and-white-stripe-shirt-RRh6wyEU_4Q?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Chewy](https://unsplash.com/@chewy).
+-   [Yoga cat](https://unsplash.com/photos/russian-blue-cat-lying-on-brown-woven-chair-5ieFKjviwL8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Hana Oliver](https://unsplash.com/@hanako87).
+-   [Pet clinic](https://unsplash.com/photos/white-and-black-short-coated-dog-wearing-white-and-black-polka-dot-shirt-loJL4ijUobg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karsten Winegeart](https://unsplash.com/@karsten116).
+-   [Exotic animal](https://unsplash.com/photos/a-green-lizard-sitting-on-top-of-a-tree-branch-uWRGj2zhQJI?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Viktoriia Kondratiuk](https://unsplash.com/@viktoriia_kondratiuk).
+-   [Sad cat](https://unsplash.com/photos/selective-focus-photography-of-brown-tabby-cat-DM2Gr9U7lHo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Anna Ogiienko](https://unsplash.com/@panafotkas).
+-   [Party dogs](https://unsplash.com/photos/white-long-coated-dog-sitting-on-brown-tree-log-during-daytime-cnBQdL559mY?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Karolina Wv](https://unsplash.com/@karolinawv).
+-   [Grumpy cat](https://unsplash.com/photos/orange-and-white-tabby-cat-sitting-on-brown-wooden-table-in-kitchen-room-w2DsS-ZAP4U?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Paul Hanaoka](https://unsplash.com/@plhnk).
+-   [Sunset dog](https://unsplash.com/photos/white-long-coated-dog-on-green-grass-field-during-daytime-cLZQ9KHuTos?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Massimo Negrello](https://unsplash.com/@massimonegrello).
+-   [Mountains dog](https://unsplash.com/photos/black-dog-with-red-collared-standing-on-gray-stone-during-cloudy-day-nk_uvN_b-w8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Patrick Hendry](https://unsplash.com/@worldsbetweenlines).
+-   [Art studio cat](https://unsplash.com/photos/a-cat-sitting-on-a-desk-in-a-room-tNjJeDf6hJs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Sindy Süßengut](https://unsplash.com/@sindy_suessengut).
+-   [Market dog](https://unsplash.com/photos/a-dog-is-sitting-on-a-table-in-a-flower-shop-mHw2MVxI8fM?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Travis Leery](https://unsplash.com/@jersey_photos).
+-   [Beach dogs](https://unsplash.com/photos/two-dogs-running-on-the-beach-with-a-teddy-bear-hZE7CNo8cdo?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Lisa Anderson](https://unsplash.com/@lisaaandy).
+-   [Kittens on books shelf](https://unsplash.com/photos/a-couple-of-cats-laying-on-top-of-a-book-shelf-txzw_LiGa4w?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Duygu Güngör](https://unsplash.com/@duygug).
+-   [Puppy on bed](https://unsplash.com/photos/brown-short-coated-dog-on-brown-wicker-basket-oeND26pmdNs?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jordan Bigelow](https://unsplash.com/@jordanbigs).
+-   [Woman with a dog in a kitchen](https://unsplash.com/photos/a-woman-standing-in-a-kitchen-with-a-dog-GF0RhSNQ5n8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Luzelle Cockburn](https://unsplash.com/@luzelle).
+-   [Dog sitting in front of book](https://unsplash.com/photos/dog-sitting-in-front-of-book-Zqy-x7K5Qcg?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash) photo by [Jamie Street](https://unsplash.com/@jamie452).
+-   [Bootstrap Color scheme](https://mdbootstrap.com/docs/standard/content-styles/colors/) to README.
 
 ## Code
 
-- Popover menu is adapted from the [Everything you need to know about the Popover API](https://codepen.io/web-dot-dev/pen/vYbadaJ).
-- The Rive integration in this web app is adapted from [the Web (JS) implementation for Rive](https://rive.app/community/doc/web-js/docvlgbnS1mp).
-- Understanding of [Bootstrap Carousel](https://getbootstrap.com/docs/5.0/components/carousel/).
-- Knowledge of sending email in Django with [StackOverflow django-email questions](https://stackoverflow.com/questions/tagged/django-email?tab=Frequent).
-- Understanding of [Django-Browser-Reload](https://medium.com/@appseed.us/django-hot-reload-templates-and-static-4d74a774b26f).
-- Knowledge of Sign In with Google for Web with [Django Allauth social account Google](https://docs.allauth.org/en/dev/socialaccount/providers/google.html).
-- Understanding of Django with [Django documentation](https://docs.djangoproject.com/en/5.1/).
+-   Popover menu is adapted from the [Everything you need to know about the Popover API](https://codepen.io/web-dot-dev/pen/vYbadaJ).
+-   The Rive integration in this web app is adapted from [the Web (JS) implementation for Rive](https://rive.app/community/doc/web-js/docvlgbnS1mp).
+-   Understanding of [Bootstrap Carousel](https://getbootstrap.com/docs/5.0/components/carousel/).
+-   Knowledge of sending email in Django with [StackOverflow django-email questions](https://stackoverflow.com/questions/tagged/django-email?tab=Frequent).
+-   Understanding of [Django-Browser-Reload](https://medium.com/@appseed.us/django-hot-reload-templates-and-static-4d74a774b26f).
+-   Knowledge of Sign In with Google for Web with [Django Allauth social account Google](https://docs.allauth.org/en/dev/socialaccount/providers/google.html).
+-   Understanding of Django with [Django documentation](https://docs.djangoproject.com/en/5.1/).
 
 [Back to top](#table-of-contents)
 
