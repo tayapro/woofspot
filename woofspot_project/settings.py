@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import sys
-import time
 import dj_database_url
 import cloudinary
 import cloudinary.uploader
@@ -62,7 +60,9 @@ INSTALLED_APPS = [
     'user_app',
 ]
 
-SITE_ID = 3
+# https://woofspot.tayadev.com is 7th in Sites list on Admin panel
+# Neon: 7 is primary key in DB in django_site table.
+SITE_ID = 7
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -213,5 +213,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 
-# For custom csrf 403 page 
+# For custom csrf 403 page
 CSRF_FAILURE_VIEW = "woofspot_project.views.custom_403_csrf"

@@ -6,12 +6,8 @@ __pycache__/
 *.py[cod]
 node_modules/
 .github/
-cloudinary_python.txt
 env.py
-blog/fixtures/
 staticfiles/
 client_secret.json
-cloudinary_python.txt
 myenv/
 .env
-caddy/
