@@ -1014,7 +1014,7 @@ Before proceeding, ensure the following are set up:
         container_name: caddy
         restart: unless-stopped
       woofspot:
-        image: woofspot:1.0.0
+        image: woofspot:prod
         env_file:
           - ./woofspot/.env
         networks:
