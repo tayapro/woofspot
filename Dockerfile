@@ -1,39 +1,48 @@
-# Use official Python image
+# syntax=docker/dockerfile:1
 FROM python:3.12-slim
 
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
+# --- Environment ---
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Set working directory
+# --- Working directory ---
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# --- System dependencies (as root) ---
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy project code
-COPY event_app/ event_app/
-COPY static/ static/
-COPY templates/ templates/
-COPY user_app/ user_app/
-COPY woofspot_project/ woofspot_project/
-COPY manage.py .
-COPY requirements.txt .
+# --- Non-root user with fixed UID/GID ---
+ARG USER_ID=1001
+ARG GROUP_ID=1001
+RUN groupadd --gid $GROUP_ID appuser \
+    && useradd --uid $USER_ID --gid $GROUP_ID --create-home --shell /bin/bash appuser \
+    && chown appuser:appuser /app
 
-# Install Python dependencies
+# --- Copy project code with correct ownership ---
+COPY --chown=appuser:appuser event_app/ event_app/
+COPY --chown=appuser:appuser static/ static/
+COPY --chown=appuser:appuser templates/ templates/
+COPY --chown=appuser:appuser user_app/ user_app/
+COPY --chown=appuser:appuser woofspot_project/ woofspot_project/
+COPY --chown=appuser:appuser manage.py .
+COPY --chown=appuser:appuser requirements.txt .
+
+# --- Install Python deps as root (go to /usr/local, readable by all users) ---
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Collect static files (optional for production)
-RUN python manage.py collectstatic --noinput
+# --- Switch to non-root for everything else ---
+USER appuser
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# --- Collect static with SQLite dummy (DB not needed at build time) ---
+RUN DATABASE_URL="sqlite:////tmp/dummy.sqlite3" \
+    python manage.py collectstatic --noinput \
+    && rm -f /tmp/dummy.sqlite3
 
-# Expose port (optional)
+# --- Expose ---
 EXPOSE 8001
 
-# Start server
+# --- Start server (port 8001 > 1024, no root needed) ---
 CMD ["gunicorn", "woofspot_project.wsgi:application", "--bind", "0.0.0.0:8001"]
