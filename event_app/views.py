@@ -515,6 +515,8 @@ def event_view(request, slug):
         "event_app/event_view.html",
         {
             "event": event,
+            "canonical_url": request.build_absolute_uri(
+                reverse("event_view", args=[event.slug])),
             "next": next,
         },
     )

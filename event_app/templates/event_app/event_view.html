@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load allauth i18n %}
 
+{% block extra_head %}
+<link rel="canonical" href="{{ canonical_url }}">
+{% endblock extra_head %}
+
 {% block head_title %}
 {% trans "View Event" %}
 {% endblock head_title %}
