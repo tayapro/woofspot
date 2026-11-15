@@ -23,6 +23,10 @@ handler403_csrf = 'woofspot_project.views.custom_403_csrf'
 
 # URL patterns for the project
 urlpatterns = [
+    # Search engine discovery
+    path("robots.txt", views.robots_txt, name="robots_txt"),
+    path("sitemap.xml", views.sitemap_xml, name="sitemap_xml"),
+
     # Admin interface
     path("admin/", admin.site.urls),
 
