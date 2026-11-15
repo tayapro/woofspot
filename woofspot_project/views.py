@@ -2,6 +2,28 @@ from django.shortcuts import render
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden, HttpResponseNotFound,
                          HttpResponseServerError)
+from django.urls import reverse
+
+
+PUBLIC_HOME_URL = "https://woofspot.taya.one/"
+
+
+def robots_txt(request):
+    sitemap_url = PUBLIC_HOME_URL.rstrip("/") + reverse("sitemap_xml")
+    return HttpResponse(
+        f"User-agent: *\nDisallow:\n\nSitemap: {sitemap_url}\n",
+        content_type="text/plain; charset=utf-8",
+    )
+
+
+def sitemap_xml(request):
+    return HttpResponse(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"  <url><loc>{PUBLIC_HOME_URL}</loc></url>\n"
+        "</urlset>\n",
+        content_type="application/xml; charset=utf-8",
+    )
 
 
 # Custom error handlers
